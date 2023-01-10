@@ -6,35 +6,44 @@ using UnityEngine.UI;
 
 public class ClickManager : MonoBehaviour
 {
-    [SerializeField] private Shader shader;
-    private Material outline;
-
     private int LayerMask;
-    Renderer renderer;
-    List<Material>materials=new List<Material>();
-    [SerializeField] private Texture texture;
+    private InteractionObject beforeHit;
 
     private void Awake()
     {
-        outline = new Material(Shader.Find("Draw/OutlineShader"));
         LayerMask = 1 << 6;
-        
     }
-    // Update is called once per frame
+
     void Update()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
+            InteractionObject obj;
+
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, LayerMask))
             {
-                Debug.DrawRay(Camera.main.transform.position, hit.point, Color.red,100);
-                Debug.Log(hit.transform.name);
-                
-                hit.transform.gameObject.GetComponent<MeshRenderer>().material.color = Color.cyan;
-                renderer = hit.transform.gameObject.GetComponent<Renderer>();
-                renderer.sharedMaterial = outline;
-                renderer.sharedMaterial.mainTexture = texture;
+                if (hit.transform.gameObject.TryGetComponent<InteractionObject>(out obj))
+                {
+                    if(beforeHit== null)
+                    {
+                        beforeHit = obj;
+                        obj.ChangeShader("Draw/OutlineShader");
+                    }
+                    else if (beforeHit.transform.gameObject != hit.transform.transform.gameObject)
+                    {
+                        beforeHit.ChangeShader("Draw/Default");
+                        beforeHit = obj;
+                        obj.ChangeShader("Draw/OutlineShader");
+                    }
+                    else if(beforeHit.transform.gameObject == hit.transform.transform.gameObject)
+                    {
+                        obj.ChangeShader("Draw/Default");
+                        beforeHit = null;
+                    }
+                    
+
+                }
             }
         }
         
