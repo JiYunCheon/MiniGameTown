@@ -28,21 +28,34 @@ public class ClickManager : MonoBehaviour
                     if(beforeHit== null)
                     {
                         beforeHit = obj;
-                        obj.ChangeShader("Draw/OutlineShader");
+                        obj.SetOutLineShader();
+                        obj.SetSelectCheck(true);
                     }
                     else if (beforeHit.transform.gameObject != hit.transform.transform.gameObject)
                     {
-                        beforeHit.ChangeShader("Draw/Default");
+                        beforeHit.SetDefaultShader();
+
+                        beforeHit.SetSelectCheck(false);
+
                         beforeHit = obj;
-                        obj.ChangeShader("Draw/OutlineShader");
+
+                        obj.SetOutLineShader();
+                        obj.SetSelectCheck(true);
                     }
                     else if(beforeHit.transform.gameObject == hit.transform.transform.gameObject)
                     {
-                        obj.ChangeShader("Draw/Default");
+                        obj.SetDefaultShader();
+                        obj.SetSelectCheck(false);
                         beforeHit = null;
                     }
-                    
-
+                }
+                else
+                {
+                   if(beforeHit!=null)
+                    {
+                        beforeHit.SetDefaultShader();
+                        beforeHit.SetSelectCheck(false);
+                    }
                 }
             }
         }

@@ -1,30 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InteractionObject : MonoBehaviour
 {
-
     [SerializeField] private Transform entrance = null;
-    [SerializeField] private Texture texture = null;
 
+    [Header("Material")]
+    [SerializeField] private Texture texture = null;
+    [SerializeField] private Material material = null;
     private Material outline = null;
     private Renderer renderer = null;
+
+    private bool selectCheck = false;
 
     public Transform GetEntranceTr { get { return entrance; } private set { } }
 
     private void Awake()
     {
         renderer = GetComponent<Renderer>();
+        outline = new Material(Shader.Find("Draw/OutlineShader"));
     }
 
-    public void ChangeShader(string materialName)
+    //아웃라인 쉐이더 적용
+    public void SetOutLineShader()
     {
-        outline = new Material(Shader.Find(materialName));
         renderer.sharedMaterial = outline;
         renderer.sharedMaterial.mainTexture = texture;
-        renderer.material.SetColor("_EmissionColor", Color.red*0.5f);
     }
 
+    //디폴트 쉐이더 적용
+    public void SetDefaultShader()
+    {
+        renderer.sharedMaterial = material;
+    }
+
+    public void SetSelectCheck(bool check)
+    {
+        selectCheck = check;
+    }
 
 }
