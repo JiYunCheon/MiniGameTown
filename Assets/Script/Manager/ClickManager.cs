@@ -9,6 +9,7 @@ public class ClickManager : MonoBehaviour
     private int LayerMask;
     private InteractionObject beforeHit;
 
+    public InteractionObject GetBeforeHit { get { return beforeHit; }private set { } }
     private void Awake()
     {
         LayerMask = 1 << 6;
@@ -19,7 +20,7 @@ public class ClickManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
-            InteractionObject obj;
+            InteractionObject obj = null;
 
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, LayerMask))
             {
@@ -34,7 +35,6 @@ public class ClickManager : MonoBehaviour
                     else if (beforeHit.transform.gameObject != hit.transform.transform.gameObject)
                     {
                         beforeHit.SetDefaultShader();
-
                         beforeHit.SetSelectCheck(false);
 
                         beforeHit = obj;
@@ -49,15 +49,9 @@ public class ClickManager : MonoBehaviour
                         beforeHit = null;
                     }
                 }
-                else
-                {
-                   if(beforeHit!=null)
-                    {
-                        beforeHit.SetDefaultShader();
-                        beforeHit.SetSelectCheck(false);
-                    }
-                }
+
             }
+
         }
         
     }

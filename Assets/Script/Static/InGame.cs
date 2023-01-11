@@ -9,7 +9,7 @@ public class InGame
 
     public static bool IsAppInstalled(string bundleID)
     {
-#if UNITY_ANDROID
+
         AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
         AndroidJavaObject currentActivity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
         AndroidJavaObject packageManager = currentActivity.Call<AndroidJavaObject>("getPackageManager");
@@ -23,26 +23,20 @@ public class InGame
         }
         catch (Exception ex)
         {
-            Debug.Log("exception" + ex.Message);
+            Debug.LogError("exception" + ex.Message);
             //여기에서 앱이 설치 되지 않았을때의 예외처리.
         }
 
         return (launchIntent == null ? false : true);
-#else
 
-        Debug.LogError("Android에서만 지원되는 기능입니다.");
-        return false;
-
-#endif
     }
 
 
     public static void openApp(string bundleID)
     {
-#if UNITY_ANDROID
         if(!IsAppInstalled(bundleID))
         {
-            Debug.Log("앱이 깔려있지 않습니다");
+            Debug.LogError("앱이 깔려있지 않습니다");
             return;
         }
 
@@ -56,9 +50,8 @@ public class InGame
 
         jo.Call("startActivity", intent);
 
-#else
-        Debug.LogError("Android에서만 지원되는 기능입니다.");
-#endif
+        //Application.Quit();
+
     }
 
 

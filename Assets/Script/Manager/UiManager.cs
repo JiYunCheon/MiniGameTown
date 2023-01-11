@@ -22,7 +22,7 @@ public class UiManager : MonoBehaviour
 
     public void OnClick_GameIn()
     {
-        InGame.IsAppInstalled(GameManager.Inst.GetGameNames[0]);
+        //InGame.IsAppInstalled(GameManager.Inst.GetGameNames[0]);
         InGame.openApp(GameManager.Inst.GetGameNames[0]);
     }
 
