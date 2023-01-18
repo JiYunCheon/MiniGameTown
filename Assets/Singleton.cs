@@ -14,6 +14,7 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T>
             if (inst == null)
             {
                 inst = FindObjectOfType(typeof(T)) as T;
+                DontDestroyOnLoad((typeof(T)) as T);
 
                 if (inst == null)
                 {
@@ -23,4 +24,6 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T>
             return inst;
         }
     }
+
+
 }

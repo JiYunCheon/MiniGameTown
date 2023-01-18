@@ -5,8 +5,6 @@ using System;
 
 public class InGame
 {
-    
-
     public static bool IsAppInstalled(string bundleID)
     {
 

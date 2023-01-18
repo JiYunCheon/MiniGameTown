@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 496032}
   - component: {fileID: 3373738}
   - component: {fileID: 2303196}
-  - component: {fileID: 5030457029931873395}
   m_Layer: 0
   m_Name: Tree_Simple_Green
   m_TagString: Untagged
@@ -84,16 +83,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5030457029931873395
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 107258}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.4891005, y: 3.9839478, z: 2.4891005}
-  m_Center: {x: -0.021571696, y: 1.9911923, z: -0.014346421}

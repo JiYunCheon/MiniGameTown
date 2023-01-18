@@ -21,6 +21,7 @@ public class TriggerCheck : MonoBehaviour
     {
         PlayerMove player = null;
 
+        //켐페얼 테그로 변경
         if (other.gameObject.TryGetComponent<PlayerMove>(out player))
         {
             GameManager.Inst.GetUiManager.ActiveObj();
@@ -28,6 +29,4 @@ public class TriggerCheck : MonoBehaviour
             //카메라 줌인 실행
         }
     }
-   
-
 }

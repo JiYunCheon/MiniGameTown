@@ -18,7 +18,10 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        //유아이가 켜져있으면 리턴
+        if (GameManager.Inst.GetUiManager.GetSeleccCheck) return;
+
+        if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
             InteractionObject obj = null;
@@ -27,12 +30,13 @@ public class PlayerMove : MonoBehaviour
             {
                 if(hit.transform.gameObject.TryGetComponent<InteractionObject>(out obj))
                 {
-                    myAgent.destination = obj.GetEntranceTr.position;
+                    myAgent.destination = obj.GetEntrance.transform.position;
                 }
                 else
                 {
-                    GameManager.Inst.GetClickManager.GetBeforeHit.SetDefaultShader();
-                    GameManager.Inst.GetClickManager.GetBeforeHit.SetSelectCheck(false);
+                    if(GameManager.Inst.GetClickManager.GetBeforeHit!=null)
+                        GameManager.Inst.GetClickManager.GetBeforeHit.SetDefaultShader();
+
                     myAgent.destination = hit.point;
                 }
 
