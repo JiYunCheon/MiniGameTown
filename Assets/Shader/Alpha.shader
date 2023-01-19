@@ -1,11 +1,9 @@
-Shader "Draw/Outline"
+Shader "Draw/Alpha"
 {
 	Properties
 	{
-		_Color("Main Color", Color) = (1,1,1,1)
+		_Color("Main Color", Color) = (1,1,1,0.1)
 		_MainTex("Main Texture", 2D) = "white" {}
-		_Outline("Outline", Float) = 0.25
-		_OutlineColor("Outline Color", Color) = (1,1,1,0.9)
 	}
 
 	SubShader

@@ -19,7 +19,7 @@ public class PlayerMove : MonoBehaviour
     void Update()
     {
         //유아이가 켜져있으면 리턴
-        if (GameManager.Inst.GetUiManager.GetSeleccCheck) return;
+        if (GameManager.Inst.GetUiManager.GetSeleccCheck || GameManager.Inst.GetBuildingMode) return;
 
         if (Input.GetMouseButtonDown(0))
         {

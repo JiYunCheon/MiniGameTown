@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     private FirstSceneUiController firstSceneUiController = null;
     private ClickManager clickManager = null;
     [HideInInspector] public string curGameName = null;
+    [SerializeField] private bool buildingMode = false;
+    public bool GetBuildingMode {get {return buildingMode;} private set { } }
 
     #region Property
 
