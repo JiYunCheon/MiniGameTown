@@ -28,13 +28,12 @@ public class ClickManager : MonoBehaviour
     [SerializeField] private Texture texture = null;
     [SerializeField] private Shader alphaShader = null;
 
-
     void Update()
     {
         //건물이 선택되어 유아이가 켜져있을 경우
         if (GameManager.Inst.GetUiManager.GetSeleccCheck) return;
 
-        if (Input.GetMouseButtonDown(0)&&!GameManager.Inst.GetBuildingMode)
+        if (Input.GetMouseButtonDown(0)&&!GameManager.Inst.buildingMode)
         {
             RaycastHit hit;
             InteractionObject obj = null;
@@ -55,50 +54,81 @@ public class ClickManager : MonoBehaviour
                         GameManager.Inst.GetUiManager.ChangeCheckValue(false);
                         Interection(obj, true);
                     }
-
                 }
             }
 
         }
 
-        if(GameManager.Inst.GetBuildingMode)
+        Debug.Log(GameManager.Inst.buildingMode);
+        if(GameManager.Inst.buildingMode)
         {
             RaycastHit hit;
+            //pad만 클릭
             if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition),out hit,100,LayerMask2))
             {
                 Debug.DrawRay(Camera.main.ScreenToWorldPoint(Input.mousePosition), Camera.main.transform.forward * 10, Color.red, 0.3f);
 
                 if (hit.transform.gameObject.TryGetComponent<Ground>(out ground))
                 {
+                    //첫번째 클릭일 경우
                     if (preview == null && saveHitPos==Vector3.zero)
                     {
+                        //선택된 패드를 저장
                         beforeGround = ground;
-                        beforeGround.ChangeColor(Color.blue);
-
+                        //주변 색 변경
+                        beforeGround.CommandAroundGround(9);
+                        //선택된 곳의 포지션을 저장
                         saveHitPos = ground.transform.position;
+                        //그 포지션에 알파 건물 생성
                         preview = Instantiate(alphaPrefab, saveHitPos, Quaternion.identity);
                     }
-                    else if(ground.transform.position!=saveHitPos)
+                    //레이의 힛의 포지션이 변경되었을 경우
+                    else if (ground.transform.position!=saveHitPos)
                     {
-                        beforeGround.ChangeColor(Color.white);
+                        Debug.Log("들어와");
+
+                        Debug.Log(beforeGround.GetNodeList.Count);
+                        //기존에 선택되었던 패드의 색을 변경
+                        beforeGround.ColorSet(Color.white);
+                        //이전 패드를 지금 선택된 패드로 초기화
                         beforeGround = ground;
-                        beforeGround.ChangeColor(Color.blue);
+                        //색을 변경
+                        beforeGround.CommandAroundGround(9);
+                        //이전 포지션을 지금 선택된 포지션으로 초기화
                         saveHitPos = ground.transform.position;
+                        //초기화된 포지션으로 알파건물의 위치를 변경
                         preview.transform.position = saveHitPos;
                     }
                 }
 
                 if (Input.GetMouseButtonDown(0))
                 {
-                    Instantiate(prefab, saveHitPos, Quaternion.identity);
-                    Destroy(preview);
-                    preview = null;
-                    saveHitPos = Vector3.zero;
+                    if (beforeGround.GetNodeList.Count == 9)
+                    {
+
+                        if(beforeGround.CompareNode(9))
+                        {
+                            beforeGround.OnBuilding(9);
+                            //진짜 건물 생성
+                            Instantiate(prefab, saveHitPos, Quaternion.identity);
+                            //알파건물 제거
+                            Destroy(preview);
+                            //값 초기화
+                            beforeGround = null;
+                            preview = null;
+                            saveHitPos = Vector3.zero;
+                            //빌딩모드 끔
+                            GameManager.Inst.ChangeMode(out GameManager.Inst.buildingMode, false);
+                        }
+                       
+                    }
                 }
             }
         }
 
     }
+
+  
 
     //클릭 될때 호출 기능 들
     private void Interection(InteractionObject obj , bool check)

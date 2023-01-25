@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 3492429267489590399}
   - component: {fileID: 4862228449540015086}
   - component: {fileID: 7492098623075327889}
-  m_Layer: 0
+  - component: {fileID: 7737411320339872}
+  m_Layer: 7
   m_Name: One
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,3 +99,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aroundGround: []
+--- !u!65 &7737411320339872
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5708521624496741287}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.99999994, y: 1.0000002, z: 0.20000005}
+  m_Center: {x: 0, y: 0, z: 0}

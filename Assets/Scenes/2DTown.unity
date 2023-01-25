@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 49523700}
   - component: {fileID: 49523699}
+  - component: {fileID: 49523701}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -153,6 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curGameName: 
+  buildingMode: 0
 --- !u!4 &49523700
 Transform:
   m_ObjectHideFlags: 0
@@ -168,6 +170,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &49523701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49523698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9808492eade34644b8eaab00f9eff783, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  find_B_Count: 0
+  memory_B_Count: 0
+  puzzle_B_Count: 0
+  balloon_B_Count: 0
+  cook_B_Count: 0
+  myRoom_B_Count: 0
+  gameMoney: 200
+  price: 500
 --- !u!1 &80701802
 GameObject:
   m_ObjectHideFlags: 0

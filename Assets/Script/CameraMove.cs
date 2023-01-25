@@ -14,6 +14,8 @@ public class CameraMove : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (GameManager.Inst.buildingMode) return;
+
 
         if(Input.GetMouseButtonDown(1))
         {
@@ -25,16 +27,6 @@ public class CameraMove : MonoBehaviour
 
             cameraAxisY = Input.GetAxis("Mouse Y");
             cameraAxisX = Input.GetAxis("Mouse X");
-
-            //transform.Translate(-1 * 20 * cameraAxisX * Time.deltaTime, -20 * cameraAxisY * Time.deltaTime, 0);
-
-            //Vector3 targetPos = transform.position;
-
-            //targetPos.x = Mathf.Clamp(targetPos.x, -4f, 7f);
-            //targetPos.y = Mathf.Clamp(targetPos.y, 17f, 18f);
-            //targetPos.z = 40f;
-
-            //transform.position = Vector3.Lerp(Camera.main.transform.position,targetPos,0.2f);
 
             StartCoroutine(nameof(CamMoveStart));
         }

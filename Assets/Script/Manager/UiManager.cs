@@ -5,9 +5,11 @@ using UnityEngine;
 public class UiManager : MonoBehaviour
 {
     [SerializeField] private GameObject CallgameInObj = null;
+    [SerializeField] private ShopBoard shopBoard = null;
 
     private bool selecCheck = false;
-    public bool GetSeleccCheck { get { return selecCheck;} private set { } }
+    public bool GetSeleccCheck { get { return selecCheck; } private set { } }
+    public ShopBoard GetShopBoard { get { return shopBoard; } private set { } }
     
     //건물이 선택이 되었는지 확인
     public void ChangeCheckValue(bool check)
@@ -38,6 +40,11 @@ public class UiManager : MonoBehaviour
         ChangeCheckValue(false);
         ActiveObj(false);
 
+    }
+
+    public void OnClick_BuildingShop()
+    {
+        shopBoard.ActiveControll();
     }
 
     #endregion
