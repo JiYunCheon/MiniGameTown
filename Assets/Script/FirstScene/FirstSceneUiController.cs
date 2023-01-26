@@ -31,8 +31,6 @@ public class FirstSceneUiController : MonoBehaviour
 
     public void OnClick_GameIn()
     {
-        Debug.Log(GameManager.Inst.curGameName);
-
         if (GameManager.Inst.curGameName == "Town1")
             SceneManager.LoadScene("Town1");
         else

@@ -52,7 +52,7 @@ public class InteractionObject : MonoBehaviour
         else
         {
             entrance.ActiveCollider(false);
-            GameManager.Inst.GetUiManager.ActiveObj(false);
+            GameManager.Inst.GetUiManager.Active_GameInBtn(false);
         }
     }
 

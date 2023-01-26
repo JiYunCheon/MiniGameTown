@@ -24,9 +24,14 @@ public class TriggerCheck : MonoBehaviour
         //켐페얼 테그로 변경
         if (other.gameObject.TryGetComponent<PlayerMove>(out player))
         {
-            GameManager.Inst.GetUiManager.ActiveObj();
+            GameManager.Inst.GetUiManager.Active_ShopBtn(false);
 
             //카메라 줌인 실행
+
+
+
+            GameManager.Inst.GetUiManager.Active_GameInBtn();
+
         }
     }
 }

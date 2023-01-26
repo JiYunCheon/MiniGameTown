@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 60522486779899441}
   - component: {fileID: 60522486779899442}
   m_Layer: 6
-  m_Name: Building_Balloon
+  m_Name: Building_Alpha_Balloon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -174,7 +174,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fb1377c6c3a6a410bbeea9b5ff5fdd79, type: 2}
+  - {fileID: 2100000, guid: 7811552553f4bd34b9484743d22779db, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

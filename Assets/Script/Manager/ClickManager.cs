@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Analytics;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class ClickManager : MonoBehaviour
@@ -18,11 +19,13 @@ public class ClickManager : MonoBehaviour
     //다른곳에서 값을 볼 수 있도록 프로퍼티
     public InteractionObject GetBeforeHit { get { return beforeHit; } private set { } }
 
-    [SerializeField] GameObject alphaPrefab = null;
-    [SerializeField] GameObject prefab = null;
-    GameObject preview;
+    Transform alphaPrefab = null;
+    InteractionObject prefab = null;
+    Transform preview;
     Ground ground = null;
-    
+    private int occupyPad = 0;
+
+
 
     [Header("Material")]
     [SerializeField] private Texture texture = null;
@@ -31,7 +34,7 @@ public class ClickManager : MonoBehaviour
     void Update()
     {
         //건물이 선택되어 유아이가 켜져있을 경우
-        if (GameManager.Inst.GetUiManager.GetSeleccCheck) return;
+        if (GameManager.Inst.GetUiManager.GetSelecCheck || EventSystem.current.IsPointerOverGameObject(GameManager.Inst.pointerID) == true) return;
 
         if (Input.GetMouseButtonDown(0)&&!GameManager.Inst.buildingMode)
         {
@@ -51,7 +54,7 @@ public class ClickManager : MonoBehaviour
                     else if (beforeHit.transform.gameObject != hit.transform.transform.gameObject)
                     {
                         beforeHit.SetDefaultShader();
-                        GameManager.Inst.GetUiManager.ChangeCheckValue(false);
+                        GameManager.Inst.GetUiManager.ChangeSelecChcek(false);
                         Interection(obj, true);
                     }
                 }
@@ -59,7 +62,6 @@ public class ClickManager : MonoBehaviour
 
         }
 
-        Debug.Log(GameManager.Inst.buildingMode);
         if(GameManager.Inst.buildingMode)
         {
             RaycastHit hit;
@@ -76,24 +78,21 @@ public class ClickManager : MonoBehaviour
                         //선택된 패드를 저장
                         beforeGround = ground;
                         //주변 색 변경
-                        beforeGround.CommandAroundGround(9);
+                        beforeGround.CommandAroundGround(occupyPad);
                         //선택된 곳의 포지션을 저장
                         saveHitPos = ground.transform.position;
                         //그 포지션에 알파 건물 생성
-                        preview = Instantiate(alphaPrefab, saveHitPos, Quaternion.identity);
+                        preview = Instantiate<Transform>(alphaPrefab, saveHitPos, Quaternion.identity);
                     }
                     //레이의 힛의 포지션이 변경되었을 경우
                     else if (ground.transform.position!=saveHitPos)
                     {
-                        Debug.Log("들어와");
-
-                        Debug.Log(beforeGround.GetNodeList.Count);
                         //기존에 선택되었던 패드의 색을 변경
                         beforeGround.ColorSet(Color.white);
                         //이전 패드를 지금 선택된 패드로 초기화
                         beforeGround = ground;
                         //색을 변경
-                        beforeGround.CommandAroundGround(9);
+                        beforeGround.CommandAroundGround(occupyPad);
                         //이전 포지션을 지금 선택된 포지션으로 초기화
                         saveHitPos = ground.transform.position;
                         //초기화된 포지션으로 알파건물의 위치를 변경
@@ -103,22 +102,22 @@ public class ClickManager : MonoBehaviour
 
                 if (Input.GetMouseButtonDown(0))
                 {
-                    if (beforeGround.GetNodeList.Count == 9)
+                    if (beforeGround.GetNodeList.Count == occupyPad)
                     {
 
-                        if(beforeGround.CompareNode(9))
+                        if(beforeGround.CompareNode(occupyPad))
                         {
-                            beforeGround.OnBuilding(9);
+                            beforeGround.OnBuilding(occupyPad);
                             //진짜 건물 생성
-                            Instantiate(prefab, saveHitPos, Quaternion.identity);
+                            Instantiate<InteractionObject>(prefab, saveHitPos+new Vector3(0,0,0.5f), Quaternion.identity);
                             //알파건물 제거
-                            Destroy(preview);
+                            Destroy(preview.gameObject);
                             //값 초기화
                             beforeGround = null;
                             preview = null;
                             saveHitPos = Vector3.zero;
-                            //빌딩모드 끔
-                            GameManager.Inst.ChangeMode(out GameManager.Inst.buildingMode, false);
+
+                            GameManager.Inst.GetUiManager.On_Click_WatingMode();
                         }
                        
                     }
@@ -137,7 +136,7 @@ public class ClickManager : MonoBehaviour
         beforeHit.SetOutLineShader();
         beforeHit.SetSelectCheck(check);
         GameManager.Inst.curGameName = obj.GetPackageName;
-        GameManager.Inst.GetUiManager.ChangeCheckValue(check);
+        GameManager.Inst.GetUiManager.ChangeSelecChcek(check);
     }
 
     
@@ -145,10 +144,16 @@ public class ClickManager : MonoBehaviour
     {
         beforeHit.SetDefaultShader();
         beforeHit.SetSelectCheck(false);
-        GameManager.Inst.GetUiManager.ChangeCheckValue(false);
+        GameManager.Inst.GetUiManager.ChangeSelecChcek(false);
         beforeHit = null;
     }
 
+    public void SetPrefab(Transform alphaPrefab ,InteractionObject obj , int occupyPad)
+    {
+        prefab = obj;
+        this.occupyPad = occupyPad;
+        this.alphaPrefab = alphaPrefab;
+    }
 
 
 }

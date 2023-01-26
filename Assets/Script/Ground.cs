@@ -5,7 +5,6 @@ using UnityEngine.Networking.Types;
 
 public class Ground : MonoBehaviour
 {
-    [SerializeField] Ground[] aroundGround;
     private List<Ground> nodes;
     public List<Ground> GetNodeList { get { return nodes; } set { } }
 
@@ -35,7 +34,6 @@ public class Ground : MonoBehaviour
         {
             GetNodeList[i].ChangeColor(Color.red);
             GetNodeList[i].buildingCheck = true;
-            //GetNodeList[i].gameObject.layer = 1 >> 0;
         }
     }
  

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 
-public class CameraMove : MonoBehaviour
+public class CameraControll : MonoBehaviour
 {
     private float cameraAxisY = 0;
     private float cameraAxisX = 0;
@@ -100,6 +100,25 @@ public class CameraMove : MonoBehaviour
 
         }
     }
+
+    public void ChangCameraSize(bool mode)
+    {
+        if (mode == true)
+        {
+            Camera.main.orthographicSize = 15;
+        }
+        else
+        {
+            Camera.main.orthographicSize = 7;
+        }
+    }
+
+
+
+
+
+
+
 
 
 

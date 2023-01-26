@@ -155,6 +155,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   curGameName: 
   buildingMode: 0
+  waitingMode: 0
+  pointerID: 0
 --- !u!4 &49523700
 Transform:
   m_ObjectHideFlags: 0
@@ -182,13 +184,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9808492eade34644b8eaab00f9eff783, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  find_B_Count: 0
-  memory_B_Count: 0
-  puzzle_B_Count: 0
-  balloon_B_Count: 0
-  cook_B_Count: 0
-  myRoom_B_Count: 0
-  gameMoney: 200
+  find_B_Count: 1
+  memory_B_Count: 1
+  puzzle_B_Count: 1
+  balloon_B_Count: 1
+  cook_B_Count: 1
+  myRoom_B_Count: 1
+  gameMoney: 500
   price: 500
 --- !u!1 &80701802
 GameObject:

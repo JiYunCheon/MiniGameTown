@@ -1,73 +1,94 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ShopBoard : MonoBehaviour
 {
+    [Header("Scroll View")]
     [SerializeField] private GameObject Building_Scroll = null;
     [SerializeField] private GameObject Object_Scroll = null;
-    [SerializeField] private Material floorMaterial = null;
 
+    [Header("Result Ui")]
     [SerializeField] private GameObject successWindow = null;
     [SerializeField] private GameObject failedWindow = null;
-    private Color color;
+
+    private GAMETYPE type;
+
 
     private void OnEnable()
     {
-        On_Click_Toggle_Building();
+        OnClick_Toggle_Building();
     }
-
 
     public void ActiveControll(bool active = true)
     {
         this.gameObject.SetActive(active);
     }
 
-    public void On_Click_Exit()
+    public void TypeChange(GAMETYPE type)
     {
+        this.type = type;
+    }
+
+
+    #region Button Event
+
+    public void OnClick_Exit()
+    {
+        GameManager.Inst.GetUiManager.GetUiCheck = false;
+        GameManager.Inst.GetUiManager.Active_ShopBtn();
+        OnClick_Cancel();
         ActiveControll(false);
     }
 
-    public void On_Click_Toggle_Building()
+    public void OnClick_Toggle_Building()
     {
         Scroll_OnOff(true);
     }
 
-    public void On_Click_Toggle_Object()
+    public void OnClick_Toggle_Object()
     {
         Scroll_OnOff(false);
     }
 
-    public void Onclick_PurchaseSuccess()
+    public void OnClick_PurchaseSuccess()
     {
+        GameManager.Inst.GetUiManager.On_Click_BuildingMode();
+
+        Active_S_Window(false);
+
+        switch(type)
+        {
+            case GAMETYPE.BALLOON:
+                GameManager.Inst.GetGameData.balloon_B_Count--;
+                break;
+            case GAMETYPE.FINDPICTURE:
+                GameManager.Inst.GetGameData.find_B_Count--;
+                break;
+            case GAMETYPE.MEMORYCARD:
+                GameManager.Inst.GetGameData.memory_B_Count--;
+                break;
+            case GAMETYPE.PUZZLE:
+                GameManager.Inst.GetGameData.puzzle_B_Count--;
+                break;
+        }
+
 
     }
 
-    public void Onclick_PurchaseCancel()
+    public void OnClick_Cancel()
     {
-        successWindow.SetActive(false);
-        failedWindow.SetActive(false);
+        Active_S_Window(false);
+        Active_F_Window(false);
     }
 
-    public void Active_S_Window(bool active = true)
+    public void OnClick_WatingMode()
     {
-        successWindow.SetActive(active);
-    }
-    public void Active_F_Window(bool active = true)
-    {
-        failedWindow.SetActive(active);
+        GameManager.Inst.GetUiManager.On_Click_WatingMode();
     }
 
-    public void On_Click_BuildingMode()
-    {
-        ActiveControll(false);
-        color = floorMaterial.color;
-        floorMaterial.color = new Color(113f/255f, 113f/255f, 113f / 255f);
-        Debug.Log(floorMaterial.color);
-        GameManager.Inst.ChangeMode(out GameManager.Inst.buildingMode,true);
-    }
-
+    #endregion
 
     private void Scroll_OnOff(bool active)
     {
@@ -75,6 +96,14 @@ public class ShopBoard : MonoBehaviour
         Object_Scroll.gameObject.SetActive(!active);
     }
 
-    
+    public void Active_S_Window(bool active = true)
+    {
+        successWindow.SetActive(active);
+    }
+
+    public void Active_F_Window(bool active = true)
+    {
+        failedWindow.SetActive(active);
+    }
 
 }

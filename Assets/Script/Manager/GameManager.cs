@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine;
-
 [RequireComponent(typeof(GameData))]
 public class GameManager : MonoBehaviour
 {
@@ -15,10 +14,17 @@ public class GameManager : MonoBehaviour
     private FirstSceneUiController firstSceneUiController = null;
     private ClickManager clickManager = null;
     private GameData gameData = null;
-
+    private CameraControll cameraMove = null;
+    private PadSpawner padSpawner = null;
 
     [HideInInspector] public string curGameName = null;
     public bool buildingMode = false;
+    public bool waitingMode  = false;
+
+    [HideInInspector] public int pointerID;
+
+  
+
 
     #region Property
 
@@ -57,6 +63,18 @@ public class GameManager : MonoBehaviour
         private set { }
     }
 
+    public CameraControll GetCameraMove
+    {
+        get
+        {
+            if (cameraMove == null)
+                cameraMove = FindObjectOfType<CameraControll>();
+
+            return cameraMove;
+        }
+        private set { }
+    }
+
     public FirstSceneUiController GetUiFirstSceneUiController
     {
         get
@@ -65,6 +83,18 @@ public class GameManager : MonoBehaviour
                 firstSceneUiController = FindObjectOfType<FirstSceneUiController>();
 
             return firstSceneUiController;
+        }
+        private set { }
+    }
+
+    public PadSpawner GetPadSpawner
+    {
+        get
+        {
+            if (padSpawner == null)
+                padSpawner = FindObjectOfType<PadSpawner>();
+
+            return padSpawner;
         }
         private set { }
     }
@@ -83,6 +113,12 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this);
         }
+
+        #if UNITY_EDITOR
+                pointerID = -1;
+        #elif UNITY_ANDROID
+                pointerID = 0; 
+        #endif
     }
 
 
@@ -97,15 +133,7 @@ public class GameManager : MonoBehaviour
 
     public void ChangeMode(out bool mode, bool check)
     {
-        mode=check;
-        if(mode==true)
-        {
-            Camera.main.orthographicSize = 15;
-        }
-        else
-        {
-            Camera.main.orthographicSize = 7;
-        }
+        mode = check;
     }
 
 
