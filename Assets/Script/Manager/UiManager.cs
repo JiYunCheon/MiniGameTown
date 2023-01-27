@@ -27,11 +27,17 @@ public class UiManager : MonoBehaviour
     [SerializeField] private Material floorMaterial     = null;
     [SerializeField] private GameObject padBoard        = null;
 
+    [Header("ModeUi")]
+    [SerializeField] private ScrollRect scroll = null;
+    [SerializeField] InventoryItem inven_itemPrefab = null;
     //CheckValue
     private bool uiCheck = false;
     private bool selecCheck = false;
 
     Color blackColor = new Color(113f / 255f, 113f / 255f, 113f / 255f);
+
+    private InventoryItem curItem = null;
+
 
     #endregion
 
@@ -48,6 +54,18 @@ public class UiManager : MonoBehaviour
     private void Awake()
     {
         floorMaterial.color = Color.white;
+    }
+
+
+    public void SetItem(InventoryItem item)
+    {
+        curItem = item;
+    }
+
+    public void DestroyItem()
+    {
+        Destroy(curItem.gameObject);
+        curItem = null;
     }
 
 
@@ -145,6 +163,30 @@ public class UiManager : MonoBehaviour
 
         GameManager.Inst.GetUiManager.Active_Pad(pad);
         GameManager.Inst.GetCameraMove.ChangCameraSize(mode);
+    }
+
+    public void GenerateContent(PreviewObject alphaPrefab, InteractionObject prefab, int occupyPad, GAMETYPE type,string spriteName)
+    {
+        InventoryItem obj = Instantiate<InventoryItem>(inven_itemPrefab,scroll.content.transform);
+
+        obj.Initialized(alphaPrefab, prefab, occupyPad, type);
+        obj.ChangeImage(spriteName);
+
+        switch (type)
+        {
+            case GAMETYPE.BALLOON:
+                GameManager.Inst.GetGameData.balloon_B_Count--;
+                break;
+            case GAMETYPE.FINDPICTURE:
+                GameManager.Inst.GetGameData.find_B_Count--;
+                break;
+            case GAMETYPE.MEMORYCARD:
+                GameManager.Inst.GetGameData.memory_B_Count--;
+                break;
+            case GAMETYPE.PUZZLE:
+                GameManager.Inst.GetGameData.puzzle_B_Count--;
+                break;
+        }
     }
 
 }

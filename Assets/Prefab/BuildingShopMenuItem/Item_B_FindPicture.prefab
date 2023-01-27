@@ -99,8 +99,9 @@ MonoBehaviour:
   occupyPad: 9
   gameName: FindPicture
   prefab: {fileID: 7055115660770575820, guid: d79c8a64ea8f6eb44b9c504e1f0fbe73, type: 3}
-  alphaPrefab: {fileID: 7055115659816642669, guid: 9841d205869ce5f4ab2815346e173e4b, type: 3}
+  alphaPrefab: {fileID: -8195556217795442724, guid: 9841d205869ce5f4ab2815346e173e4b, type: 3}
   myType: 0
+  spriteName: F
 --- !u!1 &5921534292898510343
 GameObject:
   m_ObjectHideFlags: 0

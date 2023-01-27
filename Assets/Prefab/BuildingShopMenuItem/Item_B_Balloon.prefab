@@ -96,11 +96,12 @@ MonoBehaviour:
   priceText: {fileID: 4388623016946491831}
   priceBtn: {fileID: 8457527734050801944}
   curPrice: 300
-  occupyPad: 9
+  occupyPad: 4
   gameName: Balloon
   prefab: {fileID: 60522486779899442, guid: 5654f8ba537e5c34989c85aa7ee016b1, type: 3}
-  alphaPrefab: {fileID: 8471741803409222585, guid: 2d54172440fdadf4b86eeccd17f738b1, type: 3}
+  alphaPrefab: {fileID: -428357586452027749, guid: 2d54172440fdadf4b86eeccd17f738b1, type: 3}
   myType: 2
+  spriteName: B
 --- !u!1 &5921534292898510343
 GameObject:
   m_ObjectHideFlags: 0

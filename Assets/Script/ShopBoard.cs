@@ -54,26 +54,9 @@ public class ShopBoard : MonoBehaviour
 
     public void OnClick_PurchaseSuccess()
     {
-        GameManager.Inst.GetUiManager.On_Click_BuildingMode();
+        GameManager.Inst.GetUiManager.On_Click_WatingMode();
 
         Active_S_Window(false);
-
-        switch(type)
-        {
-            case GAMETYPE.BALLOON:
-                GameManager.Inst.GetGameData.balloon_B_Count--;
-                break;
-            case GAMETYPE.FINDPICTURE:
-                GameManager.Inst.GetGameData.find_B_Count--;
-                break;
-            case GAMETYPE.MEMORYCARD:
-                GameManager.Inst.GetGameData.memory_B_Count--;
-                break;
-            case GAMETYPE.PUZZLE:
-                GameManager.Inst.GetGameData.puzzle_B_Count--;
-                break;
-        }
-
 
     }
 
