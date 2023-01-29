@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InteractionObject : MonoBehaviour
+public class Building : Interactable
 {
     [SerializeField] private TriggerCheck entrance = null;
     [SerializeField] private string packageName = null;

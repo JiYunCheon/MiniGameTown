@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 76061187012064567}
   - component: {fileID: 76061187012064565}
   - component: {fileID: 76061187012064566}
+  - component: {fileID: 7157944065913695363}
   m_Layer: 5
-  m_Name: Item_Object
+  m_Name: Item_O_Cart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,6 +80,28 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7157944065913695363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 76061187012064520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce4c6c0044d457f49bd6173416398da5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameNameText: {fileID: 5587098108142771759}
+  priceText: {fileID: 4388623016946491831}
+  priceBtn: {fileID: 8457527734050801944}
+  curPrice: 200
+  occupyPad: 2
+  gameName: Cart
+  prefab: {fileID: 925095955719522590, guid: 4623006900f410846af116fcb30ba3b7, type: 3}
+  alphaPrefab: {fileID: 5919330219792457751, guid: 74568daca77e04f429aeae4e49ce8c68, type: 3}
+  myType: 0
+  spriteName: Cart
 --- !u!1 &5921534292898510343
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,7 +223,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5985469754180346189}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7157944065913695363}
+        m_TargetAssemblyTypeName: ContentItem, Assembly-CSharp
+        m_MethodName: OnClick_Price
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6634367181832915659
 GameObject:
   m_ObjectHideFlags: 0

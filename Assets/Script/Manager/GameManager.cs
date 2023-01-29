@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     private ClickManager clickManager = null;
     private GameData gameData = null;
     private CameraControll cameraMove = null;
-    private PadSpawner padSpawner = null;
+    private PadSpawner[] padSpawner = null;
 
     [HideInInspector] public string curGameName = null;
     public bool buildingMode = false;
@@ -87,13 +87,14 @@ public class GameManager : MonoBehaviour
         private set { }
     }
 
-    public PadSpawner GetPadSpawner
+    public PadSpawner[] GetPadSpawner
     {
         get
         {
             if (padSpawner == null)
-                padSpawner = FindObjectOfType<PadSpawner>();
-
+            {
+                padSpawner = FindObjectsOfType(typeof (PadSpawner))as PadSpawner[];
+            }
             return padSpawner;
         }
         private set { }

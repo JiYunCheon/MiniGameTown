@@ -11,6 +11,7 @@ public class Ground : MonoBehaviour
     Renderer renderer = null;
     [HideInInspector] public bool buildingCheck = false;
 
+    List<Ground> ground = new List<Ground>();
 
     private void Awake()
     {
@@ -18,197 +19,92 @@ public class Ground : MonoBehaviour
         renderer = GetComponent<Renderer>();
     }
 
-    public void ChangeColor(Color color)
+    public void ChangeColor(Color color, int occupyPad)
     {
-        if (buildingCheck)
+        if (!CompareNode(occupyPad) && color!=Color.white )
         {
-            renderer.material.color = Color.red;
+            SetColor(occupyPad, color);
             return;
         }
-        renderer.material.color = color;
+
+        SetColor(occupyPad, color);
+      
     }
 
-    public void OnBuilding(int count)
+    public bool CompareNode(int occupyPad)
     {
-        if (count == 1)
+        for (int i = 0; i < GetNodeList.Count; i++)
         {
-            for (int i = 0; i < count; i++)
-            {
-                if (GetNodeList[i] == this)
-                {
-                    GetNodeList[i].ChangeColor(Color.red);
-                    GetNodeList[i].buildingCheck = true;
-                    return;
-                }
-            }
-        }
-        else if (count == 2)
-        {
-            int index = 0;
-            for (int i = 0; i < count; i++)
-            {
-                if (GetNodeList[i] == this)
-                {
-                    GetNodeList[i].ChangeColor(Color.red);
-                    GetNodeList[i].buildingCheck = true;
-                    index = i;
-                    break;
-                }
-            }
-
-            if (GetNodeList[index + 3] != null)
-            {
-                GetNodeList[index + 3].ChangeColor(Color.red);
-                GetNodeList[index + 3].buildingCheck = true;
-                return;
-            }
-
-        }
-        else if (count == 4)
-        {
-            int index = 0;
-            for (int i = 0; i < count; i++)
-            {
-                if (GetNodeList[i] == this)
-                {
-                    GetNodeList[i].ChangeColor(Color.red);
-                    GetNodeList[i].buildingCheck = true;
-                    index = i;
-                    break;
-                }
-            }
-
-            if (GetNodeList[index + 4] != null)
-            {
-                for (int i = 1; i < 5; i++)
-                {
-                    if (i == 2) continue;
-
-                    GetNodeList[index + i].ChangeColor(Color.red);
-                    GetNodeList[index + i].buildingCheck = true;
-                }
-
-                return;
-            }
-        }
-        else if (count == 9)
-        {
-            for (int i = 0; i < count; i++)
-            {
-                GetNodeList[i].ChangeColor(Color.red);
-                GetNodeList[i].buildingCheck = true;
-            }
-        }
-       
-    }
- 
-    public bool CompareNode(int count)
-    {
-        if (count > GetNodeList.Count)
-        {
-            count = GetNodeList.Count;
+            if (GetNodeList[i].buildingCheck) return false;
         }
 
-        for (int i = 0; i < count; i++)
-        {
-            if (GetNodeList[i].buildingCheck == true)
-                return false;
-        }
         return true;
     }
 
-    public void ColorSet(Color color, int count)
+    
+    public void Clear(int occupyPad)
     {
-        if (count > GetNodeList.Count) count = GetNodeList.Count;
-
-        //리스트 카운트가 인덱스 +a보다 클때
-
-        if (count == 1)
+        if (ground.Count>0)
         {
-            for (int i = 0; i < count; i++)
+            for (int i = 0; i < ground.Count; i++)
             {
-                if (GetNodeList[i] == this)
-                {
-                    GetNodeList[i].ChangeColor(Color.green);
-                    return;
-                }
+                if (ground[i].buildingCheck) continue;
+                ground[i].renderer.material.color = Color.white;
             }
+            ground.Clear();
         }
-        else if (count == 2)
-        {
-            int index = 0;
-            for (int i = 0; i < count; i++)
-            {
-                if (GetNodeList[i] == this)
-                {
-                    GetNodeList[i].ChangeColor(Color.green);
-                    index = i;
-                    break;
-                }
-            }
-
-            if (GetNodeList[index + 3] != null)
-            {
-                GetNodeList[index + 3].ChangeColor(Color.green);
-                return;
-            }
-
-        }
-        else if (count == 4)
-        {
-            int index = 0;
-            for (int i = 0; i < count; i++)
-            {
-                if (GetNodeList[i] == this)
-                {
-                    GetNodeList[i].ChangeColor(Color.green);
-                    index = i;
-                    break;
-                }
-            }
-
-            if (GetNodeList[index + 4] != null)
-            {
-                for (int i = 1; i < 5; i++)
-                {
-                    if (i == 2) continue;
-
-                    GetNodeList[index + i].ChangeColor(Color.green);
-                }
-
-                return;
-            }
-        }
-        else if (count == 9)
-        {
-            for (int i = 0; i < count; i++)
-            {
-                GetNodeList[i].ChangeColor(Color.green);
-            }
-        }
-        for (int i = 0; i < GetNodeList.Count; i++)
-        {
-            GetNodeList[i].ChangeColor(color);
-        }
+       
     }
 
-    //주변 땅에 명령
-    public void CommandAroundGround(int count)
+    private void SetColor(int occupyPad, Color color)
     {
-        if(count > GetNodeList.Count)
+        if(!CompareNode(occupyPad))
         {
-            ColorSet(Color.red, count);
+            for (int i = 0; i < GetNodeList.Count; i++)
+            {
+                GetNodeList[i].renderer.material.color = Color.red;
+                ground.Add(GetNodeList[i]);
+            }
             return;
         }
+      
 
-        if (!CompareNode(count))
+        if (occupyPad == GetNodeList.Count || color==Color.white )
         {
-            ColorSet(Color.red, count);
+            for (int i = 0; i < GetNodeList.Count; i++)
+            {
+                if (GetNodeList[i].buildingCheck)
+                    continue;
+
+                GetNodeList[i].renderer.material.color = color;
+
+            }
         }
         else
         {
-            ColorSet(Color.green, count);
+            for (int i = 0; i < GetNodeList.Count; i++)
+            {
+                GetNodeList[i].renderer.material.color = Color.red;
+            }
         }
 
     }
+
+    public void OnBuilding(int occupyPad)
+    {
+        if (occupyPad == GetNodeList.Count)
+        {
+            for (int i = 0; i < GetNodeList.Count; i++)
+            {
+                GetNodeList[i].buildingCheck=true;
+                GetNodeList[i].renderer.material.color = Color.red;
+            }
+        }
+
+    }
+
+
+
+
 }
+

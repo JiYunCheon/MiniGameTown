@@ -18,7 +18,7 @@ public class ContentItem : MonoBehaviour
     [SerializeField] private int curPrice = 0;
     [SerializeField] private int occupyPad = 0;
     [SerializeField] private string gameName = null;
-    [SerializeField] private InteractionObject prefab = null;
+    [SerializeField] private Building prefab = null;
     [SerializeField] private PreviewObject alphaPrefab = null;
     [SerializeField] private GAMETYPE myType;
     [SerializeField] private string spriteName = null;

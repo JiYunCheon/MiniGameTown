@@ -30,6 +30,9 @@ public class UiManager : MonoBehaviour
     [Header("ModeUi")]
     [SerializeField] private ScrollRect scroll = null;
     [SerializeField] InventoryItem inven_itemPrefab = null;
+
+    [SerializeField] private PadSpawner[] padSpawners = null;
+
     //CheckValue
     private bool uiCheck = false;
     private bool selecCheck = false;
@@ -127,8 +130,14 @@ public class UiManager : MonoBehaviour
     public void On_Click_BuildingMode()
     {
         GameManager.Inst.ChangeMode(out GameManager.Inst.buildingMode, true);
+        ModeControll(false, GameManager.Inst.buildingMode, true, blackColor);
 
-        ModeControll(false,GameManager.Inst.buildingMode,true,blackColor);
+        for (int i = 0; i < padSpawners.Length; i++)
+        {
+            padSpawners[i].GeneratePad(GameManager.Inst.GetClickManager.GetOccupyPad);
+        }
+
+
     }
 
     public void On_Click_WatingMode()
@@ -165,7 +174,7 @@ public class UiManager : MonoBehaviour
         GameManager.Inst.GetCameraMove.ChangCameraSize(mode);
     }
 
-    public void GenerateContent(PreviewObject alphaPrefab, InteractionObject prefab, int occupyPad, GAMETYPE type,string spriteName)
+    public void GenerateContent(PreviewObject alphaPrefab, Building prefab, int occupyPad, GAMETYPE type,string spriteName)
     {
         InventoryItem obj = Instantiate<InventoryItem>(inven_itemPrefab,scroll.content.transform);
 

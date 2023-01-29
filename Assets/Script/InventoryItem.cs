@@ -11,7 +11,7 @@ public class InventoryItem : MonoBehaviour
     #region GameData
 
     private int occupyPad = 0;
-    private InteractionObject prefab = null;
+    private Building prefab = null;
     private PreviewObject alphaPrefab = null;
     private GAMETYPE myType;
 
@@ -19,12 +19,10 @@ public class InventoryItem : MonoBehaviour
 
     public void ChangeImage(string imageName)
     {
-        Debug.Log(imageName);
         picture.sprite = Resources.Load<Sprite>(imageName);
-        Debug.Log(picture.name);
     }
 
-    public void Initialized(PreviewObject alphaPrefab, InteractionObject prefab, int occupyPad , GAMETYPE type)
+    public void Initialized(PreviewObject alphaPrefab, Building prefab, int occupyPad , GAMETYPE type)
     {
         this.alphaPrefab = alphaPrefab;
         this.prefab = prefab;

@@ -10305,6 +10305,18 @@ MonoBehaviour:
   padBoard: {fileID: 1360801968}
   scroll: {fileID: 1844623619}
   inven_itemPrefab: {fileID: -3314957027976437145, guid: 3b239826f285e154a8e9c3e279842963, type: 3}
+  padSpawners:
+  - {fileID: 901470673}
+  - {fileID: 68574892}
+  - {fileID: 1487316870}
+  - {fileID: 2039666452}
+  - {fileID: 634494334}
+  - {fileID: 1409969275}
+  - {fileID: 596337821}
+  - {fileID: 2073325666}
+  - {fileID: 698736308}
+  - {fileID: 1127492722}
+  - {fileID: 654739474}
 --- !u!4 &1565381238
 Transform:
   m_ObjectHideFlags: 0
