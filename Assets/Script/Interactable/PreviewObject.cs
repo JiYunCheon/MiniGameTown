@@ -49,8 +49,10 @@ public class PreviewObject : MonoBehaviour
 
     public void OnClick_Exit()
     {
-        GameManager.Inst.GetClickManager.choiceCheck = false;
+        GameManager.Inst.GetClickManager.PadRefresh();
         Destroy(this.gameObject);
+
+        GameManager.Inst.GetUiManager.On_Click_WatingMode();
     }
 
     #endregion

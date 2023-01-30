@@ -92,16 +92,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce4c6c0044d457f49bd6173416398da5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myData: {fileID: 11400000, guid: 66560b7b70838ee47a3caa2eb1dc9d0c, type: 2}
+  picture: {fileID: 2713385416897062360}
   gameNameText: {fileID: 5587098108142771759}
   priceText: {fileID: 4388623016946491831}
   priceBtn: {fileID: 8457527734050801944}
-  curPrice: 100
-  occupyPad: 1
-  gameName: Tree_1
-  prefab: {fileID: 8958715222355816590, guid: 0433dd10e1adeb84baf6362ec95dfced, type: 3}
-  alphaPrefab: {fileID: 23734321000875122, guid: a47c6060a7b60b34abc9fdbffb385206, type: 3}
-  myType: 4
-  spriteName: AppleTree
 --- !u!1 &5921534292898510343
 GameObject:
   m_ObjectHideFlags: 0

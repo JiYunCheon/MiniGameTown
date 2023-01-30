@@ -16,31 +16,24 @@ public class PadSpawner : MonoBehaviour
     //설치될 패드의 2차원 배열
     private Ground[,] pads;
 
-    private void OnDisable()
+    private void Awake()
     {
-        DestroyPad();
+        GeneratePad();
     }
 
-    //패드 생성 후 각 패드별 데이터 할당
-    public void GeneratePad(int occupyPad)
+    private void OnEnable()
     {
+        SetPadNode(GameManager.Inst.GetClickManager.GetOccupyPad);
+    }
+    private void OnDisable()
+    {
+        PadNodeClear();
+    }
 
-        if (pads==null)
-        {
-            pads = new Ground[hieght, width];
 
-            //2차원 배열로 설정된 높이 넓이로 패드를 설치함
-            for (int i = 0; i < hieght; i++)
-            {
-                for (int j = 0; j < width; j++)
-                {
-                    pads[i, j] = Instantiate<Ground>(pad, this.transform);
-                    pads[i, j].transform.localPosition = new Vector3(j * interveal, transform.position.y, i * interveal);
-                    pads[i, j].name = $"{i},{j}";
-                }
-            }
-        }
-
+    //패드 생성 후 각 패드별 데이터 할당
+    public void SetPadNode(int occupyPad)
+    {
         if (occupyPad == 9)
         {
             for (int y = 0; y < hieght; y++)
@@ -107,26 +100,34 @@ public class PadSpawner : MonoBehaviour
                 }
             }
         }
-
-
-
     }
 
-    private void DestroyPad()
+    private void PadNodeClear()
     {
         for (int i = 0; i < hieght; i++)
         {
             for (int j = 0; j < width; j++)
             {
                 pads[i, j].GetNodeList.Clear();
-                //pads[i, j].gameObject.SetActive(false);
-                //Destroy(pads[i,j].gameObject);
-                //pads[i, j] = null;
             }
         }
-        
     }
 
+    private void GeneratePad()
+    {
+        pads = new Ground[hieght, width];
+
+        //2차원 배열로 설정된 높이 넓이로 패드를 설치함
+        for (int i = 0; i < hieght; i++)
+        {
+            for (int j = 0; j < width; j++)
+            {
+                pads[i, j] = Instantiate<Ground>(pad, this.transform);
+                pads[i, j].transform.localPosition = new Vector3(j * interveal, transform.position.y, i * interveal);
+                pads[i, j].name = $"{i},{j}";
+            }
+        }
+    }
 
 
 }

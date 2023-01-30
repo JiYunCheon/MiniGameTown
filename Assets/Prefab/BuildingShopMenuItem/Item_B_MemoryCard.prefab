@@ -92,16 +92,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce4c6c0044d457f49bd6173416398da5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myData: {fileID: 11400000, guid: d3489990581a2194f80c7cda4534e8a9, type: 2}
+  picture: {fileID: 2713385416897062360}
   gameNameText: {fileID: 5587098108142771759}
   priceText: {fileID: 4388623016946491831}
   priceBtn: {fileID: 8457527734050801944}
-  curPrice: 300
-  occupyPad: 9
-  gameName: MemoryCard
-  prefab: {fileID: 2422075055870441811, guid: 62dd163f6a6852644a0a00ca29303eb3, type: 3}
-  alphaPrefab: {fileID: 3506387023725946524, guid: 07d71a65d5ff9674a8126b52c78f9d5d, type: 3}
-  myType: 1
-  spriteName: Memory
 --- !u!1 &5921534292898510343
 GameObject:
   m_ObjectHideFlags: 0

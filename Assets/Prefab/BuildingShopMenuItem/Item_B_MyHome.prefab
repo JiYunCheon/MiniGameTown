@@ -92,16 +92,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce4c6c0044d457f49bd6173416398da5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myData: {fileID: 11400000, guid: 4121f1a1bfd2e5843a4e486f0ab784e9, type: 2}
+  picture: {fileID: 2713385416897062360}
   gameNameText: {fileID: 5587098108142771759}
   priceText: {fileID: 4388623016946491831}
   priceBtn: {fileID: 8457527734050801944}
-  curPrice: 300
-  occupyPad: 9
-  gameName: MyHome
-  prefab: {fileID: 3389693700811471099, guid: cc704161c3d1d7f4b88e19558a57e676, type: 3}
-  alphaPrefab: {fileID: 1872399082474312554, guid: 1a7d0a77cb6c41545b7f9e47b48084c1, type: 3}
-  myType: 4
-  spriteName: MyHome
 --- !u!1 &5921534292898510343
 GameObject:
   m_ObjectHideFlags: 0

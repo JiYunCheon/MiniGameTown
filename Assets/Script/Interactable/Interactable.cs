@@ -4,27 +4,18 @@ using UnityEngine;
 
 abstract public class Interactable : MonoBehaviour
 {
+    [SerializeField]
+    private Data myData = null;
+    public Data GetMyData { get { return myData; }private set { } }
 
-    #region GameData
-    //스크립터블 오브젝트로 받으 데이터 들
-    private int occupyPad = 0;
-    private Interactable prefab = null;
-    private PreviewObject alphaPrefab = null;
-    private GAMETYPE myType;
+    [Header("===ListCheck===")]
+    public List<Ground> myGround = new List<Ground>();
 
-    #endregion
-
-    public Interactable GetPrefab { get { return prefab; } private set { } }
-    public PreviewObject GetAlphaPrefab { get { return alphaPrefab; } private set { } }
-    public GAMETYPE GetMyType { get { return myType; } private set { } }
-    public int GetOccupyPad { get { return occupyPad; } private set { } }
-
-     public void Initialized(PreviewObject alphaPrefab, Interactable prefab, int occupyPad , GAMETYPE type)
+    public virtual void SaveGround(List<Ground> nodes)
     {
-        this.alphaPrefab = alphaPrefab;
-        this.prefab = prefab;
-        this.occupyPad = occupyPad;
-        this.myType = type;
+        for (int i = 0; i < nodes.Count; i++)
+        {
+            myGround.Add(nodes[i]);
+        }
     }
-
 }

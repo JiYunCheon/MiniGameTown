@@ -23,9 +23,6 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector] public int pointerID;
 
-  
-
-
     #region Property
 
     public GameData GetGameData 
@@ -120,15 +117,6 @@ public class GameManager : MonoBehaviour
         #elif UNITY_ANDROID
                 pointerID = 0; 
         #endif
-    }
-
-
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.A))
-        {
-            ChangeMode(out buildingMode,true);
-        }
     }
 
 

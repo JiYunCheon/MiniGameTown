@@ -36,8 +36,6 @@ public class UiManager : MonoBehaviour
     [SerializeField] private GameObject successWindow = null;
     [SerializeField] private GameObject failedWindow = null;
 
-    [SerializeField] private PadSpawner[] padSpawners = null;
-
     //CheckValue
     private bool uiCheck = false;
     private bool selecCheck = false;
@@ -92,8 +90,6 @@ public class UiManager : MonoBehaviour
             buildingShopBtn.interactable = false;
         else
             buildingShopBtn.interactable = true;
-
-
     }
 
     //게임인 Ui 활성화 제어
@@ -135,7 +131,7 @@ public class UiManager : MonoBehaviour
     public void OnClick_Exit()
     {
         GameManager.Inst.GetClickManager.GetBeforeHit.GetEntrance.ActiveCollider(false);
-        GameManager.Inst.GetClickManager.Refresh();
+        GameManager.Inst.GetClickManager.BuildingRefresh();
 
         ChangeSelecChcek(false);
         Active_GameInBtn(false);
@@ -146,6 +142,7 @@ public class UiManager : MonoBehaviour
     {
         GetUiCheck = true;
         shopBoard.ActiveControll();
+
         Active_ShopBtn(false);
     }
 
@@ -153,14 +150,18 @@ public class UiManager : MonoBehaviour
     {
         GameManager.Inst.ChangeMode(out GameManager.Inst.waitingMode, false);
         GameManager.Inst.ChangeMode(out GameManager.Inst.buildingMode, true);
-        ModeControll(false, GameManager.Inst.buildingMode, true, blackColor);
 
-        for (int i = 0; i < padSpawners.Length; i++)
+        foreach (Transform item in GameManager.Inst.GetClickManager.GetBuildings)
         {
-            padSpawners[i].GeneratePad(GameManager.Inst.GetClickManager.GetOccupyPad);
+            if (item.TryGetComponent<Interactable>(out Interactable interactable))
+            {
+                for (int i = 0; i < interactable.myGround.Count; i++)
+                {
+                    interactable.myGround[i].ChangeBuildingState(true, Color.red);
+                }
+            }
         }
-
-
+        ModeControll(false, GameManager.Inst.buildingMode, true, blackColor);
     }
 
     public void On_Click_WatingMode()
@@ -211,14 +212,12 @@ public class UiManager : MonoBehaviour
         GameManager.Inst.GetCameraMove.ChangCameraSize(mode);
     }
 
-    public void GenerateContent(PreviewObject alphaPrefab, Interactable prefab, int occupyPad, GAMETYPE type,string spriteName)
+    public void GenerateContent(ContentItem content)
     {
-        InventoryItem obj = Instantiate<InventoryItem>(inven_itemPrefab,scroll.content.transform);
+        InventoryItem itme = Instantiate<InventoryItem>(inven_itemPrefab,scroll.content.transform);
+        itme.SetMyData(content.GetMyData);
 
-        obj.Initialized(alphaPrefab, prefab, occupyPad, type);
-        obj.ChangeImage(spriteName);
-
-        switch (type)
+        switch (content.GetMyData.MyType)
         {
             case GAMETYPE.BALLOON:
                 GameManager.Inst.GetGameData.balloon_B_Count--;

@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class ContentItem : MonoBehaviour
+public class ContentItem : Item
 {
     [Header("Text")]
     [SerializeField] private TextMeshProUGUI gameNameText = null;
@@ -13,27 +13,10 @@ public class ContentItem : MonoBehaviour
     [Header("Button")]
     [SerializeField] private Button priceBtn = null;
 
-    #region GameData
-
-    [SerializeField] private int curPrice = 0;
-    [SerializeField] private int occupyPad = 0;
-    [SerializeField] private string gameName = null;
-    [SerializeField] private Interactable prefab = null;
-    [SerializeField] private PreviewObject alphaPrefab = null;
-    [SerializeField] private GAMETYPE myType;
-    [SerializeField] private string spriteName = null;
-
-    #endregion
-
-
-    private void Awake()
-    {
-        Initialized();
-    }
 
     private void OnEnable()
     {
-        switch (myType)
+        switch (GetMyData.MyType)
         {
             case GAMETYPE.BALLOON:
 
@@ -58,11 +41,13 @@ public class ContentItem : MonoBehaviour
         }
     }
 
-    private void Initialized()
+    protected override void Initialized()
     {
-        gameNameText.text = gameName;
-        priceText.text = $"{curPrice}$";
+        gameNameText.text = GetMyData.GameName;
+        priceText.text = $"{GetMyData.Price}$";
+        picture.sprite = Resources.Load<Sprite>(GetMyData.SpriteName);
     }
+
 
     private void CompareSoldOutCheck(int count)
     {
@@ -75,7 +60,7 @@ public class ContentItem : MonoBehaviour
 
     public void OnClick_Price()
     {
-        if (curPrice < GameManager.Inst.GetGameData.gameMoney)
+        if (GetMyData.Price < GameManager.Inst.GetGameData.gameMoney)
         {
             GameManager.Inst.GetUiManager.Active_S_Window();
             GameManager.Inst.GetUiManager.Set_Content_Item(this);
@@ -87,8 +72,8 @@ public class ContentItem : MonoBehaviour
 
     public void CallGenerate()
     {
-        GameManager.Inst.GetUiManager.GenerateContent(alphaPrefab,prefab,occupyPad,myType,spriteName);
+        GameManager.Inst.GetUiManager.GenerateContent(this);
     }
 
-
+   
 }

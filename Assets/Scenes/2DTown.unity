@@ -190,7 +190,7 @@ MonoBehaviour:
   balloon_B_Count: 1
   cook_B_Count: 1
   myRoom_B_Count: 1
-  gameMoney: 500
+  gameMoney: 1000
   price: 500
 --- !u!1 &80701802
 GameObject:

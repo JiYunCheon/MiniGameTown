@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d756ad56c482de5478bf6c03f71af4f5, type: 3}
+  m_Name: PuzzleData
+  m_EditorClassIdentifier: 
+  price: 500
+  occupyPad: 9
+  gameName: Puzzle
+  prefab: {fileID: 1310955391024876095, guid: 6f7c779326f63744ab16bf7d21722e07, type: 3}
+  alphaPrefab: {fileID: 1872399082474312554, guid: ce3f714d08b9a5e4db1554d13c1566f1, type: 3}
+  myType: 3
+  spriteName: Puzzle
+  packageName: com.DefaultCompany.JigsawPuzzle

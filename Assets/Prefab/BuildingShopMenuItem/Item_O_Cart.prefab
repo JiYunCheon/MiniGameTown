@@ -92,16 +92,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce4c6c0044d457f49bd6173416398da5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myData: {fileID: 11400000, guid: 61bcd13a9ebd04d42ad5e01e9e823db5, type: 2}
+  picture: {fileID: 2713385416897062360}
   gameNameText: {fileID: 5587098108142771759}
   priceText: {fileID: 4388623016946491831}
   priceBtn: {fileID: 8457527734050801944}
-  curPrice: 200
-  occupyPad: 2
-  gameName: Cart
-  prefab: {fileID: 3800783185627750066, guid: 4623006900f410846af116fcb30ba3b7, type: 3}
-  alphaPrefab: {fileID: 5919330219792457751, guid: 74568daca77e04f429aeae4e49ce8c68, type: 3}
-  myType: 4
-  spriteName: Cart
 --- !u!1 &5921534292898510343
 GameObject:
   m_ObjectHideFlags: 0

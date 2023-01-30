@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1663979699459751650}
   - component: {fileID: 1663979699463137752}
   - component: {fileID: 1663979699461757676}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Apples
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1663979699459811692}
   - component: {fileID: 8958715222355816590}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Object_AppleTree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,6 +129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2e9a9c80ed65b9468643daf636aea48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myData: {fileID: 11400000, guid: 66560b7b70838ee47a3caa2eb1dc9d0c, type: 2}
+  myGround: []
 --- !u!1 &1663979699459914532
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,7 +142,7 @@ GameObject:
   - component: {fileID: 1663979699459812648}
   - component: {fileID: 1663979699463158120}
   - component: {fileID: 1663979699462111712}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tree_Fruits_Apples
   m_TagString: Untagged
   m_Icon: {fileID: 0}

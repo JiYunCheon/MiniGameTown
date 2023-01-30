@@ -3,39 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InventoryItem : MonoBehaviour
+public class InventoryItem : Item
 {
-    [Header("Image")]
-    [SerializeField] private Image picture;
 
-    #region GameData
-
-    private int occupyPad = 0;
-    private Interactable prefab = null;
-    private PreviewObject alphaPrefab = null;
-    private GAMETYPE myType;
-
-    #endregion
-
-    public void ChangeImage(string imageName)
+    private void Start()
     {
-        picture.sprite = Resources.Load<Sprite>(imageName);
+        picture.sprite = Resources.Load<Sprite>(GetMyData.SpriteName);
     }
-
-    public void Initialized(PreviewObject alphaPrefab, Interactable prefab, int occupyPad , GAMETYPE type)
+    protected override void Initialized()
     {
-        this.alphaPrefab = alphaPrefab;
-        this.prefab = prefab;
-        this.occupyPad = occupyPad;
-        this.myType = type;
+        if (picture == null)
+            picture = GetComponent<Image>();
     }
 
     #region Button Event
 
     public void OnClick_Item()
     {
-        GameManager.Inst.GetClickManager.SetPrefab(alphaPrefab, prefab, occupyPad);
-        GameManager.Inst.GetUiManager.GetShopBoard.TypeChange(myType);
+        GameManager.Inst.GetClickManager.SetInfo(GetMyData.AlphaPrefab, GetMyData.Prefab, GetMyData.OccupyPad);
+        GameManager.Inst.GetUiManager.GetShopBoard.TypeChange(GetMyData.MyType);
         GameManager.Inst.GetUiManager.Set_Inven_Item(this);
         GameManager.Inst.GetUiManager.On_Click_BuildingMode();
     }

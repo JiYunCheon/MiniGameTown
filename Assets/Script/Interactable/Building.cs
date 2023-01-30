@@ -6,24 +6,21 @@ using UnityEngine.UI;
 
 public class Building : Interactable
 {
+    [Header("===Entrance===")]
     [SerializeField] private TriggerCheck entrance = null;
-    [SerializeField] private string packageName = null;
 
-    [Header("Material")]
+    [Header("===Material===")]
     [SerializeField] private Texture texture = null;
     [SerializeField] private Material material = null;
     [SerializeField] private Shader outlineShader = null;
     [SerializeField] private Shader defaultShader = null;
 
-    private Renderer renderer = null;
 
-    [SerializeField] private bool selectCheck = false;
+    private new Renderer renderer = null;
 
-    public List<Ground> myGround = new List<Ground>();
-
-
+    private bool selectCheck = false;
+   
     public bool GetSelecCheck { get { return selectCheck; } private set { } }
-    public string GetPackageName { get { return packageName; } private set { } }
 
     public TriggerCheck GetEntrance { get { return entrance; } private set { } }
 
@@ -33,14 +30,7 @@ public class Building : Interactable
         renderer = GetComponent<Renderer>();
     }
 
-    public void SaveGround(List<Ground> nodes)
-    {
-        myGround = nodes;
-        Debug.Log("LOG::::"+nodes.Count);
-    }
-
-
-
+ 
 
     //¾Æ¿ô¶óÀÎ ½¦ÀÌ´õ Àû¿ë
     public void SetOutLineShader()
