@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ac92845fa8d32fb4d99e7fd017bd2216
+guid: d4131ba0037857641b4014780924c364
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,22 +117,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: g5_2
+      name: MyHome_0
       rect:
         serializedVersion: 2
-        x: 494
-        y: 70
-        width: 930
-        height: 950
+        x: 555
+        y: 194
+        width: 823
+        height: 687
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 26e51165d6491e84ba4ba38c0e8483c0
-      internalID: 859782496
+      spriteID: 65a218b7f74b38848b8a7b77bfd8853b
+      internalID: 1675201770
       vertices: []
       indices: 
       edges: []
@@ -140,7 +140,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: e0ff335d6fc57954bb676502fea4bbfc
+    spriteID: 8f2e462d6ae99b647969eb98aaee462f
     internalID: 0
     vertices: []
     indices: 
@@ -148,13 +148,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      g5_3: -1668686989
-      g5_6: 2511501
-      g5_0: 1249469704
-      g5_2: 859782496
-      g5_4: -315929700
-      g5_5: 1932518071
-      g5_1: 1153820818
+      MyHome_0: 1675201770
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

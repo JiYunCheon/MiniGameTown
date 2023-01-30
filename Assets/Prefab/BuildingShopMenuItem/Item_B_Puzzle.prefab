@@ -101,7 +101,7 @@ MonoBehaviour:
   prefab: {fileID: 1310955391024876095, guid: 6f7c779326f63744ab16bf7d21722e07, type: 3}
   alphaPrefab: {fileID: 1872399082474312554, guid: ce3f714d08b9a5e4db1554d13c1566f1, type: 3}
   myType: 3
-  spriteName: P
+  spriteName: Puzzle
 --- !u!1 &5921534292898510343
 GameObject:
   m_ObjectHideFlags: 0
@@ -438,7 +438,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 95050463, guid: 3225e4604f6424641b0095fc5b2f3bac, type: 3}
+  m_Sprite: {fileID: 1602009684, guid: 470598ecffbb21f4ba3657d248b870f7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

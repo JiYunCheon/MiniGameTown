@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 using UnityEngine.Analytics;
 using UnityEngine.EventSystems;
@@ -20,7 +21,7 @@ public class ClickManager : MonoBehaviour
     public Building GetBeforeHit { get { return beforeHit; } private set { } }
 
     PreviewObject alphaPrefab = null;
-    Building prefab = null;
+    Interactable prefab = null;
     PreviewObject preview;
     Ground ground = null;
     private int occupyPad = 0;
@@ -33,13 +34,13 @@ public class ClickManager : MonoBehaviour
 
     public int GetOccupyPad { get { return occupyPad;}private set { } }
 
-
+    int count = 0;
     void Update()
     {
         //건물이 선택되어 유아이가 켜져있을 경우
         if (GameManager.Inst.GetUiManager.GetSelecCheck || EventSystem.current.IsPointerOverGameObject(GameManager.Inst.pointerID) == true) return;
 
-        if (Input.GetMouseButtonDown(0)&&!GameManager.Inst.buildingMode)
+        if (Input.GetMouseButtonDown(0) && !GameManager.Inst.buildingMode && !GameManager.Inst.waitingMode)
         {
             RaycastHit hit;
             Building obj = null;
@@ -51,7 +52,7 @@ public class ClickManager : MonoBehaviour
                 if (hit.transform.gameObject.TryGetComponent<Building>(out obj))
                 {
                     //이전 오브젝트가 없는 경우
-                    if(beforeHit== null)
+                    if (beforeHit == null)
                         Interection(obj, true);
                     //이전 오브젝트와 다른 오브젝트를 클릭했을 경우
                     else if (beforeHit.transform.gameObject != hit.transform.transform.gameObject)
@@ -65,70 +66,99 @@ public class ClickManager : MonoBehaviour
 
         }
 
-        if(GameManager.Inst.buildingMode)
+
+        if (GameManager.Inst.waitingMode)
         {
-            RaycastHit hit;
-            //pad만 클릭
-            if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition),out hit,100,LayerMask2))
+            if(Input.GetMouseButtonDown(0))
             {
-                Debug.DrawRay(Camera.main.ScreenToWorldPoint(Input.mousePosition), Camera.main.transform.forward * 10, Color.red, 0.3f);
+                RaycastHit hit;
+                Interactable obj = null;
 
-                if (hit.transform.gameObject.TryGetComponent<Ground>(out ground) && choiceCheck == false)
+                //건물만 클릭으로 확인
+                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, LayerMask))
                 {
-                    //첫번째 클릭일 경우
-                    if (preview == null && saveHitPos==Vector3.zero)
+                    if (hit.transform.gameObject.TryGetComponent<Interactable>(out obj))
                     {
-                        //선택된 패드를 저장
-                        beforeGround = ground;
+                        Destroy(obj.gameObject);
 
-
-
-                        //주변 색 변경
-                        beforeGround.ChangeColor(Color.green,occupyPad);
-
-
-
-                        //선택된 곳의 포지션을 저장
-                        saveHitPos = ground.transform.position;
-                        //그 포지션에 알파 건물 생성
-                        preview = Instantiate<PreviewObject>(alphaPrefab, saveHitPos, Quaternion.identity);
-                    }
-                    //레이의 힛의 포지션이 변경되었을 경우
-                    else if (ground.transform.position!=saveHitPos)
-                    {
-
-
-                        //기존에 선택되었던 패드의 색을 변경
-                        beforeGround.ChangeColor(Color.white, occupyPad);
-                        beforeGround.Clear(occupyPad);
-
-                        //이전 패드를 지금 선택된 패드로 초기화
-                        beforeGround = ground;
-
-
-
-                        //색을 변경
-                        beforeGround.ChangeColor(Color.green, occupyPad);
-
-
-                        //이전 포지션을 지금 선택된 포지션으로 초기화
-                        saveHitPos = ground.transform.position;
-                        //초기화된 포지션으로 알파건물의 위치를 변경
-                        preview.transform.position = saveHitPos;
-                    }
-                }
-
-                if (Input.GetMouseButtonDown(0))
-                {
-                    if (beforeGround.GetNodeList.Count == occupyPad && beforeGround.CompareNode(occupyPad))
-                    {
-                        choiceCheck = true;
-                        preview.Active_BuildOption();
-
+                        GameManager.Inst.GetUiManager.On_Click_BuildingMode();
                     }
                 }
             }
         }
+        else
+        {
+            if (GameManager.Inst.buildingMode && Input.GetMouseButton(0))
+            {
+                RaycastHit hit;
+                //pad만 클릭
+                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, LayerMask2))
+                {
+                    Debug.DrawRay(Camera.main.ScreenToWorldPoint(Input.mousePosition), Camera.main.transform.forward * 10, Color.red, 0.3f);
+
+                    if (hit.transform.gameObject.TryGetComponent<Ground>(out ground) && choiceCheck == false)
+                    {
+                        //첫번째 클릭일 경우
+                        if (preview == null && saveHitPos == Vector3.zero)
+                        {
+                            //선택된 패드를 저장
+                            beforeGround = ground;
+
+
+
+                            //주변 색 변경
+                            beforeGround.ChangeColor(Color.green, occupyPad);
+
+
+
+                            //선택된 곳의 포지션을 저장
+                            saveHitPos = ground.transform.position;
+                            //그 포지션에 알파 건물 생성
+                            preview = Instantiate<PreviewObject>(alphaPrefab, saveHitPos, Quaternion.identity);
+                        }
+                        //레이의 힛의 포지션이 변경되었을 경우
+                        else if (ground.transform.position != saveHitPos)
+                        {
+
+
+                            //기존에 선택되었던 패드의 색을 변경
+                            beforeGround.ChangeColor(Color.white, occupyPad);
+                            beforeGround.Clear(occupyPad);
+
+                            //이전 패드를 지금 선택된 패드로 초기화
+                            beforeGround = ground;
+
+
+
+                            //색을 변경
+                            beforeGround.ChangeColor(Color.green, occupyPad);
+
+
+                            //이전 포지션을 지금 선택된 포지션으로 초기화
+                            saveHitPos = ground.transform.position;
+                            //초기화된 포지션으로 알파건물의 위치를 변경
+                            preview.transform.position = saveHitPos;
+                        }
+                    }
+
+                }
+
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                Debug.Log("업");
+                if (beforeGround.GetNodeList.Count == occupyPad && beforeGround.CompareNode(occupyPad))
+                {
+                    choiceCheck = true;
+                    preview.Active_BuildOption();
+                }
+            }
+        }
+
+
+
+
+
 
     }
 
@@ -136,9 +166,9 @@ public class ClickManager : MonoBehaviour
     public void InstObject(Quaternion rotation)
     {
 
-        beforeGround.OnBuilding(occupyPad);
+        beforeGround.OnBuilding(occupyPad,true);
         //진짜 건물 생성
-        Instantiate<Building>(prefab, saveHitPos + new Vector3(0, 0, 0.5f), rotation);
+        Instantiate<Interactable>(prefab, saveHitPos + new Vector3(0, 0, 0.5f), rotation);
 
         //알파건물 제거
         //Destroy(preview.gameObject);
@@ -175,7 +205,7 @@ public class ClickManager : MonoBehaviour
         beforeHit = null;
     }
 
-    public void SetPrefab(PreviewObject alphaPrefab ,Building obj , int occupyPad)
+    public void SetPrefab(PreviewObject alphaPrefab ,Interactable obj , int occupyPad)
     {
         prefab = obj;
         this.occupyPad = occupyPad;

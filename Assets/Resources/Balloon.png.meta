@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4fe2c8daa309c1a4b85034d7faa753f8
+guid: eee0b24eebb4ad44fa10cd0d207ff024
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 508, y: 52, z: 623, w: 73}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 0
@@ -117,22 +117,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: g6_0
+      name: Balloon_0
       rect:
         serializedVersion: 2
-        x: 526
-        y: 63
-        width: 731
-        height: 930
+        x: 624
+        y: 83
+        width: 716
+        height: 846
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f72a046c692b4ed4fade15337d7b1de6
-      internalID: 583962977
+      spriteID: abcfbf3c1cc22ed4a8a5275f1896a9fe
+      internalID: -849115528
       vertices: []
       indices: 
       edges: []
@@ -140,15 +140,15 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    spriteID: 3e84c5721da551d438217ee9c7fa93f4
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      g6_0: 583962977
+      Balloon_0: -849115528
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

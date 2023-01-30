@@ -23,7 +23,7 @@ public class Building : Interactable
 
     public TriggerCheck GetEntrance { get { return entrance; } private set { } }
 
-   
+ 
 
     private void Awake()
     {

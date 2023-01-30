@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 23a6715650ab8fa489c7ee89bf2d4337
+guid: 8ec8169ca46bf104a8cb4d29b30048a1
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,22 +117,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: g2_0
+      name: appletree_0
       rect:
         serializedVersion: 2
-        x: 517
-        y: 132
-        width: 877
-        height: 810
+        x: 501
+        y: 37
+        width: 751
+        height: 987
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 87a59d9d612e6ae43aa5208394060a61
-      internalID: 1501887960
+      spriteID: d734b341e4b6a8b48897439b20f7b230
+      internalID: -1091535931
       vertices: []
       indices: 
       edges: []
@@ -140,7 +140,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: f3804731ef425c14ebc978b8a4babd67
+    spriteID: 358c37fe0bbf35840bdec61eb30d4425
     internalID: 0
     vertices: []
     indices: 
@@ -148,8 +148,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      g2_0: 1501887960
-      g2_1: 1367732923
+      appletree_0: -1091535931
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

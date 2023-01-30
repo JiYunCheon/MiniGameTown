@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3225e4604f6424641b0095fc5b2f3bac
+guid: 470598ecffbb21f4ba3657d248b870f7
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,22 +117,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: g1_0
+      name: Puzzle_0
       rect:
         serializedVersion: 2
-        x: 621
-        y: 111
-        width: 700
-        height: 858
+        x: 533
+        y: 177
+        width: 889
+        height: 808
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ada6c025b715c61409ccb461ed4f875e
-      internalID: 95050463
+      spriteID: c8a67b195c43841469683ff23241bbe4
+      internalID: 1602009684
       vertices: []
       indices: 
       edges: []
@@ -140,7 +140,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: a1f471a9c7b76c5458f0bfb23954df9d
+    spriteID: 1f4df98c78e518d4983bc7c51d7d3be5
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      g1_0: 95050463
+      Puzzle_0: 1602009684
+      Puzzle_1: -5067377
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

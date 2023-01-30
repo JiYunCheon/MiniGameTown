@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 76061187012064566}
   - component: {fileID: 1328033296141376048}
   m_Layer: 5
-  m_Name: Item_B_MemoryCard
+  m_Name: Item_B_MyHome
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,11 +97,11 @@ MonoBehaviour:
   priceBtn: {fileID: 8457527734050801944}
   curPrice: 300
   occupyPad: 9
-  gameName: MemoryCard
-  prefab: {fileID: 2422075055870441811, guid: 62dd163f6a6852644a0a00ca29303eb3, type: 3}
-  alphaPrefab: {fileID: 3506387023725946524, guid: 07d71a65d5ff9674a8126b52c78f9d5d, type: 3}
-  myType: 1
-  spriteName: Memory
+  gameName: MyHome
+  prefab: {fileID: 3389693700811471099, guid: cc704161c3d1d7f4b88e19558a57e676, type: 3}
+  alphaPrefab: {fileID: 1872399082474312554, guid: 1a7d0a77cb6c41545b7f9e47b48084c1, type: 3}
+  myType: 4
+  spriteName: MyHome
 --- !u!1 &5921534292898510343
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,7 +399,7 @@ RectTransform:
   m_GameObject: {fileID: 8232542199223401880}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.62666607, y: 0.93053097, z: 0.93053097}
+  m_LocalScale: {x: 1.2512518, y: 1.2512518, z: 1.2512518}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 76061187012064567}
@@ -407,8 +407,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 100}
-  m_SizeDelta: {x: 500, y: 400}
+  m_AnchoredPosition: {x: -10, y: 71}
+  m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6571413468146818104
 CanvasRenderer:
@@ -438,7 +438,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 583962977, guid: fa25165c79052a344b10949046f341f1, type: 3}
+  m_Sprite: {fileID: 1675201770, guid: d4131ba0037857641b4014780924c364, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

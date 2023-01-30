@@ -101,7 +101,7 @@ MonoBehaviour:
   prefab: {fileID: 7055115660770575820, guid: d79c8a64ea8f6eb44b9c504e1f0fbe73, type: 3}
   alphaPrefab: {fileID: -8195556217795442724, guid: 9841d205869ce5f4ab2815346e173e4b, type: 3}
   myType: 0
-  spriteName: F
+  spriteName: Find
 --- !u!1 &5921534292898510343
 GameObject:
   m_ObjectHideFlags: 0
@@ -438,7 +438,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1575258983, guid: adc85c791b6e26f439d4eb1c62e55cdd, type: 3}
+  m_Sprite: {fileID: 1077704116, guid: 3bce23635942e064ab25cb80538dc0a5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

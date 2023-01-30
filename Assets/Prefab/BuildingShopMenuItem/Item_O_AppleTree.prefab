@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 76061187012064567}
   - component: {fileID: 76061187012064565}
   - component: {fileID: 76061187012064566}
-  - component: {fileID: 1328033296141376048}
+  - component: {fileID: 7157944065913695363}
   m_Layer: 5
-  m_Name: Item_B_MemoryCard
+  m_Name: Item_O_AppleTree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,7 +80,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1328033296141376048
+--- !u!114 &7157944065913695363
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -95,13 +95,13 @@ MonoBehaviour:
   gameNameText: {fileID: 5587098108142771759}
   priceText: {fileID: 4388623016946491831}
   priceBtn: {fileID: 8457527734050801944}
-  curPrice: 300
-  occupyPad: 9
-  gameName: MemoryCard
-  prefab: {fileID: 2422075055870441811, guid: 62dd163f6a6852644a0a00ca29303eb3, type: 3}
-  alphaPrefab: {fileID: 3506387023725946524, guid: 07d71a65d5ff9674a8126b52c78f9d5d, type: 3}
-  myType: 1
-  spriteName: Memory
+  curPrice: 100
+  occupyPad: 1
+  gameName: Tree_1
+  prefab: {fileID: 8958715222355816590, guid: 0433dd10e1adeb84baf6362ec95dfced, type: 3}
+  alphaPrefab: {fileID: 23734321000875122, guid: a47c6060a7b60b34abc9fdbffb385206, type: 3}
+  myType: 4
+  spriteName: AppleTree
 --- !u!1 &5921534292898510343
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1328033296141376048}
+      - m_Target: {fileID: 7157944065913695363}
         m_TargetAssemblyTypeName: ContentItem, Assembly-CSharp
         m_MethodName: OnClick_Price
         m_Mode: 1
@@ -399,7 +399,7 @@ RectTransform:
   m_GameObject: {fileID: 8232542199223401880}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.62666607, y: 0.93053097, z: 0.93053097}
+  m_LocalScale: {x: 2.301928, y: 2.301928, z: 2.301928}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 76061187012064567}
@@ -407,8 +407,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 100}
-  m_SizeDelta: {x: 500, y: 400}
+  m_AnchoredPosition: {x: -30, y: 132}
+  m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6571413468146818104
 CanvasRenderer:
@@ -438,7 +438,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 583962977, guid: fa25165c79052a344b10949046f341f1, type: 3}
+  m_Sprite: {fileID: -1091535931, guid: 8ec8169ca46bf104a8cb4d29b30048a1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -650,7 +650,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 500, y: 50}
+  m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6633940111722488647
 CanvasRenderer:

@@ -11,7 +11,7 @@ public class InventoryItem : MonoBehaviour
     #region GameData
 
     private int occupyPad = 0;
-    private Building prefab = null;
+    private Interactable prefab = null;
     private PreviewObject alphaPrefab = null;
     private GAMETYPE myType;
 
@@ -22,7 +22,7 @@ public class InventoryItem : MonoBehaviour
         picture.sprite = Resources.Load<Sprite>(imageName);
     }
 
-    public void Initialized(PreviewObject alphaPrefab, Building prefab, int occupyPad , GAMETYPE type)
+    public void Initialized(PreviewObject alphaPrefab, Interactable prefab, int occupyPad , GAMETYPE type)
     {
         this.alphaPrefab = alphaPrefab;
         this.prefab = prefab;
@@ -36,7 +36,7 @@ public class InventoryItem : MonoBehaviour
     {
         GameManager.Inst.GetClickManager.SetPrefab(alphaPrefab, prefab, occupyPad);
         GameManager.Inst.GetUiManager.GetShopBoard.TypeChange(myType);
-        GameManager.Inst.GetUiManager.SetItem(this);
+        GameManager.Inst.GetUiManager.Set_Inven_Item(this);
         GameManager.Inst.GetUiManager.On_Click_BuildingMode();
     }
 

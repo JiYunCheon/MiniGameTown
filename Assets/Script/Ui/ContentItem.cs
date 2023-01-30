@@ -18,7 +18,7 @@ public class ContentItem : MonoBehaviour
     [SerializeField] private int curPrice = 0;
     [SerializeField] private int occupyPad = 0;
     [SerializeField] private string gameName = null;
-    [SerializeField] private Building prefab = null;
+    [SerializeField] private Interactable prefab = null;
     [SerializeField] private PreviewObject alphaPrefab = null;
     [SerializeField] private GAMETYPE myType;
     [SerializeField] private string spriteName = null;
@@ -77,14 +77,18 @@ public class ContentItem : MonoBehaviour
     {
         if (curPrice < GameManager.Inst.GetGameData.gameMoney)
         {
-            GameManager.Inst.GetUiManager.GetShopBoard.Active_S_Window();
-            GameManager.Inst.GetUiManager.GenerateContent(alphaPrefab, prefab, occupyPad,myType, spriteName);
+            GameManager.Inst.GetUiManager.Active_S_Window();
+            GameManager.Inst.GetUiManager.Set_Content_Item(this);
         }
         else
-            GameManager.Inst.GetUiManager.GetShopBoard.Active_F_Window();
+            GameManager.Inst.GetUiManager.Active_F_Window();
         
     }
 
+    public void CallGenerate()
+    {
+        GameManager.Inst.GetUiManager.GenerateContent(alphaPrefab,prefab,occupyPad,myType,spriteName);
+    }
 
 
 }

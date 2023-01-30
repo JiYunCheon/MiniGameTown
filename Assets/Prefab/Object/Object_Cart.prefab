@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4390775498182221803}
   - component: {fileID: 4390775498183275451}
   - component: {fileID: 764193768750392019}
-  - component: {fileID: 925095955719522590}
+  - component: {fileID: 3800783185627750066}
   m_Layer: 0
   m_Name: Object_Cart
   m_TagString: Untagged
@@ -99,7 +99,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.6454246, y: 2.7571118, z: 1.5886332}
   m_Center: {x: -0.05253291, y: 1.3729764, z: 0.00011694431}
---- !u!114 &925095955719522590
+--- !u!114 &3800783185627750066
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,16 +108,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4390775498181065345}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0860cfa665784454799f8557d98437a2, type: 3}
+  m_Script: {fileID: 11500000, guid: d2e9a9c80ed65b9468643daf636aea48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entrance: {fileID: 0}
-  packageName: 
-  texture: {fileID: 0}
-  material: {fileID: 0}
-  outlineShader: {fileID: 0}
-  defaultShader: {fileID: 0}
-  selectCheck: 0
 --- !u!1001 &7688084255157364598
 PrefabInstance:
   m_ObjectHideFlags: 0

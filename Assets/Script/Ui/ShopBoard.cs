@@ -9,9 +9,7 @@ public class ShopBoard : MonoBehaviour
     [SerializeField] private GameObject Building_Scroll = null;
     [SerializeField] private GameObject Object_Scroll = null;
 
-    [Header("Result Ui")]
-    [SerializeField] private GameObject successWindow = null;
-    [SerializeField] private GameObject failedWindow = null;
+    
 
     private GAMETYPE type;
 
@@ -38,7 +36,7 @@ public class ShopBoard : MonoBehaviour
     {
         GameManager.Inst.GetUiManager.GetUiCheck = false;
         GameManager.Inst.GetUiManager.Active_ShopBtn();
-        OnClick_Cancel();
+        GameManager.Inst.GetUiManager.OnClick_Cancel();
         ActiveControll(false);
     }
 
@@ -52,19 +50,7 @@ public class ShopBoard : MonoBehaviour
         Scroll_OnOff(false);
     }
 
-    public void OnClick_PurchaseSuccess()
-    {
-        GameManager.Inst.GetUiManager.On_Click_WatingMode();
-
-        Active_S_Window(false);
-
-    }
-
-    public void OnClick_Cancel()
-    {
-        Active_S_Window(false);
-        Active_F_Window(false);
-    }
+   
 
     public void OnClick_WatingMode()
     {
@@ -79,14 +65,6 @@ public class ShopBoard : MonoBehaviour
         Object_Scroll.gameObject.SetActive(!active);
     }
 
-    public void Active_S_Window(bool active = true)
-    {
-        successWindow.SetActive(active);
-    }
-
-    public void Active_F_Window(bool active = true)
-    {
-        failedWindow.SetActive(active);
-    }
+  
 
 }

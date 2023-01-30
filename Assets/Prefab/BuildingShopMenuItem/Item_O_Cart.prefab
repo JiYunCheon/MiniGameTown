@@ -98,9 +98,9 @@ MonoBehaviour:
   curPrice: 200
   occupyPad: 2
   gameName: Cart
-  prefab: {fileID: 925095955719522590, guid: 4623006900f410846af116fcb30ba3b7, type: 3}
+  prefab: {fileID: 3800783185627750066, guid: 4623006900f410846af116fcb30ba3b7, type: 3}
   alphaPrefab: {fileID: 5919330219792457751, guid: 74568daca77e04f429aeae4e49ce8c68, type: 3}
-  myType: 0
+  myType: 4
   spriteName: Cart
 --- !u!1 &5921534292898510343
 GameObject:
