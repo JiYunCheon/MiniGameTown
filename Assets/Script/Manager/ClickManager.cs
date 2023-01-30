@@ -34,7 +34,8 @@ public class ClickManager : MonoBehaviour
 
     public int GetOccupyPad { get { return occupyPad;}private set { } }
 
-    int count = 0;
+    private bool editCheck = false;
+
     void Update()
     {
         //건물이 선택되어 유아이가 켜져있을 경우
@@ -72,17 +73,25 @@ public class ClickManager : MonoBehaviour
             if(Input.GetMouseButtonDown(0))
             {
                 RaycastHit hit;
-                Interactable obj = null;
+                Building obj = null;
 
-                //건물만 클릭으로 확인
                 if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, LayerMask))
                 {
-                    if (hit.transform.gameObject.TryGetComponent<Interactable>(out obj))
-                    {
-                        Destroy(obj.gameObject);
+                    GameManager.Inst.GetUiManager.On_Click_BuildingMode();
 
-                        GameManager.Inst.GetUiManager.On_Click_BuildingMode();
+                    if (hit.transform.TryGetComponent<Building>(out obj))
+                    {
+                        Debug.Log(obj.myGround.Count);
+
+                        for (int i = 0; i < obj.myGround.Count; i++)
+                        {
+                            obj.myGround[i].BuildingClear(false, Color.white);
+                        }
                     }
+
+                    Destroy(obj.gameObject);
+
+
                 }
             }
         }
@@ -146,7 +155,8 @@ public class ClickManager : MonoBehaviour
             }
             else if (Input.GetMouseButtonUp(0))
             {
-                Debug.Log("업");
+                if (beforeGround == null) return;
+
                 if (beforeGround.GetNodeList.Count == occupyPad && beforeGround.CompareNode(occupyPad))
                 {
                     choiceCheck = true;
@@ -165,10 +175,12 @@ public class ClickManager : MonoBehaviour
   
     public void InstObject(Quaternion rotation)
     {
-
-        beforeGround.OnBuilding(occupyPad,true);
+        
+        beforeGround.OnBuilding(occupyPad,true,Color.red);
         //진짜 건물 생성
-        Instantiate<Interactable>(prefab, saveHitPos + new Vector3(0, 0, 0.5f), rotation);
+        Interactable obj= Instantiate<Interactable>(prefab, saveHitPos + new Vector3(0, 0, 0.5f), rotation);
+
+        obj.GetComponent<Building>().SaveGround(beforeGround.GetNodeList);
 
         //알파건물 제거
         //Destroy(preview.gameObject);
@@ -178,6 +190,8 @@ public class ClickManager : MonoBehaviour
         beforeGround = null;
         preview = null;
         saveHitPos = Vector3.zero;
+
+        Debug.Log("33333"+obj.GetComponent<Building>().myGround.Count);
 
         GameManager.Inst.GetUiManager.On_Click_WatingMode();
 

@@ -90,20 +90,23 @@ public class Ground : MonoBehaviour
 
     }
 
-    public void OnBuilding(int occupyPad, bool check)
+    public void OnBuilding(int occupyPad, bool check,Color color)
     {
         if (occupyPad == GetNodeList.Count)
         {
             for (int i = 0; i < GetNodeList.Count; i++)
             {
                 GetNodeList[i].buildingCheck= check;
-                GetNodeList[i].renderer.material.color = Color.red;
+                GetNodeList[i].renderer.material.color = color;
             }
         }
-
     }
 
-
+    public void BuildingClear(bool check, Color color)
+    {
+        this.buildingCheck=check;
+        this.renderer.material.color = color;
+    }
 
 
 }

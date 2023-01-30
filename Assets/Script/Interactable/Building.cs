@@ -18,17 +18,29 @@ public class Building : Interactable
     private Renderer renderer = null;
 
     [SerializeField] private bool selectCheck = false;
+
+    public List<Ground> myGround = new List<Ground>();
+
+
     public bool GetSelecCheck { get { return selectCheck; } private set { } }
     public string GetPackageName { get { return packageName; } private set { } }
 
     public TriggerCheck GetEntrance { get { return entrance; } private set { } }
 
- 
 
     private void Awake()
     {
         renderer = GetComponent<Renderer>();
     }
+
+    public void SaveGround(List<Ground> nodes)
+    {
+        myGround = nodes;
+        Debug.Log("LOG::::"+nodes.Count);
+    }
+
+
+
 
     //¾Æ¿ô¶óÀÎ ½¦ÀÌ´õ Àû¿ë
     public void SetOutLineShader()
