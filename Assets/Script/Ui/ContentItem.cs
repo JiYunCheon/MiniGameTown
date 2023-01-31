@@ -13,32 +13,16 @@ public class ContentItem : Item
     [Header("Button")]
     [SerializeField] private Button priceBtn = null;
 
+    [SerializeField] private InventoryItem inven_itemPrefab = null;
+    private Transform contentTr = null;
 
-    private void OnEnable()
+    private InventoryItem item;
+
+    public InventoryItem GetItem { get { return item; } set { } }
+
+    private void Start()
     {
-        switch (GetMyData.MyType)
-        {
-            case GAMETYPE.BALLOON:
-
-                CompareSoldOutCheck(GameManager.Inst.GetGameData.balloon_B_Count);
-
-                break;
-            case GAMETYPE.FINDPICTURE:
-               
-                CompareSoldOutCheck(GameManager.Inst.GetGameData.find_B_Count);
-
-                break;
-            case GAMETYPE.MEMORYCARD:
-             
-                CompareSoldOutCheck(GameManager.Inst.GetGameData.memory_B_Count);
-
-                break;
-            case GAMETYPE.PUZZLE:
-             
-                CompareSoldOutCheck(GameManager.Inst.GetGameData.puzzle_B_Count);
-
-                break;
-        }
+        base.SetCount(0);
     }
 
     protected override void Initialized()
@@ -49,31 +33,40 @@ public class ContentItem : Item
     }
 
 
-    private void CompareSoldOutCheck(int count)
+    public void CompareSoldOutCheck()
     {
-        if (count <= 0)
+        GetMyData.MaxCount--;
+
+        if (GetMyData.MaxCount <= 0)
         {
             priceText.text = $"Already this";
             priceBtn.interactable = false;
         }
+
     }
 
     public void OnClick_Price()
     {
-        if (GetMyData.Price < GameManager.Inst.GetGameData.gameMoney)
+        if (GetMyData.Price < GameManager.Inst.GetPlayerData.GameMoney)
         {
             GameManager.Inst.GetUiManager.Active_S_Window();
             GameManager.Inst.GetUiManager.Set_Content_Item(this);
         }
         else
             GameManager.Inst.GetUiManager.Active_F_Window();
+
         
     }
 
-    public void CallGenerate()
+    public void GenerateContent()
     {
-        GameManager.Inst.GetUiManager.GenerateContent(this);
+        inven_itemPrefab = Resources.Load<InventoryItem>("Item_Inven");
+        contentTr = GameManager.Inst.GetUiManager.GetInvenContentTr;
+        
+        item = Instantiate<InventoryItem>(inven_itemPrefab, contentTr);
+        item.SetMyData(GetMyData);
     }
 
+  
    
 }

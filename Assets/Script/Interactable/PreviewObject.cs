@@ -20,10 +20,11 @@ public class PreviewObject : MonoBehaviour
 
     public void OnClick_Confirm()
     {
+        GameManager.Inst.GetUiManager.GetCur_Inven_Item.CountControll(-1);
+
         GameManager.Inst.GetClickManager.InstObject(rotation);
         GameManager.Inst.GetClickManager.choiceCheck = false;
         Active_BuildOption(false);
-        GameManager.Inst.GetUiManager.DestroyItem();
 
         Destroy(this.gameObject);
     }
@@ -49,10 +50,13 @@ public class PreviewObject : MonoBehaviour
 
     public void OnClick_Exit()
     {
+        GameManager.Inst.GetUiManager.GetCur_Inven_Item.CountControll(1);
+
         GameManager.Inst.GetClickManager.PadRefresh();
-        Destroy(this.gameObject);
 
         GameManager.Inst.GetUiManager.On_Click_WatingMode();
+
+        Destroy(this.gameObject);
     }
 
     #endregion

@@ -221,10 +221,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0860cfa665784454799f8557d98437a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myData: {fileID: 11400000, guid: 4121f1a1bfd2e5843a4e486f0ab784e9, type: 2}
+  myGround: []
   entrance: {fileID: 6486877862412380422}
-  packageName: 
   texture: {fileID: 2800000, guid: 910395448803c444d8958f4c73af9dce, type: 3}
   material: {fileID: 2100000, guid: fb1377c6c3a6a410bbeea9b5ff5fdd79, type: 2}
   outlineShader: {fileID: 4800000, guid: ba3d0d8b76225b349b62dc005659c3fd, type: 3}
   defaultShader: {fileID: 4800000, guid: d990c8119dd67dc40868fc605e29d608, type: 3}
-  selectCheck: 0

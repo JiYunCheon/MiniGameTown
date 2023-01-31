@@ -28,10 +28,6 @@ public class UiManager : MonoBehaviour
     [SerializeField] private Material floorMaterial     = null;
     [SerializeField] private GameObject padBoard        = null;
 
-    [Header("ModeUi")]
-    [SerializeField] private ScrollRect scroll = null;
-    [SerializeField] InventoryItem inven_itemPrefab = null;
-
     [Header("Result Ui")]
     [SerializeField] private GameObject successWindow = null;
     [SerializeField] private GameObject failedWindow = null;
@@ -42,8 +38,13 @@ public class UiManager : MonoBehaviour
 
     Color blackColor = new Color(113f / 255f, 113f / 255f, 113f / 255f);
 
-    private InventoryItem cur_Inven_Item = null;
+    [SerializeField] private Transform invenContentTr = null;
+
     private ContentItem cur_Content_Item = null;
+    private InventoryItem cur_Inven_Item = null;
+
+    public InventoryItem GetCur_Inven_Item { get { return cur_Inven_Item; } set { cur_Inven_Item = value; } } 
+    public Transform GetInvenContentTr { get { return invenContentTr; } private set { } }
 
 
     #endregion
@@ -61,12 +62,7 @@ public class UiManager : MonoBehaviour
     private void Awake()
     {
         floorMaterial.color = Color.white;
-    }
-
-
-    public void Set_Inven_Item(InventoryItem item)
-    {
-        cur_Inven_Item = item;
+        shopBoard.InstInvenItem();
     }
 
     public void Set_Content_Item(ContentItem item)
@@ -74,13 +70,10 @@ public class UiManager : MonoBehaviour
         cur_Content_Item = item;
     }
 
-    public void DestroyItem()
+    public void Set_Inven_Item(InventoryItem item)
     {
-        if (cur_Inven_Item == null) return;
-        Destroy(cur_Inven_Item.gameObject);
-        cur_Inven_Item = null;
+        cur_Inven_Item = item;
     }
-
 
     //건물이 선택 되었는지 체크    
     public void ChangeSelecChcek(bool check)
@@ -169,6 +162,11 @@ public class UiManager : MonoBehaviour
         GameManager.Inst.ChangeMode(out GameManager.Inst.buildingMode, false);
         GameManager.Inst.ChangeMode(out GameManager.Inst.waitingMode, true);
 
+
+        
+
+
+
         ModeControll(true,GameManager.Inst.waitingMode,false,blackColor);
     }
 
@@ -188,7 +186,11 @@ public class UiManager : MonoBehaviour
     public void OnClick_PurchaseSuccess()
     {
         GameManager.Inst.GetUiManager.On_Click_WatingMode();
-        cur_Content_Item.CallGenerate();
+
+        cur_Content_Item.CompareSoldOutCheck();
+
+        cur_Content_Item.GetItem.CountControll(1);
+
         Active_S_Window(false);
 
     }
@@ -212,26 +214,6 @@ public class UiManager : MonoBehaviour
         GameManager.Inst.GetCameraMove.ChangCameraSize(mode);
     }
 
-    public void GenerateContent(ContentItem content)
-    {
-        InventoryItem itme = Instantiate<InventoryItem>(inven_itemPrefab,scroll.content.transform);
-        itme.SetMyData(content.GetMyData);
-
-        switch (content.GetMyData.MyType)
-        {
-            case GAMETYPE.BALLOON:
-                GameManager.Inst.GetGameData.balloon_B_Count--;
-                break;
-            case GAMETYPE.FINDPICTURE:
-                GameManager.Inst.GetGameData.find_B_Count--;
-                break;
-            case GAMETYPE.MEMORYCARD:
-                GameManager.Inst.GetGameData.memory_B_Count--;
-                break;
-            case GAMETYPE.PUZZLE:
-                GameManager.Inst.GetGameData.puzzle_B_Count--;
-                break;
-        }
-    }
+    
 
 }

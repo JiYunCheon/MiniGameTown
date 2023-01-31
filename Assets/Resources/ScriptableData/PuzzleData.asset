@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d756ad56c482de5478bf6c03f71af4f5, type: 3}
   m_Name: PuzzleData
   m_EditorClassIdentifier: 
+  maxCount: 1
   price: 500
   occupyPad: 9
   gameName: Puzzle

@@ -1,8 +1,11 @@
+using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine;
-[RequireComponent(typeof(GameData))]
+
+
 public class GameManager : MonoBehaviour
 {
     const string gameName_Momory = "com.DefaultCompany.OneWeek_MemoryCard";
@@ -10,12 +13,14 @@ public class GameManager : MonoBehaviour
     const string gameName_Puzzle = "com.DefaultCompany.JigsawPuzzle";
     const string gameName_Balloon = "com.DefaultCompany.Pop_The_Balloon";
 
+    [SerializeField] private PlayerData playerData = null;
+
     private UiManager uiManager = null;
     private FirstSceneUiController firstSceneUiController = null;
     private ClickManager clickManager = null;
-    private GameData gameData = null;
     private CameraControll cameraMove = null;
     private PadSpawner[] padSpawner = null;
+
 
     [HideInInspector] public string curGameName = null;
     public bool buildingMode = false;
@@ -23,15 +28,15 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector] public int pointerID;
 
+    public Dictionary<string, int> datas = new Dictionary<string, int>();
+
     #region Property
 
-    public GameData GetGameData 
+    public PlayerData GetPlayerData 
     { 
         get 
-        { 
-            if(gameData == null)
-                gameData = GetComponent<GameData>();
-            return gameData;
+        {
+            return playerData;
         } 
         set { }
     }
@@ -105,6 +110,7 @@ public class GameManager : MonoBehaviour
         if(Inst == null)
         {
             Inst = this;
+            Init();
             DontDestroyOnLoad(Inst);
         }
         else
@@ -124,6 +130,22 @@ public class GameManager : MonoBehaviour
     {
         mode = check;
     }
+
+    private void Init()
+    {
+        datas.Add(GetPlayerData._GameMoney, GetPlayerData.GameMoney);
+
+        datas.Add(GetPlayerData._Balloon_B_Count, GetPlayerData.Balloon_B_Count);
+        datas.Add(GetPlayerData._Find_B_Count, GetPlayerData.Find_B_Count);
+        datas.Add(GetPlayerData._Memory_B_Count, GetPlayerData.Memory_B_Count);
+        datas.Add(GetPlayerData._Puzzle_B_Count, GetPlayerData.Puzzle_B_Count);
+        datas.Add(GetPlayerData._Cook_B_Count, GetPlayerData.Cook_B_Count);
+        datas.Add(GetPlayerData._MyRoom_B_Count, GetPlayerData.MyRoom_B_Count);
+
+        datas.Add(GetPlayerData._Cart_O_Count, GetPlayerData.Cart_O_Count);
+        datas.Add(GetPlayerData._AppleTree_O_Count, GetPlayerData.AppleTree_O_Count);
+    }
+
 
 
 }

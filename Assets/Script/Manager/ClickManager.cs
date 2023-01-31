@@ -110,8 +110,8 @@ public class ClickManager : MonoBehaviour
 
             if (hit.transform.TryGetComponent<Interactable>(out Interactable obj))
             {
-                Debug.Log(obj.GetMyData.OccupyPad);
                 SetInfo(obj.GetMyData.AlphaPrefab, obj.GetMyData.Prefab, obj.GetMyData.OccupyPad);
+                GameManager.Inst.GetUiManager.GetCur_Inven_Item = obj.GetInventoryItem;
 
                 for (int i = 0; i < obj.myGround.Count; i++)
                 {

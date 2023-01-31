@@ -6,6 +6,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName ="BuildingData",menuName = "ScriptableObject/BuildingData",order =1)]
 public class Data : ScriptableObject
 {
+    [SerializeField]
+    private int maxCount = 0;
+    public int MaxCount { get { return maxCount; } set { maxCount = value; } }
+
+
     [SerializeField] 
     private int price = 0;
     public int Price { get { return price; } private set { } }

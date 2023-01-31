@@ -12,11 +12,7 @@ public class PlayerMove : MonoBehaviour
     {
         myAgent=GetComponent<NavMeshAgent>();
     }
-    void Start()
-    {
-        
-    }
-
+   
     void Update()
     {
         //유아이가 켜져있으면 리턴

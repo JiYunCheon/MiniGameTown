@@ -153,6 +153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 221bbc41806082e488e4349a3005e02c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData: {fileID: 11400000, guid: 71084261a55e55a4e9c986a3ec9e63ed, type: 2}
+  gameData: {fileID: 0}
   curGameName: 
   buildingMode: 0
   waitingMode: 0
@@ -184,14 +186,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9808492eade34644b8eaab00f9eff783, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  find_B_Count: 1
-  memory_B_Count: 1
-  puzzle_B_Count: 1
-  balloon_B_Count: 1
-  cook_B_Count: 1
-  myRoom_B_Count: 1
-  gameMoney: 1000
-  price: 500
+  gameMoney: 0
+  _gameMoney: 
+  find_B_Count: 0
+  _find_B_Count: 
+  memory_B_Count: 0
+  _memory_B_Count: 
+  puzzle_B_Count: 0
+  _puzzle_B_Count: 
+  balloon_B_Count: 0
+  _balloon_B_Count: 
+  cook_B_Count: 0
+  _cook_B_Count: 
+  myRoom_B_Count: 0
+  _myRoom_B_Count: 
+  appleTree_O_Count: 0
+  _appleTree_O_Count: 
+  cart_O_Count: 0
+  _cart_O_Count: 
 --- !u!1 &80701802
 GameObject:
   m_ObjectHideFlags: 0

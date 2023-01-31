@@ -2,17 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class ShopBoard : MonoBehaviour
 {
     [Header("Scroll View")]
-    [SerializeField] private GameObject Building_Scroll = null;
-    [SerializeField] private GameObject Object_Scroll = null;
+    [SerializeField] private ScrollRect Building_Scroll = null;
+    [SerializeField] private ScrollRect Object_Scroll = null;
 
-    
 
     private GAMETYPE type;
-
 
     private void OnEnable()
     {
@@ -65,6 +65,25 @@ public class ShopBoard : MonoBehaviour
         Object_Scroll.gameObject.SetActive(!active);
     }
 
+    public void InstInvenItem()
+    {
+        foreach (Transform item in Building_Scroll.content.transform)
+        {
+            if(item.TryGetComponent<ContentItem>(out ContentItem content))
+            {
+                content.GenerateContent();
+            }
+        }
+
+        foreach (Transform item in Object_Scroll.content.transform)
+        {
+            if (item.TryGetComponent<ContentItem>(out ContentItem content))
+            {
+                content.GenerateContent();
+            }
+        }
+
+    }
   
 
 }

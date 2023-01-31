@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d756ad56c482de5478bf6c03f71af4f5, type: 3}
-  m_Name: MyHomeData
+  m_Name: MyRoomData
   m_EditorClassIdentifier: 
+  maxCount: 1
   price: 500
   occupyPad: 9
-  gameName: MyHome
+  gameName: MyRoom
   prefab: {fileID: 3389693700811471099, guid: cc704161c3d1d7f4b88e19558a57e676, type: 3}
   alphaPrefab: {fileID: 1872399082474312554, guid: 1a7d0a77cb6c41545b7f9e47b48084c1, type: 3}
   myType: 3
-  spriteName: MyHome
+  spriteName: MyRoom
   packageName: com.DefaultCompany.JigsawPuzzle
