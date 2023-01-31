@@ -125,6 +125,7 @@ public class PadSpawner : MonoBehaviour
                 pads[i, j] = Instantiate<Ground>(pad, this.transform);
                 pads[i, j].transform.localPosition = new Vector3(j * interveal, transform.position.y, i * interveal);
                 pads[i, j].name = $"{i},{j}";
+                GameManager.Inst.grounds.Add(pads[i, j]);
             }
         }
     }

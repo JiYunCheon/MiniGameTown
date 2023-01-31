@@ -35,10 +35,12 @@ public class UiManager : MonoBehaviour
     //CheckValue
     private bool uiCheck = false;
     private bool selecCheck = false;
+    private int clclickCount = 0;
 
     Color blackColor = new Color(113f / 255f, 113f / 255f, 113f / 255f);
 
     [SerializeField] private Transform invenContentTr = null;
+    [SerializeField] private RectTransform inventoryRect = null;
 
     private ContentItem cur_Content_Item = null;
     private InventoryItem cur_Inven_Item = null;
@@ -214,6 +216,48 @@ public class UiManager : MonoBehaviour
         GameManager.Inst.GetCameraMove.ChangCameraSize(mode);
     }
 
-    
+
+    public void OnClick_InvenMove()
+    {
+       
+        if(clclickCount==0)
+        {
+            StopAllCoroutines();
+            StartCoroutine(Move(-695f));
+            clclickCount++;
+        }
+        else if(clclickCount==1)
+        {
+            StopAllCoroutines();
+            StartCoroutine(Move(-365f));
+            clclickCount = 0;
+        }
+    }
+
+    IEnumerator Move(float ypos)
+    {
+        Vector2 pos = inventoryRect.anchoredPosition;
+
+        while(true)
+        {
+            pos.y = Mathf.Lerp(inventoryRect.anchoredPosition.y,ypos,2.5f*Time.deltaTime);
+            inventoryRect.anchoredPosition = pos;
+
+            if(ypos==-365f && inventoryRect.anchoredPosition.y> -360f)
+            {
+                pos.y = -365f;
+                inventoryRect.anchoredPosition = pos;
+                yield break;
+            }
+            else if (ypos == -695f && inventoryRect.anchoredPosition.y < -690f)
+            {
+                pos.y = -695f;
+                inventoryRect.anchoredPosition = pos;
+                yield break;
+            }
+
+            yield return null;
+        }
+    }
 
 }

@@ -30,7 +30,23 @@ public class GameManager : MonoBehaviour
 
     public Dictionary<string, int> datas = new Dictionary<string, int>();
 
+    public List<Ground> grounds = new List<Ground>();
+    private int[] grounds_Info;
+    PlayerMove player = null;
+
+
     #region Property
+
+    public PlayerMove GetPlayer
+    {
+        get
+        {
+            if (player == null)
+                player = FindObjectOfType<PlayerMove>();
+            return player;
+        }
+        set { }
+    }
 
     public PlayerData GetPlayerData 
     { 
@@ -147,5 +163,47 @@ public class GameManager : MonoBehaviour
     }
 
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+            SaveData();
+    }
 
+    private void SaveData()
+    {
+        grounds_Info = new int[grounds.Count];
+
+        for (int i = 0; i < grounds.Count; i++)
+        {
+            if(grounds[i].buildingCheck)
+                grounds_Info[i] = 1;
+            else
+                grounds_Info[i] = 0;
+        }
+
+        List<DataFormat> dats = new List<DataFormat>();
+
+        for (int i = 0; i < grounds.Count; i++)
+        {
+            DataFormat data = new DataFormat();
+
+            data.checkValues = grounds_Info[i];
+            dats.Add(data);
+        }
+
+        CSVUTILS.saveData(dats,"wow");
+
+    }
+
+    private void LoadData()
+    {
+        for (int i = 0; i < grounds_Info.Length; i++)
+        {
+            if (grounds_Info[i]==1)
+                grounds[i].buildingCheck = true;
+            else
+                grounds[i].buildingCheck = false;
+
+        }
+    }
 }

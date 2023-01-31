@@ -93,6 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1663979699459811692}
   - component: {fileID: 8958715222355816590}
+  - component: {fileID: -299208188289999569}
   m_Layer: 6
   m_Name: Object_AppleTree
   m_TagString: Untagged
@@ -131,6 +132,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myData: {fileID: 11400000, guid: 66560b7b70838ee47a3caa2eb1dc9d0c, type: 2}
   myGround: []
+--- !u!65 &-299208188289999569
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1663979699459904066}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 1}
+  m_Center: {x: 0, y: 2.5, z: 0}
 --- !u!1 &1663979699459914532
 GameObject:
   m_ObjectHideFlags: 0

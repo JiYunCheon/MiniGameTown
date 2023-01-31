@@ -11,26 +11,53 @@ public class CameraControll : MonoBehaviour
     //코루틴 종료 확인 체크
     private bool check = false;
 
+    float time = 0;
 
-    private void FixedUpdate()
+    Coroutine coroutine;
+
+    private void Awake()
     {
-        if (GameManager.Inst.buildingMode) return;
+        StartCoroutine(nameof(CamMoveStart));
+    }
 
+    private void Update()
+    {
+        if (GameManager.Inst.GetUiManager.GetSelecCheck || GameManager.Inst.buildingMode || GameManager.Inst.GetUiManager.GetUiCheck) return;
 
-        if(Input.GetMouseButtonDown(1))
+        //if (GameManager.Inst.buildingMode || GameManager.Inst.waitingMode) return;
+        
+        if (Input.GetMouseButtonDown(0))
         {
             check = false;
-            StopAllCoroutines();
+            if(coroutine!=null)
+            StopCoroutine(coroutine);
         }
-        if (Input.GetMouseButton(1))
+
+        if (Input.GetMouseButton(0))
         {
-
-            cameraAxisY = Input.GetAxis("Mouse Y");
-            cameraAxisX = Input.GetAxis("Mouse X");
-
-            StartCoroutine(nameof(CamMoveStart));
+            time += Time.deltaTime;
         }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (time > 0.5f)
+            {
+                cameraAxisY = Input.GetAxis("Mouse Y");
+                cameraAxisX = Input.GetAxis("Mouse X");
+
+                coroutine = StartCoroutine(nameof(CamMoveStart));
+            }
+            else if (time < 0.2f)
+            {
+                GameManager.Inst.GetPlayer.PlayerDestination();
+            }
+
+            time = 0;
+        }
+
+
     }
+
 
     [SerializeField] private float xMin = 0;
     [SerializeField] private float xMax = 0;
@@ -105,21 +132,40 @@ public class CameraControll : MonoBehaviour
     {
         if (mode == true)
         {
-            Camera.main.orthographicSize = 15;
+            StopAllCoroutines();
+
+            StartCoroutine(LerpCameraSize(15f));
         }
         else
         {
-            Camera.main.orthographicSize = 7;
+            StopAllCoroutines();
+
+            StartCoroutine(LerpCameraSize(7f));
         }
     }
 
+    IEnumerator LerpCameraSize(float value)
+    {
 
+        while (true)
+        {
+            Camera.main.orthographicSize= Mathf.Lerp(Camera.main.orthographicSize, value, 1.8f*Time.deltaTime);
+            
+            if(value==15f && Camera.main.orthographicSize > (value - 0.2f))
+            {
+                Camera.main.orthographicSize = value;
+                yield break;
+            }
+            else if(value == 7f && Camera.main.orthographicSize < (value + 0.2f))
+            {
+                Camera.main.orthographicSize = value;
+                yield break;
+            }
 
+            yield return null;
+        }
 
+    }
 
-
-
-
-
-
+  
 }

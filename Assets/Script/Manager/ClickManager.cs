@@ -86,11 +86,19 @@ public class ClickManager : MonoBehaviour
             //상호 작용이 가능한 오브젝트인지 확인
             if (hit.transform.gameObject.TryGetComponent<Building>(out Building obj))
             {
+                GameManager.Inst.GetPlayer.PlayerDestination();
+
                 //이전 오브젝트가 없는 경우
                 if (beforeHit == null)
                     Interection(obj, true);
                 //이전 오브젝트와 다른 오브젝트를 클릭했을 경우
                 else if (beforeHit.transform.gameObject != hit.transform.transform.gameObject)
+                {
+                    beforeHit.SetDefaultShader();
+                    GameManager.Inst.GetUiManager.ChangeSelecChcek(false);
+                    Interection(obj, true);
+                }
+                else if (beforeHit.transform.gameObject == hit.transform.transform.gameObject)
                 {
                     beforeHit.SetDefaultShader();
                     GameManager.Inst.GetUiManager.ChangeSelecChcek(false);
