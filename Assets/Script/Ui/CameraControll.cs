@@ -17,7 +17,7 @@ public class CameraControll : MonoBehaviour
 
     private void Awake()
     {
-        StartCoroutine(nameof(CamMoveStart));
+        //StartCoroutine(nameof(CamMoveStart));
     }
 
     private void Update()
@@ -26,35 +26,31 @@ public class CameraControll : MonoBehaviour
 
         //if (GameManager.Inst.buildingMode || GameManager.Inst.waitingMode) return;
         
+        
         if (Input.GetMouseButtonDown(0))
         {
             check = false;
-            if(coroutine!=null)
-            StopCoroutine(coroutine);
+            if (coroutine != null)
+                StopCoroutine(coroutine);
+            time = 0;
         }
 
         if (Input.GetMouseButton(0))
         {
             time += Time.deltaTime;
+
+            cameraAxisY = Input.GetAxis("Mouse Y");
+            cameraAxisX = Input.GetAxis("Mouse X");
+
+            coroutine = StartCoroutine(nameof(CamMoveStart));
+
+            return;
         }
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && time<=0.2f)
         {
-            if (time > 0.5f)
-            {
-                cameraAxisY = Input.GetAxis("Mouse Y");
-                cameraAxisX = Input.GetAxis("Mouse X");
-
-                coroutine = StartCoroutine(nameof(CamMoveStart));
-            }
-            else if (time < 0.2f)
-            {
-                GameManager.Inst.GetPlayer.PlayerDestination();
-            }
-
-            time = 0;
+            GameManager.Inst.GetPlayer.PlayerDestination();
         }
-
 
     }
 
@@ -70,12 +66,28 @@ public class CameraControll : MonoBehaviour
         if (check == true) yield break;
         float count =20;
         check = true;
-        while(true)
+
+        float xmin = -1;
+        float ymin = -1;
+
+
+        while (true)
         {
             count = Mathf.Lerp(count,0f,Time.deltaTime);
             yield return new WaitForEndOfFrame();
 
-            transform.Translate(-1 * count * cameraAxisX * Time.deltaTime, -count * cameraAxisY * Time.deltaTime, 0);
+            //if(cameraAxisX<0)
+            //{
+            //    xmin = -1;
+            //    ymin = 1;
+            //}
+            //else
+            //{
+            //    xmin = -1;
+            //    ymin = 1;
+            //}
+
+            transform.Translate(xmin * count * cameraAxisX * Time.deltaTime, ymin * count * cameraAxisY * Time.deltaTime, 0);
 
             Vector3 targetPos = transform.position;
 

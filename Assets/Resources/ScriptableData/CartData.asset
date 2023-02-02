@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d756ad56c482de5478bf6c03f71af4f5, type: 3}
   m_Name: CartData
   m_EditorClassIdentifier: 
-  maxCount: 2
+  maxCount: 1
   price: 200
   occupyPad: 2
-  gameName: Cart
-  prefab: {fileID: 3800783185627750066, guid: 4623006900f410846af116fcb30ba3b7, type: 3}
-  alphaPrefab: {fileID: 5919330219792457751, guid: 74568daca77e04f429aeae4e49ce8c68, type: 3}
-  myType: 4
+  gmaeInfo: It is Cart
   spriteName: Cart
   packageName: com.DefaultCompany.JigsawPuzzle
+  prefabName: Object_Cart
+  alphaPrefabName: Object_Alpha_Cart
+  gameName: Cart
+  myType: 1

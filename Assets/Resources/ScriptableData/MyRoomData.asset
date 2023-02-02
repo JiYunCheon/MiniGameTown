@@ -15,9 +15,10 @@ MonoBehaviour:
   maxCount: 1
   price: 500
   occupyPad: 9
-  gameName: MyRoom
-  prefab: {fileID: 3389693700811471099, guid: cc704161c3d1d7f4b88e19558a57e676, type: 3}
-  alphaPrefab: {fileID: 1872399082474312554, guid: 1a7d0a77cb6c41545b7f9e47b48084c1, type: 3}
-  myType: 3
+  gmaeInfo: It is MyRoom
   spriteName: MyRoom
   packageName: com.DefaultCompany.JigsawPuzzle
+  prefabName: Building_MyRoom
+  alphaPrefabName: Building_Alpha_MyRoom
+  gameName: MyRoom
+  myType: 0

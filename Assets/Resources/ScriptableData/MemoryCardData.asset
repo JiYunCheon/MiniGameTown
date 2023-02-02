@@ -15,9 +15,10 @@ MonoBehaviour:
   maxCount: 1
   price: 500
   occupyPad: 9
-  gameName: MemoryCard
-  prefab: {fileID: 2422075055870441811, guid: 62dd163f6a6852644a0a00ca29303eb3, type: 3}
-  alphaPrefab: {fileID: 3506387023725946524, guid: 07d71a65d5ff9674a8126b52c78f9d5d, type: 3}
-  myType: 1
+  gmaeInfo: It is MemoryCard
   spriteName: Memory
   packageName: com.DefaultCompany.OneWeek_MemoryCard
+  prefabName: Building_MemoryCard
+  alphaPrefabName: Building_Alpha_MemoryCard
+  gameName: MemoryCard
+  myType: 0

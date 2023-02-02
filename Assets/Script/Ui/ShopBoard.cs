@@ -1,18 +1,28 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class ShopBoard : MonoBehaviour
 {
+    [Header("ScriptableObject")]
+    [SerializeField] private Data[] datas = null;
+    [SerializeField] private ContentItem contentPrefab = null;
+
     [Header("Scroll View")]
     [SerializeField] private ScrollRect Building_Scroll = null;
     [SerializeField] private ScrollRect Object_Scroll = null;
 
 
-    private GAMETYPE type;
+    private void Awake()
+    {
+        Inst_ContentItem(datas);
+
+        Inst_InvenItem();
+    }
+
+    private void Start()
+    {
+        
+    }
 
     private void OnEnable()
     {
@@ -23,12 +33,6 @@ public class ShopBoard : MonoBehaviour
     {
         this.gameObject.SetActive(active);
     }
-
-    public void TypeChange(GAMETYPE type)
-    {
-        this.type = type;
-    }
-
 
     #region Button Event
 
@@ -65,7 +69,37 @@ public class ShopBoard : MonoBehaviour
         Object_Scroll.gameObject.SetActive(!active);
     }
 
-    public void InstInvenItem()
+    private void Inst_ContentItem(Data[] datas)
+    {
+        Transform scrollTr = null;
+
+        for (int i = 0; i < datas.Length; i++)
+        {
+            if (datas[i].MyType == OBJECT_TYPE.BUIDING)
+            {
+                scrollTr = Building_Scroll.content.transform;
+                ContentItem content = Instantiate<ContentItem>(contentPrefab, scrollTr);
+                content.SetMyData(datas[i]);
+            }
+            else
+            {
+                scrollTr = Object_Scroll.content.transform;
+                ContentItem content = Instantiate<ContentItem>(contentPrefab, scrollTr);
+                content.SetMyData(datas[i]);
+            }
+                
+
+            
+        }
+
+    }
+
+
+
+
+
+
+    private void Inst_InvenItem()
     {
         foreach (Transform item in Building_Scroll.content.transform)
         {

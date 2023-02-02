@@ -20,14 +20,11 @@ public class PlayerMove : MonoBehaviour
     {
 
         RaycastHit hit;
-        Debug.Log("¾È³ç");
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
         {
-            Debug.Log("¾È³ç2");
 
             if (hit.transform.gameObject.TryGetComponent<Building>(out Building obj))
             {
-                Debug.Log("¾È³ç3");
 
                 myAgent.destination = obj.GetEntrance.transform.position;
             }

@@ -4,8 +4,9 @@ using UnityEngine;
 
 abstract public class Interactable : MonoBehaviour
 {
-    [SerializeField]
     private Data myData = null;
+
+    protected new Renderer renderer = null;
 
     private Transform contentTr = null;
 
@@ -17,8 +18,11 @@ abstract public class Interactable : MonoBehaviour
     [Header("===ListCheck===")]
     public List<Ground> myGround = new List<Ground>();
 
+
     private void Start()
     {
+        Initialized();
+
         CompareItem();
     }
 
@@ -30,7 +34,7 @@ abstract public class Interactable : MonoBehaviour
         }
     }
 
-    public virtual void CompareItem()
+    private void CompareItem()
     {
         contentTr = GameManager.Inst.GetUiManager.GetInvenContentTr;
 
@@ -45,5 +49,12 @@ abstract public class Interactable : MonoBehaviour
             }
         }
     }
+    public virtual void SetMyData(Data data) => myData = data;
+
+    private void Initialized()
+    {
+        renderer = GetComponent<Renderer>();
+    }
+
 
 }

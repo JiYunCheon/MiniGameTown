@@ -1,16 +1,17 @@
-using JetBrains.Annotations;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
 using UnityEngine;
 
+public enum OBJECT_TYPE
+{
+    BUIDING,
+    OBJECT
+}
 
 public class GameManager : MonoBehaviour
 {
     const string gameName_Momory = "com.DefaultCompany.OneWeek_MemoryCard";
     const string gameName_Find = "com.DefaultCompany.WrongPicture";
-    const string gameName_Puzzle = "com.DefaultCompany.JigsawPuzzle";
+    const string gameName_Puzzle = "com.DefaultCompany.Jigsaw_Final";
     const string gameName_Balloon = "com.DefaultCompany.Pop_The_Balloon";
 
     [SerializeField] private PlayerData playerData = null;

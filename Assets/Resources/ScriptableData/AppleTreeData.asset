@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d756ad56c482de5478bf6c03f71af4f5, type: 3}
   m_Name: AppleTreeData
   m_EditorClassIdentifier: 
-  maxCount: 2
+  maxCount: 1
   price: 100
   occupyPad: 1
-  gameName: AppleTree
-  prefab: {fileID: 8958715222355816590, guid: 0433dd10e1adeb84baf6362ec95dfced, type: 3}
-  alphaPrefab: {fileID: 23734321000875122, guid: a47c6060a7b60b34abc9fdbffb385206, type: 3}
-  myType: 4
+  gmaeInfo: It is AppleTree
   spriteName: AppleTree
   packageName: com.DefaultCompany.JigsawPuzzle
+  prefabName: Object_AppleTree
+  alphaPrefabName: Object_Alpha_AppleTree
+  gameName: AppleTree
+  myType: 1

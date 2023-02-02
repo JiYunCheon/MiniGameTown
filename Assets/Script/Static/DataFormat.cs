@@ -52,7 +52,7 @@ public class DataFormat
 
     //    for (int i = 0; i < checkValues.Length; i++)
     //    {
-    //        if(i==0)
+    //        if (i == 0)
     //        {
     //            answer = checkValues[i].ToString();
     //        }

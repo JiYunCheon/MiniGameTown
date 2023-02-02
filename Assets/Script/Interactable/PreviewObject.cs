@@ -15,12 +15,13 @@ public class PreviewObject : MonoBehaviour
         buildOption.SetActive(active);
     }
 
-
     #region Button Event
 
     public void OnClick_Confirm()
     {
-        GameManager.Inst.GetUiManager.GetCur_Inven_Item.CountControll(-1);
+        if (!GameManager.Inst.GetClickManager.InstCompare()) return;
+
+        GameManager.Inst.GetUiManager.GetCur_Inven_Item.InventoryCount(-1);
 
         GameManager.Inst.GetClickManager.InstObject(rotation);
         GameManager.Inst.GetClickManager.choiceCheck = false;
@@ -50,7 +51,7 @@ public class PreviewObject : MonoBehaviour
 
     public void OnClick_Exit()
     {
-        GameManager.Inst.GetUiManager.GetCur_Inven_Item.CountControll(1);
+        GameManager.Inst.GetUiManager.GetCur_Inven_Item.InventoryCount(1);
 
         GameManager.Inst.GetClickManager.PadRefresh();
 

@@ -8,17 +8,10 @@ public class InventoryItem : Item
 {
     [SerializeField] private TextMeshProUGUI countText = null;
 
-    private void Start()
-    {
-        picture.sprite = Resources.Load<Sprite>(GetMyData.SpriteName);
-        SetCount(0);
-    }
-   
+
     protected override void Initialized()
     {
-        if (picture == null)
-            picture = GetComponent<Image>();
-
+        picture.sprite = Resources.Load<Sprite>($"Shop&Inventory_Image/{GetMyData.SpriteName}");
     }
 
     protected override void SetCount(int _value)
@@ -38,13 +31,10 @@ public class InventoryItem : Item
             }
 
             countText.text = count.ToString();
-
         }
-
-
     }
 
-    public void CountControll(int value)
+    public void InventoryCount(int value)
     {
         SetCount(value);
     }
@@ -54,10 +44,12 @@ public class InventoryItem : Item
 
     public void OnClick_Item()
     {
-        GameManager.Inst.GetClickManager.SetInfo(GetMyData.AlphaPrefab, GetMyData.Prefab, GetMyData.OccupyPad);
-        GameManager.Inst.GetUiManager.GetShopBoard.TypeChange(GetMyData.MyType);
+        GameManager.Inst.GetClickManager.SetInfo(GetMyData);
+
         GameManager.Inst.GetUiManager.Set_Inven_Item(this);
         GameManager.Inst.GetUiManager.On_Click_BuildingMode();
+
+        GameManager.Inst.GetUiManager.GetCur_Inven_Item.InventoryCount(-1);
 
     }
 

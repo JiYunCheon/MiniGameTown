@@ -3,14 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum GAMETYPE
-{
-    FINDPICTURE,
-    MEMORYCARD,
-    BALLOON,
-    PUZZLE,
-    OBJECT
-}
 
 public class UiManager : MonoBehaviour
 {
@@ -64,7 +56,6 @@ public class UiManager : MonoBehaviour
     private void Awake()
     {
         floorMaterial.color = Color.white;
-        shopBoard.InstInvenItem();
     }
 
     public void Set_Content_Item(ContentItem item)
@@ -120,6 +111,7 @@ public class UiManager : MonoBehaviour
     public void OnClick_GameIn()
     {
         OnClick_Exit();
+        Debug.Log(GameManager.Inst.curGameName);
         InGame.openApp(GameManager.Inst.curGameName);
     }
 
@@ -191,7 +183,7 @@ public class UiManager : MonoBehaviour
 
         cur_Content_Item.CompareSoldOutCheck();
 
-        cur_Content_Item.GetItem.CountControll(1);
+        cur_Content_Item.GetItem.InventoryCount(1);
 
         Active_S_Window(false);
 

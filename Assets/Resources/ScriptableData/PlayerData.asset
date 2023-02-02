@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92ccc54912875434b89adef74e8acb59, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  gameMoney: 1000
+  gameMoney: 200
   _gameMoney: GameMony
   find_B_Count: 0
   _find_B_Count: FindPicture
@@ -25,8 +25,8 @@ MonoBehaviour:
   cook_B_Count: 0
   _cook_B_Count: Cock
   myRoom_B_Count: 0
-  _myRoom_B_Countt: MyRoom
-  appleTree_O_Count: 1
+  _myRoom_B_Count: MyRoom
+  appleTree_O_Count: 10
   _appleTree_O_Count: AppleTree
   cart_O_Count: 1
   _cart_O_Count: Cart

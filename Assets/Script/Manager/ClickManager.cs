@@ -1,10 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
 using UnityEngine;
-using UnityEngine.Analytics;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class ClickManager : MonoBehaviour
 {
@@ -23,9 +18,12 @@ public class ClickManager : MonoBehaviour
     private Vector3 saveHitPos  = Vector3.zero;
 
     //프리뷰 생성 정보 저장 변수
-    private PreviewObject alphaPrefab = null;
-    private Interactable prefab       = null;
-    private int occupyPad             = 0;
+    [SerializeField] private Data curData;
+    private Interactable prefab_Building;
+    private Interactable prefab_Object;
+    private PreviewObject alphaPrefab_Building;
+    private PreviewObject alphaPrefab_Object;
+
 
     //프리뷰 위지 변동을 위해 필요한 변수
     private PreviewObject preview = null;
@@ -38,9 +36,10 @@ public class ClickManager : MonoBehaviour
 
     #region Property
 
-    public int GetOccupyPad { get { return occupyPad;} private set { } }
+    public int GetOccupyPad { get { return curData.OccupyPad; } private set { } }
     public Transform GetBuildings { get { return buildings; } private set { } }
     public Building GetBeforeHit { get { return beforeHit; } private set { } }
+
 
     #endregion
 
@@ -64,15 +63,23 @@ public class ClickManager : MonoBehaviour
             {
                 if (beforeGround == null) return;
 
-                if (beforeGround.GetNodeList.Count == occupyPad && beforeGround.CompareNode(occupyPad))
+                if (InstCompare())
                 {
                     choiceCheck = true;
 
-                    preview.Active_BuildOption();
                 }
             }
         }
     }
+
+    public bool InstCompare()
+    {
+        if (beforeGround.GetNodeList.Count == curData.OccupyPad && beforeGround.CompareNode(curData.OccupyPad))
+            return true;
+        else
+            return false;
+    }
+
 
     #region Sequence_Method
 
@@ -87,6 +94,7 @@ public class ClickManager : MonoBehaviour
             if (hit.transform.gameObject.TryGetComponent<Building>(out Building obj))
             {
                 GameManager.Inst.GetPlayer.PlayerDestination();
+               
 
                 //이전 오브젝트가 없는 경우
                 if (beforeHit == null)
@@ -115,10 +123,11 @@ public class ClickManager : MonoBehaviour
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, buildingLayer))
         {
             GameManager.Inst.GetUiManager.On_Click_BuildingMode();
+           
 
             if (hit.transform.TryGetComponent<Interactable>(out Interactable obj))
             {
-                SetInfo(obj.GetMyData.AlphaPrefab, obj.GetMyData.Prefab, obj.GetMyData.OccupyPad);
+                SetInfo(obj.GetMyData);
                 GameManager.Inst.GetUiManager.GetCur_Inven_Item = obj.GetInventoryItem;
 
                 for (int i = 0; i < obj.myGround.Count; i++)
@@ -148,25 +157,29 @@ public class ClickManager : MonoBehaviour
                     beforeGround = ground;
 
                     //주변 색 변경
-                    beforeGround.SetColor(occupyPad,Color.green);
+                    beforeGround.SetColor(curData.OccupyPad,Color.green);
 
                     //선택된 곳의 포지션을 저장
                     saveHitPos = ground.transform.position;
+
                     //그 포지션에 알파 건물 생성
-                    preview = Instantiate<PreviewObject>(alphaPrefab, saveHitPos, Quaternion.identity);
+                    preview = Instantiate<PreviewObject>(GetAlphaPrefab(curData), saveHitPos, Quaternion.identity);
+
+                    preview.Active_BuildOption();
+
                 }
                 //레이의 힛의 포지션이 변경되었을 경우
                 else if (ground.transform.position != saveHitPos)
                 {
                     //기존에 선택되었던 패드의 색을 변경
-                    beforeGround.SetColor(occupyPad, Color.white);
-                    beforeGround.Clear(occupyPad);
+                    beforeGround.SetColor(curData.OccupyPad, Color.white);
+                    beforeGround.Clear(curData.OccupyPad);
 
                     //이전 패드를 지금 선택된 패드로 초기화
                     beforeGround = ground;
 
                     //색을 변경
-                    beforeGround.SetColor(occupyPad, Color.green);
+                    beforeGround.SetColor(curData.OccupyPad, Color.green);
 
                     //이전 포지션을 지금 선택된 포지션으로 초기화
                     saveHitPos = ground.transform.position;
@@ -183,9 +196,10 @@ public class ClickManager : MonoBehaviour
     //건물 생성 로직
     public void InstObject(Quaternion rotation)
     {
-        //진짜 건물 생성
-        Interactable obj= Instantiate<Interactable>(prefab, saveHitPos + new Vector3(0, 0, 0.5f), rotation, buildings);
 
+        //진짜 건물 생성
+        Interactable obj= Instantiate<Interactable>(GetPrefab(curData), saveHitPos + new Vector3(0, 0, 0.5f), rotation, buildings);
+        obj.SetMyData(curData);
         //주변 노드 건물에 저장
         obj.SaveGround(beforeGround.GetNodeList);
 
@@ -201,7 +215,7 @@ public class ClickManager : MonoBehaviour
         beforeHit = obj;
         beforeHit.SetOutLineShader();
         beforeHit.SetSelectCheck(check);
-        GameManager.Inst.curGameName = obj.GetMyData.GameName;
+        GameManager.Inst.curGameName = obj.GetMyData.PackageName;
         GameManager.Inst.GetUiManager.ChangeSelecChcek(check);
     }
     
@@ -223,22 +237,51 @@ public class ClickManager : MonoBehaviour
     public void PadRefresh()
     {
         choiceCheck = false;
-        beforeGround.SetColor(occupyPad, Color.white);
+        beforeGround.SetColor(curData.OccupyPad, Color.white);
         Refresh();
     }
 
 
     //클릭한 객체의 정보를 가지고 옴
-    public void SetInfo(PreviewObject alphaPrefab ,Interactable prefab , int occupyPad)
+    public void SetInfo(Data data)
     {
-        this.prefab = prefab;
-        this.occupyPad = occupyPad;
-        this.alphaPrefab = alphaPrefab;
+        curData = data;
 
         GameManager.Inst.GetUiManager.Active_Pad();
         GameManager.Inst.GetUiManager.Active_Pad(false);
         GameManager.Inst.GetUiManager.Active_Pad();
     }
 
+    private Interactable GetPrefab(Data data)
+    {
+        if (data.MyType == OBJECT_TYPE.BUIDING)
+        {
+            prefab_Building = Resources.Load<Interactable>($"Prefabs/Building/{data.PrefabName}");
+
+            return prefab_Building;
+        }
+        else
+        {
+            prefab_Object = Resources.Load<Interactable>($"Prefabs/Object/{data.PrefabName}");
+
+            return prefab_Object;
+        }
+    }
+
+    private PreviewObject GetAlphaPrefab(Data data)
+    {
+        if (data.MyType == OBJECT_TYPE.BUIDING)
+        {
+            alphaPrefab_Building = Resources.Load<PreviewObject>($"Prefabs/Building/{data.AlphaPrefabName}");
+
+            return alphaPrefab_Building;
+        }
+        else
+        {
+            alphaPrefab_Object = Resources.Load<PreviewObject>($"Prefabs/Object/{data.AlphaPrefabName}");
+
+            return alphaPrefab_Object;
+        }
+    }
 
 }

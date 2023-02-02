@@ -16,7 +16,6 @@ public class Building : Interactable
     [SerializeField] private Shader defaultShader = null;
 
 
-    private new Renderer renderer = null;
 
     private bool selectCheck = false;
    
@@ -24,13 +23,6 @@ public class Building : Interactable
 
     public TriggerCheck GetEntrance { get { return entrance; } private set { } }
 
-
-    private void Awake()
-    {
-        renderer = GetComponent<Renderer>();
-    }
-
- 
 
     //¾Æ¿ô¶óÀÎ ½¦ÀÌ´õ Àû¿ë
     public void SetOutLineShader()
