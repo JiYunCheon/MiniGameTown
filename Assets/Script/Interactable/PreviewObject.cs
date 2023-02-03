@@ -24,7 +24,6 @@ public class PreviewObject : MonoBehaviour
         GameManager.Inst.GetUiManager.GetCur_Inven_Item.InventoryCount(-1);
 
         GameManager.Inst.GetClickManager.InstObject(rotation);
-        GameManager.Inst.GetClickManager.choiceCheck = false;
         Active_BuildOption(false);
 
         Destroy(this.gameObject);

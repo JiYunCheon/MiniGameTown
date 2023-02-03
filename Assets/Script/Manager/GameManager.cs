@@ -143,6 +143,12 @@ public class GameManager : MonoBehaviour
     }
 
 
+    public void GameMoneyControll(int money)
+    {
+        GetPlayerData.GameMoney -= money;
+    }
+
+
     public void ChangeMode(out bool mode, bool check)
     {
         mode = check;

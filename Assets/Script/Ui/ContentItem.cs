@@ -21,6 +21,11 @@ public class ContentItem : Item
 
     public InventoryItem GetItem { get { return item; } set { } }
 
+    private void Awake()
+    {
+        
+    }
+
 
     protected override void Initialized()
     {

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -29,9 +30,6 @@ public class ClickManager : MonoBehaviour
     private PreviewObject preview = null;
     private Ground ground = null;
 
-    //편집툴 확인 변수
-    [HideInInspector] public bool choiceCheck = false;
-
     #endregion
 
     #region Property
@@ -58,17 +56,6 @@ public class ClickManager : MonoBehaviour
         {
             if (GameManager.Inst.buildingMode && Input.GetMouseButton(0))
                 BuildingModeMoveSequence();
-
-            else if (Input.GetMouseButtonUp(0))
-            {
-                if (beforeGround == null) return;
-
-                if (InstCompare())
-                {
-                    choiceCheck = true;
-
-                }
-            }
         }
     }
 
@@ -94,7 +81,6 @@ public class ClickManager : MonoBehaviour
             if (hit.transform.gameObject.TryGetComponent<Building>(out Building obj))
             {
                 GameManager.Inst.GetPlayer.PlayerDestination();
-               
 
                 //이전 오브젝트가 없는 경우
                 if (beforeHit == null)
@@ -123,7 +109,6 @@ public class ClickManager : MonoBehaviour
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, buildingLayer))
         {
             GameManager.Inst.GetUiManager.On_Click_BuildingMode();
-           
 
             if (hit.transform.TryGetComponent<Interactable>(out Interactable obj))
             {
@@ -148,7 +133,7 @@ public class ClickManager : MonoBehaviour
         {
             Debug.DrawRay(Camera.main.ScreenToWorldPoint(Input.mousePosition), Camera.main.transform.forward * 10, Color.red, 0.3f);
 
-            if (hit.transform.gameObject.TryGetComponent<Ground>(out ground) && choiceCheck == false)
+            if (hit.transform.gameObject.TryGetComponent<Ground>(out ground))
             {
                 //첫번째 클릭일 경우
                 if (preview == null && saveHitPos == Vector3.zero)
@@ -163,7 +148,7 @@ public class ClickManager : MonoBehaviour
                     saveHitPos = ground.transform.position;
 
                     //그 포지션에 알파 건물 생성
-                    preview = Instantiate<PreviewObject>(GetAlphaPrefab(curData), saveHitPos, Quaternion.identity);
+                    preview = Instantiate<PreviewObject>(GetAlphaPrefab(curData), saveHitPos+new Vector3(0,0.5f,0), Quaternion.identity);
 
                     preview.Active_BuildOption();
 
@@ -184,7 +169,7 @@ public class ClickManager : MonoBehaviour
                     //이전 포지션을 지금 선택된 포지션으로 초기화
                     saveHitPos = ground.transform.position;
                     //초기화된 포지션으로 알파건물의 위치를 변경
-                    preview.transform.position = saveHitPos;
+                    preview.transform.position = saveHitPos + new Vector3(0, 0.5f, 0);
                 }
             }
 
@@ -198,11 +183,11 @@ public class ClickManager : MonoBehaviour
     {
 
         //진짜 건물 생성
-        Interactable obj= Instantiate<Interactable>(GetPrefab(curData), saveHitPos + new Vector3(0, 0, 0.5f), rotation, buildings);
+        Interactable obj= Instantiate<Interactable>(GetPrefab(curData), saveHitPos + new Vector3(0, 0.5f, 0.5f), rotation, buildings);
         obj.SetMyData(curData);
         //주변 노드 건물에 저장
         obj.SaveGround(beforeGround.GetNodeList);
-
+        obj.DownPos();
         //값 초기화
         Refresh();
 
@@ -236,7 +221,6 @@ public class ClickManager : MonoBehaviour
 
     public void PadRefresh()
     {
-        choiceCheck = false;
         beforeGround.SetColor(curData.OccupyPad, Color.white);
         Refresh();
     }

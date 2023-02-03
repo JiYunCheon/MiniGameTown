@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92ccc54912875434b89adef74e8acb59, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  gameMoney: 200
+  gameMoney: 9998000
   _gameMoney: GameMony
   find_B_Count: 0
   _find_B_Count: FindPicture

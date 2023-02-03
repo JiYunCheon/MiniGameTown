@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
 using UnityEngine;
 
 public class CameraControll : MonoBehaviour
@@ -13,20 +11,20 @@ public class CameraControll : MonoBehaviour
 
     float time = 0;
 
-    Coroutine coroutine;
+    private Coroutine coroutine;
+    private Coroutine camSizeCoroutine;
+
+    private Vector3 modePos = new Vector3(14f,28f,56.2f);
 
     private void Awake()
     {
-        //StartCoroutine(nameof(CamMoveStart));
+        StartCoroutine(nameof(CamMoveStart));
     }
 
     private void Update()
     {
         if (GameManager.Inst.GetUiManager.GetSelecCheck || GameManager.Inst.buildingMode || GameManager.Inst.GetUiManager.GetUiCheck) return;
 
-        //if (GameManager.Inst.buildingMode || GameManager.Inst.waitingMode) return;
-        
-        
         if (Input.GetMouseButtonDown(0))
         {
             check = false;
@@ -47,7 +45,7 @@ public class CameraControll : MonoBehaviour
             return;
         }
 
-        if (Input.GetMouseButtonUp(0) && time<=0.2f)
+        if (Input.GetMouseButtonUp(0) && time<=0.1f)
         {
             GameManager.Inst.GetPlayer.PlayerDestination();
         }
@@ -64,56 +62,29 @@ public class CameraControll : MonoBehaviour
     IEnumerator CamMoveStart()
     {
         if (check == true) yield break;
-        float count =20;
+        float count =2f;
         check = true;
 
         float xmin = -1;
         float ymin = -1;
-
+            
 
         while (true)
         {
-            count = Mathf.Lerp(count,0f,Time.deltaTime);
-            yield return new WaitForEndOfFrame();
+            count = Mathf.Lerp(count,0f, 0.5f * Time.fixedDeltaTime);
 
-            //if(cameraAxisX<0)
-            //{
-            //    xmin = -1;
-            //    ymin = 1;
-            //}
-            //else
-            //{
-            //    xmin = -1;
-            //    ymin = 1;
-            //}
-
-            transform.Translate(xmin * count * cameraAxisX * Time.deltaTime, ymin * count * cameraAxisY * Time.deltaTime, 0);
+            yield return new WaitForFixedUpdate();
+            transform.Translate(xmin * count * cameraAxisX * 0.5f*Time.fixedDeltaTime, ymin * count * cameraAxisY * Time.fixedDeltaTime, xmin * count * cameraAxisX * 0.5f * Time.fixedDeltaTime);
 
             Vector3 targetPos = transform.position;
-
             targetPos.x = Mathf.Clamp(targetPos.x, xMin, xMax);
             targetPos.y = Mathf.Clamp(targetPos.y, yMin, yMax);
-            targetPos.z = 40f;
+            targetPos.z = 70f- Mathf.Clamp(targetPos.x, xMin, xMax);
 
-            //transform.position = Vector3.Lerp(Camera.main.transform.position, targetPos, 0.2f);
             transform.position = targetPos;
 
-            if (count<5f)
+            if (count<1f)
             {
-                //count = count/4;
-                //while (true)
-                //{
-                //    count = Mathf.Lerp(count, 0f, Time.deltaTime);
-
-                //    yield return new WaitForEndOfFrame();
-
-                //    transform.Translate(count * cameraAxisX * Time.deltaTime, count * cameraAxisY * Time.deltaTime, 0);
-                //    if(count < 0.5f)
-                //    {
-                //        break;
-                //    }
-                //}
-
                 check = false;
                 yield break;
             }
@@ -140,19 +111,24 @@ public class CameraControll : MonoBehaviour
         }
     }
 
-    public void ChangCameraSize(bool mode)
+    public void ChangCameraSize()
     {
-        if (mode == true)
-        {
-            StopAllCoroutines();
+        transform.position = modePos;
 
-            StartCoroutine(LerpCameraSize(15f));
+        if (camSizeCoroutine != null)
+            StopCoroutine(camSizeCoroutine);
+
+        if (!GameManager.Inst.buildingMode && !GameManager.Inst.waitingMode)
+        {
+            camSizeCoroutine = StartCoroutine(LerpCameraSize(7f));
         }
-        else
+        else if(GameManager.Inst.waitingMode)
         {
-            StopAllCoroutines();
-
-            StartCoroutine(LerpCameraSize(7f));
+            camSizeCoroutine = StartCoroutine(LerpCameraSize(18f));
+        }
+        else if(GameManager.Inst.buildingMode)
+        {
+            camSizeCoroutine = StartCoroutine(LerpCameraSize(13f));
         }
     }
 
@@ -161,14 +137,14 @@ public class CameraControll : MonoBehaviour
 
         while (true)
         {
-            Camera.main.orthographicSize= Mathf.Lerp(Camera.main.orthographicSize, value, 1.8f*Time.deltaTime);
+            Camera.main.orthographicSize= Mathf.Lerp(Camera.main.orthographicSize, value, 1.8f *Time.deltaTime);
             
-            if(value==15f && Camera.main.orthographicSize > (value - 0.2f))
+            if(value==15f && Camera.main.orthographicSize > (value - 0.1f))
             {
                 Camera.main.orthographicSize = value;
                 yield break;
             }
-            else if(value == 7f && Camera.main.orthographicSize < (value + 0.2f))
+            else if(value == 7f && Camera.main.orthographicSize < (value + 0.1f))
             {
                 Camera.main.orthographicSize = value;
                 yield break;

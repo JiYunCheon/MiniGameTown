@@ -56,5 +56,26 @@ abstract public class Interactable : MonoBehaviour
         renderer = GetComponent<Renderer>();
     }
 
+    public void DownPos()
+    {
+        StartCoroutine(Down());
+    }
 
+
+    IEnumerator Down()
+    {
+        while (true)
+        {
+            transform.Translate(0, -0.2f, 0);
+
+            if (transform.localPosition.y < 1.41f)
+            {
+                Vector3 pos = transform.localPosition;
+                pos.y = 1.4f;
+                transform.localPosition = pos;   
+                yield break;
+            }
+            yield return new WaitForFixedUpdate();
+        }
+    }
 }

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class ShopBoard : MonoBehaviour
 {
     [Header("ScriptableObject")]
-    [SerializeField] private Data[] datas = null;
+    [SerializeField] Data[] datas = null;
     [SerializeField] private ContentItem contentPrefab = null;
 
     [Header("Scroll View")]
@@ -15,8 +15,8 @@ public class ShopBoard : MonoBehaviour
     private void Awake()
     {
         Inst_ContentItem(datas);
-
         Inst_InvenItem();
+        gameObject.SetActive(false);
     }
 
     private void Start()

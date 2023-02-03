@@ -34,6 +34,8 @@ abstract public class Item : MonoBehaviour
         if (GameManager.Inst.datas.TryGetValue(GetMyData.GameName, out int value))
         {
             count = value + _value;
+            if (count <= 0)
+                count = 0;
             GameManager.Inst.datas[GetMyData.GameName] = count;
         }
     }
