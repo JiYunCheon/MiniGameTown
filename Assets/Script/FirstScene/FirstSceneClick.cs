@@ -34,7 +34,7 @@ public class FirstSceneClick : MonoBehaviour
             hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Camera.main.transform.forward, 100, layer);
             Debug.DrawRay(Camera.main.ScreenToWorldPoint(Input.mousePosition), Camera.main.transform.forward * 10, Color.red, 0.3f);
 
-            if (hit.transform.TryGetComponent<PictureObject>(out obj))
+            if (hit.transform.TryGetComponent<PictureObject>(out obj) && hit.collider!=null)
             {
                 saveObj = obj;
                 saveObj.ChangeScale(biggerScale);

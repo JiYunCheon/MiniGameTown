@@ -20,7 +20,7 @@ public class UiManager : MonoBehaviour
 
     [Header("MapLevel")]
     [SerializeField] private Material floorMaterial     = null;
-    [SerializeField] private GameObject padBoard        = null;
+    [SerializeField] private PadController padBoard        = null;
 
     [Header("Result Ui")]
     [SerializeField] private GameObject successWindow = null;
@@ -100,7 +100,8 @@ public class UiManager : MonoBehaviour
     //패드 활성화 제어
     public void Active_Pad(bool activeSelf = true)
     {
-        padBoard.SetActive(activeSelf);
+        padBoard.gameObject.SetActive(activeSelf);
+        //padBoard.ActivePadByType(cur_Content_Item.GetMyData.MyType);
     }
 
     //ShopBoardUi 활성화 제어
@@ -129,6 +130,8 @@ public class UiManager : MonoBehaviour
 
     public void OnClick_Exit()
     {
+        GameManager.Inst.GetCameraMove.CameraPosMove(null,false);
+
         GameManager.Inst.GetClickManager.GetBeforeHit.GetEntrance.ActiveCollider(false);
         GameManager.Inst.GetClickManager.BuildingRefresh();
 
@@ -150,6 +153,7 @@ public class UiManager : MonoBehaviour
         GameManager.Inst.ChangeMode(out GameManager.Inst.waitingMode, false);
         GameManager.Inst.ChangeMode(out GameManager.Inst.buildingMode, true);
 
+        padBoard.ActivePadByType(GameManager.Inst.GetClickManager.GetCurData.MyType);
         //클릭매니저로
         foreach (Transform item in GameManager.Inst.GetClickManager.GetBuildings)
         {

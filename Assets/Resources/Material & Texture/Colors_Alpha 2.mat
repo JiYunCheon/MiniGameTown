@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Colors_Alpha
+  m_Name: Colors_Alpha 2
   m_Shader: {fileID: 4800000, guid: 85e6d565c4d90664f885705c942f87f9, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:
@@ -38,7 +38,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 2800000, guid: 104ebc2f22f1441e3a8ac17329e7085a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 08d6e122baaa2294d9a4b476b4260ad1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -80,7 +80,7 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 0.5019608}
-    - _EmissionColor: {r: 1.2657566, g: 1.2657566, b: 1.2657566, a: 1}
+    - _Color: {r: 1, g: 0.23113209, b: 0.23113209, a: 0.5019608}
+    - _EmissionColor: {r: 0.7490196, g: 0.7490196, b: 0.7490196, a: 1}
     - _SpecColor: {r: 0.1397059, g: 0.1397059, b: 0.1397059, a: 1}
   m_BuildTextureStacks: []

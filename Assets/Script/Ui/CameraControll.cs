@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CameraControll : MonoBehaviour
 {
@@ -23,7 +24,9 @@ public class CameraControll : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.Inst.GetUiManager.GetSelecCheck || GameManager.Inst.buildingMode || GameManager.Inst.GetUiManager.GetUiCheck) return;
+
+        if (GameManager.Inst.GetUiManager.GetSelecCheck || GameManager.Inst.buildingMode || GameManager.Inst.GetUiManager.GetUiCheck
+            || EventSystem.current.IsPointerOverGameObject(GameManager.Inst.pointerID) == true) return;
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -132,20 +135,30 @@ public class CameraControll : MonoBehaviour
         }
     }
 
-    IEnumerator LerpCameraSize(float value)
+    IEnumerator LerpCameraSize(float value,bool zoomCheck =true)
     {
-
         while (true)
         {
             Camera.main.orthographicSize= Mathf.Lerp(Camera.main.orthographicSize, value, 1.8f *Time.deltaTime);
             
-            if(value==15f && Camera.main.orthographicSize > (value - 0.1f))
+            if(zoomCheck && value ==15f && Camera.main.orthographicSize > (value - 0.1f))
             {
                 Camera.main.orthographicSize = value;
                 yield break;
             }
-            else if(value == 7f && Camera.main.orthographicSize < (value + 0.1f))
+            else if(zoomCheck && value == 7f && Camera.main.orthographicSize < (value + 0.1f))
             {
+                Camera.main.orthographicSize = value;
+                yield break;
+            }
+            else if (!zoomCheck && value == 7f && Camera.main.orthographicSize > (value - 0.1f))
+            {
+                Camera.main.orthographicSize = value;
+                yield break;
+            }
+            else if(zoomCheck && value == 4f && Camera.main.orthographicSize < (value + 0.1f))
+            {
+
                 Camera.main.orthographicSize = value;
                 yield break;
             }
@@ -153,6 +166,78 @@ public class CameraControll : MonoBehaviour
             yield return null;
         }
 
+    }
+
+    private Vector3 originPos = Vector3.zero;
+    private Quaternion originRo = Quaternion.identity;
+    private Vector3 moveRo = new Vector3(26.8f,195,-9.6f);
+
+
+    public void CameraPosMove(Building obj ,bool check = true)
+    {
+
+        StopAllCoroutines();
+
+        if (check)
+        {
+            originRo = transform.rotation;
+            originPos = transform.position;
+
+            //transform.position = pos + new Vector3(4,10f,20f);
+            StartCoroutine(MoveCoroutine(GameManager.Inst.GetClickManager.GetBeforeHit));
+            StartCoroutine(RotantionCoroutine(GameManager.Inst.GetClickManager.GetBeforeHit));
+
+            camSizeCoroutine = StartCoroutine(LerpCameraSize(4f));
+
+        }
+        else
+        {
+            transform.rotation = originRo;
+
+            StartCoroutine(MoveCoroutine(obj));
+            StartCoroutine(RotantionCoroutine(GameManager.Inst.GetClickManager.GetBeforeHit));
+
+            camSizeCoroutine = StartCoroutine(LerpCameraSize(7f,false));
+        }
+
+    }
+
+    private IEnumerator MoveCoroutine(Building obj)
+    {
+        while (true)
+        {
+            transform.position=Vector3.MoveTowards(transform.position, obj.GetCameraPos.position, 0.7f);
+            
+            yield return new WaitForFixedUpdate();
+            if (Vector3.Distance(transform.position, obj.GetCameraPos.position) <= 0.2f)
+            {
+                transform.position = obj.GetCameraPos.position;
+
+                yield break;
+            }
+            
+        }
+    }
+
+    private IEnumerator RotantionCoroutine(Building obj )
+    {
+        float count = 0;
+        while (true)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, obj.GetCameraPos.rotation, Time.deltaTime);
+
+            yield return new WaitForFixedUpdate();
+            count += Time.deltaTime;
+
+            if (count>=20f)
+            {
+                Debug.Log("gd");
+                transform.rotation = obj.GetCameraPos.rotation;
+
+                yield break;
+            }
+
+        }
     }
 
   

@@ -11,6 +11,10 @@ abstract public class Interactable : MonoBehaviour
     private Transform contentTr = null;
 
     private InventoryItem myInvenItem = null;
+    [SerializeField] private Transform cameraPos = null;
+
+    public Transform GetCameraPos { get { return cameraPos; } private set { } }
+
     public InventoryItem GetInventoryItem { get { return myInvenItem; } private set { } }
 
     public Data GetMyData { get { return myData; }private set { } }
@@ -54,6 +58,7 @@ abstract public class Interactable : MonoBehaviour
     private void Initialized()
     {
         renderer = GetComponent<Renderer>();
+        Debug.Log(renderer==null);
     }
 
     public void DownPos()

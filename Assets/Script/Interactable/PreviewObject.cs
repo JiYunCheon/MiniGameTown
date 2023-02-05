@@ -1,19 +1,44 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PreviewObject : MonoBehaviour
+public class PreviewObject : Interactable
 {
 
     [SerializeField] private GameObject buildOption = null;
+    private Material defaultMaterial = null;
+    private Material redMaterial = null;
 
     Quaternion rotation = Quaternion.identity;
     private int count = 0;
+
+
+    private void Awake()
+    {
+        defaultMaterial = Resources.Load<Material>("Material & Texture/Colors_Alpha 1");
+        redMaterial= Resources.Load<Material>("Material & Texture/Colors_Alpha 2");
+
+        if (renderer == null)
+            renderer = GetComponent<Renderer>();
+
+    }
 
     public void Active_BuildOption(bool active = true)
     {
         buildOption.SetActive(active);
     }
+
+    public void ChangeState(Ground ground,int occupyPad)
+    {
+        if(!ground.CompareNode(occupyPad))
+        {
+            renderer.material = redMaterial;
+        }
+        else
+        {
+            renderer.material= defaultMaterial;
+        }
+    }
+
+
 
     #region Button Event
 

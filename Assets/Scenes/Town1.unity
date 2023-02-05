@@ -804,7 +804,7 @@ GameObject:
   - component: {fileID: 68574891}
   - component: {fileID: 68574892}
   m_Layer: 0
-  m_Name: Pad
+  m_Name: Pad_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -839,7 +839,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pad: {fileID: 7492098623075327889, guid: 2218f1c62eca10e409c6ed63ecf57b24, type: 3}
   hieght: 3
-  width: 13
+  width: 10
   interveal: 2.5
 --- !u!1 &70867078
 GameObject:
@@ -4137,7 +4137,7 @@ GameObject:
   - component: {fileID: 596337820}
   - component: {fileID: 596337821}
   m_Layer: 0
-  m_Name: Pad
+  m_Name: Pad_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4790,7 +4790,7 @@ GameObject:
   - component: {fileID: 634494333}
   - component: {fileID: 634494334}
   m_Layer: 0
-  m_Name: Pad
+  m_Name: Pad_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4885,7 +4885,7 @@ GameObject:
   - component: {fileID: 654739473}
   - component: {fileID: 654739474}
   m_Layer: 0
-  m_Name: Pad
+  m_Name: Pad_11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5073,7 +5073,7 @@ GameObject:
   - component: {fileID: 698736307}
   - component: {fileID: 698736308}
   m_Layer: 0
-  m_Name: Pad
+  m_Name: Pad_9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5810,7 +5810,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 875177666}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.75, y: 0.7, z: 18.25}
+  m_LocalPosition: {x: -1.75, y: 0.7, z: 13.75}
   m_LocalScale: {x: 0.6, y: 1, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5978,7 +5978,7 @@ GameObject:
   - component: {fileID: 901470672}
   - component: {fileID: 901470673}
   m_Layer: 0
-  m_Name: Pad
+  m_Name: Pad_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7680,7 +7680,7 @@ GameObject:
   - component: {fileID: 1127492721}
   - component: {fileID: 1127492722}
   m_Layer: 0
-  m_Name: Pad
+  m_Name: Pad_10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9217,6 +9217,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1360801969}
+  - component: {fileID: 1360801970}
   m_Layer: 0
   m_Name: PadBoard
   m_TagString: Untagged
@@ -9251,6 +9252,31 @@ Transform:
   m_Father: {fileID: 766571263}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1360801970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1360801968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc8ef6fe35bf78f4d9d1cd8415b06ad3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  padSpawners:
+  - {fileID: 901470673}
+  - {fileID: 68574892}
+  - {fileID: 2039666452}
+  - {fileID: 634494334}
+  - {fileID: 1409969275}
+  - {fileID: 596337821}
+  - {fileID: 2073325666}
+  - {fileID: 1931167502}
+  - {fileID: 698736308}
+  - {fileID: 1127492722}
+  - {fileID: 654739474}
+  - {fileID: 1487316870}
 --- !u!1 &1361622411
 GameObject:
   m_ObjectHideFlags: 0
@@ -9565,7 +9591,7 @@ GameObject:
   - component: {fileID: 1409969274}
   - component: {fileID: 1409969275}
   m_Layer: 0
-  m_Name: Pad
+  m_Name: Pad_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9954,7 +9980,7 @@ GameObject:
   - component: {fileID: 1487316869}
   - component: {fileID: 1487316870}
   m_Layer: 0
-  m_Name: Pad
+  m_Name: Pad_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9988,7 +10014,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pad: {fileID: 7492098623075327889, guid: 2218f1c62eca10e409c6ed63ecf57b24, type: 3}
-  hieght: 5
+  hieght: 8
   width: 3
   interveal: 2.5
 --- !u!1 &1498123076
@@ -10267,7 +10293,7 @@ MonoBehaviour:
   modeBtnUi: {fileID: 1540800727}
   homeUi: {fileID: 1843455067}
   floorMaterial: {fileID: 2100000, guid: 87a059ac3be574701a4e7eb14e8cf47d, type: 2}
-  padBoard: {fileID: 1360801968}
+  padBoard: {fileID: 1360801970}
   successWindow: {fileID: 47152215}
   failedWindow: {fileID: 1784806645}
   gameMoneyText: {fileID: 403671657}
@@ -13015,7 +13041,7 @@ GameObject:
   - component: {fileID: 1931167501}
   - component: {fileID: 1931167502}
   m_Layer: 0
-  m_Name: Pad
+  m_Name: Pad_12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13834,7 +13860,7 @@ GameObject:
   - component: {fileID: 2039666451}
   - component: {fileID: 2039666452}
   m_Layer: 0
-  m_Name: Pad
+  m_Name: Pad_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13952,7 +13978,7 @@ GameObject:
   - component: {fileID: 2073325665}
   - component: {fileID: 2073325666}
   m_Layer: 0
-  m_Name: Pad
+  m_Name: Pad_8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -4,6 +4,7 @@ Shader "Draw/Alpha"
 	{
 		_Color("Main Color", Color) = (1,1,1,0.1)
 		_MainTex("Main Texture", 2D) = "white" {}
+	
 	}
 
 	SubShader

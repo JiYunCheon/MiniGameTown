@@ -25,6 +25,8 @@ public class Ground : MonoBehaviour
 
     public bool CompareNode(int occupyPad)
     {
+        if (occupyPad != GetNodeList.Count) return false;
+
         for (int i = 0; i < GetNodeList.Count; i++)
         {
             if (GetNodeList[i].buildingCheck) return false;
@@ -33,7 +35,7 @@ public class Ground : MonoBehaviour
         return true;
     }
     
-    public void Clear(int occupyPad)
+    public void Clear()
     {
         if (ground.Count>0)
         {
