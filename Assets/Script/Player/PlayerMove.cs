@@ -37,8 +37,8 @@ public class PlayerMove : MonoBehaviour
                     return;
                 }
 
-                if (GameManager.Inst.GetClickManager.GetBeforeHit != null)
-                    GameManager.Inst.GetClickManager.GetBeforeHit.SetDefaultShader();
+                if (GameManager.Inst.GetClickManager.GetCurHitObject != null)
+                    GameManager.Inst.GetClickManager.GetCurHitObject.DeSelect_Select_InteractableObj();
 
                 myAgent.destination = hit.point;
             }

@@ -5,6 +5,7 @@ public class ClickManager : MonoBehaviour
 {
     #region Member
 
+    //생성될 건물의 부모
     [Header("Parents")]
     [SerializeField] private Transform buildings = null;
 
@@ -13,12 +14,14 @@ public class ClickManager : MonoBehaviour
     private int padLayer      = 1 << 7;
 
     //이전 건물을 저장 할 변수
-    private Building beforeHit  = null;
+    private Building curHitObject  = null;
     private Ground beforeGround = null;
     private Vector3 saveHitPos  = Vector3.zero;
 
     //프리뷰 생성 정보 저장 변수
-    [SerializeField] private Data curData;
+    private Data curData;
+
+    //빌딩모드에서 현재 선택된 건물의 정보를 가지고 있을 변수
     private Interactable prefab_Building;
     private Interactable prefab_Object;
     private PreviewObject alphaPrefab_Building;
@@ -29,61 +32,68 @@ public class ClickManager : MonoBehaviour
     private PreviewObject preview = null;
     private Ground ground = null;
 
+    //빌딩모드에 들어가서 클릭을 했는지를 체크 할 불 변수
+    private bool clickCheck = false;
+    [HideInInspector] public bool selecCheck = false;
+
+    private InventoryItem cur_Inven_Item = null;
+
     #endregion
 
     #region Property
 
-    public int GetOccupyPad { get { return curData.OccupyPad; } private set { } }
     public Transform GetBuildings { get { return buildings; } private set { } }
-    public Building GetBeforeHit { get { return beforeHit; } private set { } }
+
+    public Building GetCurHitObject { get { return curHitObject; } private set { } }
 
     public Data GetCurData { get { return curData; } private set { } }
+
+    public InventoryItem GetCur_Inven_Item { get { return cur_Inven_Item; } private set { } }
 
     #endregion
 
     void Update()
     {
-        if (GameManager.Inst.GetUiManager.GetSelecCheck || 
-            EventSystem.current.IsPointerOverGameObject(GameManager.Inst.pointerID) == true) return;
+        //건물이 선택 되었거나, 유아이 위를 클릭했을 경우 리턴 
+        if (selecCheck || EventSystem.current.IsPointerOverGameObject(GameManager.Inst.pointerID) == true) return;
 
-       
 
+        //빌딩모드, 편집모드가 아닐경우 
         if (Input.GetMouseButtonDown(0) && !GameManager.Inst.buildingMode && !GameManager.Inst.waitingMode)
-            BuildingInteractionSequence();
+            InteractionSequence();
 
+        //편집모드일 경우 
         else if (GameManager.Inst.waitingMode && Input.GetMouseButtonDown(0))
             EditModeSequence();
 
         else
         {
-
+            //현재 데이터가 있고, 생성된 미리보기 객체가 없고 ,빌딩모드일경우 
             if (GameManager.Inst.buildingMode && preview == null && curData != null)
+                //미리보기 객체를 생성
+                preview = Instantiate<PreviewObject>(GetAlphaPrefab(curData), 
+                    Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(-5f, -3f, -5f), Quaternion.identity);
+            //빌딩모드이고 클릭을 한적이 없을 경우
+            else if(GameManager.Inst.buildingMode && clickCheck==false)
             {
-                preview = Instantiate<PreviewObject>(GetAlphaPrefab(curData), Camera.main.ScreenToWorldPoint(Input.mousePosition)+new Vector3(-5f,-3f,-5f), Quaternion.identity);
-            }
-            else if(GameManager.Inst.buildingMode && cccheck==false)
-            {
+                //미리보기 객체가 생성되어 있을경우
                 if (preview != null)
-                {
-                    preview.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition)+new Vector3(-5f, -3f, -5f);
-                }
+                    //미리보기객체는 마우스 포지션을 따라다님
+                    preview.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(-5f, -3f, -5f);
             }
           
+            //빌딩모드이고 마우스를 누르고 있을 경우
             if (GameManager.Inst.buildingMode && Input.GetMouseButton(0))
-            {
                 BuildingModeMoveSequence();
-            }
         }
-
            
 
     }
 
-    bool cccheck = false;   
-
+    //설치전 현재 선택된 땅의 주변 노드가 설치가능한지 검사 (가능하면 true 불가능하면 false)
     public bool InstCompare()
     {
-        if (beforeGround.GetNodeList.Count == curData.OccupyPad && beforeGround.CompareNode(curData.OccupyPad))
+        if (beforeGround.CompareNode(curData.OccupyPad))
             return true;
         else
             return false;
@@ -92,7 +102,8 @@ public class ClickManager : MonoBehaviour
 
     #region Sequence_Method
 
-    private void BuildingInteractionSequence()
+    //상호작용 가능한 건물을 눌렀을때 실행될 시퀀스
+    private void InteractionSequence()
     {
         RaycastHit hit;
 
@@ -102,74 +113,63 @@ public class ClickManager : MonoBehaviour
             //상호 작용이 가능한 오브젝트인지 확인
             if (hit.transform.gameObject.TryGetComponent<Building>(out Building obj))
             {
+                //플레이어의 도착지로 지정
                 GameManager.Inst.GetPlayer.PlayerDestination();
+
                 //이전 오브젝트가 없는 경우
-                if (beforeHit == null)
+                if (curHitObject == null)
                     Interection(obj, true);
+
                 //이전 오브젝트와 다른 오브젝트를 클릭했을 경우
-                else if (beforeHit.transform.gameObject != hit.transform.transform.gameObject)
+                else if (curHitObject.transform.gameObject != hit.transform.transform.gameObject)
                 {
-                    beforeHit.SetDefaultShader();
-                    GameManager.Inst.GetUiManager.ChangeSelecChcek(false);
-                    Interection(obj, true);
-                }
-                else if (beforeHit.transform.gameObject == hit.transform.transform.gameObject)
-                {
-                    beforeHit.SetDefaultShader();
-                    GameManager.Inst.GetUiManager.ChangeSelecChcek(false);
+                    GameManager.Inst.GetUiManager.SeclectStateUi(false);
 
                     Interection(obj, true);
                 }
-
 
                 GameManager.Inst.GetCameraMove.CameraPosMove(obj);
-
             }
         }
     }
 
+    //편집모드일때 실행될 시퀀스
     private void EditModeSequence()
     {
         RaycastHit hit;
 
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, buildingLayer))
         {
-
+            //상호작용 가능한 객체인지 확인
             if (hit.transform.TryGetComponent<Interactable>(out Interactable obj))
             {
-                SetInfo(obj.GetMyData);
-                GameManager.Inst.GetUiManager.GetCur_Inven_Item = obj.GetInventoryItem;
-                //curData = obj.GetMyData;
+                SetInfo(obj.GetInventoryItem, obj.GetMyData);
+
                 GameManager.Inst.GetUiManager.On_Click_BuildingMode();
 
-                for (int i = 0; i < obj.myGround.Count; i++)
-                {
-                    obj.myGround[i].ChangeBuildingState(false, Color.white);
-                }
+                obj.ChangeState(false, Color.white);
 
+                //선택된 오브젝트 파괴
                 Destroy(obj.gameObject);
             }
            
         }
     }
 
+    //빌딩모드일 경우 시퀀스
     private void BuildingModeMoveSequence()
     {
-       
-
         RaycastHit hit;
         //pad만 클릭
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, padLayer))
         {
-            Debug.DrawRay(Camera.main.ScreenToWorldPoint(Input.mousePosition), Camera.main.transform.forward * 10, Color.red, 0.3f);
-
-
+            
             if (hit.transform.gameObject.TryGetComponent<Ground>(out ground))
             {
                 //첫번째 클릭일 경우
                 if (saveHitPos == Vector3.zero)
                 {
-                    cccheck = true;
+                    clickCheck = true;
                     //선택된 패드를 저장
                     beforeGround = ground;
 
@@ -179,10 +179,9 @@ public class ClickManager : MonoBehaviour
                     //선택된 곳의 포지션을 저장
                     saveHitPos = ground.transform.position;
 
-                    //그 포지션에 알파 건물 생성
-                    //preview = Instantiate<PreviewObject>(GetAlphaPrefab(curData), saveHitPos+new Vector3(0,0.5f,0), Quaternion.identity);
-
+                    //미리보기 객체의 위치를 이동
                     preview.transform.position = saveHitPos + new Vector3(0, 0.5f, 0);
+
                     preview.ChangeState(beforeGround, curData.OccupyPad);
 
                     preview.Active_BuildOption();
@@ -219,14 +218,19 @@ public class ClickManager : MonoBehaviour
     //건물 생성 로직
     public void InstObject(Quaternion rotation)
     {
-        cccheck = false;
+        clickCheck = false;
+
         //진짜 건물 생성
         Interactable obj= Instantiate<Interactable>(GetPrefab(curData), saveHitPos + new Vector3(0, 0.5f, 0.5f), rotation, buildings);
+        
+        obj.NameRotate(rotation.eulerAngles.y);
+
         obj.SetMyData(curData);
-        //주변 노드 건물에 저장
+
         obj.SaveGround(beforeGround.GetNodeList);
+
         obj.DownPos();
-        //값 초기화
+
         Refresh();
 
         GameManager.Inst.GetUiManager.On_Click_WatingMode();
@@ -235,49 +239,60 @@ public class ClickManager : MonoBehaviour
     //클릭 될때 호출 기능 들
     private void Interection(Building obj , bool check)
     {
+        foreach (Transform item in GetBuildings)
+        {
+            if (item.TryGetComponent<Interactable>(out Interactable interactable))
+            {
+                interactable.Active_Name(false);
+            }
+        }
+        GameManager.Inst.GetUiManager.Active_HomeUi(false);
 
-
-        beforeHit = obj;
-        beforeHit.SetOutLineShader();
-        beforeHit.SetSelectCheck(check);
+        curHitObject = obj;
+        curHitObject.Select_InteractableObj();
+        curHitObject.SetSelectCheck(check);
         GameManager.Inst.curGameName = obj.GetMyData.PackageName;
-        GameManager.Inst.GetUiManager.ChangeSelecChcek(check);
+        selecCheck = true;
+        GameManager.Inst.GetUiManager.SeclectStateUi(check);
     }
     
+    //변수 초기화
     private void Refresh()
     {
-
         beforeGround = null;
         preview = null;
         saveHitPos = Vector3.zero;
     }
 
+    //빌딩모드를 나갈때 정보 초기화
     public void BuildingRefresh()
     {
-
-        beforeHit.SetDefaultShader();
-        beforeHit.SetSelectCheck(false);
-        GameManager.Inst.GetUiManager.ChangeSelecChcek(false);
+        selecCheck = false;
+        curHitObject.DeSelect_Select_InteractableObj();
+        curHitObject.SetSelectCheck(false);
+        GameManager.Inst.GetUiManager.SeclectStateUi(false);
         Refresh();
     }
 
+    //패드를 초기화
     public void PadRefresh()
     {
         beforeGround.SetColor(curData.OccupyPad, Color.white);
         Refresh();
     }
 
-
     //클릭한 객체의 정보를 가지고 옴
-    public void SetInfo(Data data)
+    public void SetInfo(InventoryItem inventoryItem, Data data)
     {
         curData = data;
+        cur_Inven_Item = inventoryItem;
 
         GameManager.Inst.GetUiManager.Active_Pad();
         GameManager.Inst.GetUiManager.Active_Pad(false);
         GameManager.Inst.GetUiManager.Active_Pad();
     }
 
+    //타입에 따라 프래팹을 가지고옴
     private Interactable GetPrefab(Data data)
     {
         if (data.MyType == OBJECT_TYPE.BUIDING)
@@ -294,6 +309,7 @@ public class ClickManager : MonoBehaviour
         }
     }
 
+    //타입에 따라 프래팹을 가지고옴
     private PreviewObject GetAlphaPrefab(Data data)
     {
         if (data.MyType == OBJECT_TYPE.BUIDING)
@@ -310,5 +326,5 @@ public class ClickManager : MonoBehaviour
         }
     }
 
-
+  
 }

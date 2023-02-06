@@ -26,10 +26,6 @@ public class TriggerCheck : MonoBehaviour
         {
             GameManager.Inst.GetUiManager.Active_ShopBtn(false);
 
-            //카메라 줌인 실행
-
-
-
             GameManager.Inst.GetUiManager.Active_GameInBtn();
 
         }

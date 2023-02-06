@@ -12,7 +12,7 @@ abstract public class Interactable : MonoBehaviour
 
     private InventoryItem myInvenItem = null;
     [SerializeField] private Transform cameraPos = null;
-
+    [SerializeField] private Transform nameTr = null;
     public Transform GetCameraPos { get { return cameraPos; } private set { } }
 
     public InventoryItem GetInventoryItem { get { return myInvenItem; } private set { } }
@@ -30,6 +30,7 @@ abstract public class Interactable : MonoBehaviour
         CompareItem();
     }
 
+    //주변패드의 정보를 저장
     public virtual void SaveGround(List<Ground> nodes)
     {
         for (int i = 0; i < nodes.Count; i++)
@@ -58,7 +59,6 @@ abstract public class Interactable : MonoBehaviour
     private void Initialized()
     {
         renderer = GetComponent<Renderer>();
-        Debug.Log(renderer==null);
     }
 
     public void DownPos()
@@ -83,4 +83,30 @@ abstract public class Interactable : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
     }
+
+    //생성된 건물의 로테이션에 따른 이름 회전값 변경
+    public void NameRotate(float rotationY)
+    {
+        if(nameTr != null)
+            nameTr.Rotate(0, -rotationY, 0);
+    }
+
+    public void Active_Name(bool check = true)
+    {
+        if (nameTr != null)
+            nameTr.gameObject.SetActive(check);
+    }
+
+
+    public void ChangeState(bool state , Color color)
+    {
+        for (int i = 0; i < myGround.Count; i++)
+        {
+            myGround[i].ChangePadState(state,color);
+        }
+    }
+
+
+    public virtual void Select_InteractableObj() { }
+    public virtual void DeSelect_Select_InteractableObj() { }
 }

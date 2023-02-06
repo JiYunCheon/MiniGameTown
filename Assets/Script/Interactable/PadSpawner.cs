@@ -23,7 +23,7 @@ public class PadSpawner : MonoBehaviour
 
     private void OnEnable()
     {
-        SetPadNode(GameManager.Inst.GetClickManager.GetOccupyPad);
+        SetPadNode(GameManager.Inst.GetClickManager.GetCurData.OccupyPad);
     }
     private void OnDisable()
     {

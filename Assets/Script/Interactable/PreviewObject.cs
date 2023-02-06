@@ -21,21 +21,21 @@ public class PreviewObject : Interactable
 
     }
 
+    //편집 Ui Active 컨트롤
     public void Active_BuildOption(bool active = true)
     {
         buildOption.SetActive(active);
     }
 
+    //미리보기 객체의 현재 상태 변경
     public void ChangeState(Ground ground,int occupyPad)
     {
         if(!ground.CompareNode(occupyPad))
-        {
+            //빨간색 메테리얼
             renderer.material = redMaterial;
-        }
         else
-        {
-            renderer.material= defaultMaterial;
-        }
+            //기본 메테리얼
+            renderer.material = defaultMaterial;
     }
 
 
@@ -46,7 +46,7 @@ public class PreviewObject : Interactable
     {
         if (!GameManager.Inst.GetClickManager.InstCompare()) return;
 
-        GameManager.Inst.GetUiManager.GetCur_Inven_Item.InventoryCount(-1);
+        GameManager.Inst.GetClickManager.GetCur_Inven_Item.InventoryCount(-1);
 
         GameManager.Inst.GetClickManager.InstObject(rotation);
         Active_BuildOption(false);
@@ -75,7 +75,7 @@ public class PreviewObject : Interactable
 
     public void OnClick_Exit()
     {
-        GameManager.Inst.GetUiManager.GetCur_Inven_Item.InventoryCount(1);
+        GameManager.Inst.GetClickManager.GetCur_Inven_Item.InventoryCount(1);
 
         GameManager.Inst.GetClickManager.PadRefresh();
 
@@ -83,6 +83,8 @@ public class PreviewObject : Interactable
 
         Destroy(this.gameObject);
     }
+
+ 
 
     #endregion
 }

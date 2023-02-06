@@ -27,10 +27,8 @@ public class UiManager : MonoBehaviour
     [SerializeField] private GameObject failedWindow = null;
 
     [SerializeField] private TextMeshProUGUI gameMoneyText = null;
-
     //CheckValue
     private bool uiCheck = false;
-    private bool selecCheck = false;
     private int clclickCount = 0;
 
     Color blackColor = new Color(113f / 255f, 113f / 255f, 113f / 255f);
@@ -39,17 +37,13 @@ public class UiManager : MonoBehaviour
     [SerializeField] private RectTransform inventoryRect = null;
 
     private ContentItem cur_Content_Item = null;
-    private InventoryItem cur_Inven_Item = null;
 
-    public InventoryItem GetCur_Inven_Item { get { return cur_Inven_Item; } set { cur_Inven_Item = value; } } 
     public Transform GetInvenContentTr { get { return invenContentTr; } private set { } }
 
 
     #endregion
 
     #region Property
-
-    public bool GetSelecCheck { get { return selecCheck; } private set { } }
 
     public bool GetUiCheck { get { return uiCheck; } set { uiCheck = value; } }
 
@@ -61,6 +55,10 @@ public class UiManager : MonoBehaviour
     {
         floorMaterial.color = Color.white;
         InputGameMoney(GameManager.Inst.GetPlayerData.GameMoney.ToString());
+        invenBtnImage = new Sprite[2];
+        invenBtnImage[0] = Resources.Load<Sprite>("Shop&Inventory_Image/Inven/iven_up");
+        invenBtnImage[1] = Resources.Load<Sprite>("Shop&Inventory_Image/Inven/iven_down");
+
     }
 
     public void InputGameMoney(string gameMoneyText)
@@ -68,33 +66,47 @@ public class UiManager : MonoBehaviour
         this.gameMoneyText.text = gameMoneyText;
     }
 
-    
-
-
     public void Set_Content_Item(ContentItem item)
     {
         cur_Content_Item = item;
     }
 
-    public void Set_Inven_Item(InventoryItem item)
-    {
-        cur_Inven_Item = item;
-    }
-
     //건물이 선택 되었는지 체크    
-    public void ChangeSelecChcek(bool check)
+    public void SeclectStateUi(bool check)
     {
-        selecCheck = check;
-        if (selecCheck == true)
+        if (check)
             buildingShopBtn.interactable = false;
         else
             buildingShopBtn.interactable = true;
     }
 
+    public void Active_HomeUi(bool activeSelf = true)
+    {
+        homeUi.SetActive(activeSelf);
+    }
+
+
     //게임인 Ui 활성화 제어
     public void Active_GameInBtn(bool activeSelf = true)
     {
-        gameInBtn.SetActive(activeSelf);
+        if(activeSelf)
+        {
+            gameInBtn.SetActive(activeSelf);
+        }
+        else
+        {
+            gameInBtn.SetActive(activeSelf);
+
+            foreach (Transform item in GameManager.Inst.GetClickManager.GetBuildings)
+            {
+                if (item.TryGetComponent<Interactable>(out Interactable interactable))
+                {
+                    interactable.Active_Name(true);
+                }
+            }
+            GameManager.Inst.GetUiManager.Active_HomeUi(true);
+        }
+
     }
 
     //패드 활성화 제어
@@ -132,10 +144,11 @@ public class UiManager : MonoBehaviour
     {
         GameManager.Inst.GetCameraMove.CameraPosMove(null,false);
 
-        GameManager.Inst.GetClickManager.GetBeforeHit.GetEntrance.ActiveCollider(false);
+        GameManager.Inst.GetClickManager.GetCurHitObject.GetEntrance.ActiveCollider(false);
         GameManager.Inst.GetClickManager.BuildingRefresh();
+        GameManager.Inst.GetClickManager.GetCurHitObject.DeSelect_Select_InteractableObj();
 
-        ChangeSelecChcek(false);
+        SeclectStateUi(false);
         Active_GameInBtn(false);
         Active_ShopBtn(true);
     }
@@ -159,10 +172,7 @@ public class UiManager : MonoBehaviour
         {
             if (item.TryGetComponent<Interactable>(out Interactable interactable))
             {
-                for (int i = 0; i < interactable.myGround.Count; i++)
-                {
-                    interactable.myGround[i].ChangeBuildingState(true, Color.red);
-                }
+                interactable.ChangeState(true,Color.red);
             }
         }
         ModeControll(false, true, blackColor);
@@ -173,6 +183,9 @@ public class UiManager : MonoBehaviour
         GameManager.Inst.ChangeMode(out GameManager.Inst.buildingMode, false);
         GameManager.Inst.ChangeMode(out GameManager.Inst.waitingMode, true);
 
+        Vector2 pos = inventoryRect.anchoredPosition;
+        pos.y = upPos;
+        inventoryRect.anchoredPosition = pos;
 
         ModeControll(true,false,blackColor);
     }
@@ -247,6 +260,12 @@ public class UiManager : MonoBehaviour
         GameManager.Inst.GetCameraMove.ChangCameraSize();
     }
 
+    Coroutine moveCoroutine;
+    [SerializeField] private Sprite[] invenBtnImage;
+    [SerializeField] private Image invenUpDownBtn;
+    [SerializeField] private float upPos = 0;
+    [SerializeField] private float downPos = 0;
+
 
     public void OnClick_InvenMove()
     {
@@ -254,13 +273,17 @@ public class UiManager : MonoBehaviour
         if(clclickCount==0)
         {
             StopAllCoroutines();
-            StartCoroutine(Move(-695f));
+            Debug.Log(invenBtnImage[0]);
+            invenUpDownBtn.sprite = invenBtnImage[0];
+            moveCoroutine = StartCoroutine(Move(downPos));
             clclickCount++;
         }
         else if(clclickCount==1)
         {
             StopAllCoroutines();
-            StartCoroutine(Move(-365f));
+            Debug.Log(invenBtnImage[1]);
+            invenUpDownBtn.sprite = invenBtnImage[1];
+            moveCoroutine = StartCoroutine(Move(upPos));
             clclickCount = 0;
         }
     }
@@ -271,18 +294,18 @@ public class UiManager : MonoBehaviour
 
         while(true)
         {
-            pos.y = Mathf.Lerp(inventoryRect.anchoredPosition.y,ypos,2.5f*Time.deltaTime);
+            pos.y = Mathf.Lerp(inventoryRect.anchoredPosition.y,ypos, 2.5f * Time.deltaTime);
             inventoryRect.anchoredPosition = pos;
 
-            if(ypos==-365f && inventoryRect.anchoredPosition.y> -360f)
+            if (ypos == upPos && inventoryRect.anchoredPosition.y > upPos - 5f)
             {
-                pos.y = -365f;
+                pos.y = upPos;
                 inventoryRect.anchoredPosition = pos;
                 yield break;
             }
-            else if (ypos == -695f && inventoryRect.anchoredPosition.y < -690f)
+            else if (ypos == downPos && inventoryRect.anchoredPosition.y < downPos + 5f)
             {
-                pos.y = -695f;
+                pos.y = downPos;
                 inventoryRect.anchoredPosition = pos;
                 yield break;
             }

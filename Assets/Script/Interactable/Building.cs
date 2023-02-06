@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TreeEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,11 +12,11 @@ public class Building : Interactable
 
     [Header("===Material===")]
     [SerializeField] private Texture texture = null;
-    [SerializeField] private Material material = null;
     [SerializeField] private Shader outlineShader = null;
     [SerializeField] private Shader defaultShader = null;
 
-
+    private Material defaultMaterial = null;
+    private Material lightMaterial = null;
 
     private bool selectCheck = false;
    
@@ -23,19 +24,21 @@ public class Building : Interactable
 
     public TriggerCheck GetEntrance { get { return entrance; } private set { } }
 
+    [Header("Choose OutLine or Light Material")]
+    [SerializeField] private bool shaderCheck=false;
 
-    //아웃라인 쉐이더 적용
-    public void SetOutLineShader()
+
+    private void Awake()
     {
-        renderer.material.shader = outlineShader;
-        renderer.sharedMaterial.mainTexture = texture;
+        defaultMaterial = Resources.Load<Material>("Material & Texture/Colors_Default");
+        lightMaterial = Resources.Load<Material>("Material & Texture/Colors_Glossy");
     }
 
-    //디폴트 쉐이더 적용
-    public void SetDefaultShader()
-    {
-        renderer.material = material;
-    }
+
+   
+
+  
+
 
     public void SetSelectCheck(bool check)
     {
@@ -50,7 +53,25 @@ public class Building : Interactable
         }
     }
 
-   
+    //아웃라인 쉐이더 적용
 
+    public override void Select_InteractableObj()
+    {
+        if (shaderCheck)
+        {
+            renderer.material.shader = outlineShader;
+            renderer.sharedMaterial.mainTexture = texture;
+        }
+        else
+            renderer.material = lightMaterial;
+    }
 
+    //디폴트 쉐이더 적용
+    public override void DeSelect_Select_InteractableObj()
+    {
+        if (shaderCheck)
+            renderer.material = defaultMaterial;
+        else
+            renderer.material = defaultMaterial;
+    }
 }

@@ -16,6 +16,14 @@ public class CameraControll : MonoBehaviour
     private Coroutine camSizeCoroutine;
 
     private Vector3 modePos = new Vector3(14f,28f,56.2f);
+    private Vector3 originPos = Vector3.zero;
+    private Quaternion originRo = Quaternion.identity;
+    private Vector3 moveRo = new Vector3(26.8f, 195, -9.6f);
+
+    [SerializeField] private float xMin = 0;
+    [SerializeField] private float xMax = 0;
+    [SerializeField] private float yMin = 0;
+    [SerializeField] private float yMax = 0;
 
     private void Awake()
     {
@@ -25,7 +33,7 @@ public class CameraControll : MonoBehaviour
     private void Update()
     {
 
-        if (GameManager.Inst.GetUiManager.GetSelecCheck || GameManager.Inst.buildingMode || GameManager.Inst.GetUiManager.GetUiCheck
+        if (GameManager.Inst.GetClickManager.selecCheck || GameManager.Inst.buildingMode || GameManager.Inst.GetUiManager.GetUiCheck
             || EventSystem.current.IsPointerOverGameObject(GameManager.Inst.pointerID) == true) return;
 
         if (Input.GetMouseButtonDown(0))
@@ -56,13 +64,7 @@ public class CameraControll : MonoBehaviour
     }
 
 
-    [SerializeField] private float xMin = 0;
-    [SerializeField] private float xMax = 0;
-    [SerializeField] private float yMin = 0;
-    [SerializeField] private float yMax = 0;
-
-
-    IEnumerator CamMoveStart()
+    private IEnumerator CamMoveStart()
     {
         if (check == true) yield break;
         float count =2f;
@@ -93,24 +95,6 @@ public class CameraControll : MonoBehaviour
             }
 
             
-        }
-    }
-
-    IEnumerator CamMoveStop()
-    {
-        float count = 2;
-
-        while(true)
-        {
-            count = Mathf.Lerp(count, 0f, Time.deltaTime);
-            yield return new WaitForEndOfFrame();
-            transform.Translate(count * cameraAxisX * Time.deltaTime, count * cameraAxisY * Time.deltaTime, 0);
-
-            if(count<0.5f)
-            {
-                yield break;
-            }
-
         }
     }
 
@@ -158,7 +142,11 @@ public class CameraControll : MonoBehaviour
             }
             else if(zoomCheck && value == 4f && Camera.main.orthographicSize < (value + 0.1f))
             {
-
+                Camera.main.orthographicSize = value;
+                yield break;
+            }
+            else if (zoomCheck && value == 13f && Camera.main.orthographicSize < (value + 0.1f))
+            {
                 Camera.main.orthographicSize = value;
                 yield break;
             }
@@ -168,76 +156,82 @@ public class CameraControll : MonoBehaviour
 
     }
 
-    private Vector3 originPos = Vector3.zero;
-    private Quaternion originRo = Quaternion.identity;
-    private Vector3 moveRo = new Vector3(26.8f,195,-9.6f);
+
+
+
+    private bool posProcessing = false;
+    private bool roProcessing  = false;
+
 
 
     public void CameraPosMove(Building obj ,bool check = true)
     {
-
         StopAllCoroutines();
 
         if (check)
         {
-            originRo = transform.rotation;
-            originPos = transform.position;
+            if(!posProcessing && !roProcessing)
+            {
+                originRo = transform.rotation;
+                originPos = transform.position;
+            }
 
-            //transform.position = pos + new Vector3(4,10f,20f);
-            StartCoroutine(MoveCoroutine(GameManager.Inst.GetClickManager.GetBeforeHit));
-            StartCoroutine(RotantionCoroutine(GameManager.Inst.GetClickManager.GetBeforeHit));
+            StartCoroutine(MoveCoroutine(GameManager.Inst.GetClickManager.GetCurHitObject.GetCameraPos.transform.position));
+            StartCoroutine(RotantionCoroutine(GameManager.Inst.GetClickManager.GetCurHitObject.GetCameraPos.transform.rotation));
 
             camSizeCoroutine = StartCoroutine(LerpCameraSize(4f));
 
         }
         else
         {
-            transform.rotation = originRo;
 
-            StartCoroutine(MoveCoroutine(obj));
-            StartCoroutine(RotantionCoroutine(GameManager.Inst.GetClickManager.GetBeforeHit));
+            StartCoroutine(MoveCoroutine(originPos));
+            StartCoroutine(RotantionCoroutine(originRo));
 
             camSizeCoroutine = StartCoroutine(LerpCameraSize(7f,false));
         }
 
     }
 
-    private IEnumerator MoveCoroutine(Building obj)
+    private IEnumerator MoveCoroutine(Vector3 pos)
     {
+        posProcessing = true;
         while (true)
         {
-            transform.position=Vector3.MoveTowards(transform.position, obj.GetCameraPos.position, 0.7f);
-            
-            yield return new WaitForFixedUpdate();
-            if (Vector3.Distance(transform.position, obj.GetCameraPos.position) <= 0.2f)
-            {
-                transform.position = obj.GetCameraPos.position;
+            transform.position = Vector3.MoveTowards(transform.position, pos, 0.7f);
 
+            yield return new WaitForFixedUpdate();
+            if (Vector3.Distance(transform.position, pos) <= 0.2f)
+            {
+                transform.position = pos;
+                posProcessing = false;
                 yield break;
             }
-            
+
         }
     }
 
-    private IEnumerator RotantionCoroutine(Building obj )
+
+
+    private IEnumerator RotantionCoroutine(Quaternion rotation)
     {
+        roProcessing = true;
         float count = 0;
         while (true)
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, obj.GetCameraPos.rotation, Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime);
 
             yield return new WaitForFixedUpdate();
             count += Time.deltaTime;
 
-            if (count>=20f)
+            if (count >= 5f)
             {
-                Debug.Log("gd");
-                transform.rotation = obj.GetCameraPos.rotation;
-
+                transform.rotation = rotation;
+                roProcessing = false;
                 yield break;
             }
-
         }
+
     }
 
   

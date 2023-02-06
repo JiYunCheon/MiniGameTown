@@ -47,13 +47,11 @@ public class InventoryItem : Item
 
     public void OnClick_Item()
     {
-        GameManager.Inst.GetClickManager.SetInfo(GetMyData);
+        GameManager.Inst.GetClickManager.SetInfo(this,GetMyData);
 
-        GameManager.Inst.GetUiManager.Set_Inven_Item(this);
         GameManager.Inst.GetUiManager.On_Click_BuildingMode();
 
-        GameManager.Inst.GetUiManager.GetCur_Inven_Item.InventoryCount(-1);
-
+        GameManager.Inst.GetClickManager.GetCur_Inven_Item.InventoryCount(-1);
     }
 
     #endregion
