@@ -44,9 +44,11 @@ public class PreviewObject : Interactable
 
     public void OnClick_Confirm()
     {
-        if (!GameManager.Inst.GetClickManager.InstCompare()) return;
-
-        GameManager.Inst.GetClickManager.GetCur_Inven_Item.InventoryCount(-1);
+        if (!GameManager.Inst.GetClickManager.InstCompare())
+        {
+            GameManager.Inst.GetEffectManager.Inst_SpriteUiEffect(GameManager.Inst.CurMousePos(), "EffectImage/MakeFailed_Image");
+            return;
+        }
 
         GameManager.Inst.GetClickManager.InstObject(rotation);
         Active_BuildOption(false);
@@ -76,6 +78,7 @@ public class PreviewObject : Interactable
     public void OnClick_Exit()
     {
         GameManager.Inst.GetClickManager.GetCur_Inven_Item.InventoryCount(1);
+
 
         GameManager.Inst.GetClickManager.PadRefresh();
 

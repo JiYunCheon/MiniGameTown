@@ -1,6 +1,7 @@
+using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Microsoft.Unity;
 public enum OBJECT_TYPE
 {
     BUIDING,
@@ -14,14 +15,15 @@ public class GameManager : MonoBehaviour
     const string gameName_Puzzle = "com.DefaultCompany.Jigsaw_Final";
     const string gameName_Balloon = "com.DefaultCompany.Pop_The_Balloon";
 
-    [SerializeField] private PlayerData playerData = null;
+    [SerializeField] private ObjectData data = null;
+
 
     private UiManager uiManager = null;
     private FirstSceneUiController firstSceneUiController = null;
     private ClickManager clickManager = null;
     private CameraControll cameraMove = null;
     private PadSpawner[] padSpawner = null;
-
+    private EffectManager effectManager = null;
 
     [HideInInspector] public string curGameName = null;
     public bool buildingMode = false;
@@ -35,8 +37,23 @@ public class GameManager : MonoBehaviour
     private int[] grounds_Info;
     PlayerMove player = null;
 
+    private Vector3 mousePos = Vector3.zero;
 
     #region Property
+
+    public PlayerData GetPlayerData { get { return data.playerData[0]; } private set { } }
+    public List<Excel> GetObjectData { get { return data.objectdatas; } private set { } }
+
+    public EffectManager GetEffectManager
+    {
+        get
+        {
+            if (effectManager == null)
+                effectManager = FindObjectOfType<EffectManager>();
+            return effectManager;
+        }
+        set { }
+    }
 
     public PlayerMove GetPlayer
     {
@@ -46,15 +63,6 @@ public class GameManager : MonoBehaviour
                 player = FindObjectOfType<PlayerMove>();
             return player;
         }
-        set { }
-    }
-
-    public PlayerData GetPlayerData 
-    { 
-        get 
-        {
-            return playerData;
-        } 
         set { }
     }
 
@@ -145,7 +153,9 @@ public class GameManager : MonoBehaviour
 
     public void GameMoneyControll(int money)
     {
-        GetPlayerData.GameMoney -= money;
+        
+        GetPlayerData.gameMoney -= money;
+        Debug.Log(GetPlayerData.gameMoney);
     }
 
 
@@ -154,20 +164,51 @@ public class GameManager : MonoBehaviour
         mode = check;
     }
 
+    public Vector3 CurMousePos()
+    {
+        mousePos = Camera.main.WorldToScreenPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+
+        return mousePos;
+    }
+
     private void Init()
     {
-        datas.Add(GetPlayerData._GameMoney, GetPlayerData.GameMoney);
+        //Building
+        datas.Add(GetPlayerData.balloon_B_Name, GetPlayerData.balloon_B_Count);
+        datas.Add(GetPlayerData.find_B_Name, GetPlayerData.find_B_Count);
+        datas.Add(GetPlayerData.memory_B_Name, GetPlayerData.memory_B_Count);
+        datas.Add(GetPlayerData.puzzle_B_Name, GetPlayerData.puzzle_B_Count);
+        datas.Add(GetPlayerData.cook_B_Name, GetPlayerData.cook_B_Count);
+        datas.Add(GetPlayerData.myRoom_B_Name, GetPlayerData.myRoom_B_Count);
 
-        datas.Add(GetPlayerData._Balloon_B_Count, GetPlayerData.Balloon_B_Count);
-        datas.Add(GetPlayerData._Find_B_Count, GetPlayerData.Find_B_Count);
-        datas.Add(GetPlayerData._Memory_B_Count, GetPlayerData.Memory_B_Count);
-        datas.Add(GetPlayerData._Puzzle_B_Count, GetPlayerData.Puzzle_B_Count);
-        datas.Add(GetPlayerData._Cook_B_Count, GetPlayerData.Cook_B_Count);
-        datas.Add(GetPlayerData._MyRoom_B_Count, GetPlayerData.MyRoom_B_Count);
-
-        datas.Add(GetPlayerData._Cart_O_Count, GetPlayerData.Cart_O_Count);
-        datas.Add(GetPlayerData._AppleTree_O_Count, GetPlayerData.AppleTree_O_Count);
+        //object
+        datas.Add(GetPlayerData.cart_O_Name, GetPlayerData.cart_O_Count);
+        datas.Add(GetPlayerData.appleTree_O_Name, GetPlayerData.appleTree_O_Count);
     }
+
+    public int SetCount(string name, int _value)
+    {
+        if (datas.TryGetValue(name, out int value))
+        {
+            int add = value + _value;
+            if (add <= 0)
+                add = 0;
+
+            datas[name] = add;
+
+            return datas[name];
+        }
+        else
+        {
+            Debug.LogError("OMG NO DATAS");
+            return 0;
+        }
+    }
+
+
+
+
+
 
 
     private void Update()

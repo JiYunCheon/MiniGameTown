@@ -17,7 +17,7 @@ public class FirstSceneUiController : MonoBehaviour
 
     private void Awake()
     {
-        InputGameMoney(GameManager.Inst.GetPlayerData.GameMoney.ToString());
+        InputGameMoney(GameManager.Inst.GetPlayerData.gameMoney.ToString());
     }
 
 

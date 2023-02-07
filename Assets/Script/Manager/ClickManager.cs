@@ -19,7 +19,7 @@ public class ClickManager : MonoBehaviour
     private Vector3 saveHitPos  = Vector3.zero;
 
     //프리뷰 생성 정보 저장 변수
-    private Data curData;
+    private Excel curData;
 
     //빌딩모드에서 현재 선택된 건물의 정보를 가지고 있을 변수
     private Interactable prefab_Building;
@@ -46,7 +46,7 @@ public class ClickManager : MonoBehaviour
 
     public Building GetCurHitObject { get { return curHitObject; } private set { } }
 
-    public Data GetCurData { get { return curData; } private set { } }
+    public Excel GetCurData { get { return curData; } private set { } }
 
     public InventoryItem GetCur_Inven_Item { get { return cur_Inven_Item; } private set { } }
 
@@ -93,7 +93,7 @@ public class ClickManager : MonoBehaviour
     //설치전 현재 선택된 땅의 주변 노드가 설치가능한지 검사 (가능하면 true 불가능하면 false)
     public bool InstCompare()
     {
-        if (beforeGround.CompareNode(curData.OccupyPad))
+        if (beforeGround.CompareNode(curData.occupyPad))
             return true;
         else
             return false;
@@ -174,7 +174,7 @@ public class ClickManager : MonoBehaviour
                     beforeGround = ground;
 
                     //주변 색 변경
-                    beforeGround.SetColor(curData.OccupyPad,Color.green);
+                    beforeGround.SetColor(curData.occupyPad,Color.green);
 
                     //선택된 곳의 포지션을 저장
                     saveHitPos = ground.transform.position;
@@ -182,7 +182,7 @@ public class ClickManager : MonoBehaviour
                     //미리보기 객체의 위치를 이동
                     preview.transform.position = saveHitPos + new Vector3(0, 0.5f, 0);
 
-                    preview.ChangeState(beforeGround, curData.OccupyPad);
+                    preview.ChangeState(beforeGround, curData.occupyPad);
 
                     preview.Active_BuildOption();
 
@@ -191,21 +191,21 @@ public class ClickManager : MonoBehaviour
                 else if (ground.transform.position != saveHitPos)
                 {
                     //기존에 선택되었던 패드의 색을 변경
-                    beforeGround.SetColor(curData.OccupyPad, Color.white);
+                    beforeGround.SetColor(curData.occupyPad, Color.white);
                     beforeGround.Clear();
 
                     //이전 패드를 지금 선택된 패드로 초기화
                     beforeGround = ground;
 
                     //색을 변경
-                    beforeGround.SetColor(curData.OccupyPad, Color.green);
+                    beforeGround.SetColor(curData.occupyPad, Color.green);
 
                     //이전 포지션을 지금 선택된 포지션으로 초기화
                     saveHitPos = ground.transform.position;
                     //초기화된 포지션으로 알파건물의 위치를 변경
                     preview.transform.position = saveHitPos + new Vector3(0, 0.5f, 0);
 
-                    preview.ChangeState(beforeGround, curData.OccupyPad);
+                    preview.ChangeState(beforeGround, curData.occupyPad);
 
                 }
             }
@@ -251,7 +251,7 @@ public class ClickManager : MonoBehaviour
         curHitObject = obj;
         curHitObject.Select_InteractableObj();
         curHitObject.SetSelectCheck(check);
-        GameManager.Inst.curGameName = obj.GetMyData.PackageName;
+        GameManager.Inst.curGameName = obj.GetMyData.packageName;
         selecCheck = true;
         GameManager.Inst.GetUiManager.SeclectStateUi(check);
     }
@@ -277,12 +277,13 @@ public class ClickManager : MonoBehaviour
     //패드를 초기화
     public void PadRefresh()
     {
-        beforeGround.SetColor(curData.OccupyPad, Color.white);
+        beforeGround.SetColor(curData.occupyPad, Color.white);
+        beforeGround.Clear();
         Refresh();
     }
 
     //클릭한 객체의 정보를 가지고 옴
-    public void SetInfo(InventoryItem inventoryItem, Data data)
+    public void SetInfo(InventoryItem inventoryItem, Excel data)
     {
         curData = data;
         cur_Inven_Item = inventoryItem;
@@ -293,34 +294,34 @@ public class ClickManager : MonoBehaviour
     }
 
     //타입에 따라 프래팹을 가지고옴
-    private Interactable GetPrefab(Data data)
+    private Interactable GetPrefab(Excel data)
     {
-        if (data.MyType == OBJECT_TYPE.BUIDING)
+        if (data.myType == OBJECT_TYPE.BUIDING)
         {
-            prefab_Building = Resources.Load<Interactable>($"Prefabs/Building/{data.PrefabName}");
+            prefab_Building = Resources.Load<Interactable>($"Prefabs/Building/{data.prefabName}");
 
             return prefab_Building;
         }
         else
         {
-            prefab_Object = Resources.Load<Interactable>($"Prefabs/Object/{data.PrefabName}");
+            prefab_Object = Resources.Load<Interactable>($"Prefabs/Object/{data.prefabName}");
 
             return prefab_Object;
         }
     }
 
     //타입에 따라 프래팹을 가지고옴
-    private PreviewObject GetAlphaPrefab(Data data)
+    private PreviewObject GetAlphaPrefab(Excel data)
     {
-        if (data.MyType == OBJECT_TYPE.BUIDING)
+        if (data.myType == OBJECT_TYPE.BUIDING)
         {
-            alphaPrefab_Building = Resources.Load<PreviewObject>($"Prefabs/Building/{data.AlphaPrefabName}");
+            alphaPrefab_Building = Resources.Load<PreviewObject>($"Prefabs/Building/{data.alphaPrefabName}");
 
             return alphaPrefab_Building;
         }
         else
         {
-            alphaPrefab_Object = Resources.Load<PreviewObject>($"Prefabs/Object/{data.AlphaPrefabName}");
+            alphaPrefab_Object = Resources.Load<PreviewObject>($"Prefabs/Object/{data.alphaPrefabName}");
 
             return alphaPrefab_Object;
         }

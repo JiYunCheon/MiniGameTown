@@ -23,7 +23,7 @@ public class PadSpawner : MonoBehaviour
 
     private void OnEnable()
     {
-        SetPadNode(GameManager.Inst.GetClickManager.GetCurData.OccupyPad);
+        SetPadNode(GameManager.Inst.GetClickManager.GetCurData.occupyPad, GameManager.Inst.GetClickManager.GetCurData.hvCheck);
     }
     private void OnDisable()
     {
@@ -32,9 +32,9 @@ public class PadSpawner : MonoBehaviour
 
 
     //패드 생성 후 각 패드별 데이터 할당
-    public void SetPadNode(int occupyPad)
+    public void SetPadNode(int occupyPad , int hvCheck = 0)
     {
-        if (occupyPad == 9)
+        if (occupyPad == 9 && hvCheck==0)
         {
             for (int y = 0; y < hieght; y++)
             {
@@ -52,7 +52,7 @@ public class PadSpawner : MonoBehaviour
                 }
             }
         }
-        else if (occupyPad == 4)
+        else if (occupyPad == 4 && hvCheck == 0)
         {
             for (int y = 0; y < hieght; y++)
             {
@@ -62,7 +62,7 @@ public class PadSpawner : MonoBehaviour
                     {
                         for (int j = -1; j < 1; j++)
                         {
-                            if (y + i >= 0 && x + j >= 0 && y - i <= hieght - 1 && x - j <= width - 1)
+                            if (y + i >= 0 && x + j >= 0 && y - i <= hieght - 1 && x - j <= width)
                             {
                                 pads[y, x].GetNodeList.Add(pads[y + i, x + j]);
                             }
@@ -72,7 +72,7 @@ public class PadSpawner : MonoBehaviour
                 }
             }
         }
-        else if (occupyPad == 2)
+        else if (occupyPad == 2 && hvCheck == 0)
         {
             for (int y = 0; y < hieght; y++)
             {
@@ -81,7 +81,7 @@ public class PadSpawner : MonoBehaviour
 
                     for (int j = -1; j < 1; j++)
                     {
-                        if (x + j >= 0 && x - j <= width - 1)
+                        if (x + j >= 0 && x - j <= width)
                         {
                             pads[y, x].GetNodeList.Add(pads[y, x + j]);
                         }
@@ -90,7 +90,7 @@ public class PadSpawner : MonoBehaviour
                 }
             }
         }
-        else if (occupyPad == 1)
+        else if (occupyPad == 1 && hvCheck == 0)
         {
             for (int y = 0; y < hieght; y++)
             {
@@ -100,6 +100,45 @@ public class PadSpawner : MonoBehaviour
                 }
             }
         }
+        else if (occupyPad == 3 && hvCheck == 0)
+        {
+            for (int y = 0; y < hieght; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    for (int j = -1; j < 2; j++)
+                    {
+                        if (x+j>=0&&x+j<=width-1)
+                        {
+                            pads[y, x].GetNodeList.Add(pads[y, x + j]);
+                        }
+                    }
+                }
+            }
+        }
+        else if (occupyPad == 3 && hvCheck >= 1)
+        {
+            for (int y = 0; y < hieght; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    for (int j = -1; j < 2; j++)
+                    {
+                        if (y + j >= 0 && y + j <= hieght - 1)
+                        {
+                            pads[y, x].GetNodeList.Add(pads[y+j, x]);
+                        }
+                    }
+                }
+            }
+        }
+
+
+
+
+
+
+
     }
 
     private void PadNodeClear()

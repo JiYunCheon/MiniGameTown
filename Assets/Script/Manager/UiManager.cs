@@ -24,7 +24,6 @@ public class UiManager : MonoBehaviour
 
     [Header("Result Ui")]
     [SerializeField] private GameObject successWindow = null;
-    [SerializeField] private GameObject failedWindow = null;
 
     [SerializeField] private TextMeshProUGUI gameMoneyText = null;
     //CheckValue
@@ -54,7 +53,7 @@ public class UiManager : MonoBehaviour
     private void Awake()
     {
         floorMaterial.color = Color.white;
-        InputGameMoney(GameManager.Inst.GetPlayerData.GameMoney.ToString());
+        InputGameMoney(GameManager.Inst.GetPlayerData.gameMoney.ToString());
         invenBtnImage = new Sprite[2];
         invenBtnImage[0] = Resources.Load<Sprite>("Shop&Inventory_Image/Inven/iven_up");
         invenBtnImage[1] = Resources.Load<Sprite>("Shop&Inventory_Image/Inven/iven_down");
@@ -127,10 +126,6 @@ public class UiManager : MonoBehaviour
         successWindow.SetActive(active);
     }
 
-    public void Active_F_Window(bool active = true)
-    {
-        failedWindow.SetActive(active);
-    }
 
     #region ButtonEvent
 
@@ -166,7 +161,7 @@ public class UiManager : MonoBehaviour
         GameManager.Inst.ChangeMode(out GameManager.Inst.waitingMode, false);
         GameManager.Inst.ChangeMode(out GameManager.Inst.buildingMode, true);
 
-        padBoard.ActivePadByType(GameManager.Inst.GetClickManager.GetCurData.MyType);
+        padBoard.ActivePadByType(GameManager.Inst.GetClickManager.GetCurData.myType);
         //클릭매니저로
         foreach (Transform item in GameManager.Inst.GetClickManager.GetBuildings)
         {
@@ -220,8 +215,8 @@ public class UiManager : MonoBehaviour
     public void OnClick_PurchaseSuccess()
     {
         GameManager.Inst.GetUiManager.On_Click_WatingMode();
-        GameManager.Inst.GameMoneyControll(cur_Content_Item.GetMyData.Price);
-        InputGameMoney(GameManager.Inst.GetPlayerData.GameMoney.ToString());
+        GameManager.Inst.GameMoneyControll(cur_Content_Item.GetMyData.price);
+        InputGameMoney(GameManager.Inst.GetPlayerData.gameMoney.ToString());
 
 
         cur_Content_Item.CompareSoldOutCheck();
@@ -235,7 +230,6 @@ public class UiManager : MonoBehaviour
     public void OnClick_Cancel()
     {
         Active_S_Window(false);
-        Active_F_Window(false);
     }
 
 

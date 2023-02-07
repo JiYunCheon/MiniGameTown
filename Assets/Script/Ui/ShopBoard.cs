@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class ShopBoard : MonoBehaviour
 {
     [Header("ScriptableObject")]
-    [SerializeField] Data[] datas = null;
+    [SerializeField] private ObjectData objdata = null;
     [SerializeField] private ContentItem contentPrefab = null;
 
     [Header("Scroll View")]
@@ -14,7 +14,9 @@ public class ShopBoard : MonoBehaviour
 
     private void Awake()
     {
-        Inst_ContentItem(datas);
+        //Inst_ContentItem(datas);
+        Inst_ContentItem();
+
         Inst_InvenItem();
         gameObject.SetActive(false);
     }
@@ -69,27 +71,41 @@ public class ShopBoard : MonoBehaviour
         Object_Scroll.gameObject.SetActive(!active);
     }
 
-    private void Inst_ContentItem(Data[] datas)
+    private void Inst_ContentItem()//(Data[] datas)
     {
         Transform scrollTr = null;
 
-        for (int i = 0; i < datas.Length; i++)
+        //for (int i = 0; i < datas.Length; i++)
+        //{
+        //    if (datas[i].MyType == OBJECT_TYPE.BUIDING)
+        //    {
+        //        scrollTr = Building_Scroll.content.transform;
+        //        ContentItem content = Instantiate<ContentItem>(contentPrefab, scrollTr);
+        //        content.SetMyData(datas[i]);
+        //    }
+        //    else
+        //    {
+        //        scrollTr = Object_Scroll.content.transform;
+        //        ContentItem content = Instantiate<ContentItem>(contentPrefab, scrollTr);
+        //        content.SetMyData(datas[i]);
+        //    }
+        //}
+
+        for (int i = 0; i < objdata.objectdatas.Count; i++)
         {
-            if (datas[i].MyType == OBJECT_TYPE.BUIDING)
+            if (objdata.objectdatas[i].myType == OBJECT_TYPE.BUIDING)
             {
                 scrollTr = Building_Scroll.content.transform;
                 ContentItem content = Instantiate<ContentItem>(contentPrefab, scrollTr);
-                content.SetMyData(datas[i]);
+                content.SetMyData(objdata.objectdatas[i]);
             }
             else
             {
                 scrollTr = Object_Scroll.content.transform;
                 ContentItem content = Instantiate<ContentItem>(contentPrefab, scrollTr);
-                content.SetMyData(datas[i]);
+                content.SetMyData(objdata.objectdatas[i]);
             }
-                
 
-            
         }
 
     }

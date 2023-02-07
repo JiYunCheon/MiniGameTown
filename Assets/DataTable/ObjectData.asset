@@ -1,0 +1,330 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 8
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc8566d2cd20b0c4b845de837dd3c38d, type: 3}
+  m_Name: ObjectData
+  m_EditorClassIdentifier: 
+  objectdatas:
+  - name: Balloon
+    maxCount: 0
+    price: 500
+    occupyPad: 9
+    Info: It is balloon
+    spriteName: Balloon
+    packageName: com.DefaultCompany.Pop_The_Balloon
+    prefabName: Building_Balloon
+    alphaPrefabName: Building_Alpha_Balloon
+    hvCheck: 0
+    myType: 0
+  - name: Puzzle
+    maxCount: 0
+    price: 500
+    occupyPad: 9
+    Info: It is Puzzle
+    spriteName: Puzzle
+    packageName: com.DefaultCompany.Jigsaw_Final
+    prefabName: Building_Puzzle
+    alphaPrefabName: Building_Alpha_Puzzle
+    hvCheck: 0
+    myType: 0
+  - name: MyRoom
+    maxCount: 0
+    price: 500
+    occupyPad: 9
+    Info: It is MyRoom
+    spriteName: MyRoom
+    packageName: com.DefaultCompany.JigsawPuzzle
+    prefabName: Building_MyRoom
+    alphaPrefabName: Building_Alpha_MyRoom
+    hvCheck: 0
+    myType: 0
+  - name: MemoryCard
+    maxCount: 0
+    price: 500
+    occupyPad: 9
+    Info: It is MemoryCard
+    spriteName: Memory
+    packageName: com.DefaultCompany.OneWeek_MemoryCard
+    prefabName: Building_MemoryCard
+    alphaPrefabName: Building_Alpha_MemoryCard
+    hvCheck: 0
+    myType: 0
+  - name: FindPicture
+    maxCount: 0
+    price: 500
+    occupyPad: 9
+    Info: It is FindPicture
+    spriteName: Find
+    packageName: com.DefaultCompany.WrongPicture
+    prefabName: Building_FindPicture
+    alphaPrefabName: Building_Alpha_FindPicture
+    hvCheck: 0
+    myType: 0
+  - name: Cart
+    maxCount: 0
+    price: 200
+    occupyPad: 2
+    Info: It is Cart
+    spriteName: Cart
+    packageName: 
+    prefabName: Object_Cart
+    alphaPrefabName: Object_Alpha_Cart
+    hvCheck: 0
+    myType: 1
+  - name: AppleTree
+    maxCount: 0
+    price: 100
+    occupyPad: 1
+    Info: It is AppleTree
+    spriteName: AppleTree
+    packageName: 
+    prefabName: Object_AppleTree
+    alphaPrefabName: Object_Alpha_AppleTree
+    hvCheck: 0
+    myType: 1
+  - name: Cat_Black
+    maxCount: 0
+    price: 100
+    occupyPad: 1
+    Info: a
+    spriteName: Cat_Black
+    packageName: 
+    prefabName: Object_Cat_Black
+    alphaPrefabName: Object_Alpha_Cat_Black
+    hvCheck: 0
+    myType: 1
+  - name: Cat_White
+    maxCount: 0
+    price: 100
+    occupyPad: 1
+    Info: a
+    spriteName: Cat_White
+    packageName: 
+    prefabName: Object_Cat_White
+    alphaPrefabName: Object_Alpha_Cat_White
+    hvCheck: 0
+    myType: 1
+  - name: Fence_End-Short
+    maxCount: 0
+    price: 100
+    occupyPad: 3
+    Info: a
+    spriteName: Fence_End-Short
+    packageName: 
+    prefabName: Object_Fence_End-Short
+    alphaPrefabName: Object_Alpha_Fence_End-Short
+    hvCheck: 0
+    myType: 1
+  - name: Fence_End
+    maxCount: 0
+    price: 100
+    occupyPad: 3
+    Info: a
+    spriteName: Fence_End
+    packageName: 
+    prefabName: Object_Fence_End
+    alphaPrefabName: Object_Alpha_Fence_End
+    hvCheck: 0
+    myType: 1
+  - name: Flower_1x_Orange
+    maxCount: 0
+    price: 100
+    occupyPad: 1
+    Info: a
+    spriteName: Flower_1x_Orange
+    packageName: 
+    prefabName: Object_Flower_1x_Orange
+    alphaPrefabName: Object_Alpha_Flower_1x_Orange
+    hvCheck: 0
+    myType: 1
+  - name: Flower_1x_Purple
+    maxCount: 0
+    price: 100
+    occupyPad: 1
+    Info: a
+    spriteName: Flower_1x_Purple
+    packageName: 
+    prefabName: Object_Flower_1x_Purple
+    alphaPrefabName: Object_Alpha_Flower_1x_Purple
+    hvCheck: 0
+    myType: 1
+  - name: Flowers_BlueLight
+    maxCount: 0
+    price: 100
+    occupyPad: 1
+    Info: a
+    spriteName: Flowers_BlueLight
+    packageName: 
+    prefabName: Object_Flowers_BlueLight
+    alphaPrefabName: Object_Alpha_Flowers_BlueLight
+    hvCheck: 0
+    myType: 1
+  - name: Flowers_Pink
+    maxCount: 0
+    price: 100
+    occupyPad: 1
+    Info: a
+    spriteName: Flowers_Pink
+    packageName: 
+    prefabName: Object_Flowers_Pink
+    alphaPrefabName: Object_Alpha_Flowers_Pink
+    hvCheck: 0
+    myType: 1
+  - name: GarbageCan_Blue
+    maxCount: 0
+    price: 100
+    occupyPad: 1
+    Info: a
+    spriteName: GarbageCan_Blue
+    packageName: 
+    prefabName: Object_GarbageCan_Blue
+    alphaPrefabName: Object_Alpha_GarbageCan_Blue
+    hvCheck: 0
+    myType: 1
+  - name: GarbageCan_Red
+    maxCount: 0
+    price: 100
+    occupyPad: 1
+    Info: a
+    spriteName: GarbageCan_Red
+    packageName: 
+    prefabName: Object_GarbageCan_Red
+    alphaPrefabName: Object_Alpha_GarbageCan_Red
+    hvCheck: 0
+    myType: 1
+  - name: Lantern_Path
+    maxCount: 0
+    price: 100
+    occupyPad: 1
+    Info: a
+    spriteName: Lantern_Path
+    packageName: 
+    prefabName: Object_Lantern_Path
+    alphaPrefabName: Object_Alpha_Lantern_Path
+    hvCheck: 0
+    myType: 1
+  - name: Lantern_Small
+    maxCount: 0
+    price: 100
+    occupyPad: 1
+    Info: a
+    spriteName: Lantern_Small
+    packageName: 
+    prefabName: Object_Lantern_Small
+    alphaPrefabName: Object_Alpha_Lantern_Small
+    hvCheck: 0
+    myType: 1
+  - name: PineTree_Bright
+    maxCount: 0
+    price: 100
+    occupyPad: 1
+    Info: a
+    spriteName: PineTree_Bright
+    packageName: 
+    prefabName: Object_PineTree_Bright
+    alphaPrefabName: Object_Alpha_PineTree_Bright
+    hvCheck: 0
+    myType: 1
+  - name: PineTree_Snow_1
+    maxCount: 0
+    price: 100
+    occupyPad: 1
+    Info: a
+    spriteName: PineTree_Snow_1
+    packageName: 
+    prefabName: Object_PineTree_Snow_1
+    alphaPrefabName: Object_Alpha_PineTree_Snow_1
+    hvCheck: 0
+    myType: 1
+  - name: PineTree_Snow_2
+    maxCount: 0
+    price: 100
+    occupyPad: 1
+    Info: a
+    spriteName: PineTree_Snow_2
+    packageName: 
+    prefabName: Object_PineTree_Snow_2
+    alphaPrefabName: Object_Alpha_PineTree_Snow_2
+    hvCheck: 0
+    myType: 1
+  - name: Tree_Fruits_Plums
+    maxCount: 0
+    price: 100
+    occupyPad: 1
+    Info: a
+    spriteName: Tree_Fruits_Plums
+    packageName: 
+    prefabName: Object_Tree_Fruits_Plums
+    alphaPrefabName: Object_Alpha_Tree_Fruits_Plums
+    hvCheck: 0
+    myType: 1
+  - name: Trunk
+    maxCount: 0
+    price: 100
+    occupyPad: 3
+    Info: a
+    spriteName: Trunk
+    packageName: 
+    prefabName: Object_Trunk
+    alphaPrefabName: Object_Alpha_Trunk
+    hvCheck: 0
+    myType: 1
+  - name: Trunk_x3
+    maxCount: 0
+    price: 100
+    occupyPad: 3
+    Info: a
+    spriteName: Trunk_x3
+    packageName: 
+    prefabName: Object_Trunk_x3
+    alphaPrefabName: Object_Alpha_Trunk_x3
+    hvCheck: 0
+    myType: 1
+  - name: Umbrella_Purple
+    maxCount: 0
+    price: 100
+    occupyPad: 1
+    Info: a
+    spriteName: Umbrella_Purple
+    packageName: 
+    prefabName: Object_Umbrella_Purple
+    alphaPrefabName: Object_Alpha_Umbrella_Purple
+    hvCheck: 0
+    myType: 1
+  - name: Umbrella_Red
+    maxCount: 0
+    price: 100
+    occupyPad: 1
+    Info: a
+    spriteName: Umbrella_Red
+    packageName: 
+    prefabName: Object_Umbrella_Red
+    alphaPrefabName: Object_Alpha_Umbrella_Red
+    hvCheck: 0
+    myType: 1
+  playerData:
+  - gameMoney: 1000000
+    find_B_Count: 0
+    find_B_Name: FindPicture
+    memory_B_Count: 0
+    memory_B_Name: MemoryCard
+    puzzle_B_Count: 0
+    puzzle_B_Name: Puzzle
+    balloon_B_Count: 0
+    balloon_B_Name: Balloon
+    cook_B_Count: 0
+    cook_B_Name: Cook
+    myRoom_B_Count: 0
+    myRoom_B_Name: MyRoom
+    appleTree_O_Count: 10
+    appleTree_O_Name: AppleTree
+    cart_O_Count: 1
+    cart_O_Name: Cart

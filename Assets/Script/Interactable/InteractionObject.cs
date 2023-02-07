@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class InteractionObject : Interactable
 {
+
+    private void Awake()
+    {
+        CompleteEffect();
+    }
     public override void DeSelect_Select_InteractableObj()
     {
         base.DeSelect_Select_InteractableObj();

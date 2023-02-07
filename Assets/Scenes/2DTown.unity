@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 221bbc41806082e488e4349a3005e02c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: 71084261a55e55a4e9c986a3ec9e63ed, type: 2}
+  data: {fileID: 11400000, guid: 3ff4cdda47a888549a970dc237144408, type: 2}
   curGameName: 
   buildingMode: 0
   waitingMode: 0

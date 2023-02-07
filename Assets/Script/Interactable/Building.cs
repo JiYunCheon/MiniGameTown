@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using TreeEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,12 +31,14 @@ public class Building : Interactable
     {
         defaultMaterial = Resources.Load<Material>("Material & Texture/Colors_Default");
         lightMaterial = Resources.Load<Material>("Material & Texture/Colors_Glossy");
+
+        CompleteEffect();
     }
 
 
-   
 
-  
+
+
 
 
     public void SetSelectCheck(bool check)

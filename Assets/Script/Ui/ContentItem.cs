@@ -21,43 +21,39 @@ public class ContentItem : Item
 
     public InventoryItem GetItem { get { return item; } set { } }
 
-    private void Awake()
-    {
-        
-    }
-
 
     protected override void Initialized()
     {
-        gameNameText.text = GetMyData.GameInfo;
-        priceText.text = $"{GetMyData.Price}";
-        picture.sprite = Resources.Load<Sprite>($"Shop&Inventory_Image/{GetMyData.SpriteName}");
+        gameNameText.text = GetMyData.Info;
+        priceText.text = $"{GetMyData.price}";
+        picture.sprite = Resources.Load<Sprite>($"Shop&Inventory_Image/Item_Image/{GetMyData.spriteName}");
     }
 
 
     public void CompareSoldOutCheck()
     {
 
-        if (GetMyData.MaxCount <= 0)
+        if (GetMyData.maxCount <= 0)
         {
             priceText.text = $"Already this";
             priceBtn.interactable = false;
             return;
         }
-        GetMyData.MaxCount--;
+        GetMyData.maxCount--;
 
     }
 
     public void OnClick_Price()
     {
-        if (GetMyData.Price < GameManager.Inst.GetPlayerData.GameMoney)
+        if (GetMyData.price < GameManager.Inst.GetPlayerData.gameMoney)
         {
             GameManager.Inst.GetUiManager.Active_S_Window();
             GameManager.Inst.GetUiManager.Set_Content_Item(this);
         }
         else
-            GameManager.Inst.GetUiManager.Active_F_Window();
-
+        {
+            GameManager.Inst.GetEffectManager.Inst_SpriteUiEffect(GameManager.Inst.CurMousePos(), "EffectImage/PurchaseFailed_Image");
+        }
         
     }
 

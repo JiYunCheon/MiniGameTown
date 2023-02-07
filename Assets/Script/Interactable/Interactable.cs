@@ -4,7 +4,7 @@ using UnityEngine;
 
 abstract public class Interactable : MonoBehaviour
 {
-    private Data myData = null;
+    private Excel myData = null;
 
     protected new Renderer renderer = null;
 
@@ -17,7 +17,7 @@ abstract public class Interactable : MonoBehaviour
 
     public InventoryItem GetInventoryItem { get { return myInvenItem; } private set { } }
 
-    public Data GetMyData { get { return myData; }private set { } }
+    public Excel GetMyData { get { return myData; }private set { } }
 
     [Header("===ListCheck===")]
     public List<Ground> myGround = new List<Ground>();
@@ -28,6 +28,7 @@ abstract public class Interactable : MonoBehaviour
         Initialized();
 
         CompareItem();
+
     }
 
     //주변패드의 정보를 저장
@@ -54,7 +55,7 @@ abstract public class Interactable : MonoBehaviour
             }
         }
     }
-    public virtual void SetMyData(Data data) => myData = data;
+    public virtual void SetMyData(Excel data) => myData = data;
 
     private void Initialized()
     {
@@ -106,7 +107,10 @@ abstract public class Interactable : MonoBehaviour
         }
     }
 
-
+    protected virtual void CompleteEffect()
+    {
+        GameManager.Inst.GetEffectManager.Inst_SpriteEffect(this.transform.position+ new Vector3(0,3.5f,0), "EffectImage/MakeComplete_Image");
+    }
     public virtual void Select_InteractableObj() { }
     public virtual void DeSelect_Select_InteractableObj() { }
 }

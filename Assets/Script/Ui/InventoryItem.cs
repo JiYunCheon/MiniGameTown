@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Newtonsoft.Json.Linq;
 
 public class InventoryItem : Item
 {
@@ -11,35 +12,29 @@ public class InventoryItem : Item
 
     protected override void Initialized()
     {
-        picture.sprite = Resources.Load<Sprite>($"Shop&Inventory_Image/{GetMyData.SpriteName}");
+        picture.sprite = Resources.Load<Sprite>($"Shop&Inventory_Image/Item_Image/{GetMyData.spriteName}");
     }
 
-    protected override void SetCount(int _value)
+    protected override void SetByCount(int _value)
     {
-        if (GameManager.Inst.datas.TryGetValue(GetMyData.GameName, out int value))
+
+        count = GameManager.Inst.SetCount(GetMyData.name, _value);
+
+        if (count <= 0)
         {
-            count = value + _value;
-            if (count <= 0)
-                count = 0;
-
-            GameManager.Inst.datas[GetMyData.GameName] = count;
-
-            if(count<=0)
-            {
-                this.gameObject.SetActive(false);
-            }
-            else
-            {
-                this.gameObject.SetActive(true);
-            }
-
-            countText.text = count.ToString();
+            this.gameObject.SetActive(false);
         }
+        else
+        {
+            this.gameObject.SetActive(true);
+        }
+
+        countText.text = count.ToString();
     }
 
     public void InventoryCount(int value)
     {
-        SetCount(value);
+        SetByCount(value);
     }
 
 
