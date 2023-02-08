@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 3374372}
   - component: {fileID: 2376582}
   - component: {fileID: 6227318058227438900}
-  m_Layer: 0
+  - component: {fileID: 5414583030870047397}
+  m_Layer: 6
   m_Name: Object_PineTree_Bright
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,3 +100,16 @@ MonoBehaviour:
   cameraPos: {fileID: 0}
   nameTr: {fileID: 0}
   myGround: []
+--- !u!65 &5414583030870047397
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 182992}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.9698032, y: 3.3950417, z: 1.969803}
+  m_Center: {x: 0, y: 1.7010378, z: -0.000000059604645}

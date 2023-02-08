@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 3365996}
   - component: {fileID: 2323198}
   - component: {fileID: -6093841143340684740}
-  m_Layer: 0
+  - component: {fileID: 3983878148448891735}
+  m_Layer: 6
   m_Name: Object_Trunk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,3 +100,16 @@ MonoBehaviour:
   cameraPos: {fileID: 0}
   nameTr: {fileID: 0}
   myGround: []
+--- !u!65 &3983878148448891735
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157452}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.1712024, y: 0.5847956, z: 0.8765348}
+  m_Center: {x: 0, y: 0.2879811, z: -0.005575642}

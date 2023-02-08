@@ -17,18 +17,18 @@ public class EffectManager : MonoBehaviour
     }
 
 
-
+    //하나로 합치기
     public void Inst_SpriteUiEffect(Vector3 pos, string path)
     {
         Effect effect = Instantiate(spriteUiEffect,pos,Quaternion.identity,canvarsTr);
-        effect.SetPath(path, effect.spriteAction);
+        effect.GenericLoad<Sprite>(path);
         effect.Run();
     }
 
     public void Inst_SpriteEffect(Vector3 pos, string path)
     {
         Effect effect = Instantiate(spriteEffect, pos, spriteEffect.transform.rotation);
-        effect.SetPath(path, effect.spriteAction);
+        effect.GenericLoad<Sprite>(path);
         effect.Run();
     }
 

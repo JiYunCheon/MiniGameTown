@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,7 +15,7 @@ public class SpriteEffect : Effect
 
         if (gameObject.TryGetComponent<Image>(out Image image))
         {
-            image.sprite = sprite;
+            image.sprite = GetObj<Sprite>();
 
             Color color = image.color;
 
@@ -35,7 +36,7 @@ public class SpriteEffect : Effect
         }
         else if(gameObject.TryGetComponent<SpriteRenderer>(out SpriteRenderer renderer))
         {
-            renderer.sprite = sprite;
+            renderer.sprite = GetObj<Sprite>();
 
             Color color = renderer.color;
 

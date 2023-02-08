@@ -65,4 +65,89 @@ public class PlayerData
     public string cart_O_Name;
 
 
+    public int cat_Black_O_Count;
+    public string cat_Black_O_Name;
+
+
+    public int cat_White_O_Count;
+    public string cat_White_O_Name;
+
+
+    public int fence_End_Short_O_Count;
+    public string fence_End_Short_O_Name;
+
+
+    public int fence_End_Vertical_O_Count;
+    public string fence_End_Vertical_O_Name;
+
+
+    public int fence_End_Count;
+    public string fence_End_O_Name;
+
+
+    public int flower_1x_Orange_Count;
+    public string flower_1x_Orange_Name;
+
+
+    public int flower_1x_Purple_Count;
+    public string flower_1x_Purple_Name;
+
+
+    public int flowers_BlueLight_Count;
+    public string flowers_BlueLight_Name;
+
+
+    public int flowers_Pink_Count;
+    public string flowers_Pink_Name;
+
+
+    public int garbageCan_Blue_Count;
+    public string garbageCan_Blue_Name;
+
+
+    public int garbageCan_Red_Count;
+    public string garbageCan_Red_Name;
+
+
+    public int lantern_Path_Count;
+    public string lantern_Path_Name;
+
+
+    public int lantern_Small_Count;
+    public string lantern_Small_Name;
+
+
+    public int pineTree_Bright_Count;
+    public string pineTree_Bright_Name;
+
+
+    public int pineTree_Snow_1_Count;
+    public string pineTree_Snow_1_Name;
+
+
+    public int pineTree_Snow_2_Count;
+    public string pineTree_Snow_2_Name;
+
+
+    public int tree_Fruits_Plums_Count;
+    public string Tree_Fruits_Plums_Name;
+
+
+    public int trunk_Count;
+    public string trunk_Name;
+
+    public int trunk_x3_Count;
+    public string trunk_x3_Name;
+
+    public int umbrella_Purple_Count;
+    public string umbrella_Purple_Name;
+
+
+    public int umbrella_Red_Count;
+    public string umbrella_Red_Name;
+
+
+    public int balloonStand_Count;
+    public string balloonStand_Name;
+
 }

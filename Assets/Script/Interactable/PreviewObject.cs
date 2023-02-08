@@ -14,7 +14,7 @@ public class PreviewObject : Interactable
     private void Awake()
     {
         defaultMaterial = Resources.Load<Material>("Material & Texture/Colors_Alpha 1");
-        redMaterial= Resources.Load<Material>("Material & Texture/Colors_Alpha 2");
+        redMaterial = Resources.Load<Material>("Material & Texture/Colors_Alpha 2");
 
         if (renderer == null)
             renderer = GetComponent<Renderer>();
@@ -28,9 +28,9 @@ public class PreviewObject : Interactable
     }
 
     //미리보기 객체의 현재 상태 변경
-    public void ChangeState(Ground ground,int occupyPad)
+    public void ChangeState(Ground ground, int occupyPad)
     {
-        if(!ground.CompareNode(occupyPad))
+        if (!ground.CompareNode(occupyPad))
             //빨간색 메테리얼
             renderer.material = redMaterial;
         else
@@ -60,11 +60,11 @@ public class PreviewObject : Interactable
     {
         if (count == 0)
         {
-            this.transform.Rotate(0, 50f,0 );
+            this.transform.Rotate(0, 50f, 0);
             rotation = Quaternion.Euler(0, 50f, 0);
             buildOption.transform.Rotate(0, -45f, 0);
         }
-        else if(count==1)
+        else if (count == 1)
         {
             this.transform.Rotate(0, -50f, 0);
             rotation = Quaternion.identity;
@@ -87,7 +87,7 @@ public class PreviewObject : Interactable
         Destroy(this.gameObject);
     }
 
- 
+
 
     #endregion
 }

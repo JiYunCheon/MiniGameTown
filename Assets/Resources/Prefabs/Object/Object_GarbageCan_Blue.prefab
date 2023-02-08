@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 3329514}
   - component: {fileID: 2324304}
   - component: {fileID: -2182521051490576798}
-  m_Layer: 0
+  - component: {fileID: 1269191949179942496}
+  m_Layer: 6
   m_Name: Object_GarbageCan_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,3 +100,16 @@ MonoBehaviour:
   cameraPos: {fileID: 0}
   nameTr: {fileID: 0}
   myGround: []
+--- !u!65 &1269191949179942496
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 149004}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.7083313, y: 0.833296, z: 0.7276465}
+  m_Center: {x: -0.00000011920929, y: 0.41648826, z: 0.000000029802322}

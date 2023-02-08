@@ -100,7 +100,7 @@ MonoBehaviour:
   cameraPos: {fileID: 0}
   nameTr: {fileID: 0}
   myGround: []
-  buildOption: {fileID: 0}
+  buildOption: {fileID: 5118820571850320924}
 --- !u!1001 &2882272495163013213
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -220,6 +220,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 5226489151640251231, guid: 8a5ae9870da0f414494bbb81eaa5958a, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6445953544505331834, guid: 8a5ae9870da0f414494bbb81eaa5958a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -285,5 +289,10 @@ PrefabInstance:
 --- !u!224 &3547904091263731777 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1640238703366369308, guid: 8a5ae9870da0f414494bbb81eaa5958a, type: 3}
+  m_PrefabInstance: {fileID: 2882272495163013213}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5118820571850320924 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6986868217726129217, guid: 8a5ae9870da0f414494bbb81eaa5958a, type: 3}
   m_PrefabInstance: {fileID: 2882272495163013213}
   m_PrefabAsset: {fileID: 0}

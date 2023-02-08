@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 3369932}
   - component: {fileID: 2317588}
   - component: {fileID: -2172686656280995530}
-  m_Layer: 0
+  - component: {fileID: -8061013189069217375}
+  m_Layer: 6
   m_Name: Object_Cat_White
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,3 +100,16 @@ MonoBehaviour:
   cameraPos: {fileID: 0}
   nameTr: {fileID: 0}
   myGround: []
+--- !u!65 &-8061013189069217375
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101520}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.3784823, y: 0.68709236, z: 0.461326}
+  m_Center: {x: 0.038164347, y: 0.34197745, z: 0.019569635}

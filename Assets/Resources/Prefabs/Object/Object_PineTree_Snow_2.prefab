@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 3389214}
   - component: {fileID: 2307804}
   - component: {fileID: 4959717605632380034}
-  m_Layer: 0
+  - component: {fileID: -3048786579562881818}
+  m_Layer: 6
   m_Name: Object_PineTree_Snow_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,3 +100,16 @@ MonoBehaviour:
   cameraPos: {fileID: 0}
   nameTr: {fileID: 0}
   myGround: []
+--- !u!65 &-3048786579562881818
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 105794}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.6477962, y: 4.7995596, z: 2.6477957}
+  m_Center: {x: -0.000000059604645, y: 2.3993173, z: -0.000000059604645}

@@ -153,7 +153,7 @@ public class GameManager : MonoBehaviour
 
     public void GameMoneyControll(int money)
     {
-        
+
         GetPlayerData.gameMoney -= money;
         Debug.Log(GetPlayerData.gameMoney);
     }
@@ -173,6 +173,9 @@ public class GameManager : MonoBehaviour
 
     private void Init()
     {
+        //dicpool 처럼 고치기
+
+
         //Building
         datas.Add(GetPlayerData.balloon_B_Name, GetPlayerData.balloon_B_Count);
         datas.Add(GetPlayerData.find_B_Name, GetPlayerData.find_B_Count);
@@ -183,8 +186,56 @@ public class GameManager : MonoBehaviour
 
         //object
         datas.Add(GetPlayerData.cart_O_Name, GetPlayerData.cart_O_Count);
+
         datas.Add(GetPlayerData.appleTree_O_Name, GetPlayerData.appleTree_O_Count);
+
+        datas.Add(GetPlayerData.cat_Black_O_Name, GetPlayerData.cat_Black_O_Count);
+
+        datas.Add(GetPlayerData.cat_White_O_Name, GetPlayerData.cat_White_O_Count);
+
+        datas.Add(GetPlayerData.fence_End_Short_O_Name, GetPlayerData.fence_End_Short_O_Count);
+
+        datas.Add(GetPlayerData.fence_End_Vertical_O_Name, GetPlayerData.fence_End_Vertical_O_Count);
+
+        datas.Add(GetPlayerData.fence_End_O_Name, GetPlayerData.fence_End_Count);
+
+        datas.Add(GetPlayerData.flower_1x_Orange_Name, GetPlayerData.flower_1x_Orange_Count);
+
+        datas.Add(GetPlayerData.flower_1x_Purple_Name, GetPlayerData.flower_1x_Purple_Count);
+
+        datas.Add(GetPlayerData.flowers_BlueLight_Name, GetPlayerData.flowers_BlueLight_Count);
+
+        datas.Add(GetPlayerData.flowers_Pink_Name, GetPlayerData.flowers_Pink_Count);
+
+        datas.Add(GetPlayerData.garbageCan_Blue_Name, GetPlayerData.garbageCan_Blue_Count);
+
+        datas.Add(GetPlayerData.garbageCan_Red_Name, GetPlayerData.garbageCan_Red_Count);
+
+        datas.Add(GetPlayerData.lantern_Path_Name, GetPlayerData.lantern_Path_Count);
+
+        datas.Add(GetPlayerData.lantern_Small_Name, GetPlayerData.lantern_Small_Count);
+
+        datas.Add(GetPlayerData.pineTree_Bright_Name, GetPlayerData.pineTree_Bright_Count);
+
+        datas.Add(GetPlayerData.pineTree_Snow_1_Name, GetPlayerData.pineTree_Snow_1_Count);
+
+        datas.Add(GetPlayerData.pineTree_Snow_2_Name, GetPlayerData.pineTree_Snow_2_Count);
+
+        datas.Add(GetPlayerData.Tree_Fruits_Plums_Name, GetPlayerData.tree_Fruits_Plums_Count);
+
+        datas.Add(GetPlayerData.trunk_Name, GetPlayerData.trunk_Count);
+
+        datas.Add(GetPlayerData.trunk_x3_Name, GetPlayerData.trunk_x3_Count);
+
+        datas.Add(GetPlayerData.umbrella_Purple_Name, GetPlayerData.umbrella_Purple_Count); 
+
+        datas.Add(GetPlayerData.umbrella_Red_Name, GetPlayerData.umbrella_Red_Count);
+
+        datas.Add(GetPlayerData.balloonStand_Name, GetPlayerData.balloonStand_Count);
+
+
     }
+
 
     public int SetCount(string name, int _value)
     {
@@ -200,7 +251,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("OMG NO DATAS");
+            
+            Debug.LogError(name+" :: "+"OMG NO DATAS");
             return 0;
         }
     }

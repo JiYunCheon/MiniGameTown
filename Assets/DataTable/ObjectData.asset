@@ -71,7 +71,7 @@ MonoBehaviour:
   - name: Cart
     maxCount: 0
     price: 200
-    occupyPad: 2
+    occupyPad: 4
     Info: It is Cart
     spriteName: Cart
     packageName: 
@@ -112,21 +112,32 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Cat_White
     hvCheck: 0
     myType: 1
-  - name: Fence_End-Short
+  - name: Fence_End_Short
     maxCount: 0
     price: 100
     occupyPad: 3
     Info: a
-    spriteName: Fence_End-Short
+    spriteName: Fence_End_Short
     packageName: 
     prefabName: Object_Fence_End-Short
     alphaPrefabName: Object_Alpha_Fence_End-Short
     hvCheck: 0
     myType: 1
-  - name: Fence_End
+  - name: Fence_End_Vertical
     maxCount: 0
     price: 100
     occupyPad: 3
+    Info: a
+    spriteName: Fence_End_Vertical
+    packageName: 
+    prefabName: Object_Fence_End_Vertical
+    alphaPrefabName: Object_Alpha_Fence_End_Vertical
+    hvCheck: 1
+    myType: 1
+  - name: Fence_End
+    maxCount: 0
+    price: 100
+    occupyPad: 1
     Info: a
     spriteName: Fence_End
     packageName: 
@@ -310,6 +321,17 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Umbrella_Red
     hvCheck: 0
     myType: 1
+  - name: BalloonStand
+    maxCount: 0
+    price: 100
+    occupyPad: 1
+    Info: a
+    spriteName: BalloonStand
+    packageName: 
+    prefabName: Object_BalloonStand
+    alphaPrefabName: Object_Alpha_BalloonStand
+    hvCheck: 0
+    myType: 1
   playerData:
   - gameMoney: 1000000
     find_B_Count: 0
@@ -328,3 +350,47 @@ MonoBehaviour:
     appleTree_O_Name: AppleTree
     cart_O_Count: 1
     cart_O_Name: Cart
+    cat_Black_O_Count: 3
+    cat_Black_O_Name: Cat_Black
+    cat_White_O_Count: 0
+    cat_White_O_Name: Cat_White
+    fence_End_Short_O_Count: 0
+    fence_End_Short_O_Name: Fence_End_Short
+    fence_End_Vertical_O_Count: 0
+    fence_End_Vertical_O_Name: Fence_End_Vertical
+    fence_End_Count: 0
+    fence_End_O_Name: Fence_End
+    flower_1x_Orange_Count: 0
+    flower_1x_Orange_Name: Flower_1x_Orange
+    flower_1x_Purple_Count: 0
+    flower_1x_Purple_Name: Flower_1x_Purple
+    flowers_BlueLight_Count: 0
+    flowers_BlueLight_Name: Flowers_BlueLight
+    flowers_Pink_Count: 0
+    flowers_Pink_Name: Flowers_Pink
+    garbageCan_Blue_Count: 0
+    garbageCan_Blue_Name: GarbageCan_Blue
+    garbageCan_Red_Count: 0
+    garbageCan_Red_Name: GarbageCan_Red
+    lantern_Path_Count: 0
+    lantern_Path_Name: Lantern_Path
+    lantern_Small_Count: 0
+    lantern_Small_Name: Lantern_Small
+    pineTree_Bright_Count: 0
+    pineTree_Bright_Name: PineTree_Bright
+    pineTree_Snow_1_Count: 0
+    pineTree_Snow_1_Name: PineTree_Snow_1
+    pineTree_Snow_2_Count: 0
+    pineTree_Snow_2_Name: PineTree_Snow_2
+    tree_Fruits_Plums_Count: 0
+    Tree_Fruits_Plums_Name: Tree_Fruits_Plums
+    trunk_Count: 0
+    trunk_Name: Trunk
+    trunk_x3_Count: 0
+    trunk_x3_Name: Trunk_x3
+    umbrella_Purple_Count: 0
+    umbrella_Purple_Name: Umbrella_Purple
+    umbrella_Red_Count: 0
+    umbrella_Red_Name: Umbrella_Red
+    balloonStand_Count: 0
+    balloonStand_Name: BalloonStand

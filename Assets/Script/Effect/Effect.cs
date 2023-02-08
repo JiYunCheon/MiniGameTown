@@ -6,29 +6,13 @@ using UnityEngine.UI;
 
 public abstract class Effect : MonoBehaviour
 {
-    public Action spriteAction;
-    private string path = null;
+    protected UnityEngine.Object obj;
 
-    protected Sprite sprite;
+    public void GenericLoad<T>(string path) where T : UnityEngine.Object => obj = Resources.Load<T>(path);
 
-
-    private void Awake()
-    {
-        spriteAction = SetSprite;
-    }
-
-    private void SetSprite()
-    {
-        sprite = Resources.Load<Sprite>(path);
-    }
-
-
+    protected T GetObj<T>() where T : UnityEngine.Object => (T)obj;
+  
     public abstract void Run();
 
-    public void SetPath(string path, Action action)
-    {
-        this.path = path;
-        action();
-    }
-
 }
+

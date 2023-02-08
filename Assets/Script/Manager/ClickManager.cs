@@ -72,7 +72,7 @@ public class ClickManager : MonoBehaviour
             if (GameManager.Inst.buildingMode && preview == null && curData != null)
                 //미리보기 객체를 생성
                 preview = Instantiate<PreviewObject>(GetAlphaPrefab(curData), 
-                    Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(-5f, -3f, -5f), Quaternion.identity);
+                    Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(-5f, -3f, -5f), GetAlphaPrefab(curData).transform.rotation);
             //빌딩모드이고 클릭을 한적이 없을 경우
             else if(GameManager.Inst.buildingMode && clickCheck==false)
             {
@@ -220,9 +220,12 @@ public class ClickManager : MonoBehaviour
     {
         clickCheck = false;
 
+        Debug.Log(GetPrefab(curData).transform.eulerAngles);
         //진짜 건물 생성
-        Interactable obj= Instantiate<Interactable>(GetPrefab(curData), saveHitPos + new Vector3(0, 0.5f, 0.5f), rotation, buildings);
-        
+        Interactable obj = Instantiate<Interactable>(GetPrefab(curData), saveHitPos + new Vector3(0, 0.5f, 0.5f), GetPrefab(curData).transform.rotation, buildings);
+        if (rotation != Quaternion.identity)
+            obj.transform.rotation = rotation;
+
         obj.NameRotate(rotation.eulerAngles.y);
 
         obj.SetMyData(curData);
@@ -321,7 +324,7 @@ public class ClickManager : MonoBehaviour
         }
         else
         {
-            alphaPrefab_Object = Resources.Load<PreviewObject>($"Prefabs/Object/{data.alphaPrefabName}");
+            alphaPrefab_Object = Resources.Load<PreviewObject>($"Prefabs/Object/Alpha/{data.alphaPrefabName}");
 
             return alphaPrefab_Object;
         }
