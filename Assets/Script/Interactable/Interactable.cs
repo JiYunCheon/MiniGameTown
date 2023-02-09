@@ -40,6 +40,8 @@ abstract public class Interactable : MonoBehaviour
         }
     }
 
+    //자신의 인벤 아이템을 찾음
+    //데이터만 바꿔주면 되니까 필요 없을 듯
     private void CompareItem()
     {
         contentTr = GameManager.Inst.GetUiManager.GetInvenContentTr;

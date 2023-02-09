@@ -96,6 +96,8 @@ public class UiManager : MonoBehaviour
         {
             gameInBtn.SetActive(activeSelf);
 
+
+            //반복문 중복 제거
             foreach (Transform item in GameManager.Inst.GetBuildings)
             {
                 if (item.TryGetComponent<Interactable>(out Interactable interactable))
@@ -175,6 +177,7 @@ public class UiManager : MonoBehaviour
 
     public void On_Click_WatingMode()
     {
+        //조건문으로 쓸대없는 함수실행 막기
         GameManager.Inst.ChangeMode(out GameManager.Inst.buildingMode, false);
         GameManager.Inst.ChangeMode(out GameManager.Inst.waitingMode, true);
 
@@ -201,7 +204,7 @@ public class UiManager : MonoBehaviour
     public void OnClick_ModeExit_Shop()
     {
         GetUiCheck = false;
-
+        //조건문으로 쓸대없는 함수실행 막기
         GameManager.Inst.ChangeMode(out GameManager.Inst.buildingMode, false);
         GameManager.Inst.ChangeMode(out GameManager.Inst.waitingMode, false);
 
@@ -273,6 +276,7 @@ public class UiManager : MonoBehaviour
     {
         shopBoard.ActiveControll(false);
 
+        
         floorMaterial.color = color;
         modeBtnUi.SetActive(modeBtn);
         bool check = !GameManager.Inst.waitingMode && !GameManager.Inst.buildingMode;

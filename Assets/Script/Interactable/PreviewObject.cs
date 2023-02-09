@@ -13,6 +13,7 @@ public class PreviewObject : Interactable
 
     private void Awake()
     {
+        //참조하는게 더 좋을듯
         defaultMaterial = Resources.Load<Material>("Material & Texture/Colors_Alpha 1");
         redMaterial = Resources.Load<Material>("Material & Texture/Colors_Alpha 2");
 

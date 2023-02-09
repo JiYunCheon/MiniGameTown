@@ -289,6 +289,7 @@ public class ClickManager : MonoBehaviour
     }
 
     //클릭한 객체의 정보를 가지고 옴
+    //객체마다 정보를 가지고 있기때문에 필요없을 듯
     public void SetInfo(InventoryItem inventoryItem, Excel data)
     {
         curData = data;

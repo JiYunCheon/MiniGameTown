@@ -29,6 +29,7 @@ public class Building : Interactable
 
     private void Awake()
     {
+        //참조하는 게 더 좋을 듯
         defaultMaterial = Resources.Load<Material>("Material & Texture/Colors_Default");
         lightMaterial = Resources.Load<Material>("Material & Texture/Colors_Glossy");
 
