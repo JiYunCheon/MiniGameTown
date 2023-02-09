@@ -5,12 +5,13 @@ using UnityEngine;
 public class NewBehaviourScript : MonoBehaviour
 {
 
-
+    string a = "-1.55";
     public AnimationCurve ac;
     public float t = 0;
 
      private void Awake()
     {
+        Debug.Log(float.Parse(a)+1);
     }
 
     private void Update()

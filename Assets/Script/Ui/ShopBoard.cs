@@ -4,7 +4,6 @@ using UnityEngine.UI;
 public class ShopBoard : MonoBehaviour
 {
     [Header("ScriptableObject")]
-    [SerializeField] private ObjectData objdata = null;
     [SerializeField] private ContentItem contentPrefab = null;
 
     [Header("Scroll View")]
@@ -19,11 +18,6 @@ public class ShopBoard : MonoBehaviour
 
         Inst_InvenItem();
         gameObject.SetActive(false);
-    }
-
-    private void Start()
-    {
-        
     }
 
     private void OnEnable()
@@ -75,35 +69,19 @@ public class ShopBoard : MonoBehaviour
     {
         Transform scrollTr = null;
 
-        //for (int i = 0; i < datas.Length; i++)
-        //{
-        //    if (datas[i].MyType == OBJECT_TYPE.BUIDING)
-        //    {
-        //        scrollTr = Building_Scroll.content.transform;
-        //        ContentItem content = Instantiate<ContentItem>(contentPrefab, scrollTr);
-        //        content.SetMyData(datas[i]);
-        //    }
-        //    else
-        //    {
-        //        scrollTr = Object_Scroll.content.transform;
-        //        ContentItem content = Instantiate<ContentItem>(contentPrefab, scrollTr);
-        //        content.SetMyData(datas[i]);
-        //    }
-        //}
-
-        for (int i = 0; i < objdata.objectdatas.Count; i++)
+        for (int i = 0; i < GameManager.Inst.GetObjectData.Count; i++)
         {
-            if (objdata.objectdatas[i].myType == OBJECT_TYPE.BUIDING)
+            if (GameManager.Inst.GetObjectData[i].myType == OBJECT_TYPE.BUILDING)
             {
                 scrollTr = Building_Scroll.content.transform;
                 ContentItem content = Instantiate<ContentItem>(contentPrefab, scrollTr);
-                content.SetMyData(objdata.objectdatas[i]);
+                content.SetMyData(GameManager.Inst.GetObjectData[i]);
             }
             else
             {
                 scrollTr = Object_Scroll.content.transform;
                 ContentItem content = Instantiate<ContentItem>(contentPrefab, scrollTr);
-                content.SetMyData(objdata.objectdatas[i]);
+                content.SetMyData(GameManager.Inst.GetObjectData[i]);
             }
 
         }

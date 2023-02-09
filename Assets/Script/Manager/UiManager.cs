@@ -20,7 +20,7 @@ public class UiManager : MonoBehaviour
 
     [Header("MapLevel")]
     [SerializeField] private Material floorMaterial     = null;
-    [SerializeField] private PadController padBoard        = null;
+    [SerializeField] public PadController padBoard        = null;
 
     [Header("Result Ui")]
     [SerializeField] private GameObject successWindow = null;
@@ -96,7 +96,7 @@ public class UiManager : MonoBehaviour
         {
             gameInBtn.SetActive(activeSelf);
 
-            foreach (Transform item in GameManager.Inst.GetClickManager.GetBuildings)
+            foreach (Transform item in GameManager.Inst.GetBuildings)
             {
                 if (item.TryGetComponent<Interactable>(out Interactable interactable))
                 {
@@ -163,7 +163,7 @@ public class UiManager : MonoBehaviour
 
         padBoard.ActivePadByType(GameManager.Inst.GetClickManager.GetCurData.myType);
         //클릭매니저로
-        foreach (Transform item in GameManager.Inst.GetClickManager.GetBuildings)
+        foreach (Transform item in GameManager.Inst.GetBuildings)
         {
             if (item.TryGetComponent<Interactable>(out Interactable interactable))
             {
@@ -215,13 +215,14 @@ public class UiManager : MonoBehaviour
     public void OnClick_PurchaseSuccess()
     {
         GameManager.Inst.GetUiManager.On_Click_WatingMode();
-        GameManager.Inst.GameMoneyControll(cur_Content_Item.GetMyData.price);
+
+        GameManager.Inst.SetCount(GameManager.Inst.GetPlayerData.gameMoney_Key, -cur_Content_Item.GetMyData.price);
+
         InputGameMoney(GameManager.Inst.GetPlayerData.gameMoney.ToString());
 
+        cur_Content_Item.GetItem.SetByCount(1);
 
-        cur_Content_Item.CompareSoldOutCheck();
-
-        cur_Content_Item.GetItem.InventoryCount(1);
+        cur_Content_Item.ComparerMaxCount();
 
         Active_S_Window(false);
 
@@ -238,13 +239,40 @@ public class UiManager : MonoBehaviour
         SceneManager.LoadScene("2DTown");
     }
 
+    public void Onclick_Save()
+    {
+        GameManager.Inst.SaveData();
+    }
+
+    public void Onclick_GameExit()
+    {
+        GameManager.Inst.SaveData();
+
+        StartCoroutine(WaitForSaveData());
+        
+    }
+
+
+
 
     #endregion
+
+
+    private IEnumerator WaitForSaveData()
+    {
+        //기다리는 동안 ui?
+        yield return new WaitUntil(() => !DataBaseServer.Inst.isProcessing);
+
+        InGame.ExitGame();
+
+    }
+
 
 
     private void ModeControll(bool modeBtn,bool pad,Color color)
     {
         shopBoard.ActiveControll(false);
+
         floorMaterial.color = color;
         modeBtnUi.SetActive(modeBtn);
         bool check = !GameManager.Inst.waitingMode && !GameManager.Inst.buildingMode;

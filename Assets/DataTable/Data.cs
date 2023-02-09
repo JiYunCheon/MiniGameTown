@@ -4,10 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [ExcelAsset]
-public class ObjectData : ScriptableObject
+public class Data : ScriptableObject
 {
-	
 	public List<Excel> objectdatas; // Replace 'EntityType' to an actual type that is serializable.
-
-	public List<PlayerData> playerData;
+	public List<PlayerData> playerData; // Replace 'EntityType' to an actual type that is serializable.
 }

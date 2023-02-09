@@ -2,21 +2,31 @@ using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using Microsoft.Unity;
+using TMPro.Examples;
+using System.Threading;
+using UnityEditor;
+
 public enum OBJECT_TYPE
 {
-    BUIDING,
+    BUILDING,
     OBJECT
+}
+public enum DIFFICULTY
+{
+    EASY,
+    NORMAL,
+    HARD,
+    VERYHARD
 }
 
 public class GameManager : MonoBehaviour
 {
-    const string gameName_Momory = "com.DefaultCompany.OneWeek_MemoryCard";
+    const string gameName_Memory = "com.DefaultCompany.OneWeek_MemoryCard";
     const string gameName_Find = "com.DefaultCompany.WrongPicture";
     const string gameName_Puzzle = "com.DefaultCompany.Jigsaw_Final";
     const string gameName_Balloon = "com.DefaultCompany.Pop_The_Balloon";
 
-    [SerializeField] private ObjectData data = null;
-
+    [SerializeField] private Data data = null;
 
     private UiManager uiManager = null;
     private FirstSceneUiController firstSceneUiController = null;
@@ -31,17 +41,40 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector] public int pointerID;
 
-    public Dictionary<string, int> datas = new Dictionary<string, int>();
-
+    //패드를 생성 할 때 패드들을 add 함 
     public List<Ground> grounds = new List<Ground>();
-    private int[] grounds_Info;
+    public int[] grounds_Info;
+
+    //save Data value
+     public Vector3[] objectsPos;
+     public Vector3[] objectsRot ;
+     public string[]  objectsName;
+
     PlayerMove player = null;
 
     private Vector3 mousePos = Vector3.zero;
 
+    //생성될 건물의 부모
+    [Header("Parents")]
+    private Transform buildings = null;
+
     #region Property
 
+    public Transform GetBuildings 
+    { 
+        get 
+        {
+            if (buildings == null)
+                buildings = GameObject.Find("Buildings").transform;
+
+            return buildings;
+        }
+
+        private set { }
+    }
+
     public PlayerData GetPlayerData { get { return data.playerData[0]; } private set { } }
+
     public List<Excel> GetObjectData { get { return data.objectdatas; } private set { } }
 
     public EffectManager GetEffectManager
@@ -132,16 +165,14 @@ public class GameManager : MonoBehaviour
     public static GameManager Inst = null;
     private void Awake()
     {
+
         if(Inst == null)
         {
             Inst = this;
-            Init();
+            SaveDic();
             DontDestroyOnLoad(Inst);
         }
-        else
-        {
-            Destroy(this);
-        }
+        else Destroy(this);
 
         #if UNITY_EDITOR
                 pointerID = -1;
@@ -151,18 +182,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void GameMoneyControll(int money)
-    {
-
-        GetPlayerData.gameMoney -= money;
-        Debug.Log(GetPlayerData.gameMoney);
-    }
-
-
-    public void ChangeMode(out bool mode, bool check)
-    {
-        mode = check;
-    }
+    public void ChangeMode(out bool mode, bool check) => mode = check;
 
     public Vector3 CurMousePos()
     {
@@ -171,139 +191,152 @@ public class GameManager : MonoBehaviour
         return mousePos;
     }
 
-    private void Init()
+
+    public int SetCount(string key, int _value) => GetPlayerData.TrySetValue(key, _value);
+
+
+    public void SaveData()
     {
-        //dicpool 처럼 고치기
+        objectsName = new string[buildings.transform.childCount];
+        objectsPos = new Vector3[buildings.transform.childCount];
+        objectsRot = new Vector3[buildings.transform.childCount];
 
+        DataBaseServer.Inst.loginUser.posX = new string[buildings.transform.childCount];
+        DataBaseServer.Inst.loginUser.posY = new string[buildings.transform.childCount];
+        DataBaseServer.Inst.loginUser.posZ = new string[buildings.transform.childCount];
+        DataBaseServer.Inst.loginUser.rotY = new string[buildings.transform.childCount];
+        DataBaseServer.Inst.loginUser.objname = new string[buildings.transform.childCount];
 
-        //Building
-        datas.Add(GetPlayerData.balloon_B_Name, GetPlayerData.balloon_B_Count);
-        datas.Add(GetPlayerData.find_B_Name, GetPlayerData.find_B_Count);
-        datas.Add(GetPlayerData.memory_B_Name, GetPlayerData.memory_B_Count);
-        datas.Add(GetPlayerData.puzzle_B_Name, GetPlayerData.puzzle_B_Count);
-        datas.Add(GetPlayerData.cook_B_Name, GetPlayerData.cook_B_Count);
-        datas.Add(GetPlayerData.myRoom_B_Name, GetPlayerData.myRoom_B_Count);
+        string name = "";
+        int index = 0;
+        foreach (Transform child in buildings)
+        {
+            name = child.name.Split("(")[0];
+            objectsName[index] = name;
+            objectsPos[index] = child.position;
+            objectsRot[index] = child.transform.eulerAngles;
 
-        //object
-        datas.Add(GetPlayerData.cart_O_Name, GetPlayerData.cart_O_Count);
+            if(child.TryGetComponent<Interactable>(out Interactable obj))
+            {
+                for (int i = 0; i < obj.myGround.Count; i++)
+                {
+                    obj.myGround[i].name = "SavePad";
+                }
+            }
 
-        datas.Add(GetPlayerData.appleTree_O_Name, GetPlayerData.appleTree_O_Count);
+            index++;
+        }
 
-        datas.Add(GetPlayerData.cat_Black_O_Name, GetPlayerData.cat_Black_O_Count);
+        List<int> save =new List<int>();
 
-        datas.Add(GetPlayerData.cat_White_O_Name, GetPlayerData.cat_White_O_Count);
+        for (int i = 0; i < grounds.Count; i++)
+        {
+            if (grounds[i].name=="SavePad")
+            {
+                save.Add(i);
+            }
+        }
+     
+        DataBaseServer.Inst.loginUser.grounds_Save = new string[save.Count];
 
-        datas.Add(GetPlayerData.fence_End_Short_O_Name, GetPlayerData.fence_End_Short_O_Count);
+        for (int i = 0; i < save.Count; i++)
+        {
+            DataBaseServer.Inst.loginUser.grounds_Save[i] = save[i].ToString();
+        }
 
-        datas.Add(GetPlayerData.fence_End_Vertical_O_Name, GetPlayerData.fence_End_Vertical_O_Count);
+    
+        DataBaseServer.Inst.loginUser.objname = objectsName;
 
-        datas.Add(GetPlayerData.fence_End_O_Name, GetPlayerData.fence_End_Count);
+        for (int i = 0; i < objectsName.Length; i++)
+        {
+            DataBaseServer.Inst.loginUser.posX[i] = objectsPos[i].x.ToString();
+            DataBaseServer.Inst.loginUser.posY[i] = objectsPos[i].y.ToString();
+            DataBaseServer.Inst.loginUser.posZ[i] = objectsPos[i].z.ToString();
+            DataBaseServer.Inst.loginUser.rotY[i] = objectsRot[i].y.ToString();
+        }
 
-        datas.Add(GetPlayerData.flower_1x_Orange_Name, GetPlayerData.flower_1x_Orange_Count);
-
-        datas.Add(GetPlayerData.flower_1x_Purple_Name, GetPlayerData.flower_1x_Purple_Count);
-
-        datas.Add(GetPlayerData.flowers_BlueLight_Name, GetPlayerData.flowers_BlueLight_Count);
-
-        datas.Add(GetPlayerData.flowers_Pink_Name, GetPlayerData.flowers_Pink_Count);
-
-        datas.Add(GetPlayerData.garbageCan_Blue_Name, GetPlayerData.garbageCan_Blue_Count);
-
-        datas.Add(GetPlayerData.garbageCan_Red_Name, GetPlayerData.garbageCan_Red_Count);
-
-        datas.Add(GetPlayerData.lantern_Path_Name, GetPlayerData.lantern_Path_Count);
-
-        datas.Add(GetPlayerData.lantern_Small_Name, GetPlayerData.lantern_Small_Count);
-
-        datas.Add(GetPlayerData.pineTree_Bright_Name, GetPlayerData.pineTree_Bright_Count);
-
-        datas.Add(GetPlayerData.pineTree_Snow_1_Name, GetPlayerData.pineTree_Snow_1_Count);
-
-        datas.Add(GetPlayerData.pineTree_Snow_2_Name, GetPlayerData.pineTree_Snow_2_Count);
-
-        datas.Add(GetPlayerData.Tree_Fruits_Plums_Name, GetPlayerData.tree_Fruits_Plums_Count);
-
-        datas.Add(GetPlayerData.trunk_Name, GetPlayerData.trunk_Count);
-
-        datas.Add(GetPlayerData.trunk_x3_Name, GetPlayerData.trunk_x3_Count);
-
-        datas.Add(GetPlayerData.umbrella_Purple_Name, GetPlayerData.umbrella_Purple_Count); 
-
-        datas.Add(GetPlayerData.umbrella_Red_Name, GetPlayerData.umbrella_Red_Count);
-
-        datas.Add(GetPlayerData.balloonStand_Name, GetPlayerData.balloonStand_Count);
-
-
+        DataBaseServer.Inst.SaveScore();
     }
 
-
-    public int SetCount(string name, int _value)
+    public void LoadData()
     {
-        if (datas.TryGetValue(name, out int value))
-        {
-            int add = value + _value;
-            if (add <= 0)
-                add = 0;
-
-            datas[name] = add;
-
-            return datas[name];
-        }
-        else
-        {
-            
-            Debug.LogError(name+" :: "+"OMG NO DATAS");
-            return 0;
-        }
+        DataBaseServer.Inst.Login();
     }
-
-
-
-
-
-
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.A))
-            SaveData();
+            LoadData();
     }
-
-    private void SaveData()
+    public void LoadObj()
     {
-        grounds_Info = new int[grounds.Count];
+        Interactable prefab = null;
+        Interactable  obj= null;
 
-        for (int i = 0; i < grounds.Count; i++)
+        string type = "";
+        int value = 0;
+        int count = 0;
+
+        GetUiManager.Active_Pad();
+
+        for (int i = 0; i < objectsName.Length; i++)
         {
-            if(grounds[i].buildingCheck)
-                grounds_Info[i] = 1;
+            if (objectsName[i].Split("_")[0] == "Building")
+                type = "Building";
             else
-                grounds_Info[i] = 0;
+                type = "Object";
+
+            prefab = Resources.Load<Interactable>($"Prefabs/{type}/{objectsName[i]}");
+            obj = Instantiate(prefab, objectsPos[i], Quaternion.identity,GetBuildings);
+            obj.transform.eulerAngles = objectsRot[i];
+            obj.SetMyData(GameManager.Inst.FindData(obj.name.Split("(")[0]));
+
+            for (int j = count; j < DataBaseServer.Inst.loginUser.grounds_Save.Length; j++)
+            {
+
+                if(j<count+obj.GetMyData.occupyPad)
+                {
+                    grounds[int.Parse(DataBaseServer.Inst.loginUser.grounds_Save[j])].ChangePadState(true,Color.red);
+                    obj.myGround.Add(grounds[int.Parse(DataBaseServer.Inst.loginUser.grounds_Save[j])]);
+                }
+                else
+                {
+                    count = j;
+                    break;
+                }
+            }
         }
 
-        List<DataFormat> dats = new List<DataFormat>();
-
-        for (int i = 0; i < grounds.Count; i++)
-        {
-            DataFormat data = new DataFormat();
-
-            data.checkValues = grounds_Info[i];
-            dats.Add(data);
-        }
-
-        CSVUTILS.saveData(dats,"wow");
+        GetUiManager.Active_Pad(false);
 
     }
 
-    private void LoadData()
+
+    Dictionary<string, Excel> dataDictionary = new Dictionary<string, Excel>();
+
+    public Excel FindData(string key)
     {
-        for (int i = 0; i < grounds_Info.Length; i++)
-        {
-            if (grounds_Info[i]==1)
-                grounds[i].buildingCheck = true;
-            else
-                grounds[i].buildingCheck = false;
+        Excel data;
 
+        if(dataDictionary.TryGetValue(key, out data))
+        {
+            return data;
+        }
+
+        return null;
+    }
+
+    private void SaveDic()
+    {
+        for (int i = 0; i < data.objectdatas.Count; i++)
+        {
+            dataDictionary.Add(data.objectdatas[i].prefabName, data.objectdatas[i]);
         }
     }
+
+
+
+
+
+
 }

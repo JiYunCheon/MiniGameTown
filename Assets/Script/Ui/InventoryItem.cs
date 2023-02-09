@@ -15,7 +15,7 @@ public class InventoryItem : Item
         picture.sprite = Resources.Load<Sprite>($"Shop&Inventory_Image/Item_Image/{GetMyData.spriteName}");
     }
 
-    protected override void SetByCount(int _value)
+    public override void SetByCount(int _value)
     {
 
         count = GameManager.Inst.SetCount(GetMyData.name, _value);
@@ -32,11 +32,6 @@ public class InventoryItem : Item
         countText.text = count.ToString();
     }
 
-    public void InventoryCount(int value)
-    {
-        SetByCount(value);
-    }
-
 
     #region Button Event
 
@@ -46,7 +41,7 @@ public class InventoryItem : Item
 
         GameManager.Inst.GetUiManager.On_Click_BuildingMode();
 
-        GameManager.Inst.GetClickManager.GetCur_Inven_Item.InventoryCount(-1);
+        GameManager.Inst.GetClickManager.GetCur_Inven_Item.SetByCount(-1);
     }
 
     #endregion

@@ -25,10 +25,10 @@ abstract public class Interactable : MonoBehaviour
 
     private void Start()
     {
+
         Initialized();
 
         CompareItem();
-
     }
 
     //주변패드의 정보를 저장
@@ -55,7 +55,9 @@ abstract public class Interactable : MonoBehaviour
             }
         }
     }
+
     public virtual void SetMyData(Excel data) => myData = data;
+
 
     private void Initialized()
     {

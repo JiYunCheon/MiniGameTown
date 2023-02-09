@@ -5,9 +5,7 @@ public class ClickManager : MonoBehaviour
 {
     #region Member
 
-    //생성될 건물의 부모
-    [Header("Parents")]
-    [SerializeField] private Transform buildings = null;
+  
 
     //레이어 마스크
     private int buildingLayer = 1 << 6;
@@ -42,8 +40,6 @@ public class ClickManager : MonoBehaviour
 
     #region Property
 
-    public Transform GetBuildings { get { return buildings; } private set { } }
-
     public Building GetCurHitObject { get { return curHitObject; } private set { } }
 
     public Excel GetCurData { get { return curData; } private set { } }
@@ -51,6 +47,13 @@ public class ClickManager : MonoBehaviour
     public InventoryItem GetCur_Inven_Item { get { return cur_Inven_Item; } private set { } }
 
     #endregion
+   
+
+    private void Start()
+    {
+        //로그인 만들면 데이터 받아오는 부분, 오브젝트 로드하는 부분을 나눠야함
+        //GameManager.Inst.LoadData();
+    }
 
     void Update()
     {
@@ -222,13 +225,13 @@ public class ClickManager : MonoBehaviour
 
         Debug.Log(GetPrefab(curData).transform.eulerAngles);
         //진짜 건물 생성
-        Interactable obj = Instantiate<Interactable>(GetPrefab(curData), saveHitPos + new Vector3(0, 0.5f, 0.5f), GetPrefab(curData).transform.rotation, buildings);
+        Interactable obj = Instantiate<Interactable>(GetPrefab(curData), saveHitPos + new Vector3(0, 0.5f, 0.5f), GetPrefab(curData).transform.rotation, GameManager.Inst.GetBuildings);
         if (rotation != Quaternion.identity)
             obj.transform.rotation = rotation;
 
-        obj.NameRotate(rotation.eulerAngles.y);
+        obj.SetMyData(GameManager.Inst.FindData(obj.name.Split("(")[0]));
 
-        obj.SetMyData(curData);
+        obj.NameRotate(rotation.eulerAngles.y);
 
         obj.SaveGround(beforeGround.GetNodeList);
 
@@ -242,7 +245,7 @@ public class ClickManager : MonoBehaviour
     //클릭 될때 호출 기능 들
     private void Interection(Building obj , bool check)
     {
-        foreach (Transform item in GetBuildings)
+        foreach (Transform item in GameManager.Inst.GetBuildings)
         {
             if (item.TryGetComponent<Interactable>(out Interactable interactable))
             {
@@ -299,7 +302,7 @@ public class ClickManager : MonoBehaviour
     //타입에 따라 프래팹을 가지고옴
     private Interactable GetPrefab(Excel data)
     {
-        if (data.myType == OBJECT_TYPE.BUIDING)
+        if (data.myType == OBJECT_TYPE.BUILDING)
         {
             prefab_Building = Resources.Load<Interactable>($"Prefabs/Building/{data.prefabName}");
 
@@ -316,7 +319,7 @@ public class ClickManager : MonoBehaviour
     //타입에 따라 프래팹을 가지고옴
     private PreviewObject GetAlphaPrefab(Excel data)
     {
-        if (data.myType == OBJECT_TYPE.BUIDING)
+        if (data.myType == OBJECT_TYPE.BUILDING)
         {
             alphaPrefab_Building = Resources.Load<PreviewObject>($"Prefabs/Building/{data.alphaPrefabName}");
 

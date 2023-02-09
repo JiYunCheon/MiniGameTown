@@ -77,7 +77,7 @@ public class PreviewObject : Interactable
 
     public void OnClick_Exit()
     {
-        GameManager.Inst.GetClickManager.GetCur_Inven_Item.InventoryCount(1);
+        GameManager.Inst.GetClickManager.GetCur_Inven_Item.SetByCount(1);
 
 
         GameManager.Inst.GetClickManager.PadRefresh();

@@ -10,8 +10,7 @@ public class ContentItem : Item
     [SerializeField] private TextMeshProUGUI gameNameText = null;
     [SerializeField] private TextMeshProUGUI priceText = null;
 
-    [Header("Button")]
-    [SerializeField] private Button priceBtn = null;
+   
 
     private InventoryItem inven_itemPrefab = null;
 
@@ -29,19 +28,6 @@ public class ContentItem : Item
         picture.sprite = Resources.Load<Sprite>($"Shop&Inventory_Image/Item_Image/{GetMyData.spriteName}");
     }
 
-
-    public void CompareSoldOutCheck()
-    {
-
-        if (GetMyData.maxCount <= 0)
-        {
-            priceText.text = $"Already this";
-            priceBtn.interactable = false;
-            return;
-        }
-        GetMyData.maxCount--;
-
-    }
 
     public void OnClick_Price()
     {
