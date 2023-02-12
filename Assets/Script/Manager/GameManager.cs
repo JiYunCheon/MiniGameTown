@@ -1,10 +1,6 @@
-using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using UnityEngine;
-using Microsoft.Unity;
-using TMPro.Examples;
-using System.Threading;
-using UnityEditor;
+using System;
 
 public enum OBJECT_TYPE
 {
@@ -181,6 +177,19 @@ public class GameManager : MonoBehaviour
         #endif
     }
 
+    public void Call_IntractableObj_Method(int method = 0)
+    {
+        foreach (Transform item in GameManager.Inst.GetBuildings)
+        {
+            if (item.TryGetComponent<Interactable>(out Interactable interactable))
+            {
+                if(method == 0)
+                    interactable.ChangeState(true, Color.red);
+                else if (method == 1)
+                    interactable.Active_Name(true);
+            }
+        }
+    }
 
     public void ChangeMode(out bool mode, bool check) => mode = check;
 
@@ -274,7 +283,6 @@ public class GameManager : MonoBehaviour
         Interactable  obj= null;
 
         string type = "";
-        int value = 0;
         int count = 0;
 
         GetUiManager.Active_Pad();

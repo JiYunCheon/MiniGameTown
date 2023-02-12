@@ -30,19 +30,27 @@ public class CameraControll : MonoBehaviour
         StartCoroutine(nameof(CamMoveStart));
     }
 
+
+
     private void Update()
     {
         //업데이트에  들어가는 인풋들을 게임매니저에서 하는게 좋아보임 
         //한번에 관리 할 수 있도록
 
-        if (GameManager.Inst.GetClickManager.selecCheck || GameManager.Inst.buildingMode || GameManager.Inst.GetUiManager.GetUiCheck
+        if (GameManager.Inst.GetClickManager.selecCheck || GameManager.Inst.buildingMode
             || EventSystem.current.IsPointerOverGameObject(GameManager.Inst.pointerID) == true) return;
 
         if (Input.GetMouseButtonDown(0))
         {
             check = false;
-            if (coroutine != null)
+
+            if(coroutine != null)
                 StopCoroutine(coroutine);
+            else if(positionCorou!=null || rotatiomCorou != null)
+            {
+                OriginPosMove();
+            }
+
             time = 0;
         }
 
@@ -100,7 +108,8 @@ public class CameraControll : MonoBehaviour
         }
     }
 
-    public void ChangCameraSize()
+    //모드별로 사이즈 조절
+    public void ChangeCameraSize()
     {
         transform.position = modePos;
 
@@ -127,27 +136,27 @@ public class CameraControll : MonoBehaviour
         {
             Camera.main.orthographicSize= Mathf.Lerp(Camera.main.orthographicSize, value, 1.8f *Time.deltaTime);
             
-            if(zoomCheck && value ==15f && Camera.main.orthographicSize > (value - 0.1f))
+            if(zoomCheck && value ==15f && Camera.main.orthographicSize > (value - 0.01f))
             {
                 Camera.main.orthographicSize = value;
                 yield break;
             }
-            else if(zoomCheck && value == 7f && Camera.main.orthographicSize < (value + 0.1f))
+            else if(zoomCheck && value == 7f && Camera.main.orthographicSize < (value + 0.01f))
             {
                 Camera.main.orthographicSize = value;
                 yield break;
             }
-            else if (!zoomCheck && value == 7f && Camera.main.orthographicSize > (value - 0.1f))
+            else if (!zoomCheck && value == 7f && Camera.main.orthographicSize > (value - 0.01f))
             {
                 Camera.main.orthographicSize = value;
                 yield break;
             }
-            else if(zoomCheck && value == 4f && Camera.main.orthographicSize < (value + 0.1f))
+            else if(zoomCheck && value == 4f && Camera.main.orthographicSize < (value + 0.01f))
             {
                 Camera.main.orthographicSize = value;
                 yield break;
             }
-            else if (zoomCheck && value == 13f && Camera.main.orthographicSize < (value + 0.1f))
+            else if (zoomCheck && value == 13f && Camera.main.orthographicSize < (value + 0.01f))
             {
                 Camera.main.orthographicSize = value;
                 yield break;
@@ -158,19 +167,14 @@ public class CameraControll : MonoBehaviour
 
     }
 
-
-
-
     private bool posProcessing = false;
     private bool roProcessing  = false;
 
-
-
-    public void CameraPosMove(Building obj ,bool check = true)
+    public void CameraPosMove(Building obj ,bool zoomCheck = true)
     {
         StopAllCoroutines();
 
-        if (check)
+        if (zoomCheck)
         {
             if(!posProcessing && !roProcessing)
             {
@@ -178,8 +182,8 @@ public class CameraControll : MonoBehaviour
                 originPos = transform.position;
             }
 
-            StartCoroutine(MoveCoroutine(GameManager.Inst.GetClickManager.GetCurHitObject.GetCameraPos.transform.position));
-            StartCoroutine(RotantionCoroutine(GameManager.Inst.GetClickManager.GetCurHitObject.GetCameraPos.transform.rotation));
+            positionCorou = StartCoroutine(MoveCoroutine(obj.GetCameraPos.position));
+            rotatiomCorou = StartCoroutine(RotantionCoroutine(obj.GetCameraPos.rotation));
 
             camSizeCoroutine = StartCoroutine(LerpCameraSize(4f));
 
@@ -187,24 +191,34 @@ public class CameraControll : MonoBehaviour
         else
         {
 
-            StartCoroutine(MoveCoroutine(originPos));
-            StartCoroutine(RotantionCoroutine(originRo));
+            positionCorou = StartCoroutine(MoveCoroutine(originPos));
+            rotatiomCorou = StartCoroutine(RotantionCoroutine(originRo));
 
             camSizeCoroutine = StartCoroutine(LerpCameraSize(7f,false));
         }
 
     }
 
+    Coroutine positionCorou;
+    Coroutine rotatiomCorou;
+
+
+
     private IEnumerator MoveCoroutine(Vector3 pos)
     {
         posProcessing = true;
+        float time = 0;
+
         while (true)
         {
             transform.position = Vector3.MoveTowards(transform.position, pos, 0.7f);
 
             yield return new WaitForFixedUpdate();
-            if (Vector3.Distance(transform.position, pos) <= 0.2f)
+            time += Time.deltaTime;
+
+            if (time >= 10f)
             {
+                Debug.Log("안녕");
                 transform.position = pos;
                 posProcessing = false;
                 yield break;
@@ -213,27 +227,44 @@ public class CameraControll : MonoBehaviour
         }
     }
 
-
-
     private IEnumerator RotantionCoroutine(Quaternion rotation)
     {
         roProcessing = true;
-        float count = 0;
+        float time = 0;
         while (true)
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime);
 
             yield return new WaitForFixedUpdate();
-            count += Time.deltaTime;
+            time += Time.deltaTime;
 
-            if (count >= 5f)
+            if (time >= 10f)
             {
+                Debug.Log("안녕2");
+
                 transform.rotation = rotation;
                 roProcessing = false;
                 yield break;
             }
         }
 
+    }
+
+    private void OriginPosMove()
+    {
+        StopAllCoroutines();
+
+        if(originRo!=Quaternion.identity)
+        {
+            transform.rotation = originRo;
+            rotatiomCorou = null;
+        }
+        
+        if(originPos!=Vector3.zero)
+        {
+            transform.position = originPos;
+            positionCorou = null;
+        }
     }
 
   

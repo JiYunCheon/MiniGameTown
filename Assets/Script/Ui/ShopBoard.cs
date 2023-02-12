@@ -9,14 +9,17 @@ public class ShopBoard : MonoBehaviour
     [Header("Scroll View")]
     [SerializeField] private ScrollRect Building_Scroll = null;
     [SerializeField] private ScrollRect Object_Scroll = null;
+    [Header("InventoryContentTr")]
+    [SerializeField] private ScrollRect invetoryScroll = null;
 
 
     private void Awake()
     {
-        //Inst_ContentItem(datas);
+        //인벤토리와, 상점에 컨텐트 생성
         Inst_ContentItem();
-
         Inst_InvenItem();
+
+        //비활성화
         gameObject.SetActive(false);
     }
 
@@ -32,26 +35,26 @@ public class ShopBoard : MonoBehaviour
 
     #region Button Event
 
+    //상점 x 클릭
     public void OnClick_Exit()
     {
-        GameManager.Inst.GetUiManager.GetUiCheck = false;
         GameManager.Inst.GetUiManager.Active_ShopBtn();
-        GameManager.Inst.GetUiManager.OnClick_Cancel();
         ActiveControll(false);
     }
 
+    //토클 빌딩 클릭
     public void OnClick_Toggle_Building()
     {
         Scroll_OnOff(true);
     }
 
+    //토클 오브젝트 클릭
     public void OnClick_Toggle_Object()
     {
         Scroll_OnOff(false);
     }
-
-   
-
+    
+    //편집모드 가기 클릭
     public void OnClick_WatingMode()
     {
         GameManager.Inst.GetUiManager.On_Click_WatingMode();
@@ -59,13 +62,16 @@ public class ShopBoard : MonoBehaviour
 
     #endregion
 
+
+    //토글 켜고 끔
     private void Scroll_OnOff(bool active)
     {
         Building_Scroll.gameObject.SetActive(active);
         Object_Scroll.gameObject.SetActive(!active);
     }
 
-    private void Inst_ContentItem()//(Data[] datas)
+    //상점 컨텐트 생성 로직
+    private void Inst_ContentItem()
     {
         Transform scrollTr = null;
 
@@ -85,21 +91,16 @@ public class ShopBoard : MonoBehaviour
             }
 
         }
-
     }
 
-
-
-
-
-
+    //인벤토리 컨텐트 생성 로직
     private void Inst_InvenItem()
     {
         foreach (Transform item in Building_Scroll.content.transform)
         {
             if(item.TryGetComponent<ContentItem>(out ContentItem content))
             {
-                content.GenerateContent();
+                content.GenerateContent(invetoryScroll.content.transform);
             }
         }
 
@@ -107,7 +108,7 @@ public class ShopBoard : MonoBehaviour
         {
             if (item.TryGetComponent<ContentItem>(out ContentItem content))
             {
-                content.GenerateContent();
+                content.GenerateContent(invetoryScroll.content.transform);
             }
         }
 

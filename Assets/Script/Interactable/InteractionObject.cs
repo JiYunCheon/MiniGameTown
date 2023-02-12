@@ -9,9 +9,9 @@ public class InteractionObject : Interactable
     {
         CompleteEffect();
     }
-    public override void DeSelect_Select_InteractableObj()
+    public override void DeSelect_InteractableObj()
     {
-        base.DeSelect_Select_InteractableObj();
+        base.DeSelect_InteractableObj();
     }
 
     public override void Select_InteractableObj()

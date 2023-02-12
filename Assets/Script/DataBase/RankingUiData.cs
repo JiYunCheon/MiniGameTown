@@ -50,7 +50,6 @@ public class RankingUiData : MonoBehaviour
 
     [Header("======UserRank Prefab======")]
     [SerializeField] private UiScore infoBox = null;
-    [SerializeField] private Transform canvars = null;
     [Header("")]
 
     //Cur Type

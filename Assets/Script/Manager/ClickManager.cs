@@ -1,11 +1,10 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System;
 
 public class ClickManager : MonoBehaviour
 {
     #region Member
-
-  
 
     //레이어 마스크
     private int buildingLayer = 1 << 6;
@@ -57,7 +56,7 @@ public class ClickManager : MonoBehaviour
 
     void Update()
     {
-        //건물이 선택 되었거나, 유아이 위를 클릭했을 경우 리턴 
+        //유아이 위를 클릭했을 경우 리턴 
         if (selecCheck || EventSystem.current.IsPointerOverGameObject(GameManager.Inst.pointerID) == true) return;
 
 
@@ -126,8 +125,10 @@ public class ClickManager : MonoBehaviour
                 //이전 오브젝트와 다른 오브젝트를 클릭했을 경우
                 else if (curHitObject.transform.gameObject != hit.transform.transform.gameObject)
                 {
-                    GameManager.Inst.GetUiManager.SeclectStateUi(false);
-
+                    Interection(obj, true);
+                }
+                else if(curHitObject.transform.gameObject == hit.transform.transform.gameObject)
+                {
                     Interection(obj, true);
                 }
 
@@ -146,8 +147,6 @@ public class ClickManager : MonoBehaviour
             //상호작용 가능한 객체인지 확인
             if (hit.transform.TryGetComponent<Interactable>(out Interactable obj))
             {
-                SetInfo(obj.GetInventoryItem, obj.GetMyData);
-
                 GameManager.Inst.GetUiManager.On_Click_BuildingMode();
 
                 obj.ChangeState(false, Color.white);
@@ -259,7 +258,6 @@ public class ClickManager : MonoBehaviour
         curHitObject.SetSelectCheck(check);
         GameManager.Inst.curGameName = obj.GetMyData.packageName;
         selecCheck = true;
-        GameManager.Inst.GetUiManager.SeclectStateUi(check);
     }
     
     //변수 초기화
@@ -274,9 +272,11 @@ public class ClickManager : MonoBehaviour
     public void BuildingRefresh()
     {
         selecCheck = false;
-        curHitObject.DeSelect_Select_InteractableObj();
+        curHitObject.DeSelect_InteractableObj();
+
         curHitObject.SetSelectCheck(false);
-        GameManager.Inst.GetUiManager.SeclectStateUi(false);
+        GetCurHitObject.GetEntrance.ActiveCollider(false);
+
         Refresh();
     }
 
@@ -289,12 +289,13 @@ public class ClickManager : MonoBehaviour
     }
 
     //클릭한 객체의 정보를 가지고 옴
-    //객체마다 정보를 가지고 있기때문에 필요없을 듯
     public void SetInfo(InventoryItem inventoryItem, Excel data)
     {
         curData = data;
         cur_Inven_Item = inventoryItem;
 
+        //활성화 될때 함수를 넣어놨는데 
+        //델리게이트 체인으로 바꿔도 됨
         GameManager.Inst.GetUiManager.Active_Pad();
         GameManager.Inst.GetUiManager.Active_Pad(false);
         GameManager.Inst.GetUiManager.Active_Pad();
@@ -334,5 +335,4 @@ public class ClickManager : MonoBehaviour
         }
     }
 
-  
 }

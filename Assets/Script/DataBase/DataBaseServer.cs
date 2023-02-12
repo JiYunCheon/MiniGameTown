@@ -59,7 +59,6 @@ public class DataBaseServer : MonoBehaviour
 
     #region Member
 
-    private UiController uiController = null;
     //cur User Info
     [HideInInspector] public UserInfo loginUser = null;
     //All UserList

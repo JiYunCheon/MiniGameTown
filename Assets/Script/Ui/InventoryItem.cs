@@ -9,16 +9,17 @@ public class InventoryItem : Item
 {
     [SerializeField] private TextMeshProUGUI countText = null;
 
-
+    //이미지를 데이터에 따라 바꿈
     protected override void Initialized()
     {
         picture.sprite = Resources.Load<Sprite>($"Shop&Inventory_Image/Item_Image/{GetMyData.spriteName}");
     }
 
+    //데이터에 카운트를 깍거나 더하고 개수에따라 표시하고 텍스트에 표시
     public override void SetByCount(int _value)
     {
 
-        count = GameManager.Inst.SetCount(GetMyData.name, _value);
+        int count = GameManager.Inst.SetCount(GetMyData.name, _value);
 
         if (count <= 0)
         {
@@ -35,6 +36,7 @@ public class InventoryItem : Item
 
     #region Button Event
 
+    //아이템을 눌렀을 때 실행
     public void OnClick_Item()
     {
         GameManager.Inst.GetClickManager.SetInfo(this,GetMyData);

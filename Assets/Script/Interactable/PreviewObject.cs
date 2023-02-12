@@ -2,24 +2,22 @@ using UnityEngine;
 
 public class PreviewObject : Interactable
 {
-
+    [Header("Ui")]
     [SerializeField] private GameObject buildOption = null;
+
     private Material defaultMaterial = null;
     private Material redMaterial = null;
 
     Quaternion rotation = Quaternion.identity;
     private int count = 0;
 
-
     private void Awake()
     {
-        //참조하는게 더 좋을듯
         defaultMaterial = Resources.Load<Material>("Material & Texture/Colors_Alpha 1");
         redMaterial = Resources.Load<Material>("Material & Texture/Colors_Alpha 2");
 
         if (renderer == null)
             renderer = GetComponent<Renderer>();
-
     }
 
     //편집 Ui Active 컨트롤
@@ -40,9 +38,9 @@ public class PreviewObject : Interactable
     }
 
 
-
     #region Button Event
 
+    //Ui 확인을 눌렀을때
     public void OnClick_Confirm()
     {
         if (!GameManager.Inst.GetClickManager.InstCompare())
@@ -57,6 +55,7 @@ public class PreviewObject : Interactable
         Destroy(this.gameObject);
     }
 
+    //Ui 회전을 눌렀을때
     public void OnClick_Rotation()
     {
         if (count == 0)
@@ -76,10 +75,10 @@ public class PreviewObject : Interactable
         count++;
     }
 
+    //Ui x를 눌렀을때
     public void OnClick_Exit()
     {
         GameManager.Inst.GetClickManager.GetCur_Inven_Item.SetByCount(1);
-
 
         GameManager.Inst.GetClickManager.PadRefresh();
 
@@ -87,7 +86,6 @@ public class PreviewObject : Interactable
 
         Destroy(this.gameObject);
     }
-
 
 
     #endregion

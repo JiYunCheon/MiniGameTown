@@ -7,7 +7,6 @@ public class EffectManager : MonoBehaviour
     private Effect spriteUiEffect = null;
     private Effect spriteEffect = null;
 
-    [SerializeField] private AnimationCurve myAc = null;
     [SerializeField] private Transform canvarsTr = null;
 
     private void Awake()

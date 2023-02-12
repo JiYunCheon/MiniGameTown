@@ -9,9 +9,12 @@ public class UiManager : MonoBehaviour
 {
     #region Member
 
+    [Header("Canvars")]
+    [SerializeField] private Transform canvarsTr = null;
+
     [Header("Button")]
     [SerializeField] private GameObject gameInBtn       = null;
-    [SerializeField] private Button buildingShopBtn = null;
+    [SerializeField] private Button buildingShopBtn     = null;
 
     [Header("ShopUi")]
     [SerializeField] private ShopBoard shopBoard        = null;
@@ -22,68 +25,55 @@ public class UiManager : MonoBehaviour
     [SerializeField] private Material floorMaterial     = null;
     [SerializeField] public PadController padBoard        = null;
 
-    [Header("Result Ui")]
-    [SerializeField] private GameObject successWindow = null;
+    [Header("Iventory")]
+    [SerializeField] private RectTransform inventoryRect = null;
+    [SerializeField] private Image invenUpDownBtn;
+    [SerializeField] private Sprite[] invenBtnImage;
+    [SerializeField] private float upPos = 0;
+    [SerializeField] private float downPos = 0;
 
+    [Header("GameMoneyText")]
     [SerializeField] private TextMeshProUGUI gameMoneyText = null;
+
     //CheckValue
-    private bool uiCheck = false;
-    private int clclickCount = 0;
+    private int clickCount = 0;
 
     Color blackColor = new Color(113f / 255f, 113f / 255f, 113f / 255f);
-
-    [SerializeField] private Transform invenContentTr = null;
-    [SerializeField] private RectTransform inventoryRect = null;
-
-    private ContentItem cur_Content_Item = null;
-
-    public Transform GetInvenContentTr { get { return invenContentTr; } private set { } }
-
+    Coroutine moveCoroutine;
 
     #endregion
 
     #region Property
 
-    public bool GetUiCheck { get { return uiCheck; } set { uiCheck = value; } }
-
-    public ShopBoard GetShopBoard { get { return shopBoard; } private set { } }
+    public Transform GetCanvarsTr { get { return canvarsTr; } private set { } }
 
     #endregion
 
     private void Awake()
     {
+        //혹시나 편집모드나 빌딩모드에서 강종했을 때를 대비해 
         floorMaterial.color = Color.white;
+        //현재돈을 표시
         InputGameMoney(GameManager.Inst.GetPlayerData.gameMoney.ToString());
+
+        //인벤토리 업다운 이미지
         invenBtnImage = new Sprite[2];
         invenBtnImage[0] = Resources.Load<Sprite>("Shop&Inventory_Image/Inven/iven_up");
         invenBtnImage[1] = Resources.Load<Sprite>("Shop&Inventory_Image/Inven/iven_down");
 
     }
 
+    //게임머니 표시 유아이
     public void InputGameMoney(string gameMoneyText)
     {
         this.gameMoneyText.text = gameMoneyText;
     }
 
-    public void Set_Content_Item(ContentItem item)
-    {
-        cur_Content_Item = item;
-    }
-
-    //건물이 선택 되었는지 체크    
-    public void SeclectStateUi(bool check)
-    {
-        if (check)
-            buildingShopBtn.interactable = false;
-        else
-            buildingShopBtn.interactable = true;
-    }
-
+    //홈 유아이 버튼 활성화 제어
     public void Active_HomeUi(bool activeSelf = true)
     {
         homeUi.SetActive(activeSelf);
     }
-
 
     //게임인 Ui 활성화 제어
     public void Active_GameInBtn(bool activeSelf = true)
@@ -96,15 +86,9 @@ public class UiManager : MonoBehaviour
         {
             gameInBtn.SetActive(activeSelf);
 
+            //빌딩들의 이름을 끔
+            GameManager.Inst.Call_IntractableObj_Method(1);
 
-            //반복문 중복 제거
-            foreach (Transform item in GameManager.Inst.GetBuildings)
-            {
-                if (item.TryGetComponent<Interactable>(out Interactable interactable))
-                {
-                    interactable.Active_Name(true);
-                }
-            }
             GameManager.Inst.GetUiManager.Active_HomeUi(true);
         }
 
@@ -114,7 +98,6 @@ public class UiManager : MonoBehaviour
     public void Active_Pad(bool activeSelf = true)
     {
         padBoard.gameObject.SetActive(activeSelf);
-        //padBoard.ActivePadByType(cur_Content_Item.GetMyData.MyType);
     }
 
     //ShopBoardUi 활성화 제어
@@ -122,145 +105,106 @@ public class UiManager : MonoBehaviour
     {
         buildingShopBtn.gameObject.SetActive(activeSelf);
     }
-
-    public void Active_S_Window(bool active = true)
-    {
-        successWindow.SetActive(active);
-    }
-
+   
 
     #region ButtonEvent
 
+    //게임 들어가기
     public void OnClick_GameIn()
     {
-        OnClick_Exit();
+        OnClick_GameInExit();
         InGame.openApp(GameManager.Inst.curGameName);
     }
 
-    public void OnClick_Exit()
+    //게임 들어가기 취소
+    public void OnClick_GameInExit()
     {
+        //카메라 위치 초기화
         GameManager.Inst.GetCameraMove.CameraPosMove(null,false);
 
-        GameManager.Inst.GetClickManager.GetCurHitObject.GetEntrance.ActiveCollider(false);
+        //클릭된 오브젝트 초기화
         GameManager.Inst.GetClickManager.BuildingRefresh();
-        GameManager.Inst.GetClickManager.GetCurHitObject.DeSelect_Select_InteractableObj();
 
-        SeclectStateUi(false);
         Active_GameInBtn(false);
         Active_ShopBtn(true);
     }
 
+    //상점 ui
     public void OnClick_BuildingShop()
     {
-        GetUiCheck = true;
         shopBoard.ActiveControll();
 
         Active_ShopBtn(false);
     }
 
+    //빌딩모드로 이동
     public void On_Click_BuildingMode()
     {
-        GameManager.Inst.ChangeMode(out GameManager.Inst.waitingMode, false);
-        GameManager.Inst.ChangeMode(out GameManager.Inst.buildingMode, true);
+        ModeChange(true, false);
 
         padBoard.ActivePadByType(GameManager.Inst.GetClickManager.GetCurData.myType);
-        //클릭매니저로
-        foreach (Transform item in GameManager.Inst.GetBuildings)
-        {
-            if (item.TryGetComponent<Interactable>(out Interactable interactable))
-            {
-                interactable.ChangeState(true,Color.red);
-            }
-        }
-        ModeControll(false, true, blackColor);
+
+        GameManager.Inst.Call_IntractableObj_Method();
+
+        ModeChangeSquence(false, true, blackColor);
     }
 
+    //편집모드로 이동
     public void On_Click_WatingMode()
     {
-        //조건문으로 쓸대없는 함수실행 막기
-        GameManager.Inst.ChangeMode(out GameManager.Inst.buildingMode, false);
-        GameManager.Inst.ChangeMode(out GameManager.Inst.waitingMode, true);
+        ModeChange(false, true);
 
         Vector2 pos = inventoryRect.anchoredPosition;
         pos.y = upPos;
         inventoryRect.anchoredPosition = pos;
 
-        ModeControll(true,false,blackColor);
+        ModeChangeSquence(true,false,blackColor);
     }
 
+    //모드 나가기
     public void OnClick_ModeExit()
     {
-        GetUiCheck = false;
-
-        GameManager.Inst.ChangeMode(out GameManager.Inst.buildingMode, false);
-        GameManager.Inst.ChangeMode(out GameManager.Inst.waitingMode, false);
+        ModeChange(false, false);
 
         Active_ShopBtn();
 
-        ModeControll(false, false, Color.white);
-
+        ModeChangeSquence(false, false, Color.white);
     }
 
+    //모드 나가고 상점 이동
     public void OnClick_ModeExit_Shop()
     {
-        GetUiCheck = false;
-        //조건문으로 쓸대없는 함수실행 막기
-        GameManager.Inst.ChangeMode(out GameManager.Inst.buildingMode, false);
-        GameManager.Inst.ChangeMode(out GameManager.Inst.waitingMode, false);
-
-        Active_ShopBtn();
-
-        ModeControll(false, false, Color.white);
+        OnClick_ModeExit();
 
         OnClick_BuildingShop();
     }
 
-    public void OnClick_PurchaseSuccess()
-    {
-        GameManager.Inst.GetUiManager.On_Click_WatingMode();
-
-        GameManager.Inst.SetCount(GameManager.Inst.GetPlayerData.gameMoney_Key, -cur_Content_Item.GetMyData.price);
-
-        InputGameMoney(GameManager.Inst.GetPlayerData.gameMoney.ToString());
-
-        cur_Content_Item.GetItem.SetByCount(1);
-
-        cur_Content_Item.ComparerMaxCount();
-
-        Active_S_Window(false);
-
-    }
-
-    public void OnClick_Cancel()
-    {
-        Active_S_Window(false);
-    }
-
-
+    //신변경
     public void OnClick_Go_2DTown()
     {
+        //신 변경
         SceneManager.LoadScene("2DTown");
     }
 
     public void Onclick_Save()
     {
+        //데이터 저장
         GameManager.Inst.SaveData();
     }
 
     public void Onclick_GameExit()
     {
+        //데이터 저장
         GameManager.Inst.SaveData();
 
+        //데이터가 저장된 후 나가기
         StartCoroutine(WaitForSaveData());
-        
     }
-
-
 
 
     #endregion
 
-
+    
     private IEnumerator WaitForSaveData()
     {
         //기다리는 동안 ui?
@@ -270,50 +214,53 @@ public class UiManager : MonoBehaviour
 
     }
 
+    //모드 컨트롤
+    private void ModeChange(bool buildingMode, bool editMode)
+    {
+        if(GameManager.Inst.buildingMode!=buildingMode)
+        {
+            GameManager.Inst.ChangeMode(out GameManager.Inst.buildingMode, buildingMode);
+        }
+        if (GameManager.Inst.waitingMode != editMode)
+        {
+            GameManager.Inst.ChangeMode(out GameManager.Inst.waitingMode, editMode);
+        }
+    }
 
-
-    private void ModeControll(bool modeBtn,bool pad,Color color)
+    //모드가 변경되면서 실행될 시퀀스
+    private void ModeChangeSquence(bool modeBtn,bool pad,Color color)
     {
         shopBoard.ActiveControll(false);
-
         
         floorMaterial.color = color;
+
         modeBtnUi.SetActive(modeBtn);
         bool check = !GameManager.Inst.waitingMode && !GameManager.Inst.buildingMode;
         homeUi.SetActive(check);
 
         GameManager.Inst.GetUiManager.Active_Pad(pad);
-        GameManager.Inst.GetCameraMove.ChangCameraSize();
+        GameManager.Inst.GetCameraMove.ChangeCameraSize();
     }
 
-    Coroutine moveCoroutine;
-    [SerializeField] private Sprite[] invenBtnImage;
-    [SerializeField] private Image invenUpDownBtn;
-    [SerializeField] private float upPos = 0;
-    [SerializeField] private float downPos = 0;
-
-
+    //인벤토리 상하 이동
     public void OnClick_InvenMove()
     {
        
-        if(clclickCount==0)
+        if(clickCount==0)
         {
             StopAllCoroutines();
-            Debug.Log(invenBtnImage[0]);
             invenUpDownBtn.sprite = invenBtnImage[0];
             moveCoroutine = StartCoroutine(Move(downPos));
-            clclickCount++;
+            clickCount++;
         }
-        else if(clclickCount==1)
+        else if(clickCount==1)
         {
             StopAllCoroutines();
-            Debug.Log(invenBtnImage[1]);
             invenUpDownBtn.sprite = invenBtnImage[1];
             moveCoroutine = StartCoroutine(Move(upPos));
-            clclickCount = 0;
+            clickCount = 0;
         }
     }
-
     IEnumerator Move(float ypos)
     {
         Vector2 pos = inventoryRect.anchoredPosition;

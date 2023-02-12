@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 1591
+  controlID: 109
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 1592
+  controlID: 110
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 1593
+  controlID: 111
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -475,9 +475,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -2.5132816, y: 19.989016, z: 39.94134}
+    m_Target: {x: 622.86176, y: 600.27954, z: -1264.8875}
     speed: 2
-    m_Value: {x: -2.5132816, y: 19.989016, z: 39.94134}
+    m_Value: {x: 622.86176, y: 600.27954, z: -1264.8875}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -524,13 +524,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.1791924, y: -0.8279128, z: 0.36077994, w: 0.39205256}
+    m_Target: {x: 0.14471257, y: 0.054901525, z: -0.015122818, w: 0.9885446}
     speed: 2
-    m_Value: {x: 0.17906557, y: -0.8273269, z: 0.3605246, w: 0.3917751}
+    m_Value: {x: 0.14461102, y: 0.054863, z: -0.015112205, w: 0.98785084}
   m_Size:
-    m_Target: 0.8660254
+    m_Target: 53.262188
     speed: 2
-    m_Value: 0.8660254
+    m_Value: 53.262188
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -606,7 +606,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 8096}
   vertical: 0
-  controlID: 1438
+  controlID: 30
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -674,22 +674,23 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Script/FirstScene
+    - Assets/Script/Manager
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Script/FirstScene
+  - Assets/Script/Manager
   m_LastFoldersGridSize: 16
-  m_LastProjectPath: C:\Users\KGA_20\Desktop\Main\MiniGameTown
+  m_LastProjectPath: "C:\\Users\\\uCC9C\uC9C0\uC724\\Desktop\\\uC0C8 \uD3F4\uB354
+    (2)\\MiniGameTown"
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 202}
-    m_SelectedIDs: 98ca0000
-    m_LastClickedID: 51864
-    m_ExpandedIDs: 0000000022b8000032b8000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 330}
+    m_SelectedIDs: 94670000
+    m_LastClickedID: 26516
+    m_ExpandedIDs: 000000003c6700003e670000406700004267000044670000466700004867000052670000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -717,7 +718,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000022b8000000ca9a3bffffff7f
+    m_ExpandedIDs: 000000003c6700003e6700004067000042670000446700004667000048670000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -742,8 +743,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 786b0000
-    m_LastClickedInstanceID: 27512
+    m_SelectedInstanceIDs: e4180000
+    m_LastClickedInstanceID: 6372
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000c22a020056d000001aa1010018a10100f82e0100d62e0100000000007e2e0000c0790000fc790000c4790000d2720000b6720000aa720000f2ba000000bb000036b7010038b701003ab701005ab7010074b7010072b7010070b701006eb701006cb701006ab7010068b7010066b7010060b7010078b701004eb70100b0ba000052720000ae72000002d60000fed500000ed600000ad6000006d6000012d60000b67d00003abc000012390200
     m_RenameOverlay:
@@ -830,9 +831,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 786b0000
+      m_SelectedIDs: e4180000
       m_LastClickedID: 0
-      m_ExpandedIDs: 788affff08a2ffff82a3ffff18ca00003aca0000
+      m_ExpandedIDs: fefaffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 

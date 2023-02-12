@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking.Types;
 
+
 public class PadSpawner : MonoBehaviour
 {
     [Header("Prefab")]
@@ -16,6 +17,7 @@ public class PadSpawner : MonoBehaviour
     //설치될 패드의 2차원 배열
     private Ground[,] pads;
 
+
     private void Awake()
     {
         GeneratePad();
@@ -24,7 +26,9 @@ public class PadSpawner : MonoBehaviour
     private void OnEnable()
     {
         if(GameManager.Inst.GetClickManager.GetCurData!=null)
+        {
             SetPadNode(GameManager.Inst.GetClickManager.GetCurData.occupyPad, GameManager.Inst.GetClickManager.GetCurData.hvCheck);
+        }
     }
     private void OnDisable()
     {
