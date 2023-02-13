@@ -9,6 +9,9 @@ public class InteractionObject : Interactable
     {
         CompleteEffect();
     }
+
+
+    //구현을 해야함
     public override void DeSelect_InteractableObj()
     {
         base.DeSelect_InteractableObj();

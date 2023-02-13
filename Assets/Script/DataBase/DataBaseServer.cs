@@ -19,6 +19,7 @@ public class UserInfo : IComparable
     public string pwd;
 
     public string[] score;
+    public int gamemoney;
 
     public string[] objname;
     public string[] posX;
@@ -27,7 +28,10 @@ public class UserInfo : IComparable
     public string[] rotY;
     public string[] grounds_Save;
 
+    public string[] objectCount;
+
     public float curScore;
+
 
     public int CompareTo(object obj)
     {
@@ -103,7 +107,6 @@ public class DataBaseServer : MonoBehaviour
         if (isProcessing) return;
 
         isProcessing = true;
-
         string jsonData = JsonUtility.ToJson(loginUser);
         Debug.Log(jsonData);
 
@@ -173,13 +176,33 @@ public class DataBaseServer : MonoBehaviour
             }
             else
             {
-            
+
+                Debug.Log(request.downloadHandler.text);
                 loginUser = JsonConvert.DeserializeObject<UserInfo>(request.downloadHandler.text);
 
                 GameManager.Inst.objectsName = loginUser.objname;
                 GameManager.Inst.objectsPos = new Vector3[loginUser.objname.Length];
                 GameManager.Inst.objectsRot = new Vector3[loginUser.objname.Length];
                 GameManager.Inst.grounds_Info = new int[loginUser.objname.Length];
+
+
+                int number = 0;
+                GameManager.Inst.myPlayerData.objectCount=new int[loginUser.objectCount.Length];
+
+                for (int i = 0; i < GameManager.Inst.myPlayerData.objectCount.Length; i++)
+                {
+                    if(!int.TryParse(loginUser.objectCount[i], out number))
+                    {
+                        GameManager.Inst.myPlayerData.objectCount[i] = number;
+                    }
+                    else
+                    {
+                        GameManager.Inst.myPlayerData.objectCount[i] = int.Parse(loginUser.objectCount[i]);
+                    }
+                }
+                GameManager.Inst.myPlayerData.gameMoney = loginUser.gamemoney;
+
+
 
                 for (int i = 0; i < loginUser.objname.Length; i++)
                 {
@@ -193,7 +216,6 @@ public class DataBaseServer : MonoBehaviour
             }
 
             isProcessing = false;
-            GameManager.Inst.LoadObj();
         }
     }
     //Call Method

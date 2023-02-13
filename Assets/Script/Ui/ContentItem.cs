@@ -14,7 +14,6 @@ public class ContentItem : Item
     [SerializeField] private Button priceBtn = null;
 
     [Header("Prefab")]
-    [SerializeField] private PurchaseResult successWindowPrfab = null;
     [SerializeField] private InventoryItem inven_itemPrefab = null;
 
     private InventoryItem item;
@@ -32,13 +31,13 @@ public class ContentItem : Item
     //가격버튼을 눌렀을 때 실행되는 함수
     public void OnClick_Price()
     {
-        if (GetMyData.price < GameManager.Inst.GetPlayerData.gameMoney)
+        if (GetMyData.price < GameManager.Inst.GetPlayerData.gamemoney)
         {
-            InstantiatePurchaseReslut(this,GameManager.Inst.GetUiManager.GetCanvarsTr);
+            InstantiatePurchaseReslut(this);
         }
         else
         {
-            GameManager.Inst.GetEffectManager.Inst_SpriteUiEffect(GameManager.Inst.CurMousePos(), "EffectImage/PurchaseFailed_Image");
+            GameManager.Inst.GetEffectManager.Inst_SpriteUiEffect(Input.mousePosition, "EffectImage/PurchaseFailed_Image");
         }
     }
     
@@ -47,6 +46,8 @@ public class ContentItem : Item
     {
         item = Instantiate<InventoryItem>(inven_itemPrefab, parent);
         item.SetMyData(GetMyData);
+        item.countIndex = this.countIndex;
+
     }
 
     //다 팔린지 판단
@@ -60,10 +61,11 @@ public class ContentItem : Item
     }
 
     //결과창 생성
-    private void InstantiatePurchaseReslut(ContentItem contentItem,Transform canvars)
+    private void InstantiatePurchaseReslut(ContentItem contentItem)
     {
-        PurchaseResult resultWindow = Instantiate<PurchaseResult>(successWindowPrfab, canvars);
-        resultWindow.SetMyContent(contentItem);
+        GameManager.Inst.GetUiManager.GetSuccessWindow.gameObject.SetActive(true);
+        GameManager.Inst.GetUiManager.GetSuccessWindow.SetMyContent(contentItem);
+
     }
    
 

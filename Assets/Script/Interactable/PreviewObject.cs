@@ -45,9 +45,11 @@ public class PreviewObject : Interactable
     {
         if (!GameManager.Inst.GetClickManager.InstCompare())
         {
-            GameManager.Inst.GetEffectManager.Inst_SpriteUiEffect(GameManager.Inst.CurMousePos(), "EffectImage/MakeFailed_Image");
+            GameManager.Inst.GetEffectManager.Inst_SpriteUiEffect(Input.mousePosition, "EffectImage/MakeFailed_Image");
             return;
         }
+
+        GameManager.Inst.GetClickManager.GetCur_Inven_Item.SetByCount(-1);
 
         GameManager.Inst.GetClickManager.InstObject(rotation);
         Active_BuildOption(false);
@@ -82,7 +84,7 @@ public class PreviewObject : Interactable
 
         GameManager.Inst.GetClickManager.PadRefresh();
 
-        GameManager.Inst.GetUiManager.On_Click_WatingMode();
+        GameManager.Inst.GetUiManager.On_Click_WaitingMode();
 
         Destroy(this.gameObject);
     }

@@ -71,7 +71,7 @@ MonoBehaviour:
   - name: Cart
     maxCount: 1
     price: 200
-    occupyPad: 4
+    occupyPad: 2
     Info: It is Cart
     spriteName: Cart
     packageName: 

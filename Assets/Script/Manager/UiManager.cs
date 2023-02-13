@@ -9,9 +9,6 @@ public class UiManager : MonoBehaviour
 {
     #region Member
 
-    [Header("Canvars")]
-    [SerializeField] private Transform canvarsTr = null;
-
     [Header("Button")]
     [SerializeField] private GameObject gameInBtn       = null;
     [SerializeField] private Button buildingShopBtn     = null;
@@ -35,6 +32,10 @@ public class UiManager : MonoBehaviour
     [Header("GameMoneyText")]
     [SerializeField] private TextMeshProUGUI gameMoneyText = null;
 
+    [Header("PurchaseComplteUi")]
+    [SerializeField] private PurchaseResult successWindow = null;
+
+
     //CheckValue
     private int clickCount = 0;
 
@@ -45,7 +46,7 @@ public class UiManager : MonoBehaviour
 
     #region Property
 
-    public Transform GetCanvarsTr { get { return canvarsTr; } private set { } }
+    public PurchaseResult GetSuccessWindow { get { return successWindow; } private set { } }
 
     #endregion
 
@@ -54,7 +55,7 @@ public class UiManager : MonoBehaviour
         //혹시나 편집모드나 빌딩모드에서 강종했을 때를 대비해 
         floorMaterial.color = Color.white;
         //현재돈을 표시
-        InputGameMoney(GameManager.Inst.GetPlayerData.gameMoney.ToString());
+        InputGameMoney(GameManager.Inst.GetPlayerData.gamemoney.ToString());
 
         //인벤토리 업다운 이미지
         invenBtnImage = new Sprite[2];
@@ -142,6 +143,8 @@ public class UiManager : MonoBehaviour
     {
         ModeChange(true, false);
 
+        Debug.Log(GameManager.Inst.GetClickManager.GetCurData.myType.ToString());
+
         padBoard.ActivePadByType(GameManager.Inst.GetClickManager.GetCurData.myType);
 
         GameManager.Inst.Call_IntractableObj_Method();
@@ -150,7 +153,7 @@ public class UiManager : MonoBehaviour
     }
 
     //편집모드로 이동
-    public void On_Click_WatingMode()
+    public void On_Click_WaitingMode()
     {
         ModeChange(false, true);
 

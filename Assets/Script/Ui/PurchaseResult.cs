@@ -13,13 +13,13 @@ public class PurchaseResult : MonoBehaviour
     public void OnClick_PurchaseSuccess()
     {
         //편집모드로 이동
-        GameManager.Inst.GetUiManager.On_Click_WatingMode();
+        GameManager.Inst.GetUiManager.On_Click_WaitingMode();
 
         //게임머니를 깎음
-        GameManager.Inst.SetCount(GameManager.Inst.GetPlayerData.gameMoney_Key, -curContent.GetMyData.price);
+        GameManager.Inst.TrySetGameMoney(-curContent.GetMyData.price);
 
         //게임머니 유아이에 값표시
-        GameManager.Inst.GetUiManager.InputGameMoney(GameManager.Inst.GetPlayerData.gameMoney.ToString());
+        GameManager.Inst.GetUiManager.InputGameMoney(GameManager.Inst.GetPlayerData.gamemoney.ToString());
 
         //현재 개수를 추가
         curContent.GetItem.SetByCount(1);
@@ -27,14 +27,14 @@ public class PurchaseResult : MonoBehaviour
         //max카운트 확인
         curContent.ComparerMaxCount();
 
-        //유아이 파괴
-        Destroy(this.gameObject);
+        gameObject.SetActive(false);
+
     }
 
     //구매취소 시 실행
     public void OnClick_Cancel()
     {
-        Destroy(this.gameObject);
+        gameObject.SetActive(false);
     }
 
 }

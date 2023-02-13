@@ -9,6 +9,8 @@ abstract public class Item : MonoBehaviour
 {
     [Header("Image")]
     [SerializeField] protected Image picture;
+    [HideInInspector] public int countIndex = 0;
+
 
     private Excel myData = null;
     public Excel GetMyData { get { return myData; } private set { } }
@@ -30,7 +32,7 @@ abstract public class Item : MonoBehaviour
     //현재 개수를 적용하여 유아이에 표시
     public virtual void SetByCount(int value)
     {
-        GameManager.Inst.SetCount(myData.name,value);
+        GameManager.Inst.TrySetValue(countIndex, value);
     }
 
     

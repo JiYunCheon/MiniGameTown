@@ -8,7 +8,7 @@ public class CameraControll : MonoBehaviour
     private float cameraAxisX = 0;
 
     //코루틴 종료 확인 체크
-    private bool check = false;
+    private bool moveProcessing = false;
 
     float time = 0;
 
@@ -25,6 +25,11 @@ public class CameraControll : MonoBehaviour
     [SerializeField] private float yMin = 0;
     [SerializeField] private float yMax = 0;
 
+    private bool posProcessing = false;
+    private bool roProcessing = false;
+    private Coroutine positionCorou;
+    private Coroutine rotatiomCorou;
+
     private void Awake()
     {
         StartCoroutine(nameof(CamMoveStart));
@@ -37,12 +42,12 @@ public class CameraControll : MonoBehaviour
         //업데이트에  들어가는 인풋들을 게임매니저에서 하는게 좋아보임 
         //한번에 관리 할 수 있도록
 
-        if (GameManager.Inst.GetClickManager.selecCheck || GameManager.Inst.buildingMode
+        if (GameManager.Inst.GetClickManager.selectCheck || GameManager.Inst.buildingMode
             || EventSystem.current.IsPointerOverGameObject(GameManager.Inst.pointerID) == true) return;
 
         if (Input.GetMouseButtonDown(0))
         {
-            check = false;
+            moveProcessing = false;
 
             if(coroutine != null)
                 StopCoroutine(coroutine);
@@ -76,9 +81,9 @@ public class CameraControll : MonoBehaviour
 
     private IEnumerator CamMoveStart()
     {
-        if (check == true) yield break;
+        if (moveProcessing == true) yield break;
         float count =2f;
-        check = true;
+        moveProcessing = true;
 
         float xmin = -1;
         float ymin = -1;
@@ -100,7 +105,7 @@ public class CameraControll : MonoBehaviour
 
             if (count<1f)
             {
-                check = false;
+                moveProcessing = false;
                 yield break;
             }
 
@@ -136,6 +141,8 @@ public class CameraControll : MonoBehaviour
         {
             Camera.main.orthographicSize= Mathf.Lerp(Camera.main.orthographicSize, value, 1.8f *Time.deltaTime);
             
+            //이프문 하나로 묶기
+
             if(zoomCheck && value ==15f && Camera.main.orthographicSize > (value - 0.01f))
             {
                 Camera.main.orthographicSize = value;
@@ -167,9 +174,7 @@ public class CameraControll : MonoBehaviour
 
     }
 
-    private bool posProcessing = false;
-    private bool roProcessing  = false;
-
+    
     public void CameraPosMove(Building obj ,bool zoomCheck = true)
     {
         StopAllCoroutines();
@@ -199,10 +204,9 @@ public class CameraControll : MonoBehaviour
 
     }
 
-    Coroutine positionCorou;
-    Coroutine rotatiomCorou;
+  
 
-
+    //코루틴 하나로 묶기
 
     private IEnumerator MoveCoroutine(Vector3 pos)
     {
@@ -218,7 +222,6 @@ public class CameraControll : MonoBehaviour
 
             if (time >= 10f)
             {
-                Debug.Log("안녕");
                 transform.position = pos;
                 posProcessing = false;
                 yield break;
@@ -240,8 +243,6 @@ public class CameraControll : MonoBehaviour
 
             if (time >= 10f)
             {
-                Debug.Log("안녕2");
-
                 transform.rotation = rotation;
                 roProcessing = false;
                 yield break;

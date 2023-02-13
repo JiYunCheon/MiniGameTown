@@ -31,7 +31,7 @@ public class ClickManager : MonoBehaviour
 
     //빌딩모드에 들어가서 클릭을 했는지를 체크 할 불 변수
     private bool clickCheck = false;
-    [HideInInspector] public bool selecCheck = false;
+    [HideInInspector] public bool selectCheck = false;
 
     private InventoryItem cur_Inven_Item = null;
 
@@ -57,7 +57,7 @@ public class ClickManager : MonoBehaviour
     void Update()
     {
         //유아이 위를 클릭했을 경우 리턴 
-        if (selecCheck || EventSystem.current.IsPointerOverGameObject(GameManager.Inst.pointerID) == true) return;
+        if (selectCheck || EventSystem.current.IsPointerOverGameObject(GameManager.Inst.pointerID) == true) return;
 
 
         //빌딩모드, 편집모드가 아닐경우 
@@ -120,16 +120,16 @@ public class ClickManager : MonoBehaviour
 
                 //이전 오브젝트가 없는 경우
                 if (curHitObject == null)
-                    Interection(obj, true);
+                    Interaction(obj, true);
 
                 //이전 오브젝트와 다른 오브젝트를 클릭했을 경우
                 else if (curHitObject.transform.gameObject != hit.transform.transform.gameObject)
                 {
-                    Interection(obj, true);
+                    Interaction(obj, true);
                 }
                 else if(curHitObject.transform.gameObject == hit.transform.transform.gameObject)
                 {
-                    Interection(obj, true);
+                    Interaction(obj, true);
                 }
 
                 GameManager.Inst.GetCameraMove.CameraPosMove(obj);
@@ -147,8 +147,10 @@ public class ClickManager : MonoBehaviour
             //상호작용 가능한 객체인지 확인
             if (hit.transform.TryGetComponent<Interactable>(out Interactable obj))
             {
-                GameManager.Inst.GetUiManager.On_Click_BuildingMode();
+                curData = obj.GetMyData;
 
+                GameManager.Inst.GetUiManager.On_Click_BuildingMode();
+                
                 obj.ChangeState(false, Color.white);
 
                 //선택된 오브젝트 파괴
@@ -238,11 +240,11 @@ public class ClickManager : MonoBehaviour
 
         Refresh();
 
-        GameManager.Inst.GetUiManager.On_Click_WatingMode();
+        GameManager.Inst.GetUiManager.On_Click_WaitingMode();
     }
 
     //클릭 될때 호출 기능 들
-    private void Interection(Building obj , bool check)
+    private void Interaction(Building obj , bool check)
     {
         foreach (Transform item in GameManager.Inst.GetBuildings)
         {
@@ -257,7 +259,7 @@ public class ClickManager : MonoBehaviour
         curHitObject.Select_InteractableObj();
         curHitObject.SetSelectCheck(check);
         GameManager.Inst.curGameName = obj.GetMyData.packageName;
-        selecCheck = true;
+        selectCheck = true;
     }
     
     //변수 초기화
@@ -271,7 +273,7 @@ public class ClickManager : MonoBehaviour
     //빌딩모드를 나갈때 정보 초기화
     public void BuildingRefresh()
     {
-        selecCheck = false;
+        selectCheck = false;
         curHitObject.DeSelect_InteractableObj();
 
         curHitObject.SetSelectCheck(false);

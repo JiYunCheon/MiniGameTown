@@ -18,8 +18,8 @@ public class InventoryItem : Item
     //데이터에 카운트를 깍거나 더하고 개수에따라 표시하고 텍스트에 표시
     public override void SetByCount(int _value)
     {
-
-        int count = GameManager.Inst.SetCount(GetMyData.name, _value);
+        Debug.Log(_value);
+        int count = GameManager.Inst.TrySetValue(countIndex, _value);
 
         if (count <= 0)
         {
@@ -43,7 +43,6 @@ public class InventoryItem : Item
 
         GameManager.Inst.GetUiManager.On_Click_BuildingMode();
 
-        GameManager.Inst.GetClickManager.GetCur_Inven_Item.SetByCount(-1);
     }
 
     #endregion

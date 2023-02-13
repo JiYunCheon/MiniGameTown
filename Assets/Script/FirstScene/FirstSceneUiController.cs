@@ -15,11 +15,6 @@ public class FirstSceneUiController : MonoBehaviour
     public bool GetIsGameStart { get { return isGameStart; } private set { } }
 
 
-    private void Awake()
-    {
-        InputGameMoney(GameManager.Inst.GetPlayerData.gameMoney.ToString());
-    }
-
 
     public void AreYouGameIn(bool check)
     {

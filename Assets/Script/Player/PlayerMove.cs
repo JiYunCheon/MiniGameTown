@@ -28,10 +28,10 @@ public class PlayerMove : MonoBehaviour
             }
             else
             {
-                //오브젝트위이면 펄스 유아이 위이면 트루 
+                //오브젝트위이면 펄스 Ui 위이면 트루 
                 if (EventSystem.current.IsPointerOverGameObject(GameManager.Inst.pointerID) == true)
                 {
-                    //유아이 위일경우 리턴
+                    //Ui 위일경우 리턴
                     return;
                 }
 

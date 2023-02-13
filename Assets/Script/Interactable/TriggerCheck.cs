@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class TriggerCheck : MonoBehaviour
 {
+
+    //스크립트 없애고 distance 로 확인?
+
+
     private new BoxCollider collider = null;
 
     private void Awake()

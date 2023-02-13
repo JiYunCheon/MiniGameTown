@@ -57,7 +57,7 @@ public class ShopBoard : MonoBehaviour
     //편집모드 가기 클릭
     public void OnClick_WatingMode()
     {
-        GameManager.Inst.GetUiManager.On_Click_WatingMode();
+        GameManager.Inst.GetUiManager.On_Click_WaitingMode();
     }
 
     #endregion
@@ -82,14 +82,15 @@ public class ShopBoard : MonoBehaviour
                 scrollTr = Building_Scroll.content.transform;
                 ContentItem content = Instantiate<ContentItem>(contentPrefab, scrollTr);
                 content.SetMyData(GameManager.Inst.GetObjectData[i]);
+                content.countIndex = i;
             }
             else
             {
                 scrollTr = Object_Scroll.content.transform;
                 ContentItem content = Instantiate<ContentItem>(contentPrefab, scrollTr);
                 content.SetMyData(GameManager.Inst.GetObjectData[i]);
+                content.countIndex = i;
             }
-
         }
     }
 
