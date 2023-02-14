@@ -186,21 +186,21 @@ public class DataBaseServer : MonoBehaviour
                 GameManager.Inst.grounds_Info = new int[loginUser.objname.Length];
 
 
-                int number = 0;
-                GameManager.Inst.myPlayerData.objectCount=new int[loginUser.objectCount.Length];
+                //int number = 0;
+                //GameManager.Inst.myPlayerData.objectcount=new int[loginUser.objectCount.Length];
 
-                for (int i = 0; i < GameManager.Inst.myPlayerData.objectCount.Length; i++)
-                {
-                    if(!int.TryParse(loginUser.objectCount[i], out number))
-                    {
-                        GameManager.Inst.myPlayerData.objectCount[i] = number;
-                    }
-                    else
-                    {
-                        GameManager.Inst.myPlayerData.objectCount[i] = int.Parse(loginUser.objectCount[i]);
-                    }
-                }
-                GameManager.Inst.myPlayerData.gameMoney = loginUser.gamemoney;
+                //for (int i = 0; i < GameManager.Inst.myPlayerData.objectcount.Length; i++)
+                //{
+                //    if(!int.TryParse(loginUser.objectCount[i], out number))
+                //    {
+                //        GameManager.Inst.myPlayerData.objectcount[i] = number;
+                //    }
+                //    else
+                //    {
+                //        GameManager.Inst.myPlayerData.objectcount[i] = int.Parse(loginUser.objectCount[i]);
+                //    }
+                //}
+                //GameManager.Inst.myPlayerData.objectcount = loginUser.gamemoney;
 
 
 

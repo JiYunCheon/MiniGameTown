@@ -55,7 +55,6 @@ public class UiManager : MonoBehaviour
         //혹시나 편집모드나 빌딩모드에서 강종했을 때를 대비해 
         floorMaterial.color = Color.white;
         //현재돈을 표시
-        InputGameMoney(GameManager.Inst.GetPlayerData.gamemoney.ToString());
 
         //인벤토리 업다운 이미지
         invenBtnImage = new Sprite[2];
@@ -64,6 +63,10 @@ public class UiManager : MonoBehaviour
 
     }
 
+    private void Start()
+    {
+       InputGameMoney(DatabaseAccess.Inst.loginUser.gamemoney.ToString());
+    }
     //게임머니 표시 유아이
     public void InputGameMoney(string gameMoneyText)
     {

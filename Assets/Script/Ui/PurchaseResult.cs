@@ -19,7 +19,7 @@ public class PurchaseResult : MonoBehaviour
         GameManager.Inst.TrySetGameMoney(-curContent.GetMyData.price);
 
         //게임머니 유아이에 값표시
-        GameManager.Inst.GetUiManager.InputGameMoney(GameManager.Inst.GetPlayerData.gamemoney.ToString());
+        GameManager.Inst.GetUiManager.InputGameMoney(DatabaseAccess.Inst.loginUser.gamemoney.ToString());
 
         //현재 개수를 추가
         curContent.GetItem.SetByCount(1);

@@ -31,7 +31,7 @@ public class ContentItem : Item
     //가격버튼을 눌렀을 때 실행되는 함수
     public void OnClick_Price()
     {
-        if (GetMyData.price < GameManager.Inst.GetPlayerData.gamemoney)
+        if (GetMyData.price < DatabaseAccess.Inst.loginUser.gamemoney)
         {
             InstantiatePurchaseReslut(this);
         }
