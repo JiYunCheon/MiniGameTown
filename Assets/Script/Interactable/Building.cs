@@ -23,7 +23,7 @@ public class Building : Interactable
         defaultMaterial = Resources.Load<Material>("Material & Texture/Colors_Default");
         lightMaterial = Resources.Load<Material>("Material & Texture/Colors_Glossy");
 
-        CompleteEffect();
+        //CompleteEffect();
     }
 
     public void SetSelectCheck(bool check)

@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.UIElements;
+using System.Linq;
 
 public enum OBJECT_TYPE
 {
@@ -31,11 +33,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Data data = null;
 
     private UiManager uiManager = null;
+    private LoginSceneController loginSceneController = null;
     private FirstSceneUiController firstSceneUiController = null;
     private ClickManager clickManager = null;
     private CameraControll cameraMove = null;
     private PadSpawner[] padSpawner = null;
     private EffectManager effectManager = null;
+
 
     [HideInInspector] public string curGameName = null;
     public bool buildingMode = false;
@@ -61,6 +65,20 @@ public class GameManager : MonoBehaviour
 
     #region Property
 
+    public LoginSceneController GetLoginSceneController 
+    { 
+        get 
+        { 
+            if(loginSceneController==null)
+                loginSceneController = FindObjectOfType<LoginSceneController>();
+
+            return loginSceneController; 
+        } 
+
+        private set { } 
+    }
+
+
     public Transform GetBuildings
     {
         get
@@ -73,8 +91,6 @@ public class GameManager : MonoBehaviour
 
         private set { }
     }
-
-    public UserInfo GetPlayerData { get { return DataBaseServer.Inst.loginUser; } private set { } }
 
     public List<Excel> GetObjectData { get { return data.objectdatas; } private set { } }
 
@@ -170,7 +186,6 @@ public class GameManager : MonoBehaviour
         if (Inst == null)
         {
             Inst = this;
-            LoadData();
 
             SaveDic();
             DontDestroyOnLoad(Inst);
@@ -186,9 +201,13 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        GetUiFirstSceneUiController.InputGameMoney(DatabaseAccess.Inst.loginUser.gamemoney.ToString());
+        //GetUiFirstSceneUiController.InputGameMoney(DatabaseAccess.Inst.loginUser.gamemoney.ToString());
     }
 
+    public void ListClear()
+    {
+        grounds.Clear();
+    }
 
     public void Call_IntractableObj_Method(int method = 0)
     {
@@ -232,7 +251,7 @@ public class GameManager : MonoBehaviour
             {
                 for (int i = 0; i < obj.myGround.Count; i++)
                 {
-                    obj.myGround[i].name = "SavePad";
+                    obj.myGround[i].name = $"SavePad{index}";
                 }
             }
 
@@ -240,14 +259,17 @@ public class GameManager : MonoBehaviour
         }
 
         List<int> save = new List<int>();
-
-        for (int i = 0; i < grounds.Count; i++)
+        for (int i = 0; i < index; i++)
         {
-            if (grounds[i].name == "SavePad")
+            for (int j = 0; j < grounds.Count; j++)
             {
-                save.Add(i);
+                if (grounds[j].name == $"SavePad{i}")
+                {
+                    save.Add(j);
+                }
             }
         }
+       
 
         DatabaseAccess.Inst.loginUser.grounds_Save = new string[save.Count];
 
@@ -255,7 +277,6 @@ public class GameManager : MonoBehaviour
         {
             DatabaseAccess.Inst.loginUser.grounds_Save[i] = save[i].ToString();
         }
-
 
         DatabaseAccess.Inst.loginUser.objname = objectsName;
 
@@ -267,23 +288,16 @@ public class GameManager : MonoBehaviour
             DatabaseAccess.Inst.loginUser.rotY[i] = objectsRot[i].y.ToString();
         }
 
+        for (int i = 0; i < DatabaseAccess.Inst.loginUser.shopmaxcount.Length; i++)
+        {
+            DatabaseAccess.Inst.loginUser.shopmaxcount[i]=DatabaseAccess.Inst.loginUser.shopmaxcount[i].Replace(" ",String.Empty);
+        }
 
-        //DatabaseAccess.Inst.loginUser.gamemoney = DatabaseAccess.Inst.loginUser.gamemoney;
 
-        //DatabaseAccess.Inst.SaveUserData(DatabaseAccess.Inst.loginUser);
         DatabaseAccess.Inst.SetUserData_Replace_FromDatabase(DatabaseAccess.Inst.loginUser.id);
+
     }
 
-    public void LoadData()
-    {
-        //DatabaseAccess.Inst.GetUserData(DatabaseAccess.Inst.loginUser.id, DatabaseAccess.Inst.loginUser.password);
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.A))
-            LoadObj();
-    }
     public void LoadObj()
     {
         Interactable prefab = null;
@@ -295,50 +309,65 @@ public class GameManager : MonoBehaviour
         GetUiManager.Active_Pad();
 
         objectsName = DatabaseAccess.Inst.loginUser.objname;
+
         objectsPos = new Vector3[DatabaseAccess.Inst.loginUser.objname.Length];
         objectsRot = new Vector3[DatabaseAccess.Inst.loginUser.objname.Length];
         grounds_Info = new int[DatabaseAccess.Inst.loginUser.objname.Length];
 
         for (int i = 0; i < DatabaseAccess.Inst.loginUser.objname.Length; i++)
         {
-            GameManager.Inst.objectsPos[i].x = float.Parse(DatabaseAccess.Inst.loginUser.posX[i]);
-            GameManager.Inst.objectsPos[i].y = float.Parse(DatabaseAccess.Inst.loginUser.posY[i]);
-            GameManager.Inst.objectsPos[i].z = float.Parse(DatabaseAccess.Inst.loginUser.posZ[i]);
-
-            GameManager.Inst.objectsRot[i].y = float.Parse(DatabaseAccess.Inst.loginUser.rotY[i]);
+           objectsPos[i].x = TryParse(DatabaseAccess.Inst.loginUser.posX[i]);
+           objectsPos[i].y = TryParse(DatabaseAccess.Inst.loginUser.posY[i]);
+           objectsPos[i].z = TryParse(DatabaseAccess.Inst.loginUser.posZ[i]);
+           objectsRot[i].y = TryParse(DatabaseAccess.Inst.loginUser.rotY[i]);
         }
 
-        for (int i = 0; i < objectsName.Length; i++)
+        string word = "";
+
+        if (objectsName.Length!=0 && objectsName[0] != "" )
         {
-            if (objectsName[i].Split("_")[0] == "Building")
-                type = "Building";
-            else
-                type = "Object";
-
-            prefab = Resources.Load<Interactable>($"Prefabs/{type}/{objectsName[i]}");
-            obj = Instantiate(prefab, objectsPos[i], Quaternion.identity, GetBuildings);
-            obj.transform.eulerAngles = objectsRot[i];
-            obj.SetMyData(GameManager.Inst.FindData(obj.name.Split("(")[0]));
-
-            for (int j = count; j < DatabaseAccess.Inst.loginUser.grounds_Save.Length; j++) 
+            for (int i = 0; i < objectsName.Length; i++)
             {
+                word = objectsName[i].Replace(" ", String.Empty);
+                type = word.Split("_")[0];
 
-                if (j < count + obj.GetMyData.occupyPad)
+                prefab = Resources.Load<Interactable>($"Prefabs/{type}/{word}");
+                obj = Instantiate<Interactable>(prefab, objectsPos[i], Quaternion.identity, GetBuildings);
+                obj.transform.eulerAngles = objectsRot[i];
+                obj.SetMyData(GameManager.Inst.FindData(obj.name.Split("(")[0]));
+
+                for (int j = count; j < DatabaseAccess.Inst.loginUser.grounds_Save.Length; j++)
                 {
-                    grounds[int.Parse(DatabaseAccess.Inst.loginUser.grounds_Save[j])].ChangePadState(true, Color.red);
-                    obj.myGround.Add(grounds[int.Parse(DatabaseAccess.Inst.loginUser.grounds_Save[j])]);
-                }
-                else
-                {
-                    count = j;
-                    break;
+
+                    if (j < count + obj.GetMyData.occupyPad)
+                    {
+                        grounds[int.Parse(DatabaseAccess.Inst.loginUser.grounds_Save[j])].ChangePadState(true, Color.red);
+                        obj.myGround.Add(grounds[int.Parse(DatabaseAccess.Inst.loginUser.grounds_Save[j])]);
+                    }
+                    else
+                    {
+                        count = j;
+                        break;
+                    }
                 }
             }
         }
 
         GetUiManager.Active_Pad(false);
+
+        
     }
 
+    private float TryParse(string value)
+    {
+        float result = 0;
+        if(float.TryParse(value,out result))
+        {
+            return result;
+        }
+        return result;
+
+    }
 
     private Dictionary<string, Excel> dataDictionary = new Dictionary<string, Excel>();
 
@@ -365,12 +394,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    int i = 0;
     public int TrySetValue(int index, int value)
     {
-        Debug.Log(i);
         int calValue = int.Parse(DatabaseAccess.Inst.loginUser.objectcount[index]);
-        i++;
+
         calValue = calValue + value;
 
         if (calValue < 0)

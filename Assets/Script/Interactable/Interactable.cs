@@ -32,7 +32,7 @@ abstract public class Interactable : MonoBehaviour
         Initialized();
     }
 
-    private void Initialized()
+    protected virtual void Initialized()
     {
         renderer = GetComponent<Renderer>();
     }
@@ -94,7 +94,7 @@ abstract public class Interactable : MonoBehaviour
     public virtual void SetMyData(Excel data) => myData = data;
 
     //설치완료 이펙트 출력
-    protected virtual void CompleteEffect()
+    public virtual void CompleteEffect()
     {
         GameManager.Inst.GetEffectManager.Inst_SpriteEffect(this.transform.position+ new Vector3(0,3.5f,0), "EffectImage/MakeComplete_Image");
     }

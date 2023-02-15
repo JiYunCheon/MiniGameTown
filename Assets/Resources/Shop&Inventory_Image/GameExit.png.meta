@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 17c7f4217b8c4284f9e76ad9f1e9efb7
+guid: ddcac072a0db298438ffd55e079e8ef1
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,13 +117,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\uC790\uC0B0 11_0"
+      name: GameExit_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 1943
-        height: 1081
+        y: 3
+        width: 174
+        height: 181
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,8 +131,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b9d4d6728bc2b094d8cbdf92c6106c34
-      internalID: -1435629486
+      spriteID: 34d02ea1804e08847bbf9b6734c9624f
+      internalID: -896469945
       vertices: []
       indices: 
       edges: []
@@ -140,7 +140,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 47bfc2ab99a81214eabe5defe6822600
+    spriteID: 5c2477ba142b94a4e9b19d785f4c8dd9
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      "\uC790\uC0B0 11_0": -1435629486
+      GameExit_0: -896469945
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

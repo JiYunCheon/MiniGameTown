@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class UiManager : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class UiManager : MonoBehaviour
 
     [Header("Iventory")]
     [SerializeField] private RectTransform inventoryRect = null;
+    [SerializeField] private ScrollRect inventoryScrollRect = null;
     [SerializeField] private Image invenUpDownBtn;
     [SerializeField] private Sprite[] invenBtnImage;
     [SerializeField] private float upPos = 0;
@@ -146,8 +148,6 @@ public class UiManager : MonoBehaviour
     {
         ModeChange(true, false);
 
-        Debug.Log(GameManager.Inst.GetClickManager.GetCurData.myType.ToString());
-
         padBoard.ActivePadByType(GameManager.Inst.GetClickManager.GetCurData.myType);
 
         GameManager.Inst.Call_IntractableObj_Method();
@@ -188,6 +188,9 @@ public class UiManager : MonoBehaviour
     //신변경
     public void OnClick_Go_2DTown()
     {
+        GameManager.Inst.SaveData();
+        GameManager.Inst.ListClear();
+
         //신 변경
         SceneManager.LoadScene("2DTown");
     }
@@ -210,11 +213,11 @@ public class UiManager : MonoBehaviour
 
     #endregion
 
-    
+
     private IEnumerator WaitForSaveData()
     {
         //기다리는 동안 ui?
-        yield return new WaitUntil(() => !DataBaseServer.Inst.isProcessing);
+        yield return new WaitUntil(() => !DatabaseAccess.Inst.isProcessing);
 
         InGame.ExitGame();
 
@@ -292,5 +295,24 @@ public class UiManager : MonoBehaviour
             yield return null;
         }
     }
+
+    public InventoryItem GetInventoryContent(Excel data)
+    {
+        foreach (Transform child in inventoryScrollRect.content.transform)
+        {
+            if(child.TryGetComponent<InventoryItem>(out InventoryItem item))
+            {
+                if(item.GetMyData.name==data.name)
+                {
+                    return item;
+                }
+            }
+        }
+
+        Debug.LogError("OMG NO INVENTORY CONTENT");
+
+        return null;
+    }
+
 
 }

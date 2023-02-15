@@ -31,9 +31,8 @@ public class ClickManager : MonoBehaviour
 
     //빌딩모드에 들어가서 클릭을 했는지를 체크 할 불 변수
     private bool clickCheck = false;
+    private bool editCheck = false;
     [HideInInspector] public bool selectCheck = false;
-
-    private InventoryItem cur_Inven_Item = null;
 
     #endregion
 
@@ -43,15 +42,12 @@ public class ClickManager : MonoBehaviour
 
     public Excel GetCurData { get { return curData; } private set { } }
 
-    public InventoryItem GetCur_Inven_Item { get { return cur_Inven_Item; } private set { } }
-
     #endregion
    
 
     private void Start()
     {
-        //로그인 만들면 데이터 받아오는 부분, 오브젝트 로드하는 부분을 나눠야함
-        //GameManager.Inst.LoadData();
+       GameManager.Inst.LoadObj();
     }
 
     void Update()
@@ -72,9 +68,15 @@ public class ClickManager : MonoBehaviour
         {
             //현재 데이터가 있고, 생성된 미리보기 객체가 없고 ,빌딩모드일경우 
             if (GameManager.Inst.buildingMode && preview == null && curData != null)
+            {
                 //미리보기 객체를 생성
-                preview = Instantiate<PreviewObject>(GetAlphaPrefab(curData), 
-                    Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(-5f, -3f, -5f), GetAlphaPrefab(curData).transform.rotation);
+                preview = Instantiate<PreviewObject>(GetAlphaPrefab(curData),
+                    Camera.main.ScreenToWorldPoint(Input.mousePosition) + 
+                    new Vector3(-5f, -3f, -5f), GetAlphaPrefab(curData).transform.rotation);
+                preview.SetMyData(curData);
+
+            }
+
             //빌딩모드이고 클릭을 한적이 없을 경우
             else if(GameManager.Inst.buildingMode && clickCheck==false)
             {
@@ -141,6 +143,7 @@ public class ClickManager : MonoBehaviour
     private void EditModeSequence()
     {
         RaycastHit hit;
+        editCheck = true;
 
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, buildingLayer))
         {
@@ -190,6 +193,11 @@ public class ClickManager : MonoBehaviour
 
                     preview.Active_BuildOption();
 
+                    if(editCheck)
+                    {
+                        preview.editCheck = true;
+                        editCheck = false;
+                    }
                 }
                 //레이의 힛의 포지션이 변경되었을 경우
                 else if (ground.transform.position != saveHitPos)
@@ -223,12 +231,11 @@ public class ClickManager : MonoBehaviour
     public void InstObject(Quaternion rotation)
     {
         clickCheck = false;
-
-        Debug.Log(GetPrefab(curData).transform.eulerAngles);
         //진짜 건물 생성
         Interactable obj = Instantiate<Interactable>(GetPrefab(curData), saveHitPos + new Vector3(0, 0.5f, 0.5f), GetPrefab(curData).transform.rotation, GameManager.Inst.GetBuildings);
         if (rotation != Quaternion.identity)
             obj.transform.rotation = rotation;
+        obj.CompleteEffect();
 
         obj.SetMyData(GameManager.Inst.FindData(obj.name.Split("(")[0]));
 
@@ -291,10 +298,9 @@ public class ClickManager : MonoBehaviour
     }
 
     //클릭한 객체의 정보를 가지고 옴
-    public void SetInfo(InventoryItem inventoryItem, Excel data)
+    public void SetInfo(Excel data)
     {
         curData = data;
-        cur_Inven_Item = inventoryItem;
 
         //활성화 될때 함수를 넣어놨는데 
         //델리게이트 체인으로 바꿔도 됨

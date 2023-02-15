@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 [Serializable]
 public class UserData
@@ -27,6 +28,7 @@ public class UserData
     public string[] grounds_Save;
 
     public string[] objectcount;
+    public string[] shopmaxcount;
 }
 
 public class DatabaseAccess : MonoBehaviour
@@ -37,7 +39,7 @@ public class DatabaseAccess : MonoBehaviour
 
     [HideInInspector] public UserData loginUser = null;
 
-    private bool isProcessing = false;
+    [HideInInspector] public bool isProcessing = false;
 
     public static DatabaseAccess Inst = null;
 
@@ -46,13 +48,7 @@ public class DatabaseAccess : MonoBehaviour
         if (Inst == null)
         {
             Inst = this;
-            loginUser = new UserData();
-
-            loginUser.id = "First3";
-            loginUser.password = "1234";
-
-            DontDestroyOnLoad(this.gameObject);
-
+            DontDestroyOnLoad(Inst);
         }
         else
         {
@@ -69,11 +65,7 @@ public class DatabaseAccess : MonoBehaviour
         database = client.GetDatabase("UserData");
         collection = database.GetCollection<BsonDocument>("UserInfo");
 
-        //GameManager.Inst.myPlayerData = loginUser;
-
-        GetUserData(loginUser.id, loginUser.password);
-        
-        StartCoroutine(IsProcessing());
+        //GetUserData(loginUser.id, loginUser.password);
     }
 
     public async void SaveUserData(UserData curUserData)
@@ -84,16 +76,16 @@ public class DatabaseAccess : MonoBehaviour
     public async void GetUserData(string _id, string _password)
     {
         isProcessing= true;
-
         await GetUserData_FromDatabase(_id, _password);
     }
 
     private IEnumerator IsProcessing()
     {
         yield return new WaitUntil(()=>!isProcessing);
-        Debug.Log(loginUser.gamemoney);
+        SceneManager.LoadScene("2DTown");
 
     }
+
 
 
     //로그인 유저 데이터 가지고 오기
@@ -104,54 +96,59 @@ public class DatabaseAccess : MonoBehaviour
         var allDatasTask = collection.FindAsync(find);
         var datasAwated = await allDatasTask;
 
-        string id = "";
-        string password = "";
-        object array = null;
+        object arrayString = null;
 
         UserData user = new UserData();
 
         foreach (var data in datasAwated.ToList())
         {
-            id = (string)data.GetValue("_id");
-            password = (string)data.GetValue("password");
-
-            user.id = id;
-            user.password = password;
+            user.id = (string)data.GetValue("_id");
+            user.password = (string)data.GetValue("password");
             user.gamemoney = (int)data.GetValue("gamemoney");
 
-            array = (object)data.GetValue("objname");
-            user.objname = ArraySplitSort(array);
-
-            array = (object)data.GetValue("posX");
-            user.posX= ArraySplitSort(array);
-
-            array = (object)data.GetValue("posY");
-            user.posY = ArraySplitSort(array);
-
-            array = (object)data.GetValue("posZ");
-            user.posZ = ArraySplitSort(array);
-
-            array = (object)data.GetValue("rotY");
-            user.rotY = ArraySplitSort(array);
-
-            array = (object)data.GetValue("grounds_Save");
-            user.grounds_Save = ArraySplitSort(array);
-
-            array = (object)data.GetValue("objectcount");
+            arrayString = (object)data.GetValue("objname");
             //스트링으로 변환된 배열들의 값을 배열에 넣음
-            user.objectcount = ArraySplitSort(array);
+            user.objname = ArraySplitSort(arrayString);
+
+            arrayString = (object)data.GetValue("posX");
+            user.posX= ArraySplitSort(arrayString);
+
+            arrayString = (object)data.GetValue("posY");
+            user.posY = ArraySplitSort(arrayString);
+
+            arrayString = (object)data.GetValue("posZ");
+            user.posZ = ArraySplitSort(arrayString);
+
+            arrayString = (object)data.GetValue("rotY");
+            user.rotY = ArraySplitSort(arrayString);
+
+            arrayString = (object)data.GetValue("grounds_Save");
+            user.grounds_Save = ArraySplitSort(arrayString);
+
+            arrayString = (object)data.GetValue("objectcount");
+            user.objectcount = ArraySplitSort(arrayString);
+
+            arrayString = (object)data.GetValue("shopmaxcount");
+            user.shopmaxcount = ArraySplitSort(arrayString);
         }
 
         loginUser = user;
 
-        Debug.Log(loginUser.posX.Length);
-
-
         isProcessing = false;
+
+        if (loginUser.id == null)
+        {
+            Debug.Log("로그인 실패");
+
+            return null;
+        }
+
+        Debug.Log("로그인 성공");
+
+        StartCoroutine(IsProcessing());
 
         return user;
     }
-
     private string[] ArraySplitSort(object str)
     {
         string[] words = str.ToString().Split(",");
@@ -191,6 +188,7 @@ public class DatabaseAccess : MonoBehaviour
 
         return words;
     }
+
     public void SetUserData_Replace_FromDatabase(string _id)
     {
         BsonDocument find = new BsonDocument { { "_id", _id }};

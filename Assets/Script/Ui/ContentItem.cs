@@ -26,6 +26,9 @@ public class ContentItem : Item
         gameNameText.text = GetMyData.Info;
         priceText.text = $"{GetMyData.price}";
         picture.sprite = Resources.Load<Sprite>($"Shop&Inventory_Image/Item_Image/{GetMyData.spriteName}");
+
+        if(int.Parse(DatabaseAccess.Inst.loginUser.shopmaxcount[countIndex])==0)
+            priceBtn.interactable = false;
     }
 
     //가격버튼을 눌렀을 때 실행되는 함수
@@ -53,9 +56,12 @@ public class ContentItem : Item
     //다 팔린지 판단
     public void ComparerMaxCount()
     {
-        if (GetMyData.myType == OBJECT_TYPE.BUILDING && GetMyData.maxCount > 0)
+        int value = int.Parse(DatabaseAccess.Inst.loginUser.shopmaxcount[countIndex]);
+        value--;
+        DatabaseAccess.Inst.loginUser.shopmaxcount[countIndex]= value.ToString();
+        if (value <= 0)
         {
-            GetMyData.maxCount--;
+            value = 0;
             priceBtn.interactable = false;
         }
     }

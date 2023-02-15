@@ -22,6 +22,9 @@ public class NewBehaviourScript : MonoBehaviour
 
         float y = ac.Evaluate(t);
         transform.position = new Vector3(-31.8f, 5 + y, 35.37f);
+
+        //Interactable prefab = Resources.Load<Interactable>($"Prefabs/{type}/{objectsName[i]}");
+        
     }
 
 

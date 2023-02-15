@@ -11,6 +11,10 @@ public class PreviewObject : Interactable
     Quaternion rotation = Quaternion.identity;
     private int count = 0;
 
+    private InventoryItem myInventoryItem = null;
+
+    [HideInInspector] public bool editCheck = false; 
+
     private void Awake()
     {
         defaultMaterial = Resources.Load<Material>("Material & Texture/Colors_Alpha 1");
@@ -18,6 +22,13 @@ public class PreviewObject : Interactable
 
         if (renderer == null)
             renderer = GetComponent<Renderer>();
+    }
+
+    protected override void Initialized()
+    {
+        if (renderer == null)
+            renderer = GetComponent<Renderer>();
+
     }
 
     //편집 Ui Active 컨트롤
@@ -43,13 +54,23 @@ public class PreviewObject : Interactable
     //Ui 확인을 눌렀을때
     public void OnClick_Confirm()
     {
+        if(myInventoryItem==null)
+            myInventoryItem = GameManager.Inst.GetUiManager.GetInventoryContent(GetMyData);
+
         if (!GameManager.Inst.GetClickManager.InstCompare())
         {
             GameManager.Inst.GetEffectManager.Inst_SpriteUiEffect(Input.mousePosition, "EffectImage/MakeFailed_Image");
             return;
         }
 
-        GameManager.Inst.GetClickManager.GetCur_Inven_Item.SetByCount(-1);
+        if(!editCheck)
+        {
+            myInventoryItem.SetByCount(-1);
+        }
+        else
+        {
+            editCheck = true;
+        }
 
         GameManager.Inst.GetClickManager.InstObject(rotation);
         Active_BuildOption(false);
@@ -80,7 +101,10 @@ public class PreviewObject : Interactable
     //Ui x를 눌렀을때
     public void OnClick_Exit()
     {
-        GameManager.Inst.GetClickManager.GetCur_Inven_Item.SetByCount(1);
+        if (myInventoryItem == null)
+            myInventoryItem = GameManager.Inst.GetUiManager.GetInventoryContent(GetMyData);
+
+        myInventoryItem.SetByCount(1);
 
         GameManager.Inst.GetClickManager.PadRefresh();
 
