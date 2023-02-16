@@ -33,6 +33,8 @@ public class UiManager : MonoBehaviour
 
     [Header("GameMoneyText")]
     [SerializeField] private TextMeshProUGUI gameMoneyText = null;
+    [Header("UserProfile")]
+    [SerializeField] private TextMeshProUGUI userProfileNickNameText = null;
 
     [Header("PurchaseComplteUi")]
     [SerializeField] private PurchaseResult successWindow = null;
@@ -67,13 +69,19 @@ public class UiManager : MonoBehaviour
 
     private void Start()
     {
-       InputGameMoney(DatabaseAccess.Inst.loginUser.gamemoney.ToString());
+        InputGameMoney(DatabaseAccess.Inst.loginUser.gamemoney.ToString());
+        InputUserNickName(DatabaseAccess.Inst.loginUser.nickname);
     }
     //게임머니 표시 유아이
     public void InputGameMoney(string gameMoneyText)
     {
         this.gameMoneyText.text = gameMoneyText;
     }
+    public void InputUserNickName(string userNickNameText)
+    {
+        this.userProfileNickNameText.text = userNickNameText;
+    }
+
 
     //홈 유아이 버튼 활성화 제어
     public void Active_HomeUi(bool activeSelf = true)

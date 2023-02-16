@@ -231,7 +231,6 @@ public class GameManager : MonoBehaviour
         objectsName = new string[GetBuildings.transform.childCount];
         objectsPos = new Vector3[buildings.transform.childCount];
         objectsRot = new Vector3[buildings.transform.childCount];
-
         DatabaseAccess.Inst.loginUser.posX = new string[buildings.transform.childCount];
         DatabaseAccess.Inst.loginUser.posY = new string[buildings.transform.childCount];
         DatabaseAccess.Inst.loginUser.posZ = new string[buildings.transform.childCount];
@@ -300,61 +299,64 @@ public class GameManager : MonoBehaviour
 
     public void LoadObj()
     {
-        Interactable prefab = null;
-        Interactable obj = null;
-
-        string type = "";
-        int count = 0;
-
-        GetUiManager.Active_Pad();
-
-        objectsName = DatabaseAccess.Inst.loginUser.objname;
-
-        objectsPos = new Vector3[DatabaseAccess.Inst.loginUser.objname.Length];
-        objectsRot = new Vector3[DatabaseAccess.Inst.loginUser.objname.Length];
-        grounds_Info = new int[DatabaseAccess.Inst.loginUser.objname.Length];
-
-        for (int i = 0; i < DatabaseAccess.Inst.loginUser.objname.Length; i++)
+        if (DatabaseAccess.Inst.loginUser.objname != null)
         {
-           objectsPos[i].x = TryParse(DatabaseAccess.Inst.loginUser.posX[i]);
-           objectsPos[i].y = TryParse(DatabaseAccess.Inst.loginUser.posY[i]);
-           objectsPos[i].z = TryParse(DatabaseAccess.Inst.loginUser.posZ[i]);
-           objectsRot[i].y = TryParse(DatabaseAccess.Inst.loginUser.rotY[i]);
-        }
 
-        string word = "";
+            Interactable prefab = null;
+            Interactable obj = null;
 
-        if (objectsName.Length!=0 && objectsName[0] != "" )
-        {
-            for (int i = 0; i < objectsName.Length; i++)
+            string type = "";
+            int count = 0;
+            GetUiManager.Active_Pad();
+
+
+            objectsName = DatabaseAccess.Inst.loginUser.objname;
+
+            objectsPos = new Vector3[DatabaseAccess.Inst.loginUser.objname.Length];
+            objectsRot = new Vector3[DatabaseAccess.Inst.loginUser.objname.Length];
+            grounds_Info = new int[DatabaseAccess.Inst.loginUser.objname.Length];
+
+            for (int i = 0; i < DatabaseAccess.Inst.loginUser.objname.Length; i++)
             {
-                word = objectsName[i].Replace(" ", String.Empty);
-                type = word.Split("_")[0];
+                objectsPos[i].x = TryParse(DatabaseAccess.Inst.loginUser.posX[i]);
+                objectsPos[i].y = TryParse(DatabaseAccess.Inst.loginUser.posY[i]);
+                objectsPos[i].z = TryParse(DatabaseAccess.Inst.loginUser.posZ[i]);
+                objectsRot[i].y = TryParse(DatabaseAccess.Inst.loginUser.rotY[i]);
+            }
 
-                prefab = Resources.Load<Interactable>($"Prefabs/{type}/{word}");
-                obj = Instantiate<Interactable>(prefab, objectsPos[i], Quaternion.identity, GetBuildings);
-                obj.transform.eulerAngles = objectsRot[i];
-                obj.SetMyData(GameManager.Inst.FindData(obj.name.Split("(")[0]));
+            string word = "";
 
-                for (int j = count; j < DatabaseAccess.Inst.loginUser.grounds_Save.Length; j++)
+            if (objectsName.Length != 0 && objectsName[0] != "" && DatabaseAccess.Inst.loginUser.grounds_Save != null)
+            {
+                for (int i = 0; i < objectsName.Length; i++)
                 {
+                    word = objectsName[i].Replace(" ", String.Empty);
+                    type = word.Split("_")[0];
 
-                    if (j < count + obj.GetMyData.occupyPad)
+                    prefab = Resources.Load<Interactable>($"Prefabs/{type}/{word}");
+                    obj = Instantiate<Interactable>(prefab, objectsPos[i], Quaternion.identity, GetBuildings);
+                    obj.transform.eulerAngles = objectsRot[i];
+                    obj.SetMyData(GameManager.Inst.FindData(obj.name.Split("(")[0]));
+
+                    for (int j = count; j < DatabaseAccess.Inst.loginUser.grounds_Save.Length; j++)
                     {
-                        grounds[int.Parse(DatabaseAccess.Inst.loginUser.grounds_Save[j])].ChangePadState(true, Color.red);
-                        obj.myGround.Add(grounds[int.Parse(DatabaseAccess.Inst.loginUser.grounds_Save[j])]);
-                    }
-                    else
-                    {
-                        count = j;
-                        break;
+
+                        if (j < count + obj.GetMyData.occupyPad)
+                        {
+                            grounds[int.Parse(DatabaseAccess.Inst.loginUser.grounds_Save[j])].ChangePadState(true, Color.red);
+                            obj.myGround.Add(grounds[int.Parse(DatabaseAccess.Inst.loginUser.grounds_Save[j])]);
+                        }
+                        else
+                        {
+                            count = j;
+                            break;
+                        }
                     }
                 }
             }
+
+            GetUiManager.Active_Pad(false);
         }
-
-        GetUiManager.Active_Pad(false);
-
         
     }
 
