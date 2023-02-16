@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Networking.Types;
 
@@ -13,10 +14,22 @@ public class PadSpawner : MonoBehaviour
     [SerializeField] private int width = 0;
     [SerializeField] float interveal = 0;
 
-    
+    [SerializeField] private int beginX =0;
+    [SerializeField] private int endX = 0;
+    [SerializeField] private int beginY = 0;
+    [SerializeField] private int endY = 0;
+
+    [SerializeField] private int saveStartX = 0;
+    [SerializeField] private int saveEndX = 0;
+    [SerializeField] private int saveStartY = 0;
+    [SerializeField] private int saveEndY = 0;
+
+    [SerializeField] public bool deactiveCheck = false;
+
+    public bool hideCheck = false;
     //설치될 패드의 2차원 배열
     private Ground[,] pads;
-
+    [HideInInspector] public List<Ground> savePad = new List<Ground>();
 
     private void Awake()
     {
@@ -169,12 +182,31 @@ public class PadSpawner : MonoBehaviour
                 pads[i, j] = Instantiate<Ground>(pad, this.transform);
                 pads[i, j].transform.localPosition = new Vector3(j * interveal, transform.position.y, i * interveal);
                 pads[i, j].name = $"{i},{j}";
+
+                if (!hideCheck && deactiveCheck && j >= saveStartX && j <= saveEndX && i >= saveStartY && i <= saveEndY)
+                {
+                    savePad.Add(pads[i, j]);
+                }
+
                 GameManager.Inst.grounds.Add(pads[i, j]);
             }
         }
 
-       
+        if (deactiveCheck)
+            DeActivePad();
     }
 
+    private void DeActivePad()
+    {
+        for (int y = beginY; y < endY; y++)
+        {
+            for (int x = beginX; x < endX; x++)
+            {
+                pads[y, x].ChangePadState(true,Color.red);
+                pads[y, x].gameObject.SetActive(false);
+            }
+        }
 
+
+    }
 }

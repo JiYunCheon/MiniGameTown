@@ -16,7 +16,6 @@ public class Ground : MonoBehaviour
 
     public List<Ground> GetNodeList { get { return nodes; } set { } }
 
-
     private void Awake()
     {
         nodes = new List<Ground>();

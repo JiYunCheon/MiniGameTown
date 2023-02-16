@@ -7,7 +7,6 @@ public class PadController : MonoBehaviour
     [SerializeField] private PadSpawner[] padSpawners = null;
 
 
-
     public void ActivePadByType(OBJECT_TYPE type)
     {
         if(type== OBJECT_TYPE.OBJECT)
@@ -15,17 +14,32 @@ public class PadController : MonoBehaviour
             for (int i = 0; i < padSpawners.Length; i++)
             {
                 padSpawners[i].gameObject.SetActive(true);
+
+                if (padSpawners[i].deactiveCheck)
+                {
+                    for (int j = 0; j < padSpawners[i].savePad.Count; j++)
+                    {
+                        padSpawners[i].savePad[j].gameObject.SetActive(true);
+                    }
+                }
             }
         }
         else
         {
-            bool active = true;
             for (int i = 0; i < padSpawners.Length; i++)
             {
-                if (i > 7)
-                    active = false;
+               if(padSpawners[i].deactiveCheck)
+                {
+                    for (int j = 0; j < padSpawners[i].savePad.Count; j++)
+                    {
+                        padSpawners[i].savePad[j].gameObject.SetActive(false);
+                    }
+                }
 
-                padSpawners[i].gameObject.SetActive(active);
+                if (padSpawners[i].hideCheck)
+                {
+                    padSpawners[i].gameObject.SetActive(false);
+                }
             }
         }
     }
