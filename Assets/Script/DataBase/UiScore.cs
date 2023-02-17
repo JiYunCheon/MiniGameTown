@@ -16,21 +16,11 @@ public class UiScore : MonoBehaviour
     public string GetSocreText { get { return socreText.text; } private set { } }
          
 
-    public void init(int ranking,string nickname,float score)
+    public void init(int ranking,string nickname,string score)
     {
-        if(score==10000)
-        {
-            socreText.text = "None";
-            rankingText.text = "Nub";
-            nickNameText.text = nickname;
-        }
-        else
-        {
-            socreText.text = score.ToString();
-            rankingText.text = ranking.ToString();
-            nickNameText.text = nickname;
-        }
-
+        socreText.text = score.ToString();
+        rankingText.text = ranking.ToString();
+        nickNameText.text = nickname;
     }
 
 

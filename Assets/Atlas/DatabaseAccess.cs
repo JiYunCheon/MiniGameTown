@@ -10,10 +10,13 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
+using System.Security.Cryptography;
 
 [Serializable]
-public class UserData
+public class UserData : IComparable
 {
+    public static int sortingIdx;
+
     public string id;
     public string password;
     public string nickname;
@@ -31,6 +34,14 @@ public class UserData
 
     public string[] objectcount;
     public string[] shopmaxcount;
+
+
+    public int CompareTo(object obj)
+    {
+        UserData data = (UserData)obj;
+
+        return float.Parse(this.score[sortingIdx]).CompareTo(float.Parse(data.score[sortingIdx]));
+    }
 }
 
 public class DatabaseAccess : MonoBehaviour
@@ -50,6 +61,8 @@ public class DatabaseAccess : MonoBehaviour
         if (Inst == null)
         {
             Inst = this;
+            database = client.GetDatabase("UserData");
+        collection = database.GetCollection<BsonDocument>("UserInfo");
             DontDestroyOnLoad(Inst);
         }
         else
@@ -59,17 +72,10 @@ public class DatabaseAccess : MonoBehaviour
         }
     }
 
-
-
-
     private void Start()
     {
-        database = client.GetDatabase("UserData");
-        collection = database.GetCollection<BsonDocument>("UserInfo");
-
-        //GetUserData(loginUser.id, loginUser.password);
+        GetTotalData_FromDatabase();
     }
-
     public async void SaveUserData(UserData curUserData)
     {
         await collection.InsertOneAsync(curUserData.ToBsonDocument());
@@ -91,14 +97,14 @@ public class DatabaseAccess : MonoBehaviour
 
 
     //로그인 유저 데이터 가지고 오기
-    public async Task<UserData> GetUserData_FromDatabase(string _id,string _password)
+    public async Task<UserData> GetUserData_FromDatabase(string _id, string _password)
     {
-        BsonDocument find = new BsonDocument { { "_id", _id },{ "password",_password } };
+        BsonDocument find = new BsonDocument { { "_id", _id }, { "password", _password } };
 
         var allDatasTask = collection.FindAsync(find);
         var datasAwated = await allDatasTask;
 
-        object arrayString = null;
+        object arrayString;
 
         UserData user = new UserData();
 
@@ -115,7 +121,7 @@ public class DatabaseAccess : MonoBehaviour
             user.objname = ArraySplitSort(arrayString);
 
             arrayString = (object)data.GetValue("posX");
-            user.posX= ArraySplitSort(arrayString);
+            user.posX = ArraySplitSort(arrayString);
 
             arrayString = (object)data.GetValue("posY");
             user.posY = ArraySplitSort(arrayString);
@@ -146,12 +152,13 @@ public class DatabaseAccess : MonoBehaviour
 
             return null;
         }
-        Debug.Log("로그인 성공 :  "+loginUser.nickname);
+        Debug.Log("로그인 성공 :  " + loginUser.nickname);
 
         StartCoroutine(IsProcessing());
 
         return user;
     }
+
     private string[] ArraySplitSort(object str)
     {
         string[] words = str.ToString().Split(",");
@@ -159,7 +166,6 @@ public class DatabaseAccess : MonoBehaviour
 
         bool indexCheck = false;
         if (words[0] == "BsonNull") return null;
-        //if () return null;
 
         for (int i = 0; i < charArray.Length; i++)
         {
@@ -236,6 +242,13 @@ public class DatabaseAccess : MonoBehaviour
 
         newUser.objectcount = new string[29];
         newUser.shopmaxcount = new string[29];
+        newUser.score = new string[16];
+
+        for (int i = 0; i < newUser.score.Length; i++)
+        {
+            newUser.score[i] = "0";
+        }
+
 
         for (int i = 0; i < 29; i++)
         {
@@ -271,5 +284,39 @@ public class DatabaseAccess : MonoBehaviour
         }
 
     }
+
+
+    public List<UserData> totalScoreData = new List<UserData>();
+
+    public async void GetTotalData_FromDatabase()
+    {
+
+        var allDatasTask = collection.FindAsync(new BsonDocument());
+        var datasAwated = await allDatasTask;
+
+        object arrayString;
+
+        foreach (var data in datasAwated.ToList())
+        {
+            UserData user = new UserData();
+
+            user.nickname = (string)data.GetValue("nickname");
+
+            arrayString = (object)data.GetValue("score");
+            user.score = ArraySplitSort(arrayString);
+
+            totalScoreData.Add(user);
+        }
+        Debug.Log(totalScoreData.Count);
+
+
+        isProcessing = false;
+
+    }
+
+
+
+
+
 
 }
