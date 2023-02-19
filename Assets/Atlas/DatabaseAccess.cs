@@ -62,7 +62,7 @@ public class DatabaseAccess : MonoBehaviour
         {
             Inst = this;
             database = client.GetDatabase("UserData");
-        collection = database.GetCollection<BsonDocument>("UserInfo");
+            collection = database.GetCollection<BsonDocument>("UserInfo");
             DontDestroyOnLoad(Inst);
         }
         else
@@ -299,6 +299,8 @@ public class DatabaseAccess : MonoBehaviour
         foreach (var data in datasAwated.ToList())
         {
             UserData user = new UserData();
+
+            user.id = (string)data.GetValue("_id");
 
             user.nickname = (string)data.GetValue("nickname");
 

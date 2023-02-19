@@ -30,5 +30,6 @@ public class ResultWindow : MonoBehaviour
     {
         difiiculty.text = dif;
     }
+    
 
 }

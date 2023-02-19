@@ -10,17 +10,6 @@ public class FirstSceneUiController : MonoBehaviour
     [SerializeField] private FirstSceneClick firstSceneClick = null;
     [SerializeField] private TextMeshProUGUI gameMoneyText = null;
 
-    private bool isGameStart = false;
-
-    public bool GetIsGameStart { get { return isGameStart; } private set { } }
-
-
-
-    public void AreYouGameIn(bool check)
-    {
-        isGameStart = check;
-    }
-   
     public void InputGameMoney(string gameMoneyText)
     {
         this.gameMoneyText.text = gameMoneyText;
@@ -34,7 +23,6 @@ public class FirstSceneUiController : MonoBehaviour
     public void OnClick_Exit()
     {
         firstSceneClick.Refresh();
-        AreYouGameIn(false);
         ActiveButton(false);
     }
 

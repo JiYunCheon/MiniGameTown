@@ -9,10 +9,6 @@ public class RankingUiData : MonoBehaviour
 {
     #region Refrence Member
 
-    [Header("======Difficulty Board======")]
-    [SerializeField] private GameObject[] easyBoard = null;
-    [Header("")]
-
     [Header("======Top User Text======")]
     [SerializeField] private TextMeshProUGUI fistPlaceText = null;
     [SerializeField] private TextMeshProUGUI secondPlaceText = null;
@@ -20,11 +16,18 @@ public class RankingUiData : MonoBehaviour
     [Header("")]
 
     [Header("======Ranking Boad Name======")]
-    public TextMeshProUGUI curGameName = null;
+    [SerializeField] private TextMeshProUGUI curGameName = null;
+    [SerializeField] private string[] gameName = null;
+    [SerializeField] private UiScore myScoreInfo = null;
     [Header("")]
 
     [Header("======Type By Difficulty======")]
     [SerializeField] private ScrollRect[] scrollRect = null;
+    [Header("")]
+
+    [Header("======Difficulty Board======")]
+    [SerializeField] private GameObject[] difByBoard = null;
+    private GameObject curBoard = null;
     [Header("")]
 
     #endregion
@@ -40,30 +43,27 @@ public class RankingUiData : MonoBehaviour
     #endregion
 
 
-    private void Start()
-    {
-    }
+    private List<UiScore> contents = new List<UiScore>();
+
+    private int curGameNum = 0;
+    private int curDifNum = 0;
 
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.A))
         {
-            GenerateRanking(0, 0, DatabaseAccess.Inst.totalScoreData);
+            Onclick_BalloonToggle();
         }
-    }
-
-
-    IEnumerator start()
-    {
-        yield return new WaitUntil(()=>!DatabaseAccess.Inst.isProcessing);
-        GenerateRanking(0, 0, DatabaseAccess.Inst.totalScoreData);
-
     }
 
 
     public void GenerateRanking(int gameNum,int difficulty, List<UserData> userdata)
     {
         ScrollRect scroll = scrollRect[difficulty];
+        curBoard = difByBoard[difficulty];
+        curBoard.SetActive(true);
+        curGameName.text = gameName[gameNum];
+
 
         UserData.sortingIdx = gameNum*4+ difficulty;
         userdata.Sort();
@@ -74,10 +74,112 @@ public class RankingUiData : MonoBehaviour
         {
             UiScore rankingContent = Instantiate<UiScore>(rankingContentfrefab, scroll.content.transform);
             rankingContent.init(i+1, userdata[i].nickname, userdata[i].score[gameNum * 4 + difficulty]);
-        }
 
+            contents.Add(rankingContent);
+
+            if (userdata[i].id == DatabaseAccess.Inst.loginUser.id)
+            {
+                rankingContent.ChangeColor(Color.cyan);
+                myScoreInfo.init(i + 1, userdata[i].nickname, userdata[i].score[gameNum * 4 + difficulty]);
+            }
+        }
     }
 
 
+    private void DestrouContents()
+    {
+        if (contents.Count == 0) return;
+
+        for (int i = 0; i < contents.Count; i++)
+        {
+            Destroy(contents[i].gameObject);
+        }
+        contents.Clear();
+    }
+
+
+
+    public void OnClick_Exit()
+    {
+        this.gameObject.SetActive(false);
+    }
+
+
+    public void OnClick_EasyToggle()
+    {
+        if (curBoard != null)
+            curBoard.SetActive(false);
+
+        DestrouContents();
+
+        curDifNum = 0;
+
+        GenerateRanking(curGameNum, curDifNum, DatabaseAccess.Inst.totalScoreData);
+    }
+
+    public void OnClick_NomalToggle()
+    {
+        if (curBoard != null)
+            curBoard.SetActive(false);
+
+        DestrouContents();
+
+        curDifNum = 1;
+
+        GenerateRanking(curGameNum, curDifNum, DatabaseAccess.Inst.totalScoreData);
+    }
+
+    public void OnClick_HardToggle()
+    {
+        if (curBoard != null)
+            curBoard.SetActive(false);
+
+        DestrouContents();
+
+        curDifNum = 2;
+
+        GenerateRanking(curGameNum, curDifNum, DatabaseAccess.Inst.totalScoreData);
+    }
+
+    public void OnClick_VeryHardToggle()
+    {
+        if (curBoard != null)
+            curBoard.SetActive(false);
+
+        DestrouContents();
+
+        curDifNum = 3;
+
+        GenerateRanking(curGameNum, curDifNum, DatabaseAccess.Inst.totalScoreData);
+    }
+
+
+    public void Onclick_BalloonToggle()
+    {
+        curGameNum = 0;
+
+        OnClick_EasyToggle();
+    }
+
+    public void Onclick_MemoryCard()
+    {
+        curGameNum = 1;
+
+        OnClick_EasyToggle();
+    }
+
+    public void Onclick_Juice()
+    {
+        curGameNum = 2;
+
+        OnClick_EasyToggle();
+    }
+
+    public void Onclick_PuzzleToggle()
+    {
+        curGameNum = 3;
+
+        OnClick_EasyToggle();
+    }
 
 }
