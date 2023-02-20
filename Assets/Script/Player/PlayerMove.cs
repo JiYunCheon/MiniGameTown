@@ -39,7 +39,7 @@ public class PlayerMove : MonoBehaviour
                 if (GameManager.Inst.GetClickManager.GetCurHitObject != null)
                     GameManager.Inst.GetClickManager.GetCurHitObject.DeSelect_InteractableObj();
 
-                
+                Debug.Log("¿Ãµø");
                 myAgent.destination = hit.point;
             }
 

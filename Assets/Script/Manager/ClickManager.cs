@@ -47,7 +47,9 @@ public class ClickManager : MonoBehaviour
 
     private void Start()
     {
-       GameManager.Inst.LoadObj();
+        if(GameManager.Inst.CompareLoadScene())
+            GameManager.Inst.LoadObj();
+
     }
 
     void Update()

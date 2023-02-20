@@ -3,6 +3,7 @@ using UnityEngine;
 using System;
 using UnityEngine.UIElements;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public enum OBJECT_TYPE
 {
@@ -199,10 +200,15 @@ public class GameManager : MonoBehaviour
 #endif
     }
 
-    private void Start()
+
+    public bool CompareLoadScene()
     {
-        //GetUiFirstSceneUiController.InputGameMoney(DatabaseAccess.Inst.loginUser.gamemoney.ToString());
+        if (SceneManager.GetActiveScene().name == "Town1")
+            return true;
+
+        return false;
     }
+
 
     public void ListClear()
     {

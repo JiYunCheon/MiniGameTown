@@ -10,6 +10,11 @@ public class FirstSceneUiController : MonoBehaviour
     [SerializeField] private FirstSceneClick firstSceneClick = null;
     [SerializeField] private TextMeshProUGUI gameMoneyText = null;
 
+    private void Start()
+    {
+        InputGameMoney(DatabaseAccess.Inst.loginUser.gamemoney.ToString());
+    }
+
     public void InputGameMoney(string gameMoneyText)
     {
         this.gameMoneyText.text = gameMoneyText;

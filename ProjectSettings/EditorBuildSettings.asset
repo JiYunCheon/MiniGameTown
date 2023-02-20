@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Town1.unity
     guid: 3fbabd12b07d56c44a7e09c611bbeb15
+  - enabled: 1
+    path: Assets/Scenes/Beach.unity
+    guid: d525d1920f3b89a41b5198cf4a7de0c9
+  - enabled: 1
+    path: Assets/Scenes/PlazaScene.unity
+    guid: 52c9b700572c23140a36346c5b35b120
   m_configObjects: {}

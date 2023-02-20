@@ -7,10 +7,12 @@ public class Potal : MonoBehaviour
 {
     [SerializeField] string sceneName;
 
-    private void OnCollisionEnter(Collision collision)
+   
+    private void OnTriggerEnter(Collider other)
     {
+        GameManager.Inst.ListClear();
+
         SceneManager.LoadScene(sceneName);
     }
-
 
 }
