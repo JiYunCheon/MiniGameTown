@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3326710394062819334
+--- !u!1 &8854809139473765351
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3326710394062819328}
-  - component: {fileID: 3326710394062819335}
+  - component: {fileID: 8854809139473765345}
+  - component: {fileID: 8854809139473765350}
   m_Layer: 0
   m_Name: InGameRanking
   m_TagString: Untagged
@@ -17,13 +17,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3326710394062819328
+--- !u!4 &8854809139473765345
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3326710394062819334}
+  m_GameObject: {fileID: 8854809139473765351}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1005.39923, y: 555.8233, z: 3.9232986}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,13 +32,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3326710394062819335
+--- !u!114 &8854809139473765350
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3326710394062819334}
+  m_GameObject: {fileID: 8854809139473765351}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32cee46932b695641a327692137021a4, type: 3}
@@ -48,8 +48,6 @@ MonoBehaviour:
   secondPlaceText: {fileID: 0}
   thirdPlaceText: {fileID: 0}
   gameName: {fileID: 0}
-  curGameName: "\uD48D\uC120\uD130\uD2B8\uB9AC\uAE30"
-  myScoreInfo: {fileID: 0}
   scrollRect:
   - {fileID: 0}
   - {fileID: 0}
@@ -61,8 +59,13 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   rankingContentfrefab: {fileID: 6560949563989423416, guid: 21bcb310e9e481c458adef760d0339db, type: 3}
-  curGameNum: 0
-  curScore: 87
+  myScoreInfo: {fileID: 0}
+  gameDifText: {fileID: 0}
+  difName:
+  - "\uC26C\uC6C0"
+  - "\uBCF4\uD1B5"
+  - "\uC5B4\uB824\uC6C0"
+  - "\uB9E4\uC6B0\uC5B4\uB824\uC6C0"
   resultWindow: {fileID: 0}
   rankingBoard: {fileID: 0}
   typeOfGameRangking: {fileID: 0}
