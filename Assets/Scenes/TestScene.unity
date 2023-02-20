@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44971073, g: 0.49977922, b: 0.5756355, a: 1}
+  m_IndirectSpecularColor: {r: 0.44971067, g: 0.499779, b: 0.5756352, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -156,7 +156,6 @@ MonoBehaviour:
   secondPlaceText: {fileID: 8565318890021652080}
   thirdPlaceText: {fileID: 7121328994591787573}
   gameName: {fileID: 464059691501963872}
-  curGameName: "\uD48D\uC120\uD130\uD2B8\uB9AC\uAE30"
   myScoreInfo: {fileID: 3877475934480116624}
   scrollRect:
   - {fileID: 8316386711554296985}
@@ -169,9 +168,15 @@ MonoBehaviour:
   - {fileID: 8401728610845821677}
   - {fileID: 3251282689408147054}
   rankingContentfrefab: {fileID: 6560949563989423416, guid: 21bcb310e9e481c458adef760d0339db, type: 3}
+  difName:
+  - "\uC26C\uC6C0"
+  - "\uBCF4\uD1B5"
+  - "\uC5B4\uB824\uC6C0"
+  - "\uB9E4\uC6B0\uC5B4\uB824\uC6C0"
   resultWindow: {fileID: 1113935754}
   rankingBoard: {fileID: 8316386711110344324}
   typeOfGameRangking: {fileID: 1681977311}
+  gameDifText: {fileID: 2129328614988148596}
 --- !u!4 &189322772
 Transform:
   m_ObjectHideFlags: 0

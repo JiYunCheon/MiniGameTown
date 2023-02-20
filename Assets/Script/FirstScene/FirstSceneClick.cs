@@ -8,20 +8,12 @@ public class FirstSceneClick : MonoBehaviour
     private RaycastHit2D hit;
     private Select saveObj;
 
-    private Vector3 biggerScale;
-    private Vector3 originScale;
-
-    private void Awake()
-    {
-        biggerScale = new Vector3(2, 2, 1);
-        originScale = new Vector3(1.5f, 1.5f, 1);
-    }
+    public Select GetSaveObj { get { return saveObj; } private set { } }
 
     private void Update()
     {
         InputEvent();
     }
-
 
     private void InputEvent()
     {
@@ -34,15 +26,11 @@ public class FirstSceneClick : MonoBehaviour
                 if (hit.transform.TryGetComponent<Select>(out Select obj))
                 {
                     saveObj = obj;
-                    saveObj.ChangeScale(biggerScale);
                     saveObj.GameSelect();
                 }
         }
     }
     
-    public void Refresh()
-    {
-        saveObj.ChangeScale(originScale);
-    }
+    
 
 }

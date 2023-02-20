@@ -18,6 +18,7 @@ public class ResultWindow : MonoBehaviour
 
     public void SetCurRank(int rank)
     {
+        Debug.Log(rank);
         curRank.text = rank.ToString();
     }
 

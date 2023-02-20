@@ -184,13 +184,6 @@ public class TypeOfGameRangking : MonoBehaviour
     }
 
 
-
-    public void GetUserScore(string _id)
-    {
-        isProcessing = true;
-
-    }
-
     private string[] ArraySplitSort(object str)
     {
         string[] words = str.ToString().Split(",");

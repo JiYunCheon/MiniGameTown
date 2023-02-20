@@ -309,8 +309,6 @@ public class DatabaseAccess : MonoBehaviour
 
             totalScoreData.Add(user);
         }
-        Debug.Log(totalScoreData.Count);
-
 
         isProcessing = false;
 
