@@ -4,14 +4,12 @@ using UnityEngine;
 
 public abstract class Select : MonoBehaviour
 {
+    [SerializeField] protected Vector3 biggerScale;
     protected Vector3 originScale;
-    protected Vector3 biggerScale;
 
     private void Awake()
     {
-        originScale = new Vector3(1.5f, 1.5f, 1);
-        biggerScale = new Vector3(2, 2, 1);
-
+        originScale = transform.localScale;
     }
     public abstract void GameSelect();
 

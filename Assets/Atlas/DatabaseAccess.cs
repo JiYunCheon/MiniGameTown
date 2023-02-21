@@ -116,6 +116,9 @@ public class DatabaseAccess : MonoBehaviour
             user.year = (int)data.GetValue("year");
             user.nickname = (string)data.GetValue("nickname");
 
+            arrayString = (object)data.GetValue("score");
+            user.score = ArraySplitSort(arrayString);
+
             arrayString = (object)data.GetValue("objname");
             //스트링으로 변환된 배열들의 값을 배열에 넣음
             user.objname = ArraySplitSort(arrayString);

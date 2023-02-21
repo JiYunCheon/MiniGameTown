@@ -36,7 +36,6 @@ public class CameraControll : MonoBehaviour
     }
 
 
-
     private void Update()
     {
         //업데이트에  들어가는 인풋들을 게임매니저에서 하는게 좋아보임 
@@ -71,7 +70,7 @@ public class CameraControll : MonoBehaviour
             return;
         }
 
-        if (Input.GetMouseButtonUp(0) && time<=0.1f)
+        if (Input.GetMouseButtonUp(0) && time<=0.15f)
         {
             GameManager.Inst.GetPlayer.PlayerDestination();
         }

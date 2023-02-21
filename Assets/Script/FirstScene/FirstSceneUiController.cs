@@ -27,6 +27,7 @@ public class FirstSceneUiController : MonoBehaviour
 
     public void OnClick_Exit()
     {
+        Debug.Log("¿ä¿ì");
         firstSceneClick.GetSaveObj.Refresh();
         ActiveButton(false);
     }

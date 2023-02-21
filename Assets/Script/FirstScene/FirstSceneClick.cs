@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class FirstSceneClick : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class FirstSceneClick : MonoBehaviour
 
     private void InputEvent()
     {
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0) && EventSystem.current.IsPointerOverGameObject(GameManager.Inst.pointerID) == false)
         {
             hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Camera.main.transform.forward, 100, layer);
             Debug.DrawRay(Camera.main.ScreenToWorldPoint(Input.mousePosition), Camera.main.transform.forward * 10, Color.red, 0.3f);

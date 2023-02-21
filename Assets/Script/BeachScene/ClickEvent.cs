@@ -13,11 +13,5 @@ public class ClickEvent : MonoBehaviour
         player = Instantiate<PlayerMove>(playerPrefab, spawnTr.position,Quaternion.identity);
     }
 
-    private void Update()
-    {
-        if(Input.GetMouseButtonDown(0))
-        {
-            player.PlayerDestination();
-        }
-    }
+   
 }
