@@ -203,7 +203,7 @@ public class GameManager : MonoBehaviour
 
     public bool CompareLoadScene()
     {
-        if (SceneManager.GetActiveScene().name == "Town1")
+        if (SceneManager.GetActiveScene().name == "3.MiniTown")
             return true;
 
         return false;
@@ -314,7 +314,6 @@ public class GameManager : MonoBehaviour
             string type = "";
             int count = 0;
             GetUiManager.Active_Pad();
-
 
             objectsName = DatabaseAccess.Inst.loginUser.objname;
 

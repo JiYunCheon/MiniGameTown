@@ -174,8 +174,10 @@ public class CameraControll : MonoBehaviour
     }
 
     
-    public void CameraPosMove(Building obj ,bool zoomCheck = true)
+    public void CameraPosMove(Interactable obj ,bool zoomCheck = true)
     {
+        if (zoomCheck&&!obj.GetInteracterbleCheck) return;
+
         StopAllCoroutines();
 
         if (zoomCheck)

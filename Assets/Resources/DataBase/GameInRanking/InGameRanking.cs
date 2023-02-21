@@ -172,7 +172,9 @@ public class InGameRanking : MonoBehaviour
 
         UserData.sortingIdx = gameNum * 4 + difficulty;
         userdata.Sort();
-        userdata.Reverse();
+
+        if(gameNum==1)
+            userdata.Reverse();
 
 
         for (int i = 0; i < userdata.Count; i++)

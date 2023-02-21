@@ -24,7 +24,6 @@ public class LoginSceneController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI nickName_StateText = null;
 
 
-
     [Header("Find_Password")]
     [SerializeField] private GameObject find_ID_Board = null;
     [SerializeField] private TMP_InputField inputfied__FindID = null;
@@ -210,6 +209,7 @@ public class LoginSceneController : MonoBehaviour
     {
         inputfied__FindID.text = "";
         inputfied__FindYear.text = "";
+        find_Psw_StateText.text = "";
 
         Active_FindPswBox(false);
     }
@@ -242,7 +242,9 @@ public class LoginSceneController : MonoBehaviour
         id_StateText.color = Color.white;
         inputfied__CreateID.text = "";
         inputfied__CreatePsw.text = "";
+        inputfied__CopyPsw.text = "";
         inputfied__CreateYear.text = "";
+        inputfied__NickName.text = "";
 
         Active_CreateIDBox(false);
     }
@@ -273,6 +275,8 @@ public class LoginSceneController : MonoBehaviour
 
         idCompleteCheck = false;
     }
+
+
 
     #endregion
     ///////////////////////////////////////////////////////////////////////////////////////

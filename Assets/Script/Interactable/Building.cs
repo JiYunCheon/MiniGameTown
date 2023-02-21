@@ -6,17 +6,11 @@ using UnityEngine.UI;
 
 public class Building : Interactable
 {
-    [Header("===Entrance===")]
-    [SerializeField] private TriggerCheck entrance = null;
-
     private Material defaultMaterial = null;
     private Material lightMaterial = null;
 
-    private bool selectCheck = false;
 
-    public bool GetSelecCheck { get { return selectCheck; } private set { } }
 
-    public TriggerCheck GetEntrance { get { return entrance; } private set { } }
 
     private void Awake()
     {
@@ -26,28 +20,15 @@ public class Building : Interactable
         //CompleteEffect();
     }
 
-    public void SetSelectCheck(bool check)
-    {
-        selectCheck = check;
+ 
 
-        if (selectCheck == true)
-            entrance.ActiveCollider(true);
-        else
-        {
-            entrance.ActiveCollider(false);
-            GameManager.Inst.GetUiManager.Active_GameInBtn(false);
-        }
-    }
-
-    //빛나는 쉐이더 적용
     public override void Select_InteractableObj()
     {
-        renderer.material = lightMaterial;
+        GetComponent<Renderer>().material = lightMaterial;
     }
 
-    //디폴트 쉐이더 적용
     public override void DeSelect_InteractableObj()
     {
-        renderer.material = defaultMaterial;
+        GetComponent<Renderer>().material = defaultMaterial;
     }
 }

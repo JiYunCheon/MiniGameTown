@@ -31,27 +31,23 @@ public class PreviewObject : Interactable
 
     }
 
-    //ÆíÁý Ui Active ÄÁÆ®·Ñ
     public void Active_BuildOption(bool active = true)
     {
         buildOption.SetActive(active);
     }
 
-    //¹Ì¸®º¸±â °´Ã¼ÀÇ ÇöÀç »óÅÂ º¯°æ
     public void ChangeState(Ground ground, int occupyPad)
     {
         if (!ground.CompareNode(occupyPad))
-            //»¡°£»ö ¸ÞÅ×¸®¾ó
             renderer.material = redMaterial;
         else
-            //±âº» ¸ÞÅ×¸®¾ó
             renderer.material = defaultMaterial;
     }
 
 
     #region Button Event
 
-    //Ui È®ÀÎÀ» ´­·¶À»¶§
+    //Ui È®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public void OnClick_Confirm()
     {
         if(myInventoryItem==null)
@@ -78,7 +74,7 @@ public class PreviewObject : Interactable
         Destroy(this.gameObject);
     }
 
-    //Ui È¸ÀüÀ» ´­·¶À»¶§
+    //Ui È¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public void OnClick_Rotation()
     {
         if (count == 0)
@@ -98,7 +94,7 @@ public class PreviewObject : Interactable
         count++;
     }
 
-    //Ui x¸¦ ´­·¶À»¶§
+    //Ui xï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public void OnClick_Exit()
     {
         if (myInventoryItem == null)

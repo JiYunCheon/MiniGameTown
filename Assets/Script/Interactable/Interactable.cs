@@ -4,6 +4,9 @@ using UnityEngine;
 
 abstract public class Interactable : MonoBehaviour
 {
+    [Header("===Entrance===")]
+    [SerializeField] private TriggerCheck entrance = null;
+
     [Header("===ListCheck===")]
     public List<Ground> myGround = new List<Ground>();
 
@@ -13,15 +16,20 @@ abstract public class Interactable : MonoBehaviour
 
     private Excel myData = null;
 
-    protected new Renderer renderer = null;
+    [SerializeField] protected new Renderer renderer = null;
+    [SerializeField] private bool interacterbleCheck = true; 
 
-    private InventoryItem myInvenItem = null;
+    private bool selectCheck = false;
 
     #region Property
 
-    public Transform GetCameraPos { get { return cameraPos; } private set { } }
+    public bool GetInteracterbleCheck { get { return interacterbleCheck; } private set { } }
 
-    public InventoryItem GetInventoryItem { get { return myInvenItem; } private set { } }
+    public TriggerCheck GetEntrance { get { return entrance; } private set { } }
+
+    public bool GetSelecCheck { get { return selectCheck; } private set { } }
+
+    public Transform GetCameraPos { get { return cameraPos; } private set { } }
 
     public Excel GetMyData { get { return myData; }private set { } }
 
@@ -105,6 +113,18 @@ abstract public class Interactable : MonoBehaviour
     //선택취소되었을 때 실행될 함수
     public virtual void DeSelect_InteractableObj() { }
 
-    //주변패드의 정보를 저장
- 
+    public virtual void SetSelectCheck(bool check)
+    {
+        if (entrance == null) return;
+
+        selectCheck = check;
+
+        if (selectCheck == true)
+            entrance.ActiveCollider(true);
+        else
+        {
+            entrance.ActiveCollider(false);
+            GameManager.Inst.GetUiManager.Active_GameInBtn(false);
+        }
+    }
 }

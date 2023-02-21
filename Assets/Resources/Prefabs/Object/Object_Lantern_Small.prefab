@@ -98,9 +98,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2e9a9c80ed65b9468643daf636aea48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  entrance: {fileID: 0}
+  myGround: []
   cameraPos: {fileID: 0}
   nameTr: {fileID: 0}
-  myGround: []
+  renderer: {fileID: 0}
+  interacterbleCheck: 0
 --- !u!65 &-8108299374517290646
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -90,7 +90,7 @@ public class DatabaseAccess : MonoBehaviour
     private IEnumerator IsProcessing()
     {
         yield return new WaitUntil(()=>!isProcessing);
-        SceneManager.LoadScene("2DTown");
+        SceneManager.LoadScene("2.BaseTown");
 
     }
 

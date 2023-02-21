@@ -38,7 +38,10 @@ public class PlayerMove : MonoBehaviour
             if (hit.transform.gameObject.TryGetComponent<Building>(out Building obj))
             {
                 //건물의 입구로 이동
+                anim.SetBool("move", true);
+
                 myAgent.destination = obj.GetEntrance.transform.position;
+                des = obj.GetEntrance.transform.position;
             }
             else
             {

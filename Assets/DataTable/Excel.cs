@@ -26,4 +26,8 @@ public class Excel
     public int hvCheck;
 
     public OBJECT_TYPE myType;
+
+    public string explain;
+
+    public string character;
 }

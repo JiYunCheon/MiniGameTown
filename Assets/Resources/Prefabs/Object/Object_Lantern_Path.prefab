@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3314574}
   - component: {fileID: 2384122}
   - component: {fileID: -1571013137850376486}
+  - component: {fileID: 5678389793945776008}
   m_Layer: 6
   m_Name: Object_Lantern_Path
   m_TagString: Untagged
@@ -101,6 +102,24 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.648188, y: 0.64818794, z: 0.648188}
   m_Center: {x: 0, y: 0.32456455, z: -0.000000014901161}
+--- !u!114 &5678389793945776008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2e9a9c80ed65b9468643daf636aea48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entrance: {fileID: 0}
+  myGround: []
+  cameraPos: {fileID: 0}
+  nameTr: {fileID: 0}
+  renderer: {fileID: 0}
+  interacterbleCheck: 0
 --- !u!1 &6475730590531683032
 GameObject:
   m_ObjectHideFlags: 0

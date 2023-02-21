@@ -11,7 +11,7 @@ public class ClickManager : MonoBehaviour
     private int padLayer      = 1 << 7;
 
     //이전 건물을 저장 할 변수
-    private Building curHitObject  = null;
+    private Interactable curHitObject  = null;
     private Ground beforeGround = null;
     private Vector3 saveHitPos  = Vector3.zero;
 
@@ -38,7 +38,7 @@ public class ClickManager : MonoBehaviour
 
     #region Property
 
-    public Building GetCurHitObject { get { return curHitObject; } private set { } }
+    public Interactable GetCurHitObject { get { return curHitObject; } private set { } }
 
     public Excel GetCurData { get { return curData; } private set { } }
 
@@ -117,7 +117,7 @@ public class ClickManager : MonoBehaviour
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, buildingLayer))
         {
             //상호 작용이 가능한 오브젝트인지 확인
-            if (hit.transform.gameObject.TryGetComponent<Building>(out Building obj))
+            if (hit.transform.gameObject.TryGetComponent<Interactable>(out Interactable obj))
             {
                 //플레이어의 도착지로 지정
                 GameManager.Inst.GetPlayer.PlayerDestination();
@@ -253,8 +253,10 @@ public class ClickManager : MonoBehaviour
     }
 
     //클릭 될때 호출 기능 들
-    private void Interaction(Building obj , bool check)
+    private void Interaction(Interactable obj , bool check)
     {
+        if (!obj.GetInteracterbleCheck) return;
+
         foreach (Transform item in GameManager.Inst.GetBuildings)
         {
             if (item.TryGetComponent<Interactable>(out Interactable interactable))

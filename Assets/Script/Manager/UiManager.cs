@@ -11,7 +11,7 @@ public class UiManager : MonoBehaviour
     #region Member
 
     [Header("Button")]
-    [SerializeField] private GameObject gameInBtn       = null;
+    [SerializeField] private TextUi gameInBtn       = null;
     [SerializeField] private Button buildingShopBtn     = null;
 
     [Header("ShopUi")]
@@ -94,11 +94,13 @@ public class UiManager : MonoBehaviour
     {
         if(activeSelf)
         {
-            gameInBtn.SetActive(activeSelf);
+            gameInBtn.gameObject.SetActive(activeSelf);
+            gameInBtn.SetMyData(GameManager.Inst.GetClickManager.GetCurHitObject.GetMyData);
+            gameInBtn.SetExplain();
         }
         else
         {
-            gameInBtn.SetActive(activeSelf);
+            gameInBtn.gameObject.SetActive(activeSelf);
 
             //빌딩들의 이름을 끔
             GameManager.Inst.Call_IntractableObj_Method(1);
@@ -200,7 +202,7 @@ public class UiManager : MonoBehaviour
         GameManager.Inst.ListClear();
 
         //신 변경
-        SceneManager.LoadScene("2DTown");
+        SceneManager.LoadScene("2.BaseTown");
     }
 
     public void Onclick_Save()

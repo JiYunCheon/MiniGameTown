@@ -24,6 +24,8 @@ MonoBehaviour:
     alphaPrefabName: Building_Alpha_Balloon
     hvCheck: 0
     myType: 0
+    explain: wow fox
+    character: Fox
   - name: Puzzle
     maxCount: 1
     price: 500
@@ -35,6 +37,8 @@ MonoBehaviour:
     alphaPrefabName: Building_Alpha_Puzzle
     hvCheck: 0
     myType: 0
+    explain: 
+    character: 
   - name: MyRoom
     maxCount: 1
     price: 500
@@ -46,6 +50,8 @@ MonoBehaviour:
     alphaPrefabName: Building_Alpha_MyRoom
     hvCheck: 0
     myType: 0
+    explain: 
+    character: 
   - name: MemoryCard
     maxCount: 1
     price: 500
@@ -57,6 +63,8 @@ MonoBehaviour:
     alphaPrefabName: Building_Alpha_MemoryCard
     hvCheck: 0
     myType: 0
+    explain: 
+    character: 
   - name: FindPicture
     maxCount: 1
     price: 500
@@ -68,6 +76,8 @@ MonoBehaviour:
     alphaPrefabName: Building_Alpha_FindPicture
     hvCheck: 0
     myType: 0
+    explain: 
+    character: 
   - name: Cart
     maxCount: 99999
     price: 200
@@ -79,6 +89,8 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Cart
     hvCheck: 0
     myType: 1
+    explain: 
+    character: 
   - name: AppleTree
     maxCount: 99999
     price: 100
@@ -90,6 +102,8 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_AppleTree
     hvCheck: 0
     myType: 1
+    explain: 
+    character: 
   - name: Cat_Black
     maxCount: 99999
     price: 100
@@ -101,6 +115,8 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Cat_Black
     hvCheck: 0
     myType: 1
+    explain: 
+    character: 
   - name: Cat_White
     maxCount: 99999
     price: 100
@@ -112,10 +128,12 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Cat_White
     hvCheck: 0
     myType: 1
+    explain: 
+    character: 
   - name: Fence_End_Short
     maxCount: 99999
     price: 100
-    occupyPad: 3
+    occupyPad: 1
     Info: a
     spriteName: Fence_End_Short
     packageName: 
@@ -123,6 +141,8 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Fence_End-Short
     hvCheck: 0
     myType: 1
+    explain: 
+    character: 
   - name: Fence_End_Vertical
     maxCount: 99999
     price: 100
@@ -134,10 +154,12 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Fence_End_Vertical
     hvCheck: 1
     myType: 1
+    explain: 
+    character: 
   - name: Fence_End
     maxCount: 99999
     price: 100
-    occupyPad: 1
+    occupyPad: 3
     Info: a
     spriteName: Fence_End
     packageName: 
@@ -145,6 +167,8 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Fence_End
     hvCheck: 0
     myType: 1
+    explain: 
+    character: 
   - name: Flower_1x_Orange
     maxCount: 99999
     price: 100
@@ -156,6 +180,8 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Flower_1x_Orange
     hvCheck: 0
     myType: 1
+    explain: 
+    character: 
   - name: Flower_1x_Purple
     maxCount: 99999
     price: 100
@@ -167,6 +193,8 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Flower_1x_Purple
     hvCheck: 0
     myType: 1
+    explain: 
+    character: 
   - name: Flowers_BlueLight
     maxCount: 99999
     price: 100
@@ -178,6 +206,8 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Flowers_BlueLight
     hvCheck: 0
     myType: 1
+    explain: 
+    character: 
   - name: Flowers_Pink
     maxCount: 99999
     price: 100
@@ -189,6 +219,8 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Flowers_Pink
     hvCheck: 0
     myType: 1
+    explain: 
+    character: 
   - name: GarbageCan_Blue
     maxCount: 99999
     price: 100
@@ -200,6 +232,8 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_GarbageCan_Blue
     hvCheck: 0
     myType: 1
+    explain: 
+    character: 
   - name: GarbageCan_Red
     maxCount: 99999
     price: 100
@@ -211,6 +245,8 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_GarbageCan_Red
     hvCheck: 0
     myType: 1
+    explain: 
+    character: 
   - name: Lantern_Path
     maxCount: 99999
     price: 100
@@ -222,6 +258,8 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Lantern_Path
     hvCheck: 0
     myType: 1
+    explain: 
+    character: 
   - name: Lantern_Small
     maxCount: 99999
     price: 100
@@ -233,6 +271,8 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Lantern_Small
     hvCheck: 0
     myType: 1
+    explain: 
+    character: 
   - name: PineTree_Bright
     maxCount: 99999
     price: 100
@@ -244,6 +284,8 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_PineTree_Bright
     hvCheck: 0
     myType: 1
+    explain: 
+    character: 
   - name: PineTree_Snow_1
     maxCount: 99999
     price: 100
@@ -255,6 +297,8 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_PineTree_Snow_1
     hvCheck: 0
     myType: 1
+    explain: 
+    character: 
   - name: PineTree_Snow_2
     maxCount: 99999
     price: 100
@@ -266,6 +310,8 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_PineTree_Snow_2
     hvCheck: 0
     myType: 1
+    explain: 
+    character: 
   - name: Tree_Fruits_Plums
     maxCount: 99999
     price: 100
@@ -277,6 +323,8 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Tree_Fruits_Plums
     hvCheck: 0
     myType: 1
+    explain: 
+    character: 
   - name: Trunk
     maxCount: 99999
     price: 100
@@ -288,6 +336,8 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Trunk
     hvCheck: 0
     myType: 1
+    explain: 
+    character: 
   - name: Trunk_x3
     maxCount: 99999
     price: 100
@@ -299,6 +349,8 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Trunk_x3
     hvCheck: 0
     myType: 1
+    explain: 
+    character: 
   - name: Umbrella_Purple
     maxCount: 99999
     price: 100
@@ -310,6 +362,8 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Umbrella_Purple
     hvCheck: 0
     myType: 1
+    explain: 
+    character: 
   - name: Umbrella_Red
     maxCount: 99999
     price: 100
@@ -321,6 +375,8 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Umbrella_Red
     hvCheck: 0
     myType: 1
+    explain: 
+    character: 
   - name: BalloonStand
     maxCount: 99999
     price: 100
@@ -332,3 +388,5 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_BalloonStand
     hvCheck: 0
     myType: 1
+    explain: 
+    character: 
