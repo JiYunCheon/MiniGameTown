@@ -17,11 +17,15 @@ abstract public class Interactable : MonoBehaviour
     private Excel myData = null;
 
     [SerializeField] protected new Renderer renderer = null;
-    [SerializeField] private bool interacterbleCheck = true; 
+    [SerializeField] private bool interacterbleCheck = true;
+    [SerializeField] private bool uiCheck = false;
+
 
     private bool selectCheck = false;
 
     #region Property
+
+    public bool GetUiCheck { get { return uiCheck; } private set { } }
 
     public bool GetInteracterbleCheck { get { return interacterbleCheck; } private set { } }
 
@@ -124,7 +128,9 @@ abstract public class Interactable : MonoBehaviour
         else
         {
             entrance.ActiveCollider(false);
-            GameManager.Inst.GetUiManager.Active_GameInBtn(false);
+
+            if(GameManager.Inst.GetUiManager!=null)
+                GameManager.Inst.GetUiManager.Active_GameInBtn(false);
         }
     }
 }

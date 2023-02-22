@@ -39,6 +39,7 @@ public class InventoryItem : Item
     public void OnClick_Item()
     {
         GameManager.Inst.GetClickManager.SetInfo(GetMyData);
+        SetByCount(-1);
 
         GameManager.Inst.GetUiManager.On_Click_BuildingMode();
     }

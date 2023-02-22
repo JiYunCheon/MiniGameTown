@@ -370,11 +370,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0860cfa665784454799f8557d98437a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  entrance: {fileID: 8471741802133643821}
+  myGround: []
   cameraPos: {fileID: 1847257299066466905}
   nameTr: {fileID: 337472999991832980}
-  myGround: []
-  entrance: {fileID: 8471741802133643821}
-  texture: {fileID: 2800000, guid: 910395448803c444d8958f4c73af9dce, type: 3}
-  outlineShader: {fileID: 4800000, guid: ba3d0d8b76225b349b62dc005659c3fd, type: 3}
-  defaultShader: {fileID: 4800000, guid: d990c8119dd67dc40868fc605e29d608, type: 3}
-  shaderCheck: 0
+  renderer: {fileID: 0}
+  interacterbleCheck: 1
+  uiCheck: 1

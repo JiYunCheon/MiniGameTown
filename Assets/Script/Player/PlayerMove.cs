@@ -8,9 +8,12 @@ using UnityEngine.EventSystems;
 
 public class PlayerMove : MonoBehaviour
 {
+    [SerializeField] GameObject balloon = null;
+
     public NavMeshAgent myAgent;
     Animator anim;
     Vector3 des = Vector3.zero;
+    Coroutine interaction = null;
 
     void Start()
     {
@@ -29,13 +32,34 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    private void Active_Item(bool check = true)
+    {
+        balloon.SetActive(check);
+    }
+
+    public void Interaction()
+    {
+        if (interaction != null)
+            StopCoroutine(interaction);
+
+        interaction = StartCoroutine(ActiveControll());
+    }
+    
+    IEnumerator ActiveControll()
+    {
+        Active_Item();
+        yield return new WaitForSeconds(10f);
+        Active_Item(false);
+    }
+
+
     public void PlayerDestination()
     {
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
         {
             //클릭한 객체가 건물일 경우
-            if (hit.transform.gameObject.TryGetComponent<Building>(out Building obj))
+            if (hit.transform.gameObject.TryGetComponent<Interactable>(out Interactable obj) && obj.GetInteracterbleCheck)
             {
                 //건물의 입구로 이동
                 anim.SetBool("move", true);

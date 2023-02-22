@@ -17,7 +17,7 @@ MonoBehaviour:
     maxCount: 1
     price: 500
     occupyPad: 9
-    Info: It is balloon
+    Info: "\uD48D\uC120\uD130\uD2B8\uB9AC\uAE30"
     spriteName: Balloon
     packageName: com.DefaultCompany.Pop_The_Balloon
     prefabName: Building_Balloon
@@ -30,7 +30,7 @@ MonoBehaviour:
     maxCount: 1
     price: 500
     occupyPad: 9
-    Info: It is Puzzle
+    Info: "\uD37C\uC990"
     spriteName: Puzzle
     packageName: com.DefaultCompany.Jigsaw_Final
     prefabName: Building_Puzzle
@@ -43,7 +43,7 @@ MonoBehaviour:
     maxCount: 1
     price: 500
     occupyPad: 9
-    Info: It is MyRoom
+    Info: "\uB9C8\uC774\uD648"
     spriteName: MyRoom
     packageName: com.DefaultCompany.JigsawPuzzle
     prefabName: Building_MyRoom
@@ -56,7 +56,7 @@ MonoBehaviour:
     maxCount: 1
     price: 500
     occupyPad: 9
-    Info: It is MemoryCard
+    Info: "\uBA54\uBAA8\uB9AC\uCE74\uB4DC"
     spriteName: Memory
     packageName: com.DefaultCompany.OneWeek_MemoryCard
     prefabName: Building_MemoryCard
@@ -69,7 +69,7 @@ MonoBehaviour:
     maxCount: 1
     price: 500
     occupyPad: 9
-    Info: It is FindPicture
+    Info: "\uC8FC\uC2A4\uB9CC\uB4E4\uAE30"
     spriteName: Find
     packageName: com.DefaultCompany.WrongPicture
     prefabName: Building_FindPicture
@@ -82,7 +82,7 @@ MonoBehaviour:
     maxCount: 99999
     price: 200
     occupyPad: 2
-    Info: It is Cart
+    Info: "\uC544\uC774\uC2A4\uD06C\uB9BC\uCE74\uD2B8"
     spriteName: Cart
     packageName: 
     prefabName: Object_Cart
@@ -95,7 +95,7 @@ MonoBehaviour:
     maxCount: 99999
     price: 100
     occupyPad: 1
-    Info: It is AppleTree
+    Info: "\uC0AC\uACFC\uB098\uBB34"
     spriteName: AppleTree
     packageName: 
     prefabName: Object_AppleTree
@@ -108,7 +108,7 @@ MonoBehaviour:
     maxCount: 99999
     price: 100
     occupyPad: 1
-    Info: a
+    Info: "\uAC80\uC740\uACE0\uC591\uC774"
     spriteName: Cat_Black
     packageName: 
     prefabName: Object_Cat_Black
@@ -121,7 +121,7 @@ MonoBehaviour:
     maxCount: 99999
     price: 100
     occupyPad: 1
-    Info: a
+    Info: "\uD558\uC580\uACE0\uC591\uC774"
     spriteName: Cat_White
     packageName: 
     prefabName: Object_Cat_White
@@ -134,7 +134,7 @@ MonoBehaviour:
     maxCount: 99999
     price: 100
     occupyPad: 1
-    Info: a
+    Info: "\uD32C\uC2A4 \uB05D"
     spriteName: Fence_End_Short
     packageName: 
     prefabName: Object_Fence_End-Short
@@ -147,7 +147,7 @@ MonoBehaviour:
     maxCount: 99999
     price: 100
     occupyPad: 3
-    Info: a
+    Info: "\uD32C\uC2A4 \uC138\uB85C"
     spriteName: Fence_End_Vertical
     packageName: 
     prefabName: Object_Fence_End_Vertical
@@ -160,7 +160,7 @@ MonoBehaviour:
     maxCount: 99999
     price: 100
     occupyPad: 3
-    Info: a
+    Info: "\uD32C\uC2A4 \uAC00\uB85C"
     spriteName: Fence_End
     packageName: 
     prefabName: Object_Fence_End
@@ -173,7 +173,7 @@ MonoBehaviour:
     maxCount: 99999
     price: 100
     occupyPad: 1
-    Info: a
+    Info: "\uC624\uB80C\uC9C0 \uAF43"
     spriteName: Flower_1x_Orange
     packageName: 
     prefabName: Object_Flower_1x_Orange
@@ -186,7 +186,7 @@ MonoBehaviour:
     maxCount: 99999
     price: 100
     occupyPad: 1
-    Info: a
+    Info: "\uBCF4\uB77C \uAF43"
     spriteName: Flower_1x_Purple
     packageName: 
     prefabName: Object_Flower_1x_Purple
@@ -199,7 +199,7 @@ MonoBehaviour:
     maxCount: 99999
     price: 100
     occupyPad: 1
-    Info: a
+    Info: "\uD30C\uB780 \uAF43"
     spriteName: Flowers_BlueLight
     packageName: 
     prefabName: Object_Flowers_BlueLight

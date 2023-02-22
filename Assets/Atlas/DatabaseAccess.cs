@@ -21,6 +21,7 @@ public class UserData : IComparable
     public string password;
     public string nickname;
     public int year;
+    public int selectNum;
 
     public string[] score;
     public int gamemoney;
@@ -90,7 +91,15 @@ public class DatabaseAccess : MonoBehaviour
     private IEnumerator IsProcessing()
     {
         yield return new WaitUntil(()=>!isProcessing);
-        SceneManager.LoadScene("2.BaseTown");
+
+        if(loginUser.selectNum== -1)
+        {
+            SceneManager.LoadScene("CharacterSelectScene");
+        }
+        else
+        {
+            SceneManager.LoadScene("2.BaseTown");
+        }
 
     }
 
@@ -115,6 +124,7 @@ public class DatabaseAccess : MonoBehaviour
             user.gamemoney = (int)data.GetValue("gamemoney");
             user.year = (int)data.GetValue("year");
             user.nickname = (string)data.GetValue("nickname");
+            user.selectNum=(int)data.GetValue("selectNum");
 
             arrayString = (object)data.GetValue("score");
             user.score = ArraySplitSort(arrayString);
@@ -241,7 +251,7 @@ public class DatabaseAccess : MonoBehaviour
         newUser.year = year;
         newUser.nickname = nickname;
         newUser.gamemoney = 5000;
-
+        newUser.selectNum = -1;
 
         newUser.objectcount = new string[29];
         newUser.shopmaxcount = new string[29];

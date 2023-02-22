@@ -24,15 +24,20 @@ public class TriggerCheck : MonoBehaviour
     //플레이어가 닿으면 유아이 켜짐
     private void OnTriggerEnter(Collider other)
     {
-        PlayerMove player = null;
+        if (GameManager.Inst.GetUiManager == null) return;
 
-        //켐페얼 테그로 변경
-        if (other.gameObject.TryGetComponent<PlayerMove>(out player))
+        if(GameManager.Inst.GetClickManager.GetCurHitObject.GetUiCheck)
         {
-            GameManager.Inst.GetUiManager.Active_ShopBtn(false);
+            //켐페얼 테그로 변경
+            if (other.gameObject.TryGetComponent<PlayerMove>(out PlayerMove player))
+            {
+                GameManager.Inst.GetUiManager.Active_ShopBtn(false);
 
-            GameManager.Inst.GetUiManager.Active_GameInBtn();
+                GameManager.Inst.GetUiManager.Active_GameInBtn();
 
+            }
         }
+
+      
     }
 }

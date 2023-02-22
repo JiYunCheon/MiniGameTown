@@ -10,7 +10,11 @@ public class Potal : MonoBehaviour
    
     private void OnTriggerEnter(Collider other)
     {
-        GameManager.Inst.ListClear();
+        if(GameManager.Inst.CompareLoadScene())
+        {
+            GameManager.Inst.SaveData();
+            GameManager.Inst.ListClear();
+        }
 
         SceneManager.LoadScene(sceneName);
     }

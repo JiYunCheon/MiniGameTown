@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/5.PlazaScene.unity
     guid: 52c9b700572c23140a36346c5b35b120
+  - enabled: 1
+    path: Assets/Scenes/CharacterSelectScene.unity
+    guid: 700914fd6b5084f479c791c448c22dfe
   m_configObjects: {}

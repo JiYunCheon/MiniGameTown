@@ -31,7 +31,6 @@ public class ClickManager : MonoBehaviour
 
     //빌딩모드에 들어가서 클릭을 했는지를 체크 할 불 변수
     private bool clickCheck = false;
-    private bool editCheck = false;
     [HideInInspector] public bool selectCheck = false;
 
     #endregion
@@ -55,7 +54,7 @@ public class ClickManager : MonoBehaviour
     void Update()
     {
         //유아이 위를 클릭했을 경우 리턴 
-        if (selectCheck || EventSystem.current.IsPointerOverGameObject(GameManager.Inst.pointerID) == true) return;
+        if (selectCheck ||EventSystem.current.IsPointerOverGameObject(GameManager.Inst.pointerID) == true) return;
 
 
         //빌딩모드, 편집모드가 아닐경우 
@@ -145,7 +144,6 @@ public class ClickManager : MonoBehaviour
     private void EditModeSequence()
     {
         RaycastHit hit;
-        editCheck = true;
 
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, buildingLayer))
         {
@@ -195,11 +193,6 @@ public class ClickManager : MonoBehaviour
 
                     preview.Active_BuildOption();
 
-                    if(editCheck)
-                    {
-                        preview.editCheck = true;
-                        editCheck = false;
-                    }
                 }
                 //레이의 힛의 포지션이 변경되었을 경우
                 else if (ground.transform.position != saveHitPos)
@@ -257,20 +250,23 @@ public class ClickManager : MonoBehaviour
     {
         if (!obj.GetInteracterbleCheck) return;
 
-        foreach (Transform item in GameManager.Inst.GetBuildings)
+        if(GameManager.Inst.CompareLoadScene())
         {
-            if (item.TryGetComponent<Interactable>(out Interactable interactable))
+            foreach (Transform item in GameManager.Inst.GetBuildings)
             {
-                interactable.Active_Name(false);
+                if (item.TryGetComponent<Interactable>(out Interactable interactable))
+                {
+                    interactable.Active_Name(false);
+                }
             }
+            GameManager.Inst.GetUiManager.Active_HomeUi(false);
+            GameManager.Inst.curGameName = obj.GetMyData.packageName;
         }
-        GameManager.Inst.GetUiManager.Active_HomeUi(false);
 
         curHitObject = obj;
+        selectCheck = true;
         curHitObject.Select_InteractableObj();
         curHitObject.SetSelectCheck(check);
-        GameManager.Inst.curGameName = obj.GetMyData.packageName;
-        selectCheck = true;
     }
     
     //변수 초기화

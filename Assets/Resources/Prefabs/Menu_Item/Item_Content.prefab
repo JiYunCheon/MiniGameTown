@@ -93,10 +93,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   picture: {fileID: 2713385416897062360}
+  countIndex: 0
   gameNameText: {fileID: 5374344302158670955}
   priceText: {fileID: 4388623016946491831}
   priceBtn: {fileID: 8457527734050801944}
-  successWindowPrfab: {fileID: 375856710718027088, guid: 2733431420751b44c8da455e109750c8, type: 3}
   inven_itemPrefab: {fileID: -3314957027976437145, guid: 3b239826f285e154a8e9c3e279842963, type: 3}
 --- !u!1 &3692965686396367229
 GameObject:
@@ -166,15 +166,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ec99cd49a0b665e4fb7939318dcc8a74, type: 2}
-  m_sharedMaterial: {fileID: -1631962337758843187, guid: ec99cd49a0b665e4fb7939318dcc8a74, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bb3ddc7dc9e5b624b83b2c60901d820a, type: 2}
+  m_sharedMaterial: {fileID: -1631962337758843187, guid: bb3ddc7dc9e5b624b83b2c60901d820a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -197,7 +197,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535

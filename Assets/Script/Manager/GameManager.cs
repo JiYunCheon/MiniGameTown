@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
     private CameraControll cameraMove = null;
     private PadSpawner[] padSpawner = null;
     private EffectManager effectManager = null;
-
+    private InteractionManager interactionManager = null;
 
     [HideInInspector] public string curGameName = null;
     public bool buildingMode = false;
@@ -59,12 +59,26 @@ public class GameManager : MonoBehaviour
 
     PlayerMove player = null;
 
-
     //생성될 건물의 부모
     [Header("Parents")]
     private Transform buildings = null;
 
     #region Property
+
+    public InteractionManager GetInteractionManager
+    {
+        get
+        {
+            if (interactionManager == null)
+                interactionManager = FindObjectOfType<InteractionManager>();
+
+            return interactionManager;
+        }
+
+        private set { }
+    }
+
+
 
     public LoginSceneController GetLoginSceneController 
     { 

@@ -9,12 +9,10 @@ public class FirstSceneUiController : MonoBehaviour
     [SerializeField] private GameObject isGameInButton = null;
     [SerializeField] private FirstSceneClick firstSceneClick = null;
     [SerializeField] private TextMeshProUGUI gameMoneyText = null;
-    [SerializeField] private TextMeshProUGUI userProfileText = null;
 
     private void Start()
     {
         InputGameMoney(DatabaseAccess.Inst.loginUser.gamemoney.ToString());
-        UserInfo(DatabaseAccess.Inst.loginUser.nickname);
     }
 
     public void InputGameMoney(string gameMoneyText)
@@ -22,10 +20,6 @@ public class FirstSceneUiController : MonoBehaviour
         this.gameMoneyText.text = gameMoneyText;
     }
 
-    public void UserInfo(string nickName)
-    {
-        this.userProfileText.text = nickName;
-    }
 
     public void ActiveButton(bool check = true)
     {

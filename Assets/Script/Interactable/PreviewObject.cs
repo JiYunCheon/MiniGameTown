@@ -13,8 +13,6 @@ public class PreviewObject : Interactable
 
     private InventoryItem myInventoryItem = null;
 
-    [HideInInspector] public bool editCheck = false; 
-
     private void Awake()
     {
         defaultMaterial = Resources.Load<Material>("Material & Texture/Colors_Alpha 1");
@@ -57,15 +55,6 @@ public class PreviewObject : Interactable
         {
             GameManager.Inst.GetEffectManager.Inst_SpriteUiEffect(Input.mousePosition, "EffectImage/MakeFailed_Image");
             return;
-        }
-
-        if(!editCheck)
-        {
-            myInventoryItem.SetByCount(-1);
-        }
-        else
-        {
-            editCheck = true;
         }
 
         GameManager.Inst.GetClickManager.InstObject(rotation);

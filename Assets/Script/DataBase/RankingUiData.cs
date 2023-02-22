@@ -161,6 +161,12 @@ public class RankingUiData : MonoBehaviour
 
     public void OnClick_Exit()
     {
+        if(GameManager.Inst.GetClickManager!=null && GameManager.Inst.GetClickManager.GetCurHitObject !=null)
+        {
+            GameManager.Inst.GetClickManager.BuildingRefresh();
+            GameManager.Inst.GetClickManager.GetCurHitObject.SetSelectCheck(false);
+        }
+
         this.gameObject.SetActive(false);
     }
 
