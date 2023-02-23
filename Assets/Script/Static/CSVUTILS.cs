@@ -18,7 +18,7 @@ public class CSVUTILS : MonoBehaviour
 
         for (int i = 0; i < saveLis.Count; i++)
         {
-            tw.WriteLine(saveLis[i].toCSVBool());
+            tw.WriteLine(saveLis[i].toCSVString());
         }
 
         tw.Close();
@@ -67,3 +67,4 @@ public class CSVUTILS : MonoBehaviour
         return loadLis;
     }
 }
+

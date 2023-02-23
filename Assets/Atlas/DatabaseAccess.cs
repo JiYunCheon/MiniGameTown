@@ -36,6 +36,10 @@ public class UserData : IComparable
     public string[] objectcount;
     public string[] shopmaxcount;
 
+    public string[] farmobjname;
+    public string[] farminvenobjname;
+    public string[] farmobjposX;
+    public string[] farmobjposY;
 
     public int CompareTo(object obj)
     {
@@ -125,6 +129,18 @@ public class DatabaseAccess : MonoBehaviour
             user.year = (int)data.GetValue("year");
             user.nickname = (string)data.GetValue("nickname");
             user.selectNum=(int)data.GetValue("selectNum");
+
+            arrayString = (object)data.GetValue("farmobjname");
+            user.farmobjname = ArraySplitSort(arrayString);
+
+            arrayString = (object)data.GetValue("farminvenobjname");
+            user.farminvenobjname = ArraySplitSort(arrayString);
+
+            arrayString = (object)data.GetValue("farmobjposX");
+            user.farmobjposX = ArraySplitSort(arrayString);
+
+            arrayString = (object)data.GetValue("farmobjposY");
+            user.farmobjposY = ArraySplitSort(arrayString);
 
             arrayString = (object)data.GetValue("score");
             user.score = ArraySplitSort(arrayString);
@@ -252,6 +268,8 @@ public class DatabaseAccess : MonoBehaviour
         newUser.nickname = nickname;
         newUser.gamemoney = 5000;
         newUser.selectNum = -1;
+
+
 
         newUser.objectcount = new string[29];
         newUser.shopmaxcount = new string[29];

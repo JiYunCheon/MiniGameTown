@@ -12,7 +12,6 @@ public class ShopManager : MonoBehaviour
         Inst = this;
     }
 
-    public int curStar;
     public Text starTxt;
 
     public List<Scriptable_Item> itemLis = new List<Scriptable_Item>();
@@ -41,7 +40,7 @@ public class ShopManager : MonoBehaviour
 
     void updateUI()
     {
-        starTxt.text = "º°: " + curStar.ToString();
+        starTxt.text = "º°: " + DatabaseAccess.Inst.loginUser.gamemoney.ToString();
     }
 
     public void openBuyPanel(Scriptable_Item data)
@@ -61,9 +60,10 @@ public class ShopManager : MonoBehaviour
     }
     public void Btn_buyItem()
     {
-        curStar -= curItem.cost;
+        DatabaseAccess.Inst.loginUser.gamemoney -= curItem.cost;
         FarmData.Inst.myItemLis.Add(curItem);
         updateUI();
+        Btn_closeBuyPanel();
     }
 
     public void Btn_categoryAll()

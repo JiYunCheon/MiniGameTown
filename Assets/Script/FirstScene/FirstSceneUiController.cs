@@ -44,5 +44,9 @@ public class FirstSceneUiController : MonoBehaviour
         }
     }
 
+    public void OnClick_MyHome()
+    {
+        SceneManager.LoadScene("MyFarm");
+    }
 
 }

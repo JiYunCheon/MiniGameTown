@@ -23,4 +23,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CharacterSelectScene.unity
     guid: 700914fd6b5084f479c791c448c22dfe
+  - enabled: 1
+    path: Assets/Scenes/MyFarm.unity
+    guid: 945d6fb9cdca1424bb9589e48483f82f
+  - enabled: 1
+    path: Assets/Scenes/MyFarmShop.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}

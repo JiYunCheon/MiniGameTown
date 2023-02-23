@@ -31,3 +31,9 @@ public class Excel
 
     public string character;
 }
+
+[System.Serializable]
+public class Farm
+{
+
+}

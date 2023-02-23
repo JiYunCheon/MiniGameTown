@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -30,7 +32,7 @@ public class Scriptable_Item: ScriptableObject
     {
         GameObject obj = new GameObject();
         obj.name = "Btn" + itemName;
-        obj.AddComponent<Image>().color = new Color(0.87f, 0.74f, 0.3f);
+        obj.AddComponent<Image>().sprite=Resources.Load<Sprite>("MyFarmShop/ShopItem");
 
         GameObject itemImage = new GameObject();
         itemImage.AddComponent<Image>().sprite = sp;
@@ -40,7 +42,17 @@ public class Scriptable_Item: ScriptableObject
         btnItm.setButton(obj.AddComponent<Button>());
         btnItm.setData(this);
 
+        GameObject child = new GameObject();
+        TMP_FontAsset font = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/Resources/TextAsset/Maplestory Bold SDF 1"); 
 
+        TextMeshProUGUI text = child.AddComponent<TextMeshProUGUI>();
+        child.transform.SetParent(obj.transform);
+        text.font = font;
+        text.text = $"АЁАн : {this.cost}";
+        text.color = Color.black;
+        text.fontSize = 25;
+        text.alignment = (TextAlignmentOptions)TextAlignment.Left;
+        text.rectTransform.Translate(new Vector3(0,-80f,0));
 
         return obj;
     }
