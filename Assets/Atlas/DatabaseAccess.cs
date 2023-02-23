@@ -271,8 +271,8 @@ public class DatabaseAccess : MonoBehaviour
 
 
 
-        newUser.objectcount = new string[29];
-        newUser.shopmaxcount = new string[29];
+        newUser.objectcount = new string[39];
+        newUser.shopmaxcount = new string[39];
         newUser.score = new string[16];
 
         for (int i = 0; i < newUser.score.Length; i++)
@@ -281,7 +281,7 @@ public class DatabaseAccess : MonoBehaviour
         }
 
 
-        for (int i = 0; i < 29; i++)
+        for (int i = 0; i < newUser.objectcount.Length; i++)
         {
             newUser.objectcount[i] = "0";
             newUser.shopmaxcount[i] = GameManager.Inst.GetObjectData[i].maxCount.ToString();

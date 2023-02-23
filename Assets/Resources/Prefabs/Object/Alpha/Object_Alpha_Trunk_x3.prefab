@@ -97,9 +97,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8510e04d63779b4b95d410778464943, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  entrance: {fileID: 0}
+  myGround: []
   cameraPos: {fileID: 0}
   nameTr: {fileID: 0}
-  myGround: []
+  renderer: {fileID: 0}
+  interacterbleCheck: 0
+  uiCheck: 0
   buildOption: {fileID: 2839298704939754508}
 --- !u!1001 &5157009154361094221
 PrefabInstance:

@@ -7,5 +7,4 @@ using UnityEngine;
 public class Data : ScriptableObject
 {
 	public List<Excel> objectdatas; // Replace 'EntityType' to an actual type that is serializable.
-	public List<PlayerData> playerData; // Replace 'EntityType' to an actual type that is serializable.
 }

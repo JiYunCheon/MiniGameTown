@@ -78,7 +78,20 @@ MonoBehaviour:
     myType: 0
     explain: 
     character: 
-  - name: Cart
+  - name: IceCreamCart
+    maxCount: 99999
+    price: 200
+    occupyPad: 2
+    Info: "\uACFC\uC77C\uCE74\uD2B8"
+    spriteName: Cart2
+    packageName: 
+    prefabName: Object_Cart2
+    alphaPrefabName: Object_Alpha_Cart2
+    hvCheck: 0
+    myType: 1
+    explain: 
+    character: 
+  - name: IceCreamCart
     maxCount: 99999
     price: 200
     occupyPad: 2
@@ -100,6 +113,19 @@ MonoBehaviour:
     packageName: 
     prefabName: Object_AppleTree
     alphaPrefabName: Object_Alpha_AppleTree
+    hvCheck: 0
+    myType: 1
+    explain: 
+    character: 
+  - name: Cat_Brown
+    maxCount: 99999
+    price: 100
+    occupyPad: 1
+    Info: "\uC904\uBB34\uB2AC\uACE0\uC591\uC774"
+    spriteName: Cat_Brown
+    packageName: 
+    prefabName: Object_Cat_Brown
+    alphaPrefabName: Object_Alpha_Cat_Brown
     hvCheck: 0
     myType: 1
     explain: 
@@ -364,15 +390,15 @@ MonoBehaviour:
     myType: 1
     explain: 
     character: 
-  - name: Umbrella_Red
+  - name: Umbrella_Yellow
     maxCount: 99999
     price: 100
     occupyPad: 1
     Info: a
-    spriteName: Umbrella_Red
+    spriteName: Umbrella_Yellow
     packageName: 
-    prefabName: Object_Umbrella_Red
-    alphaPrefabName: Object_Alpha_Umbrella_Red
+    prefabName: Object_Umbrella_Yellow
+    alphaPrefabName: Object_Alpha_Umbrella_Yellow
     hvCheck: 0
     myType: 1
     explain: 
@@ -386,6 +412,110 @@ MonoBehaviour:
     packageName: 
     prefabName: Object_BalloonStand
     alphaPrefabName: Object_Alpha_BalloonStand
+    hvCheck: 0
+    myType: 1
+    explain: 
+    character: 
+  - name: Clock
+    maxCount: 99999
+    price: 100
+    occupyPad: 1
+    Info: a
+    spriteName: Clock
+    packageName: 
+    prefabName: Object_Clock
+    alphaPrefabName: Object_Alpha_Clock
+    hvCheck: 0
+    myType: 1
+    explain: 
+    character: 
+  - name: FlowerBox
+    maxCount: 99999
+    price: 100
+    occupyPad: 2
+    Info: a
+    spriteName: FlowerBox
+    packageName: 
+    prefabName: Object_FlowerBox
+    alphaPrefabName: Object_Alpha_FlowerBox
+    hvCheck: 0
+    myType: 1
+    explain: 
+    character: 
+  - name: gift_1
+    maxCount: 99999
+    price: 100
+    occupyPad: 1
+    Info: a
+    spriteName: gift_1
+    packageName: 
+    prefabName: Object_gift_1
+    alphaPrefabName: Object_Alpha_gift_1
+    hvCheck: 0
+    myType: 1
+    explain: 
+    character: 
+  - name: gift_2
+    maxCount: 99999
+    price: 100
+    occupyPad: 1
+    Info: a
+    spriteName: gift_2
+    packageName: 
+    prefabName: Object_gift_2
+    alphaPrefabName: Object_Alpha_gift_2
+    hvCheck: 0
+    myType: 1
+    explain: 
+    character: 
+  - name: Tree_Blue_x2Crowns
+    maxCount: 99999
+    price: 100
+    occupyPad: 1
+    Info: a
+    spriteName: Tree_Blue_x2Crowns
+    packageName: 
+    prefabName: Object_Tree_Blue_x2Crowns
+    alphaPrefabName: Object_Alpha_Tree_Blue_x2Crowns
+    hvCheck: 0
+    myType: 1
+    explain: 
+    character: 
+  - name: Tree_Green_Big_x3Crowns
+    maxCount: 99999
+    price: 100
+    occupyPad: 1
+    Info: a
+    spriteName: Tree_Green_Big_x3Crowns
+    packageName: 
+    prefabName: Object_Tree_Green_Big_x3Crowns
+    alphaPrefabName: Object_Alpha_Tree_Green_Big_x3Crowns
+    hvCheck: 0
+    myType: 1
+    explain: 
+    character: 
+  - name: Tree_Stripes_Green
+    maxCount: 99999
+    price: 100
+    occupyPad: 1
+    Info: a
+    spriteName: Tree_Stripes_Green
+    packageName: 
+    prefabName: Object_Tree_Tree_Stripes_Green
+    alphaPrefabName: Object_Alpha_Tree_Stripes_Green
+    hvCheck: 0
+    myType: 1
+    explain: 
+    character: 
+  - name: Tree_Stripes_Yellow
+    maxCount: 99999
+    price: 100
+    occupyPad: 1
+    Info: a
+    spriteName: Tree_Stripes_Yellow
+    packageName: 
+    prefabName: Object_Tree_Stripes_Yellow
+    alphaPrefabName: Object_Alpha_Tree_Stripes_Yellow
     hvCheck: 0
     myType: 1
     explain: 

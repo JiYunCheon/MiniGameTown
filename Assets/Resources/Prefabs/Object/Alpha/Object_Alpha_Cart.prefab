@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4390775498183275451}
   - component: {fileID: 764193768750392019}
   - component: {fileID: 5919330219792457751}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Object_Alpha_Cart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,9 +111,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8510e04d63779b4b95d410778464943, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  entrance: {fileID: 0}
+  myGround: []
+  cameraPos: {fileID: 0}
+  nameTr: {fileID: 0}
+  renderer: {fileID: 0}
+  interacterbleCheck: 0
+  uiCheck: 0
   buildOption: {fileID: 740798458178695991}
-  defaultMaterial: {fileID: 2100000, guid: 7811552553f4bd34b9484743d22779db, type: 2}
-  redMaterial: {fileID: 2100000, guid: 043e7f6357fe3e047b2b9fd0544ef553, type: 2}
 --- !u!1001 &7688084255157364598
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -321,9 +326,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8510e04d63779b4b95d410778464943, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  entrance: {fileID: 0}
+  myGround: []
+  cameraPos: {fileID: 0}
+  nameTr: {fileID: 0}
+  renderer: {fileID: 0}
+  interacterbleCheck: 1
+  uiCheck: 0
   buildOption: {fileID: 740798458178695991}
-  defaultMaterial: {fileID: 0}
-  redMaterial: {fileID: 0}
 --- !u!224 &8967444816712587114 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1640238703366369308, guid: 8a5ae9870da0f414494bbb81eaa5958a, type: 3}
