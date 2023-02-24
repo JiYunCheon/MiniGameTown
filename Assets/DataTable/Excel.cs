@@ -27,13 +27,13 @@ public class Excel
 
     public OBJECT_TYPE myType;
 
-    public string explain;
+    public string explain_1;
+
+    public string explain_2;
+
+    public string explain_3;
+
 
     public string character;
 }
 
-[System.Serializable]
-public class Farm
-{
-
-}

@@ -8,8 +8,9 @@ using UnityEngine.EventSystems;
 
 public class PlayerMove : MonoBehaviour
 {
-    [SerializeField] GameObject balloon = null;
+    [SerializeField] GameObject[] balloon = null;
 
+    private GameObject beforeBalloon = null;
     public NavMeshAgent myAgent;
     Animator anim;
     Vector3 des = Vector3.zero;
@@ -34,22 +35,70 @@ public class PlayerMove : MonoBehaviour
 
     private void Active_Item(bool check = true)
     {
-        balloon.SetActive(check);
+        int random = 0;
+        random = Random.Range(0,balloon.Length);
+
+        if(beforeBalloon!=null)
+            beforeBalloon.SetActive(false);
+
+        balloon[random].SetActive(check);
+        beforeBalloon = balloon[random];
     }
 
-    public void Interaction()
+    public void Interaction(Interactable obj)
     {
         if (interaction != null)
             StopCoroutine(interaction);
 
-        interaction = StartCoroutine(ActiveControll());
+
+        interaction = StartCoroutine(DistanceCheck(obj));
     }
-    
+
+
+    IEnumerator DistanceCheck(Interactable obj)
+    {
+        int count = 0;
+
+        while (true)
+        {
+            if (count > 10)
+            {
+                yield break;
+            }
+
+            yield return new WaitForSeconds(1f);
+
+            count++;
+
+            if (Vector3.Distance(this.transform.position, obj.transform.position)<2f)
+            {
+                StartCoroutine(ActiveControll());
+                yield break;
+            }
+
+        }
+    }
+
+
+
     IEnumerator ActiveControll()
     {
+        int count = 0;
         Active_Item();
-        yield return new WaitForSeconds(10f);
-        Active_Item(false);
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+
+            count++;
+
+            if(count > 5)
+            {
+                Debug.Log("들어옴");
+                Active_Item(false);
+                yield break;
+            }
+        }
+
     }
 
 
@@ -59,12 +108,14 @@ public class PlayerMove : MonoBehaviour
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
         {
             //클릭한 객체가 건물일 경우
-            if (hit.transform.gameObject.TryGetComponent<Interactable>(out Interactable obj) && obj.GetInteracterbleCheck)
+            if (hit.transform.gameObject.TryGetComponent<Interactable>(out Interactable obj) && 
+                obj.GetInteracterbleCheck && obj.GetEntrance != null)
             {
                 //건물의 입구로 이동
                 anim.SetBool("move", true);
 
                 myAgent.destination = obj.GetEntrance.transform.position;
+
                 des = obj.GetEntrance.transform.position;
             }
             else

@@ -227,7 +227,7 @@ public class ClickManager : MonoBehaviour
     {
         clickCheck = false;
         //진짜 건물 생성
-        Interactable obj = Instantiate<Interactable>(GetPrefab(curData), saveHitPos + new Vector3(0, 0.5f, 0.5f), GetPrefab(curData).transform.rotation, GameManager.Inst.GetBuildings);
+        Interactable obj = Instantiate<Interactable>(GetPrefab(curData), saveHitPos, GetPrefab(curData).transform.rotation, GameManager.Inst.GetBuildings);
         if (rotation != Quaternion.identity)
             obj.transform.rotation = rotation;
         obj.CompleteEffect();
@@ -250,7 +250,7 @@ public class ClickManager : MonoBehaviour
     {
         if (!obj.GetInteracterbleCheck) return;
 
-        if(GameManager.Inst.CompareLoadScene())
+        if(GameManager.Inst.CompareLoadScene() && obj.GetEntrance!=null)
         {
             foreach (Transform item in GameManager.Inst.GetBuildings)
             {
@@ -259,6 +259,7 @@ public class ClickManager : MonoBehaviour
                     interactable.Active_Name(false);
                 }
             }
+
             GameManager.Inst.GetUiManager.Active_HomeUi(false);
             GameManager.Inst.curGameName = obj.GetMyData.packageName;
         }
@@ -284,7 +285,8 @@ public class ClickManager : MonoBehaviour
         curHitObject.DeSelect_InteractableObj();
 
         curHitObject.SetSelectCheck(false);
-        GetCurHitObject.GetEntrance.ActiveCollider(false);
+        if(GetCurHitObject.GetEntrance!=null)
+            GetCurHitObject.GetEntrance.ActiveCollider(false);
 
         Refresh();
     }

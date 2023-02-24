@@ -24,8 +24,13 @@ MonoBehaviour:
     alphaPrefabName: Building_Alpha_Balloon
     hvCheck: 0
     myType: 0
-    explain: wow fox
-    character: Fox
+    explain_1: "\uB0B4 \uC608\uC05C \uAF43\uB4E4\uC774 \uB9C8\uC2E4 \uBB3C\uC744
+      \uC880 \uAE38\uC5B4\uB2E4 \uC8FC\uC9C0 \uC54A\uC744\uB798 ?"
+    explain_2: "\uB0B4\uAC00 \uAFB8\uBBFC \uAF43\uBC2D\uC774 \uC815\uB9D0 \uC608\uC058\uC9C0
+      ? "
+    explain_3: "\uB0B4 \uC815\uC6D0\uC744 \uB9DD\uCE58\uB294 \uD1A0\uB07C\uB4E4\uC744
+      \uCAD3\uC544\uC918 !"
+    character: Sheep
   - name: Puzzle
     maxCount: 1
     price: 500
@@ -37,21 +42,31 @@ MonoBehaviour:
     alphaPrefabName: Building_Alpha_Puzzle
     hvCheck: 0
     myType: 0
-    explain: 
-    character: 
-  - name: MyRoom
+    explain_1: "\uCC22\uC5B4\uC9C4 \uC0AC\uC9C4 \uBD99\uC774\uB294\uAC78 \uB3C4\uC640\uC8FC\uC9C0
+      \uC54A\uC744\uB798?"
+    explain_2: "\uC624\uB298\uC740 \uC0AC\uC9C4 \uCC0D\uAE30 \uC88B\uC740 \uB0A0\uC528\uC57C
+      !"
+    explain_3: "\uC5B4\uB5BB\uAC8C \uD558\uBA74 \uC0AC\uC9C4\uC744 \uC608\uC058\uAC8C
+      \uAFB8\uBC00 \uC218 \uC788\uC744\uAE4C ? "
+    character: Fox
+  - name: Juice
     maxCount: 1
     price: 500
     occupyPad: 9
-    Info: "\uB9C8\uC774\uD648"
-    spriteName: MyRoom
-    packageName: com.DefaultCompany.JigsawPuzzle
-    prefabName: Building_MyRoom
-    alphaPrefabName: Building_Alpha_MyRoom
+    Info: "\uC8FC\uC2A4\uB9CC\uB4E4\uAE30"
+    spriteName: Juice
+    packageName: com.DefaultCompany.2DProject
+    prefabName: Building_Juice
+    alphaPrefabName: Building_Alpha_Juice
     hvCheck: 0
     myType: 0
-    explain: 
-    character: 
+    explain_1: "\uB098\uB294 \uB300\uB098\uBB34\uC8FC\uC2A4\uAC00 \uC88B\uC544 !
+      \uB108\uB294 \uC5B4\uB54C ?"
+    explain_2: "\uC2DC\uAC04 \uC788\uC73C\uBA74 \uACFC\uC77C \uB2E4\uB4EC\uB294 \uAC83\uC880
+      \uB3C4\uC640\uC8FC\uC9C0 \uC54A\uC744\uB798?"
+    explain_3: "\uB9DB\uC788\uB294 \uC74C\uC2DD\uC744 \uBA39\uC744 \uC218 \uC788\uB2E4\uB294
+      \uAC83\uC740 \uC5C4\uCCAD\uB09C \uD589\uC6B4\uC774\uC57C!"
+    character: Panda
   - name: MemoryCard
     maxCount: 1
     price: 500
@@ -63,21 +78,13 @@ MonoBehaviour:
     alphaPrefabName: Building_Alpha_MemoryCard
     hvCheck: 0
     myType: 0
-    explain: 
-    character: 
-  - name: FindPicture
-    maxCount: 1
-    price: 500
-    occupyPad: 9
-    Info: "\uC8FC\uC2A4\uB9CC\uB4E4\uAE30"
-    spriteName: Find
-    packageName: com.DefaultCompany.WrongPicture
-    prefabName: Building_FindPicture
-    alphaPrefabName: Building_Alpha_FindPicture
-    hvCheck: 0
-    myType: 0
-    explain: 
-    character: 
+    explain_1: "\uB0B4 \uC218\uC0AC\uB178\uD2B8\uB97C \uBCF4\uC5EC\uB2EC\uB77C\uACE0?
+      \uC5B4\uB9BC\uB3C4 \uC5C6\uC9C0 !"
+    explain_2: "\uBC94\uC778\uC744 \uC7A1\uAC8C\uB418\uBA74 \uAF2D \uBB3C\uC5B4\uBCF4\uACE0
+      \uC2F6\uC740\uAC8C \uC788\uC5B4"
+    explain_3: "\uBB34\uC5C7\uC774\uB4E0 \uB0B4\uAC8C \uB9D0\uD558\uBA74 \uCD5C\uC120\uC744
+      \uB2E4\uD574 \uB3C4\uC640\uC904\uAC8C !"
+    character: Elephant
   - name: IceCreamCart
     maxCount: 99999
     price: 200
@@ -89,7 +96,9 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Cart2
     hvCheck: 0
     myType: 1
-    explain: 
+    explain_1: 
+    explain_2: 
+    explain_3: 
     character: 
   - name: IceCreamCart
     maxCount: 99999
@@ -102,7 +111,9 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Cart
     hvCheck: 0
     myType: 1
-    explain: 
+    explain_1: 
+    explain_2: 
+    explain_3: 
     character: 
   - name: AppleTree
     maxCount: 99999
@@ -115,7 +126,9 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_AppleTree
     hvCheck: 0
     myType: 1
-    explain: 
+    explain_1: 
+    explain_2: 
+    explain_3: 
     character: 
   - name: Cat_Brown
     maxCount: 99999
@@ -128,7 +141,9 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Cat_Brown
     hvCheck: 0
     myType: 1
-    explain: 
+    explain_1: 
+    explain_2: 
+    explain_3: 
     character: 
   - name: Cat_Black
     maxCount: 99999
@@ -141,7 +156,9 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Cat_Black
     hvCheck: 0
     myType: 1
-    explain: 
+    explain_1: 
+    explain_2: 
+    explain_3: 
     character: 
   - name: Cat_White
     maxCount: 99999
@@ -154,7 +171,9 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Cat_White
     hvCheck: 0
     myType: 1
-    explain: 
+    explain_1: 
+    explain_2: 
+    explain_3: 
     character: 
   - name: Fence_End_Short
     maxCount: 99999
@@ -167,7 +186,9 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Fence_End-Short
     hvCheck: 0
     myType: 1
-    explain: 
+    explain_1: 
+    explain_2: 
+    explain_3: 
     character: 
   - name: Fence_End_Vertical
     maxCount: 99999
@@ -180,7 +201,9 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Fence_End_Vertical
     hvCheck: 1
     myType: 1
-    explain: 
+    explain_1: 
+    explain_2: 
+    explain_3: 
     character: 
   - name: Fence_End
     maxCount: 99999
@@ -193,7 +216,9 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Fence_End
     hvCheck: 0
     myType: 1
-    explain: 
+    explain_1: 
+    explain_2: 
+    explain_3: 
     character: 
   - name: Flower_1x_Orange
     maxCount: 99999
@@ -206,7 +231,9 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Flower_1x_Orange
     hvCheck: 0
     myType: 1
-    explain: 
+    explain_1: 
+    explain_2: 
+    explain_3: 
     character: 
   - name: Flower_1x_Purple
     maxCount: 99999
@@ -219,7 +246,9 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Flower_1x_Purple
     hvCheck: 0
     myType: 1
-    explain: 
+    explain_1: 
+    explain_2: 
+    explain_3: 
     character: 
   - name: Flowers_BlueLight
     maxCount: 99999
@@ -232,7 +261,9 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Flowers_BlueLight
     hvCheck: 0
     myType: 1
-    explain: 
+    explain_1: 
+    explain_2: 
+    explain_3: 
     character: 
   - name: Flowers_Pink
     maxCount: 99999
@@ -245,7 +276,9 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Flowers_Pink
     hvCheck: 0
     myType: 1
-    explain: 
+    explain_1: 
+    explain_2: 
+    explain_3: 
     character: 
   - name: GarbageCan_Blue
     maxCount: 99999
@@ -258,7 +291,9 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_GarbageCan_Blue
     hvCheck: 0
     myType: 1
-    explain: 
+    explain_1: 
+    explain_2: 
+    explain_3: 
     character: 
   - name: GarbageCan_Red
     maxCount: 99999
@@ -271,7 +306,9 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_GarbageCan_Red
     hvCheck: 0
     myType: 1
-    explain: 
+    explain_1: 
+    explain_2: 
+    explain_3: 
     character: 
   - name: Lantern_Path
     maxCount: 99999
@@ -284,7 +321,9 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Lantern_Path
     hvCheck: 0
     myType: 1
-    explain: 
+    explain_1: 
+    explain_2: 
+    explain_3: 
     character: 
   - name: Lantern_Small
     maxCount: 99999
@@ -297,7 +336,9 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Lantern_Small
     hvCheck: 0
     myType: 1
-    explain: 
+    explain_1: 
+    explain_2: 
+    explain_3: 
     character: 
   - name: PineTree_Bright
     maxCount: 99999
@@ -310,7 +351,9 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_PineTree_Bright
     hvCheck: 0
     myType: 1
-    explain: 
+    explain_1: 
+    explain_2: 
+    explain_3: 
     character: 
   - name: PineTree_Snow_1
     maxCount: 99999
@@ -323,7 +366,9 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_PineTree_Snow_1
     hvCheck: 0
     myType: 1
-    explain: 
+    explain_1: 
+    explain_2: 
+    explain_3: 
     character: 
   - name: PineTree_Snow_2
     maxCount: 99999
@@ -336,7 +381,9 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_PineTree_Snow_2
     hvCheck: 0
     myType: 1
-    explain: 
+    explain_1: 
+    explain_2: 
+    explain_3: 
     character: 
   - name: Tree_Fruits_Plums
     maxCount: 99999
@@ -349,7 +396,9 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Tree_Fruits_Plums
     hvCheck: 0
     myType: 1
-    explain: 
+    explain_1: 
+    explain_2: 
+    explain_3: 
     character: 
   - name: Trunk
     maxCount: 99999
@@ -362,7 +411,9 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Trunk
     hvCheck: 0
     myType: 1
-    explain: 
+    explain_1: 
+    explain_2: 
+    explain_3: 
     character: 
   - name: Trunk_x3
     maxCount: 99999
@@ -375,7 +426,9 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Trunk_x3
     hvCheck: 0
     myType: 1
-    explain: 
+    explain_1: 
+    explain_2: 
+    explain_3: 
     character: 
   - name: Umbrella_Purple
     maxCount: 99999
@@ -388,7 +441,9 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Umbrella_Purple
     hvCheck: 0
     myType: 1
-    explain: 
+    explain_1: 
+    explain_2: 
+    explain_3: 
     character: 
   - name: Umbrella_Yellow
     maxCount: 99999
@@ -401,7 +456,9 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Umbrella_Yellow
     hvCheck: 0
     myType: 1
-    explain: 
+    explain_1: 
+    explain_2: 
+    explain_3: 
     character: 
   - name: BalloonStand
     maxCount: 99999
@@ -414,7 +471,9 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_BalloonStand
     hvCheck: 0
     myType: 1
-    explain: 
+    explain_1: 
+    explain_2: 
+    explain_3: 
     character: 
   - name: Clock
     maxCount: 99999
@@ -427,7 +486,9 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Clock
     hvCheck: 0
     myType: 1
-    explain: 
+    explain_1: 
+    explain_2: 
+    explain_3: 
     character: 
   - name: FlowerBox
     maxCount: 99999
@@ -440,7 +501,9 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_FlowerBox
     hvCheck: 0
     myType: 1
-    explain: 
+    explain_1: 
+    explain_2: 
+    explain_3: 
     character: 
   - name: gift_1
     maxCount: 99999
@@ -453,7 +516,9 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_gift_1
     hvCheck: 0
     myType: 1
-    explain: 
+    explain_1: 
+    explain_2: 
+    explain_3: 
     character: 
   - name: gift_2
     maxCount: 99999
@@ -466,7 +531,9 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_gift_2
     hvCheck: 0
     myType: 1
-    explain: 
+    explain_1: 
+    explain_2: 
+    explain_3: 
     character: 
   - name: Tree_Blue_x2Crowns
     maxCount: 99999
@@ -479,7 +546,9 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Tree_Blue_x2Crowns
     hvCheck: 0
     myType: 1
-    explain: 
+    explain_1: 
+    explain_2: 
+    explain_3: 
     character: 
   - name: Tree_Green_Big_x3Crowns
     maxCount: 99999
@@ -492,7 +561,9 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Tree_Green_Big_x3Crowns
     hvCheck: 0
     myType: 1
-    explain: 
+    explain_1: 
+    explain_2: 
+    explain_3: 
     character: 
   - name: Tree_Stripes_Green
     maxCount: 99999
@@ -505,7 +576,9 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Tree_Stripes_Green
     hvCheck: 0
     myType: 1
-    explain: 
+    explain_1: 
+    explain_2: 
+    explain_3: 
     character: 
   - name: Tree_Stripes_Yellow
     maxCount: 99999
@@ -518,5 +591,7 @@ MonoBehaviour:
     alphaPrefabName: Object_Alpha_Tree_Stripes_Yellow
     hvCheck: 0
     myType: 1
-    explain: 
+    explain_1: 
+    explain_2: 
+    explain_3: 
     character: 

@@ -6,12 +6,21 @@ public class MovingObject : MonoBehaviour
 {
     [SerializeField] private AnimationCurve myCurve = null;
     [SerializeField] private float speed = 0;
+    [SerializeField] private float destroyPosZ = 0;
     private float curTime;
     float save = 0;
     private void Awake()
     {
         save = transform.position.x;
         moveSquence();
+    }
+
+    private void Update()
+    {
+        if(transform.position.z<destroyPosZ)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     public void moveSquence()

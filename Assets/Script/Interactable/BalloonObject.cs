@@ -6,7 +6,7 @@ public class BalloonObject : Interactable
 {
     public override void Select_InteractableObj()
     {
-        GameManager.Inst.GetPlayer.Interaction();
+        GameManager.Inst.GetPlayer.Interaction(this);
         GameManager.Inst.GetInteractionManager.GetSpriteSpawner.SpawnStart();
         SetSelectCheck(false);
         GameManager.Inst.GetClickManager.BuildingRefresh();

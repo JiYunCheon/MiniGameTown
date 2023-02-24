@@ -271,8 +271,8 @@ public class DatabaseAccess : MonoBehaviour
 
 
 
-        newUser.objectcount = new string[39];
-        newUser.shopmaxcount = new string[39];
+        newUser.objectcount = new string[38];
+        newUser.shopmaxcount = new string[38];
         newUser.score = new string[16];
 
         for (int i = 0; i < newUser.score.Length; i++)

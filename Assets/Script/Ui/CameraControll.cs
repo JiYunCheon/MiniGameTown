@@ -40,8 +40,8 @@ public class CameraControll : MonoBehaviour
     {
         //업데이트에  들어가는 인풋들을 게임매니저에서 하는게 좋아보임 
         //한번에 관리 할 수 있도록
-        if (GameManager.Inst.GetClickManager.selectCheck || GameManager.Inst.buildingMode
-            || EventSystem.current.IsPointerOverGameObject(GameManager.Inst.pointerID) == true) return;
+        if (GameManager.Inst.GetClickManager.selectCheck || GameManager.Inst.buildingMode|| GameManager.Inst.waitingMode
+            || GameManager.Inst.GetUiManager.uiSelectCheck) return;
 
         if (Input.GetMouseButtonDown(0))
         {

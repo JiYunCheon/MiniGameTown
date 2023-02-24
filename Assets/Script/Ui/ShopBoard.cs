@@ -30,6 +30,7 @@ public class ShopBoard : MonoBehaviour
 
     public void ActiveControll(bool active = true)
     {
+        GameManager.Inst.GetUiManager.uiSelectCheck = active;
         this.gameObject.SetActive(active);
     }
 

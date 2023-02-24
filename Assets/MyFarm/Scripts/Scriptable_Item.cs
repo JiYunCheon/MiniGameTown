@@ -43,11 +43,9 @@ public class Scriptable_Item: ScriptableObject
         btnItm.setData(this);
 
         GameObject child = new GameObject();
-        TMP_FontAsset font = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/Resources/TextAsset/Maplestory Bold SDF 1"); 
 
         TextMeshProUGUI text = child.AddComponent<TextMeshProUGUI>();
         child.transform.SetParent(obj.transform);
-        text.font = font;
         text.text = $"АЁАн : {this.cost}";
         text.color = Color.black;
         text.fontSize = 25;

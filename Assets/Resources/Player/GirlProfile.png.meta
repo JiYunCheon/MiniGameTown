@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0a4ca2d4b399039478f658ec4086973f
+guid: cdd305ccace2aca4c949dee8fc3fda45
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -120,10 +120,10 @@ TextureImporter:
       name: GirlProfile_0
       rect:
         serializedVersion: 2
-        x: 845
+        x: 0
         y: 0
-        width: 355
-        height: 418
+        width: 818
+        height: 1008
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,8 +131,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aa56398249319b04789fd9920dec09bf
-      internalID: -1667806795
+      spriteID: 69bc1fc14de24e4448eefb7edcda4ea0
+      internalID: 886889539
       vertices: []
       indices: 
       edges: []
@@ -140,7 +140,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: b3ea84ba7c24f7b44ae171d9c461441d
+    spriteID: a59ab718bec9cdf459bb41a57a066719
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      GirlProfile_0: -1667806795
+      GirlProfile_0: 886889539
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PictureObject : Select
 {
@@ -11,8 +12,13 @@ public class PictureObject : Select
     public override void GameSelect()
     {
         GameManager.Inst.curGameName = packageName;
-        GameManager.Inst.GetUiFirstSceneUiController.ActiveButton(true);
-        ChangeScale(biggerScale);
+
+        if (GameManager.Inst.curGameName == "3.MiniTown")
+            SceneManager.LoadScene("3.MiniTown");
+        else
+        {
+            InGame.openApp(GameManager.Inst.curGameName);
+        }
     }
 
     

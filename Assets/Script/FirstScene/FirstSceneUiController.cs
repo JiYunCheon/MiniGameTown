@@ -6,7 +6,6 @@ using TMPro;
 
 public class FirstSceneUiController : MonoBehaviour
 {
-    [SerializeField] private GameObject isGameInButton = null;
     [SerializeField] private FirstSceneClick firstSceneClick = null;
     [SerializeField] private TextMeshProUGUI gameMoneyText = null;
 
@@ -20,28 +19,10 @@ public class FirstSceneUiController : MonoBehaviour
         this.gameMoneyText.text = gameMoneyText;
     }
 
-
-    public void ActiveButton(bool check = true)
-    {
-        isGameInButton.SetActive(check);
-    }
-
+    
     public void OnClick_Exit()
     {
-        Debug.Log("¿ä¿ì");
-        firstSceneClick.GetSaveObj.Refresh();
-        ActiveButton(false);
-    }
-
-    public void OnClick_GameIn()
-    {
-        if (GameManager.Inst.curGameName == "3.MiniTown")
-            SceneManager.LoadScene("3.MiniTown");
-        else
-        {
-            OnClick_Exit();
-            InGame.openApp(GameManager.Inst.curGameName);
-        }
+        InGame.ExitGame();
     }
 
     public void OnClick_MyHome()

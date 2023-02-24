@@ -5,48 +5,44 @@ using UnityEngine;
 
 public class SpriteSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject prefab = null;
-    [SerializeField] private Vector3[] spawnSpot = null;
+    [SerializeField] private GameObject[] prefab = null;
+    private Vector3[] spawnSpot = null;
+    [SerializeField] private int spotLenght = 0; 
+
     [SerializeField] private float spawnInterval = 0;
     [SerializeField] private float stopTime = 0;
+    [SerializeField] private int repeat = 0;
 
-    List<GameObject> objectList = new List<GameObject>();
+
+    private void Start()
+    {
+        spawnSpot = new Vector3[spotLenght];
+
+        for (int i = 0; i < spotLenght; i++)
+        {
+            spawnSpot[i] = new Vector3(transform.position.x + (-5f*i), transform.position.y, transform.position.z);
+        }
+    }
+
 
     public void SpawnStart()
     {
-        StartCoroutine(TimeControll());
-    }
-
-    IEnumerator TimeControll()
-    {
-        WaitForSeconds scecound = new WaitForSeconds(stopTime);
-        Coroutine moveCoroutine = StartCoroutine(RandomSpawn());
-
-        yield return scecound;
-        StopCoroutine(moveCoroutine);
-
-        for (int i = 0; i < objectList.Count; i++)
-        {
-            Destroy(objectList[i]);
-        }
-    }
-
-
-
-    IEnumerator RandomSpawn()
-    {
-        int randomPoint = 0;
         GameObject obj = null;
-        WaitForSeconds scecound = new WaitForSeconds(spawnInterval);
-        while(true)
-        {
-            randomPoint = Random.Range(0, spawnSpot.Length);
-            obj = Instantiate(prefab, spawnSpot[randomPoint], prefab.transform.rotation);
-            objectList.Add(obj);
-            yield return scecound;
-        }
-    }
 
+        int randomIndex = 0;
+        int randomPoint = 0;
+
+        Debug.Log(spawnSpot.Length);
+
+        for (int i = 0; i < repeat; i++)
+        {
+            randomIndex = Random.Range(0, prefab.Length);
+            randomPoint = Random.Range(0, spawnSpot.Length);
+
+            obj = Instantiate(prefab[randomIndex], spawnSpot[randomPoint], prefab[randomIndex].transform.rotation);
+        }
+       
+    }
 
 
 

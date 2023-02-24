@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5d941c8dc8e74d44c81fbef073728c22
+guid: 4b9b03d6452c9934fad2e2017991339f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,13 +117,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Fence_End_Vertical_0
+      name: Fence_End_0
       rect:
         serializedVersion: 2
-        x: 288
-        y: 387
-        width: 555
-        height: 1085
+        x: 387
+        y: 237
+        width: 1085
+        height: 555
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,8 +131,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 90213bc9d442a1447bb5fb6d9f74812b
-      internalID: -1910246822
+      spriteID: 2dbec5985dca3ff4894cd3f243c5f7ba
+      internalID: -550100517
       vertices: []
       indices: 
       edges: []
@@ -140,7 +140,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5abf441d89fb5284fa14b27c5d2daed1
+    spriteID: 8f2647c519347f14b8780d6ccbc3e006
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Fence_End_Vertical_0: -1910246822
+      Fence_End_0: -550100517
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

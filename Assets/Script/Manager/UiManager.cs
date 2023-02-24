@@ -44,6 +44,8 @@ public class UiManager : MonoBehaviour
     Color blackColor = new Color(113f / 255f, 113f / 255f, 113f / 255f);
     Coroutine moveCoroutine;
 
+    public bool uiSelectCheck = false;
+
     #endregion
 
     #region Property
@@ -148,6 +150,7 @@ public class UiManager : MonoBehaviour
     //빌딩모드로 이동
     public void On_Click_BuildingMode()
     {
+
         ModeChange(true, false);
 
         padBoard.ActivePadByType(GameManager.Inst.GetClickManager.GetCurData.myType);
