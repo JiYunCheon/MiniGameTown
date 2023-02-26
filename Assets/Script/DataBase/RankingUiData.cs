@@ -11,13 +11,10 @@ public class RankingUiData : MonoBehaviour
     #region Refrence Member
 
     [Header("======Top User Text======")]
-    [SerializeField] private TextMeshProUGUI fistPlaceText = null;
-    [SerializeField] private TextMeshProUGUI secondPlaceText = null;
-    [SerializeField] private TextMeshProUGUI thirdPlaceText = null;
+    [SerializeField] private TopUser topUser = null;
     [Header("")]
 
     [Header("======Ranking Boad Name======")]
-    [SerializeField] private TextMeshProUGUI curGameName = null;
     [SerializeField] private string[] gameName = null;
     [SerializeField] private UiScore myScoreInfo = null;
     [Header("")]
@@ -49,14 +46,6 @@ public class RankingUiData : MonoBehaviour
     private int curGameNum = 0;
     private int curDifNum = 0;
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.A))
-        {
-            Onclick_BalloonToggle();
-        }
-    }
-
     private void OnEnable()
     {
         Onclick_BalloonToggle();
@@ -75,7 +64,7 @@ public class RankingUiData : MonoBehaviour
         UserData.sortingIdx = gameNum * 4 + difficulty;
         userdata.Sort();
 
-        if (gameNum != 1)
+        if (gameNum != 1 || gameNum != 3)
             userdata.Reverse();
 
         int instNum = 0;
@@ -84,35 +73,34 @@ public class RankingUiData : MonoBehaviour
         {
             if (float.Parse(userdata[i].score[gameNum * 4 + difficulty]) == 0)
             {
+                Debug.Log(userdata[i].id == DatabaseAccess.Inst.loginUser.id);
                 if (userdata[i].id == DatabaseAccess.Inst.loginUser.id)
-                    myScoreInfo.init(0, "¾øÀ½", "0");
-
+                    myScoreInfo.init(0, userdata[i].nickname, "0", userdata[i].selectNum, gameNum);
                 continue;
             }
 
             UiScore rankingContent = Instantiate<UiScore>(rankingContentfrefab, scroll.content.transform);
-            rankingContent.init(instNum + 1, userdata[i].nickname, userdata[i].score[gameNum * 4 + difficulty]);
+            rankingContent.init(instNum + 1, userdata[i].nickname, userdata[i].score[gameNum * 4 + difficulty], userdata[i].selectNum, gameNum);
+            rankingContent.charNum = userdata[i].selectNum;
             contents.Add(rankingContent);
 
             if (userdata[i].id == DatabaseAccess.Inst.loginUser.id)
             {
                 saveMyIndex = instNum;
-                rankingContent.ChangeColor(Color.cyan);
-                myScoreInfo.init(instNum + 1, userdata[i].nickname, userdata[i].score[gameNum * 4 + difficulty]);
+                myScoreInfo.init(instNum + 1, userdata[i].nickname, userdata[i].score[gameNum * 4 + difficulty], userdata[i].selectNum, gameNum);
             }
 
             instNum++;
         }
         StartCoroutine(MoveScroll(difficulty, saveMyIndex));
 
-        TopUser(scroll);
+        TopUser();
 
     }
 
     private IEnumerator MoveScroll(int difNum, int instNum)
     {
         ScrollRect scroll = scrollRect[difNum];
-        Debug.Log(instNum);
 
         float value = size * instNum / (((scroll.content.childCount * size) - 20) - scroll.GetComponent<RectTransform>().rect.height);
         float scrollvalue = (1 - value) + scroll.verticalScrollbar.size / 2;
@@ -122,29 +110,35 @@ public class RankingUiData : MonoBehaviour
     }
 
 
-    private void TopUser(ScrollRect scroll)
+    private void TopUser()
     {
+
         string[] name = new string[3];
-        int index = 0;
+        int[] charNum = new int[3];
 
-        for (int i = 0; i < contents.Count; i++)
+        for (int i = 0; i < charNum.Length; i++)
         {
-            if (index > 2) break;
-
-            name[index] = contents[i].GetNickNameText;
-            index++;
+            charNum[i] = -1;
         }
 
-        SetTopUser(name[0], name[1], name[2]);
-    }
+        for (int i = 0; i < 3; i++)
+        {
+            if (i > contents.Count-1) break;
 
-    private void SetTopUser(string first, string second, string third)
-    {
-        fistPlaceText.text = first;
-        secondPlaceText.text = second;
-        thirdPlaceText.text = third;
-    }
 
+            name[i] = contents[i].GetNickNameText;
+
+            if (name[i] == null)
+                charNum[i] = 2;
+            else
+                charNum[i] = contents[i].charNum;
+
+        }
+
+        topUser.SetNickName(name[0], name[1], name[2]);
+        topUser.SetImage(charNum[0], charNum[1], charNum[2]);
+    }
+  
 
     private void DestrouContents()
     {
@@ -218,7 +212,6 @@ public class RankingUiData : MonoBehaviour
     public void Onclick_BalloonToggle()
     {
         curGameNum = 0;
-        curGameName.text = gameName[curGameNum];
 
         OnClick_EasyToggle();
     }
@@ -226,7 +219,6 @@ public class RankingUiData : MonoBehaviour
     public void Onclick_MemoryCard()
     {
         curGameNum = 1;
-        curGameName.text = gameName[curGameNum];
 
         OnClick_EasyToggle();
     }
@@ -234,7 +226,6 @@ public class RankingUiData : MonoBehaviour
     public void Onclick_Juice()
     {
         curGameNum = 2;
-        curGameName.text = gameName[curGameNum];
 
         OnClick_EasyToggle();
     }
@@ -242,7 +233,6 @@ public class RankingUiData : MonoBehaviour
     public void Onclick_PuzzleToggle()
     {
         curGameNum = 3;
-        curGameName.text = gameName[curGameNum];
 
         OnClick_EasyToggle();
     }

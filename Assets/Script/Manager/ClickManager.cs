@@ -33,6 +33,10 @@ public class ClickManager : MonoBehaviour
     private bool clickCheck = false;
     [HideInInspector] public bool selectCheck = false;
 
+
+    [SerializeField] private ParticleSystem effect = null;
+    public ParticleSystem wayPoint = null;
+
     #endregion
 
     #region Property
@@ -135,7 +139,30 @@ public class ClickManager : MonoBehaviour
                     Interaction(obj, true);
                 }
 
+
+                if (wayPoint == null)
+                {
+                    wayPoint = Instantiate<ParticleSystem>(effect, obj.transform.position + new Vector3(0, 5f, 0), Quaternion.identity);
+                }
+                else
+                {
+                    wayPoint.transform.position = obj.transform.position + new Vector3(0, 5f, 0);
+                }
+
                 GameManager.Inst.GetCameraMove.CameraPosMove(obj);
+            }
+
+         
+        }
+        else if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
+        {
+            if (wayPoint == null)
+            {
+                wayPoint = Instantiate<ParticleSystem>(effect, hit.point + new Vector3(0, 1, 0), Quaternion.identity);
+            }
+            else
+            {
+                wayPoint.transform.position = hit.point + new Vector3(0, 1, 0);
             }
         }
     }

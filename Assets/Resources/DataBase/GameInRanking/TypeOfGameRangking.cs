@@ -7,25 +7,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 [Serializable]
-public class UserRanking : IComparable
-{
-    public static int sortingIdx;
-
-    public string id;
-    public string nickname;
-
-    public string[] score;
-
-    public int CompareTo(object obj)
-    {
-        UserData data = (UserData)obj;
-
-        return float.Parse(this.score[sortingIdx]).CompareTo(float.Parse(data.score[sortingIdx]));
-    }
-}
-
-[Serializable]
-public class UserInfo
+public class UserInfo : IComparable
 {
     public static int sortingIdx;
 
@@ -33,6 +15,7 @@ public class UserInfo
     public string password;
     public string nickname;
     public int year;
+    public int selectNum;
 
     public string[] score;
     public int gamemoney;
@@ -46,7 +29,19 @@ public class UserInfo
 
     public string[] objectcount;
     public string[] shopmaxcount;
-   
+
+    public string[] farmobjname;
+    public string[] farminvenobjname;
+    public string[] farmobjposX;
+    public string[] farmobjposY;
+
+    public int CompareTo(object obj)
+    {
+        UserInfo data = (UserInfo)obj;
+
+        return float.Parse(this.score[sortingIdx]).CompareTo(float.Parse(data.score[sortingIdx]));
+    }
+
 }
 
 public class TypeOfGameRangking : MonoBehaviour
@@ -55,15 +50,24 @@ public class TypeOfGameRangking : MonoBehaviour
     IMongoDatabase database;
     IMongoCollection<BsonDocument> collection;
 
-    public List<UserData> totalScoreData = new List<UserData>();
+    public List<UserInfo> totalScoreData = new List<UserInfo>();
 
     public bool isProcessing = false;
 
     public UserInfo loginUser = null;
-
+    public static TypeOfGameRangking Inst;
 
     private void Awake()
     {
+        if (Inst == null)
+        {
+            Inst = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+
         database = client.GetDatabase("UserData");
         collection = database.GetCollection<BsonDocument>("UserInfo");
     }
@@ -86,16 +90,18 @@ public class TypeOfGameRangking : MonoBehaviour
 
         object arrayString;
 
+
         foreach (var data in datasAwated.ToList())
         {
-            UserData user = new UserData();
+            UserInfo user = new UserInfo();
 
             user.id = (string)data.GetValue("_id");
-
             user.nickname = (string)data.GetValue("nickname");
+            user.selectNum = (int)data.GetValue("selectNum");
 
             arrayString = (object)data.GetValue("score");
             user.score = ArraySplitSort(arrayString);
+
 
             totalScoreData.Add(user);
         }
@@ -104,7 +110,7 @@ public class TypeOfGameRangking : MonoBehaviour
     }
 
     //데이터베이스에 해당 유저를 찾고 해당유저의 정보를 수정
-    public async void Save_FromDatabase(string _id,float curScore, int curGameNum, int curDifNum )
+    public async void Save_FromDatabase(string _id,float curScore,int star ,int curGameNum, int curDifNum )
     {
         await GetUserData_FromDatabase(_id);
 
@@ -116,6 +122,7 @@ public class TypeOfGameRangking : MonoBehaviour
         }
 
         loginUser.score[curGameNum * 4 + curDifNum] = curScore.ToString();
+        loginUser.gamemoney = loginUser.gamemoney + star;
 
         BsonDocument find = new BsonDocument { { "_id", _id } };
 

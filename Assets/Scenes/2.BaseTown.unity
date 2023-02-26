@@ -1828,7 +1828,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97251486bc031a643a019f586fb84a47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  packageName: 3.MiniTown
+  packageName: 5.PlazaScene
 --- !u!61 &1704406406
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2022,23 +2022,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4870276239395309368, guid: e11ec618e07ee1e45a952fffe9211bea, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4870276239395309368, guid: e11ec618e07ee1e45a952fffe9211bea, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4870276239395309368, guid: e11ec618e07ee1e45a952fffe9211bea, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: -17
       objectReference: {fileID: 0}
     - target: {fileID: 4870276240089048562, guid: e11ec618e07ee1e45a952fffe9211bea, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4870276240089048562, guid: e11ec618e07ee1e45a952fffe9211bea, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e11ec618e07ee1e45a952fffe9211bea, type: 3}

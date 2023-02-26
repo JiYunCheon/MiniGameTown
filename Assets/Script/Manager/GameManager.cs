@@ -57,11 +57,17 @@ public class GameManager : MonoBehaviour
     public Vector3[] objectsRot;
     public string[] objectsName;
 
+    public bool uiSelectCheck = false;
+
+
     PlayerMove player = null;
 
     //생성될 건물의 부모
     [Header("Parents")]
     private Transform buildings = null;
+
+    public int curSceneNum = 0;
+
 
     #region Property
 
@@ -439,6 +445,11 @@ public class GameManager : MonoBehaviour
 
 
         return DatabaseAccess.Inst.loginUser.gamemoney;
+    }
+
+  
+    public void SaveSceneNum()
+    {
     }
 
 }

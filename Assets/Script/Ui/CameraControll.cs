@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class CameraControll : MonoBehaviour
 {
@@ -30,18 +31,22 @@ public class CameraControll : MonoBehaviour
     private Coroutine positionCorou;
     private Coroutine rotatiomCorou;
 
-    private void Awake()
-    {
-        StartCoroutine(nameof(CamMoveStart));
-    }
 
+    [SerializeField] private Vector3[] changeScenePos = null;
+
+    private void Start()
+    {
+        ChangeCamPosByScene();
+    }
 
     private void Update()
     {
+        Debug.Log(transform.position);
+
         //업데이트에  들어가는 인풋들을 게임매니저에서 하는게 좋아보임 
         //한번에 관리 할 수 있도록
         if (GameManager.Inst.GetClickManager.selectCheck || GameManager.Inst.buildingMode|| GameManager.Inst.waitingMode
-            || GameManager.Inst.GetUiManager.uiSelectCheck) return;
+            || GameManager.Inst.uiSelectCheck) return;
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -80,26 +85,27 @@ public class CameraControll : MonoBehaviour
     private IEnumerator CamMoveStart()
     {
         if (moveProcessing == true) yield break;
-        float count =2f;
+        float count =5f;
         moveProcessing = true;
 
         float xmin = -1;
         float ymin = -1;
-            
+        Vector3 targetPos = Vector3.zero;
 
         while (true)
         {
             count = Mathf.Lerp(count,0f, 0.5f * Time.fixedDeltaTime);
 
             yield return new WaitForFixedUpdate();
-            transform.Translate(xmin * count * cameraAxisX * 0.5f*Time.fixedDeltaTime, ymin * count * cameraAxisY * Time.fixedDeltaTime, xmin * count * cameraAxisX * 0.5f * Time.fixedDeltaTime);
+            transform.Translate(xmin * count * cameraAxisX * 0.7f*Time.fixedDeltaTime, ymin * count * cameraAxisY * Time.fixedDeltaTime, xmin * count * cameraAxisX * 0.5f * Time.fixedDeltaTime);
 
-            Vector3 targetPos = transform.position;
+            targetPos = transform.position;
             targetPos.x = Mathf.Clamp(targetPos.x, xMin, xMax);
             targetPos.y = Mathf.Clamp(targetPos.y, yMin, yMax);
-            targetPos.z = 70f- Mathf.Clamp(targetPos.x, xMin, xMax);
+            //targetPos.z = 70f- Mathf.Clamp(targetPos.x, xMin, xMax);
 
             transform.position = targetPos;
+            Debug.Log("타겟 포즈" + targetPos);
 
             if (count<1f)
             {
@@ -268,5 +274,51 @@ public class CameraControll : MonoBehaviour
         }
     }
 
-  
+    private void ChangeCamPosByScene()
+    {
+      
+
+        if (GameManager.Inst.curSceneNum==1 && SceneManager.GetActiveScene().buildIndex==2 && changeScenePos.Length==3)
+        {
+            this.transform.position = changeScenePos[0];
+        }
+        else if(GameManager.Inst.curSceneNum == 3 && SceneManager.GetActiveScene().buildIndex == 2 && changeScenePos.Length == 3)
+        {
+            Debug.Log("들어옴 : "+ changeScenePos[1]);
+
+            this.transform.position = changeScenePos[1];
+
+            Debug.Log(this.transform.position);
+
+        }
+        else if (GameManager.Inst.curSceneNum == 4 && SceneManager.GetActiveScene().buildIndex == 2 && changeScenePos.Length == 3)
+        {
+            this.transform.position = changeScenePos[2];
+        }
+        else if (GameManager.Inst.curSceneNum == 2 && SceneManager.GetActiveScene().buildIndex == 3 && changeScenePos.Length == 2)
+        {
+            this.transform.position = changeScenePos[0];
+        }
+        else if (GameManager.Inst.curSceneNum == 4 && SceneManager.GetActiveScene().buildIndex == 3 && changeScenePos.Length == 2)
+        {
+            this.transform.position = changeScenePos[1];
+        }
+        else if (GameManager.Inst.curSceneNum == 2 && SceneManager.GetActiveScene().buildIndex == 4 && changeScenePos.Length == 2)
+        {
+            this.transform.position = changeScenePos[1];
+        }
+        else if (GameManager.Inst.curSceneNum == 3 && SceneManager.GetActiveScene().buildIndex == 4 && changeScenePos.Length == 2)
+        {
+            this.transform.position = changeScenePos[0];
+        }
+
+
+    }
+
+
+
+
+
+
+
 }

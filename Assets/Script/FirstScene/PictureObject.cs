@@ -13,8 +13,11 @@ public class PictureObject : Select
     {
         GameManager.Inst.curGameName = packageName;
 
-        if (GameManager.Inst.curGameName == "3.MiniTown")
-            SceneManager.LoadScene("3.MiniTown");
+        if (GameManager.Inst.curGameName == "5.PlazaScene")
+        {
+            GameManager.Inst.curSceneNum = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene("5.PlazaScene");
+        }
         else
         {
             InGame.openApp(GameManager.Inst.curGameName);

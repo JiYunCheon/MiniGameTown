@@ -44,8 +44,6 @@ public class UiManager : MonoBehaviour
     Color blackColor = new Color(113f / 255f, 113f / 255f, 113f / 255f);
     Coroutine moveCoroutine;
 
-    public bool uiSelectCheck = false;
-
     #endregion
 
     #region Property

@@ -125,6 +125,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1847257299066466905}
+  - component: {fileID: 2003381061141336272}
   m_Layer: 6
   m_Name: CameraPos
   m_TagString: Untagged
@@ -139,14 +140,27 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3803372775393847866}
-  m_LocalRotation: {x: -0.05601868, y: 0.9430295, z: -0.20906462, w: -0.25268394}
-  m_LocalPosition: {x: 5, y: 13, z: 20}
+  m_LocalRotation: {x: -0.018863963, y: 0.9725809, z: -0.21561599, w: -0.08508985}
+  m_LocalPosition: {x: 5, y: 9, z: 20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8471741803409222585}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 25, y: 210, z: 0}
+  m_LocalEulerAnglesHint: {x: 25, y: 190, z: 0}
+--- !u!65 &2003381061141336272
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3803372775393847866}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8471741802133643792
 GameObject:
   m_ObjectHideFlags: 0

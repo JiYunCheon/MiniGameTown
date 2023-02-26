@@ -15,7 +15,8 @@ public class Potal : MonoBehaviour
             GameManager.Inst.SaveData();
             GameManager.Inst.ListClear();
         }
-
+       
+        GameManager.Inst.curSceneNum = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(sceneName);
     }
 

@@ -12,14 +12,14 @@ EditorBuildSettings:
     path: Assets/Scenes/2.BaseTown.unity
     guid: 92163ec0796719f4993a86c0bd30cf03
   - enabled: 1
+    path: Assets/Scenes/5.PlazaScene.unity
+    guid: 52c9b700572c23140a36346c5b35b120
+  - enabled: 1
     path: Assets/Scenes/3.MiniTown.unity
     guid: 3fbabd12b07d56c44a7e09c611bbeb15
   - enabled: 1
     path: Assets/Scenes/4.BeachScene.unity
     guid: d525d1920f3b89a41b5198cf4a7de0c9
-  - enabled: 1
-    path: Assets/Scenes/5.PlazaScene.unity
-    guid: 52c9b700572c23140a36346c5b35b120
   - enabled: 1
     path: Assets/Scenes/CharacterSelectScene.unity
     guid: 700914fd6b5084f479c791c448c22dfe

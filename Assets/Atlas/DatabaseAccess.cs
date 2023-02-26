@@ -332,7 +332,7 @@ public class DatabaseAccess : MonoBehaviour
             UserData user = new UserData();
 
             user.id = (string)data.GetValue("_id");
-
+            user.selectNum = (int)data.GetValue("selectNum");
             user.nickname = (string)data.GetValue("nickname");
 
             arrayString = (object)data.GetValue("score");
