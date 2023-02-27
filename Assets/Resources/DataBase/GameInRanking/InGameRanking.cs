@@ -44,7 +44,7 @@ public class InGameRanking : MonoBehaviour
     {
         Inst = this;
         //ex)
-        SetGameInfo("1",150,5,0,0);
+        SetGameInfo("1",160,5,0,0);
         SaveScore(_id);
     }
 

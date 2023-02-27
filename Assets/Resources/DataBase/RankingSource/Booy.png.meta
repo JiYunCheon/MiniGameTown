@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2d76db5d4c3da5f49852391c42dbbff8
+guid: 2c006aa1cc389954bae3eae3dc3c2b5c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,13 +117,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Girl_0
+      name: Booy_0
       rect:
         serializedVersion: 2
-        x: 848
-        y: 119
-        width: 379
-        height: 868
+        x: 809
+        y: 100
+        width: 274
+        height: 580
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,8 +131,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 196c4c2a262238340b6eb3323bb34b3e
-      internalID: 1066335892
+      spriteID: f7d5c58c1604c7340886d287021785aa
+      internalID: -892006206
       vertices: []
       indices: 
       edges: []
@@ -140,7 +140,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 65c6156557cd9e24cb4e0a34d8c2597f
+    spriteID: 228961a17cc520a49a94d16d29638d04
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Girl_0: 1066335892
+      Booy_0: -892006206
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

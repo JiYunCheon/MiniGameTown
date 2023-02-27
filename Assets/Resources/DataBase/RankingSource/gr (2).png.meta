@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 70c0c9adf0528a84fae467f35711fa8d
+guid: 7c2435fa8491e8a4691cdac4321605a6
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,13 +117,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Boy_0
+      name: gr (2)_0
       rect:
         serializedVersion: 2
-        x: 773
-        y: 154
-        width: 424
-        height: 867
+        x: 823
+        y: 99
+        width: 247
+        height: 603
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,8 +131,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 707ad7ed0813f244182524833b6133c2
-      internalID: -2117113163
+      spriteID: 12fdfceabd9dde54abd5cd6dc9fdc38a
+      internalID: -881031320
       vertices: []
       indices: 
       edges: []
@@ -140,7 +140,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: d44e1fd1e158f424f927e7a8b0e1920c
+    spriteID: 10578e57da36336429cfa997e0e6d11e
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Boy_0: -2117113163
+      gr (2)_0: -881031320
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
