@@ -30,6 +30,8 @@ public class LoginSceneController : MonoBehaviour
     [SerializeField] private TMP_InputField inputfied__FindYear = null;
     [SerializeField] private TextMeshProUGUI find_Psw_StateText = null;
 
+    [Header("LoginFailed")]
+    [SerializeField] private GameObject loginFailed = null;
 
 
     private bool idCompleteCheck = false;
@@ -46,7 +48,6 @@ public class LoginSceneController : MonoBehaviour
     [SerializeField] private int nickNameLength = 0;
     string saveID = null;
 
-    private int savePswLength = 0;
 
     private void Update()
     {
@@ -138,9 +139,15 @@ public class LoginSceneController : MonoBehaviour
 
     }
 
-
+    public void Active_LoginFaied(bool activeSelf = true)
+    {
+        loginFailed.SetActive(activeSelf);
+    }
    
-
+    public void OnClick_LoginFailedExit()
+    {
+        Active_LoginFaied(false);
+    }
 
 
 

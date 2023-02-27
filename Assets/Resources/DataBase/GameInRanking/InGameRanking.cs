@@ -30,7 +30,6 @@ public class InGameRanking : MonoBehaviour
     #region Member
 
     private List<UiScore> contents = new List<UiScore>();
-    private GameObject curBoard = null;
 
     private string _id = null;
     private string curGameName = null;

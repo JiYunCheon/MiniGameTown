@@ -29,7 +29,7 @@ public class CameraControll : MonoBehaviour
     private bool posProcessing = false;
     private bool roProcessing = false;
     private Coroutine positionCorou;
-    private Coroutine rotatiomCorou;
+    private Coroutine rotationCorou;
 
 
     [SerializeField] private Vector3[] changeScenePos = null;
@@ -41,8 +41,6 @@ public class CameraControll : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(transform.position);
-
         //업데이트에  들어가는 인풋들을 게임매니저에서 하는게 좋아보임 
         //한번에 관리 할 수 있도록
         if (GameManager.Inst.GetClickManager.selectCheck || GameManager.Inst.buildingMode|| GameManager.Inst.waitingMode
@@ -52,9 +50,9 @@ public class CameraControll : MonoBehaviour
         {
             moveProcessing = false;
 
-            if(coroutine != null)
+            if (coroutine != null)
                 StopCoroutine(coroutine);
-            else if(positionCorou!=null || rotatiomCorou != null)
+            else if(positionCorou!=null || rotationCorou != null)
             {
                 OriginPosMove();
             }
@@ -76,8 +74,12 @@ public class CameraControll : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0) && time<=0.15f)
         {
+            GameManager.Inst.GetClickManager.EffectSequence(GameManager.Inst.GetClickManager.curPoint);
+
             GameManager.Inst.GetPlayer.PlayerDestination();
         }
+
+        GameManager.Inst.camMoveCheck = false;
 
     }
 
@@ -85,6 +87,7 @@ public class CameraControll : MonoBehaviour
     private IEnumerator CamMoveStart()
     {
         if (moveProcessing == true) yield break;
+
         float count =5f;
         moveProcessing = true;
 
@@ -105,7 +108,6 @@ public class CameraControll : MonoBehaviour
             //targetPos.z = 70f- Mathf.Clamp(targetPos.x, xMin, xMax);
 
             transform.position = targetPos;
-            Debug.Log("타겟 포즈" + targetPos);
 
             if (count<1f)
             {
@@ -194,7 +196,7 @@ public class CameraControll : MonoBehaviour
             }
 
             positionCorou = StartCoroutine(MoveCoroutine(obj.GetCameraPos.position));
-            rotatiomCorou = StartCoroutine(RotantionCoroutine(obj.GetCameraPos.rotation));
+            rotationCorou = StartCoroutine(RotantionCoroutine(obj.GetCameraPos.rotation));
 
             camSizeCoroutine = StartCoroutine(LerpCameraSize(4f));
 
@@ -203,7 +205,7 @@ public class CameraControll : MonoBehaviour
         {
 
             positionCorou = StartCoroutine(MoveCoroutine(originPos));
-            rotatiomCorou = StartCoroutine(RotantionCoroutine(originRo));
+            rotationCorou = StartCoroutine(RotantionCoroutine(originRo));
 
             camSizeCoroutine = StartCoroutine(LerpCameraSize(7f,false));
         }
@@ -264,7 +266,7 @@ public class CameraControll : MonoBehaviour
         if(originRo!=Quaternion.identity)
         {
             transform.rotation = originRo;
-            rotatiomCorou = null;
+            rotationCorou = null;
         }
         
         if(originPos!=Vector3.zero)

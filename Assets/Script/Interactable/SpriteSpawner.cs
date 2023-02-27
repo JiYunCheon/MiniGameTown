@@ -9,8 +9,6 @@ public class SpriteSpawner : MonoBehaviour
     private Vector3[] spawnSpot = null;
     [SerializeField] private int spotLenght = 0; 
 
-    [SerializeField] private float spawnInterval = 0;
-    [SerializeField] private float stopTime = 0;
     [SerializeField] private int repeat = 0;
 
 

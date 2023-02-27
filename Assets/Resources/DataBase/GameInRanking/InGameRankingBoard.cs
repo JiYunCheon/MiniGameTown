@@ -13,7 +13,6 @@ public class InGameRankingBoard : MonoBehaviour
     [Header("")]
 
     [Header("======Ranking Boad Name======")]
-    [SerializeField] private string[] gameName = null;
     [SerializeField] private UiScore myScoreInfo = null;
     [Header("")]
 

@@ -6,7 +6,6 @@ using TMPro;
 
 public class FirstSceneUiController : MonoBehaviour
 {
-    [SerializeField] private FirstSceneClick firstSceneClick = null;
     [SerializeField] private TextMeshProUGUI gameMoneyText = null;
 
     private void Start()

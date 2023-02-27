@@ -26,7 +26,7 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-        if (des!=Vector3.zero && Vector3.Distance(transform.position, des) < 0.5f)
+        if (des!=Vector3.zero && Vector3.Distance(transform.position, des) < 0.7f)
         {
             anim.SetBool("move", false);
             des = Vector3.zero;

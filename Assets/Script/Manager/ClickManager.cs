@@ -37,6 +37,8 @@ public class ClickManager : MonoBehaviour
     [SerializeField] private ParticleSystem effect = null;
     public ParticleSystem wayPoint = null;
 
+    public Vector3 curPoint = Vector3.zero;
+
     #endregion
 
     #region Property
@@ -95,7 +97,7 @@ public class ClickManager : MonoBehaviour
             if (GameManager.Inst.buildingMode && Input.GetMouseButton(0))
                 BuildingModeMoveSequence();
         }
-           
+
 
     }
 
@@ -156,14 +158,20 @@ public class ClickManager : MonoBehaviour
         }
         else if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
         {
-            if (wayPoint == null)
-            {
-                wayPoint = Instantiate<ParticleSystem>(effect, hit.point + new Vector3(0, 1, 0), Quaternion.identity);
-            }
-            else
-            {
-                wayPoint.transform.position = hit.point + new Vector3(0, 1, 0);
-            }
+            curPoint = hit.point;
+        }
+
+    }
+
+    public void EffectSequence(Vector3 point)
+    {
+        if (wayPoint == null)
+        {
+            wayPoint = Instantiate<ParticleSystem>(effect, point + new Vector3(0, 1, 0), Quaternion.identity);
+        }
+        else
+        {
+            wayPoint.transform.position = point + new Vector3(0, 1, 0);
         }
     }
 
@@ -248,6 +256,12 @@ public class ClickManager : MonoBehaviour
     }
 
     #endregion
+
+
+
+
+
+
 
     //건물 생성 로직
     public void InstObject(Quaternion rotation)

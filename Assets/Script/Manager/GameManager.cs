@@ -43,21 +43,21 @@ public class GameManager : MonoBehaviour
     private InteractionManager interactionManager = null;
 
     [HideInInspector] public string curGameName = null;
-    public bool buildingMode = false;
-    public bool waitingMode = false;
+    [HideInInspector] public bool buildingMode = false;
+    [HideInInspector] public bool waitingMode = false;
 
     [HideInInspector] public int pointerID;
 
     //패드를 생성 할 때 패드들을 add 함 
-    public List<Ground> grounds = new List<Ground>();
-    public int[] grounds_Info;
+    [HideInInspector] public List<Ground> grounds = new List<Ground>();
+    [HideInInspector] public int[] grounds_Info;
 
     //save Data value
-    public Vector3[] objectsPos;
-    public Vector3[] objectsRot;
-    public string[] objectsName;
+    [HideInInspector] public Vector3[] objectsPos;
+    [HideInInspector] public Vector3[] objectsRot;
+    [HideInInspector] public string[] objectsName;
 
-    public bool uiSelectCheck = false;
+    [HideInInspector] public bool uiSelectCheck = false;
 
 
     PlayerMove player = null;
@@ -66,7 +66,8 @@ public class GameManager : MonoBehaviour
     [Header("Parents")]
     private Transform buildings = null;
 
-    public int curSceneNum = 0;
+    [HideInInspector] public int curSceneNum = 0;
+    [HideInInspector] public bool camMoveCheck = false;
 
 
     #region Property

@@ -179,6 +179,8 @@ public class DatabaseAccess : MonoBehaviour
         {
             Debug.Log("로그인 실패");
 
+            GameManager.Inst.GetLoginSceneController.Active_LoginFaied();
+
             return null;
         }
         Debug.Log("로그인 성공 :  " + loginUser.nickname);
