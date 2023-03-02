@@ -37,6 +37,8 @@ public class UiManager : MonoBehaviour
     [Header("PurchaseComplteUi")]
     [SerializeField] private PurchaseResult successWindow = null;
 
+    [Header("RankingBoard")]
+    [SerializeField] private RankingUiData rankingBoard = null;
 
     //CheckValue
     private int clickCount = 0;
@@ -113,7 +115,10 @@ public class UiManager : MonoBehaviour
     {
         buildingShopBtn.gameObject.SetActive(activeSelf);
     }
-   
+    public void Active_RankingBtn(bool activeSelf = true)
+    {
+        rankingBoard.gameObject.SetActive(activeSelf);
+    }
 
     #region ButtonEvent
 
@@ -130,11 +135,14 @@ public class UiManager : MonoBehaviour
         //카메라 위치 초기화
         GameManager.Inst.GetCameraMove.CameraPosMove(null,false);
 
+        GameManager.Inst.GetClickManager.GetCurHitObject.SetSelectCheck(false);
+
         //클릭된 오브젝트 초기화
         GameManager.Inst.GetClickManager.BuildingRefresh();
 
         Active_GameInBtn(false);
         Active_ShopBtn(true);
+        GameManager.Inst.GetClickManager.Active_Effect(false);
     }
 
     //상점 ui
@@ -212,6 +220,12 @@ public class UiManager : MonoBehaviour
         //데이터가 저장된 후 나가기
         StartCoroutine(WaitForSaveData());
     }
+
+    public void OnClick_Ranking()
+    {
+        Active_RankingBtn();
+    }
+    
 
 
     #endregion
@@ -298,6 +312,21 @@ public class UiManager : MonoBehaviour
             yield return null;
         }
     }
+
+    public void Active_BuildingName(Interactable obj)
+    {
+        foreach (Transform item in GameManager.Inst.GetBuildings)
+        {
+            if (item.TryGetComponent<Interactable>(out Interactable interactable))
+            {
+                interactable.Active_Name(false);
+            }
+        }
+
+        GameManager.Inst.curGameName = obj.GetMyData.packageName;
+    }
+
+
 
     public InventoryItem GetInventoryContent(Excel data)
     {

@@ -74,7 +74,8 @@ public class CameraControll : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0) && time<=0.15f)
         {
-            GameManager.Inst.GetClickManager.EffectSequence(GameManager.Inst.GetClickManager.curPoint);
+
+            //GameManager.Inst.GetClickManager.EffectSequence(GameManager.Inst.GetClickManager.curPoint, new Vector3(0, 1, 0));
 
             GameManager.Inst.GetPlayer.PlayerDestination();
         }

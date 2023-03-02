@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,8 @@ public class ShopBoard : MonoBehaviour
     [SerializeField] private ScrollRect Object_Scroll = null;
     [Header("InventoryContentTr")]
     [SerializeField] private ScrollRect invetoryScroll = null;
+    [Header("Btn")]
+    [SerializeField] private Button[] toggle = null;
 
 
     private void Awake()
@@ -46,15 +49,18 @@ public class ShopBoard : MonoBehaviour
     //토클 빌딩 클릭
     public void OnClick_Toggle_Building()
     {
-        Scroll_OnOff(true);
+        Building_Scroll_OnOff(true);
+        Object_Scroll_OnOff(false);
     }
 
     //토클 오브젝트 클릭
     public void OnClick_Toggle_Object()
     {
-        Scroll_OnOff(false);
+        Object_Scroll_OnOff(true);
+        Building_Scroll_OnOff(false);
+
     }
-    
+
     //편집모드 가기 클릭
     public void OnClick_WatingMode()
     {
@@ -65,10 +71,18 @@ public class ShopBoard : MonoBehaviour
 
 
     //토글 켜고 끔
-    private void Scroll_OnOff(bool active)
+    private void  Building_Scroll_OnOff(bool active)
     {
         Building_Scroll.gameObject.SetActive(active);
-        Object_Scroll.gameObject.SetActive(!active);
+        toggle[0].gameObject.SetActive(!active);
+        toggle[1].gameObject.SetActive(active);
+    }
+
+    private void Object_Scroll_OnOff(bool active)
+    {
+        Object_Scroll.gameObject.SetActive(active);
+        toggle[2].gameObject.SetActive(!active);
+        toggle[3].gameObject.SetActive(active);
     }
 
     //상점 컨텐트 생성 로직

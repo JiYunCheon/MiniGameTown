@@ -37,7 +37,7 @@ public class ClickManager : MonoBehaviour
     [SerializeField] private ParticleSystem effect = null;
     public ParticleSystem wayPoint = null;
 
-    public Vector3 curPoint = Vector3.zero;
+    //public Vector3 curPoint = Vector3.zero;
 
     #endregion
 
@@ -124,54 +124,45 @@ public class ClickManager : MonoBehaviour
             //상호 작용이 가능한 오브젝트인지 확인
             if (hit.transform.gameObject.TryGetComponent<Interactable>(out Interactable obj))
             {
-                //플레이어의 도착지로 지정
-                GameManager.Inst.GetPlayer.PlayerDestination();
-
                 //이전 오브젝트가 없는 경우
                 if (curHitObject == null)
-                    Interaction(obj, true);
+                    Interaction(obj);
 
                 //이전 오브젝트와 다른 오브젝트를 클릭했을 경우
                 else if (curHitObject.transform.gameObject != hit.transform.transform.gameObject)
                 {
-                    Interaction(obj, true);
+                    Interaction(obj);
                 }
                 else if(curHitObject.transform.gameObject == hit.transform.transform.gameObject)
                 {
-                    Interaction(obj, true);
+                    Interaction(obj);
                 }
 
-
-                if (wayPoint == null)
-                {
-                    wayPoint = Instantiate<ParticleSystem>(effect, obj.transform.position + new Vector3(0, 5f, 0), Quaternion.identity);
-                }
-                else
-                {
-                    wayPoint.transform.position = obj.transform.position + new Vector3(0, 5f, 0);
-                }
-
-                GameManager.Inst.GetCameraMove.CameraPosMove(obj);
             }
 
          
         }
-        else if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
-        {
-            curPoint = hit.point;
-        }
 
     }
 
-    public void EffectSequence(Vector3 point)
+    public void Active_Effect(bool chek =true )
     {
+        wayPoint.gameObject.SetActive(chek);
+    }
+
+    public void EffectSequence(Vector3 point, Vector3 pos)
+    {
+        Debug.Log("도착지 : "+pos);
+
         if (wayPoint == null)
         {
-            wayPoint = Instantiate<ParticleSystem>(effect, point + new Vector3(0, 1, 0), Quaternion.identity);
+            wayPoint = Instantiate<ParticleSystem>(effect, point + pos, Quaternion.identity);
         }
         else
         {
-            wayPoint.transform.position = point + new Vector3(0, 1, 0);
+            if (!wayPoint.gameObject.activeSelf) Active_Effect();
+
+            wayPoint.transform.position = point + pos;
         }
     }
 
@@ -287,30 +278,18 @@ public class ClickManager : MonoBehaviour
     }
 
     //클릭 될때 호출 기능 들
-    private void Interaction(Interactable obj , bool check)
+    private void Interaction(Interactable obj)
     {
         if (!obj.GetInteracterbleCheck) return;
 
-        if(GameManager.Inst.CompareLoadScene() && obj.GetEntrance!=null)
-        {
-            foreach (Transform item in GameManager.Inst.GetBuildings)
-            {
-                if (item.TryGetComponent<Interactable>(out Interactable interactable))
-                {
-                    interactable.Active_Name(false);
-                }
-            }
-
-            GameManager.Inst.GetUiManager.Active_HomeUi(false);
-            GameManager.Inst.curGameName = obj.GetMyData.packageName;
-        }
+        if (GameManager.Inst.CompareLoadScene() && obj.GetEntrance != null)
+            GameManager.Inst.GetUiManager.Active_BuildingName(obj);
 
         curHitObject = obj;
-        selectCheck = true;
-        curHitObject.Select_InteractableObj();
-        curHitObject.SetSelectCheck(check);
+        GetCurHitObject.Select_InteractableObj();
+        GetCurHitObject.SetSelectCheck(true);
     }
-    
+
     //변수 초기화
     private void Refresh()
     {

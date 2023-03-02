@@ -15,7 +15,7 @@ public class Building : Interactable
     private void Awake()
     {
         defaultMaterial = Resources.Load<Material>("Material & Texture/Colors_Default");
-        lightMaterial = Resources.Load<Material>("Material & Texture/Colors_Glossy");
+        lightMaterial = Resources.Load<Material>("Material & Texture/Colors_WindowBright");
 
         //CompleteEffect();
     }
@@ -24,11 +24,11 @@ public class Building : Interactable
 
     public override void Select_InteractableObj()
     {
-        GetComponent<Renderer>().material = lightMaterial;
+        renderer.material = lightMaterial;
     }
 
     public override void DeSelect_InteractableObj()
     {
-        GetComponent<Renderer>().material = defaultMaterial;
+        renderer.material = defaultMaterial;
     }
 }

@@ -20,14 +20,15 @@ public class PlayerMove : MonoBehaviour
     {
         myAgent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
-        myAgent.speed = 3;
+        myAgent.speed = 4;
         myAgent.angularSpeed = 300;
     }
 
     void Update()
     {
-        if (des!=Vector3.zero && Vector3.Distance(transform.position, des) < 0.7f)
+        if (des!=Vector3.zero && Vector3.Distance(transform.position, des) < 0.8f)
         {
+            GameManager.Inst.GetClickManager.Active_Effect(false);
             anim.SetBool("move", false);
             des = Vector3.zero;
         }
@@ -117,6 +118,8 @@ public class PlayerMove : MonoBehaviour
                 myAgent.destination = obj.GetEntrance.transform.position;
 
                 des = obj.GetEntrance.transform.position;
+                
+                GameManager.Inst.GetClickManager.EffectSequence(obj.transform.position, new Vector3(0, 5f, 0));
             }
             else
             {
@@ -135,6 +138,8 @@ public class PlayerMove : MonoBehaviour
                 myAgent.destination = hit.point;
 
                 des = hit.point;
+
+                GameManager.Inst.GetClickManager.EffectSequence(hit.point, new Vector3(0, 1f, 0));
             }
         }
     }

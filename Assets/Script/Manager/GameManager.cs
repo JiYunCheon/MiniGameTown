@@ -107,7 +107,6 @@ public class GameManager : MonoBehaviour
         {
             if (buildings == null)
                 buildings = GameObject.Find("Buildings").transform;
-
             return buildings;
         }
 
