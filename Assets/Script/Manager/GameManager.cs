@@ -203,11 +203,9 @@ public class GameManager : MonoBehaviour
     public static GameManager Inst = null;
     private void Awake()
     {
-
         if (Inst == null)
         {
             Inst = this;
-
             SaveDic();
             DontDestroyOnLoad(Inst);
         }
@@ -219,6 +217,42 @@ public class GameManager : MonoBehaviour
                 pointerID = 0; 
 #endif
     }
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        SoundManager.Inst.StopBGM();
+
+        // Debug.Log("æ¿ ±≥√ºµ , «ˆ¿Á æ¿: " + scene.name);
+        if (SceneManager.GetActiveScene().name == "1.LoginScene")
+        {
+            SoundManager.Inst.PlayBGM("BGM_Login");
+        }
+        else if (SceneManager.GetActiveScene().name == "2.BaseTown")
+        {
+            SoundManager.Inst.PlayBGM("BGM_MiniTown");
+        }
+        else if (SceneManager.GetActiveScene().name == "3.MiniTown")
+        {
+            SoundManager.Inst.PlayBGM("BGM_MiniTown");
+        }
+        else if (SceneManager.GetActiveScene().name == "5.PlazaScene")
+        {
+            SoundManager.Inst.PlayBGM("BGM_MiniTown");
+        }
+
+    }
+
+    void OnDisable()
+    {
+        // µ®∏Æ∞‘¿Ã∆Æ √º¿Œ ¡¶∞≈
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
 
 
     public bool CompareLoadScene()
@@ -447,9 +481,5 @@ public class GameManager : MonoBehaviour
         return DatabaseAccess.Inst.loginUser.gamemoney;
     }
 
-  
-    public void SaveSceneNum()
-    {
-    }
-
+    
 }

@@ -30,7 +30,7 @@ public class SpriteSpawner : MonoBehaviour
         int randomIndex = 0;
         int randomPoint = 0;
 
-        Debug.Log(spawnSpot.Length);
+        SoundManager.Inst.PlaySFX("SFX_Interact_Balloon");
 
         for (int i = 0; i < repeat; i++)
         {

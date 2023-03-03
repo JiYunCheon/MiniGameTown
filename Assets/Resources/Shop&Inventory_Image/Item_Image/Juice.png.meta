@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 504c85211253b33468a2c8fe5f2fc47d
+guid: 7811961bd9de039469adec011afeeedc
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -120,19 +120,19 @@ TextureImporter:
       name: Juice_0
       rect:
         serializedVersion: 2
-        x: 705
-        y: 167
-        width: 497
-        height: 549
+        x: 506
+        y: 128
+        width: 858
+        height: 634
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7587d1d94d74b9f4493d7b4314834558
-      internalID: 396449082
+      spriteID: c0da464a7c681a04d89b4f10eaaf221a
+      internalID: -1711362108
       vertices: []
       indices: 
       edges: []
@@ -140,7 +140,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: f6535b6da099ff046aa6577cd8784760
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Juice_0: 396449082
+      Juice_0: -1711362108
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

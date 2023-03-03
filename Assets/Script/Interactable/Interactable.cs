@@ -14,7 +14,7 @@ abstract public class Interactable : MonoBehaviour
     [SerializeField] private Transform cameraPos = null;
     [SerializeField] private Transform nameTr = null;
 
-    private Excel myData = null;
+    [SerializeField] private Excel myData = null;
 
     [SerializeField] protected new Renderer renderer = null;
     [SerializeField] private bool interacterbleCheck = true;
@@ -73,7 +73,9 @@ abstract public class Interactable : MonoBehaviour
             {
                 Vector3 pos = transform.localPosition;
                 pos.y = 1.4f;
-                transform.localPosition = pos;   
+                transform.localPosition = pos;
+
+                SoundManager.Inst.PlaySFX("SFX_SetObject");
                 yield break;
             }
             yield return new WaitForFixedUpdate();
@@ -108,7 +110,14 @@ abstract public class Interactable : MonoBehaviour
     //설치완료 이펙트 출력
     public virtual void CompleteEffect()
     {
-        GameManager.Inst.GetEffectManager.Inst_SpriteEffect(this.transform.position+ new Vector3(0,3.5f,0), "EffectImage/MakeComplete_Image");
+        if(myData.myType==OBJECT_TYPE.BUILDING)
+        {
+            GameManager.Inst.GetEffectManager.Inst_SpriteEffect(this.transform.position + new Vector3(0, 5.5f, 0), "EffectImage/MakeComplete_Image");
+        }
+        else
+            GameManager.Inst.GetEffectManager.Inst_SpriteEffect(this.transform.position + new Vector3(0, 3.5f, 0), "EffectImage/MakeComplete_Image");
+
+
     }
 
     //선택되었을 때 실행될 함수

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -47,6 +48,7 @@ public class RankingUiData : MonoBehaviour
 
     private void OnEnable()
     {
+        SoundManager.Inst.PlayBGM("BGM_Ranking");
         Onclick_BalloonToggle();
     }
 
@@ -154,7 +156,14 @@ public class RankingUiData : MonoBehaviour
 
     public void OnClick_Exit()
     {
-        if(GameManager.Inst.GetClickManager!=null && GameManager.Inst.GetClickManager.GetCurHitObject !=null)
+        if(SceneManager.GetActiveScene().name== "3.MiniTown")
+            SoundManager.Inst.PlayBGM("BGM_MiniTown");
+        else if (SceneManager.GetActiveScene().name == "2.BaseTown")
+            SoundManager.Inst.PlayBGM("BGM_BaseTown");
+        else if (SceneManager.GetActiveScene().name == "5.PlazaScene")
+            SoundManager.Inst.PlayBGM("BGM_MiniTown");
+
+        if (GameManager.Inst.GetClickManager!=null && GameManager.Inst.GetClickManager.GetCurHitObject !=null)
         {
             GameManager.Inst.GetClickManager.BuildingRefresh();
             GameManager.Inst.GetClickManager.GetCurHitObject.SetSelectCheck(false);

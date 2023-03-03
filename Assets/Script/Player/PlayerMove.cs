@@ -15,6 +15,8 @@ public class PlayerMove : MonoBehaviour
     Animator anim;
     Vector3 des = Vector3.zero;
     Coroutine interaction = null;
+    Coroutine stepSound = null;
+    WaitForSeconds stepInterval = null;
 
     void Start()
     {
@@ -22,12 +24,17 @@ public class PlayerMove : MonoBehaviour
         anim = GetComponent<Animator>();
         myAgent.speed = 4;
         myAgent.angularSpeed = 300;
+        stepInterval = new WaitForSeconds(0.4f);
     }
 
     void Update()
     {
         if (des!=Vector3.zero && Vector3.Distance(transform.position, des) < 0.8f)
         {
+            if(stepSound!=null)
+                StopCoroutine(stepSound);
+            SoundManager.Inst.StopSFX();
+
             GameManager.Inst.GetClickManager.Active_Effect(false);
             anim.SetBool("move", false);
             des = Vector3.zero;
@@ -108,10 +115,18 @@ public class PlayerMove : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
         {
+            if(stepSound!=null)
+            {
+                SoundManager.Inst.StopSFX();
+                StopCoroutine(stepSound);
+            }
+
             //클릭한 객체가 건물일 경우
             if (hit.transform.gameObject.TryGetComponent<Interactable>(out Interactable obj) && 
                 obj.GetInteracterbleCheck && obj.GetEntrance != null)
             {
+                SoundManager.Inst.StopSFX();
+
                 //건물의 입구로 이동
                 anim.SetBool("move", true);
 
@@ -123,6 +138,7 @@ public class PlayerMove : MonoBehaviour
             }
             else
             {
+
                 //오브젝트위이면 펄스 Ui 위이면 트루 
                 if (EventSystem.current.IsPointerOverGameObject(GameManager.Inst.pointerID) == true)
                 {
@@ -134,6 +150,8 @@ public class PlayerMove : MonoBehaviour
                 if (GameManager.Inst.GetClickManager.GetCurHitObject != null)
                     GameManager.Inst.GetClickManager.GetCurHitObject.DeSelect_InteractableObj();
 
+                stepSound = StartCoroutine(StartSound());
+
                 anim.SetBool("move", true);
                 myAgent.destination = hit.point;
 
@@ -143,6 +161,21 @@ public class PlayerMove : MonoBehaviour
             }
         }
     }
-   
+
+    
+
+    IEnumerator StartSound()
+    {
+        while (true)
+        {
+            SoundManager.Inst.PlaySFX("SFX_Footstep");
+
+            yield return stepInterval;
+
+        }
+
+    }
+
+
 
 }

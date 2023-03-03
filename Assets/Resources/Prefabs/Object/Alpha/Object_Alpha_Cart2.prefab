@@ -115,6 +115,22 @@ MonoBehaviour:
   myGround: []
   cameraPos: {fileID: 0}
   nameTr: {fileID: 0}
+  myData:
+    name: 
+    maxCount: 0
+    price: 0
+    occupyPad: 0
+    Info: 
+    spriteName: 
+    packageName: 
+    prefabName: 
+    alphaPrefabName: 
+    hvCheck: 0
+    myType: 0
+    explain_1: 
+    explain_2: 
+    explain_3: 
+    character: 
   renderer: {fileID: 0}
   interacterbleCheck: 0
   uiCheck: 0
@@ -126,6 +142,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 406088}
     m_Modifications:
+    - target: {fileID: 1067725382482706464, guid: 8a5ae9870da0f414494bbb81eaa5958a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1640238703366369308, guid: 8a5ae9870da0f414494bbb81eaa5958a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

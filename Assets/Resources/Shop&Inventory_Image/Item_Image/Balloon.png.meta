@@ -120,19 +120,19 @@ TextureImporter:
       name: Balloon_0
       rect:
         serializedVersion: 2
-        x: 624
-        y: 83
-        width: 716
-        height: 846
+        x: 332
+        y: 29
+        width: 1293
+        height: 963
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: abcfbf3c1cc22ed4a8a5275f1896a9fe
-      internalID: -849115528
+      spriteID: e88cf5e2b17839e4d83869f781407dcc
+      internalID: -233437076
       vertices: []
       indices: 
       edges: []
@@ -140,7 +140,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 3e84c5721da551d438217ee9c7fa93f4
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Balloon_0: -849115528
+      Balloon_0: -233437076
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

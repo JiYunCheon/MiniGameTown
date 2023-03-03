@@ -116,10 +116,28 @@ MonoBehaviour:
   myGround: []
   cameraPos: {fileID: 0}
   nameTr: {fileID: 0}
+  myData:
+    name: 
+    maxCount: 0
+    price: 0
+    occupyPad: 0
+    Info: 
+    spriteName: 
+    packageName: 
+    prefabName: 
+    alphaPrefabName: 
+    hvCheck: 0
+    myType: 0
+    rotationCheck: 0
+    explain_1: 
+    explain_2: 
+    explain_3: 
+    character: 
   renderer: {fileID: 0}
   interacterbleCheck: 0
   uiCheck: 0
   buildOption: {fileID: 6101732835106514875}
+  rotationBtn: {fileID: 7867580293001847680}
 --- !u!1 &8278297001926065811
 GameObject:
   m_ObjectHideFlags: 0
@@ -322,6 +340,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 5226489151640251231, guid: 8a5ae9870da0f414494bbb81eaa5958a, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6445953544505331834, guid: 8a5ae9870da0f414494bbb81eaa5958a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -349,6 +371,10 @@ PrefabInstance:
     - target: {fileID: 6445953544505331834, guid: 8a5ae9870da0f414494bbb81eaa5958a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6986868217726129217, guid: 8a5ae9870da0f414494bbb81eaa5958a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7996672995330735509, guid: 8a5ae9870da0f414494bbb81eaa5958a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -394,3 +420,14 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6986868217726129217, guid: 8a5ae9870da0f414494bbb81eaa5958a, type: 3}
   m_PrefabInstance: {fileID: 3772857667523195898}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7867580293001847680 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6445953544505331834, guid: 8a5ae9870da0f414494bbb81eaa5958a, type: 3}
+  m_PrefabInstance: {fileID: 3772857667523195898}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

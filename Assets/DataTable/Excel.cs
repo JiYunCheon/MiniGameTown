@@ -27,6 +27,8 @@ public class Excel
 
     public OBJECT_TYPE myType;
 
+    public int rotationCheck;
+
     public string explain_1;
 
     public string explain_2;

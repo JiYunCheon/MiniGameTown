@@ -115,10 +115,28 @@ MonoBehaviour:
   myGround: []
   cameraPos: {fileID: 0}
   nameTr: {fileID: 0}
+  myData:
+    name: 
+    maxCount: 0
+    price: 0
+    occupyPad: 0
+    Info: 
+    spriteName: 
+    packageName: 
+    prefabName: 
+    alphaPrefabName: 
+    hvCheck: 0
+    myType: 0
+    rotationCheck: 0
+    explain_1: 
+    explain_2: 
+    explain_3: 
+    character: 
   renderer: {fileID: 0}
   interacterbleCheck: 0
   uiCheck: 0
   buildOption: {fileID: 2232649776551487117}
+  rotationBtn: {fileID: 2844304762064970422}
 --- !u!1001 &9083092515581375180
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -238,6 +256,26 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 5226489151640251231, guid: 8a5ae9870da0f414494bbb81eaa5958a, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6445953544505331834, guid: 8a5ae9870da0f414494bbb81eaa5958a, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.a
+      value: 0.59607846
+      objectReference: {fileID: 0}
+    - target: {fileID: 6445953544505331834, guid: 8a5ae9870da0f414494bbb81eaa5958a, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.b
+      value: 0.5803922
+      objectReference: {fileID: 0}
+    - target: {fileID: 6445953544505331834, guid: 8a5ae9870da0f414494bbb81eaa5958a, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.g
+      value: 0.5803922
+      objectReference: {fileID: 0}
+    - target: {fileID: 6445953544505331834, guid: 8a5ae9870da0f414494bbb81eaa5958a, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.r
+      value: 0.58431375
+      objectReference: {fileID: 0}
     - target: {fileID: 6445953544505331834, guid: 8a5ae9870da0f414494bbb81eaa5958a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -309,6 +347,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6986868217726129217, guid: 8a5ae9870da0f414494bbb81eaa5958a, type: 3}
   m_PrefabInstance: {fileID: 9083092515581375180}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2844304762064970422 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6445953544505331834, guid: 8a5ae9870da0f414494bbb81eaa5958a, type: 3}
+  m_PrefabInstance: {fileID: 9083092515581375180}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &7552234131183321808 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1640238703366369308, guid: 8a5ae9870da0f414494bbb81eaa5958a, type: 3}

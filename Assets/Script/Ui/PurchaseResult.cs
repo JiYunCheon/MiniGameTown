@@ -4,7 +4,20 @@ using UnityEngine;
 
 public class PurchaseResult : MonoBehaviour
 {
+    [SerializeField] private float waitSecond = 0;
+    [SerializeField] GameObject successWindow = null;
+    [SerializeField] GameObject resultWindow = null;
+
     private ContentItem curContent = null;
+
+
+
+    private void OnEnable()
+    {
+        successWindow.SetActive(true);
+        resultWindow.SetActive(false);
+    }
+
 
     //현재 컨탠트를 가져옴
     public virtual void SetMyContent(ContentItem content) => curContent = content;
@@ -12,6 +25,17 @@ public class PurchaseResult : MonoBehaviour
     //구매성공시 실행됨
     public void OnClick_PurchaseSuccess()
     {
+        StartCoroutine(WaitForSecond(waitSecond));
+    }
+
+
+    IEnumerator WaitForSecond(float waitSecond)
+    {
+        successWindow.SetActive(false);
+        resultWindow.SetActive(true);
+
+        yield return new WaitForSeconds(waitSecond);
+
         //편집모드로 이동
         GameManager.Inst.GetUiManager.On_Click_WaitingMode();
 
@@ -30,6 +54,8 @@ public class PurchaseResult : MonoBehaviour
         gameObject.SetActive(false);
 
     }
+
+
 
     //구매취소 시 실행
     public void OnClick_Cancel()

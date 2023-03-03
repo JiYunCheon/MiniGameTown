@@ -42,7 +42,7 @@ public class SpriteEffect : Effect
 
             while (true)
             {
-                color.a -= 0.1f;
+                color.a -= 0.08f;
 
                 renderer.color = color;
 

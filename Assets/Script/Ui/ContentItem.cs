@@ -16,6 +16,9 @@ public class ContentItem : Item
     [Header("Prefab")]
     [SerializeField] private InventoryItem inven_itemPrefab = null;
 
+    [Header("SoldOut")]
+    [SerializeField] private Sprite soldOutSprite = null;
+
     private InventoryItem item;
     public InventoryItem GetItem { get { return item; } set { } }
 
@@ -28,7 +31,11 @@ public class ContentItem : Item
         picture.sprite = Resources.Load<Sprite>($"Shop&Inventory_Image/Item_Image/{GetMyData.spriteName}");
 
         if(int.Parse(DatabaseAccess.Inst.loginUser.shopmaxcount[countIndex])==0)
-            priceBtn.interactable = false;
+        {
+            priceBtn.GetComponent<Image>().sprite = soldOutSprite;
+            priceBtn.transform.GetChild(0).gameObject.SetActive(false);
+            priceBtn.enabled = false;
+        }
     }
 
     //가격버튼을 눌렀을 때 실행되는 함수
@@ -58,12 +65,16 @@ public class ContentItem : Item
     {
         int value = int.Parse(DatabaseAccess.Inst.loginUser.shopmaxcount[countIndex]);
         value--;
-        DatabaseAccess.Inst.loginUser.shopmaxcount[countIndex]= value.ToString();
+
         if (value <= 0)
         {
             value = 0;
-            priceBtn.interactable = false;
+            priceBtn.GetComponent<Image>().sprite = soldOutSprite;
+            priceBtn.transform.GetChild(0).gameObject.SetActive(false);
+            priceBtn.enabled = false;
         }
+
+        DatabaseAccess.Inst.loginUser.shopmaxcount[countIndex] = value.ToString();
     }
 
     //결과창 생성

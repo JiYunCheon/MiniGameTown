@@ -120,19 +120,19 @@ TextureImporter:
       name: Cart_0
       rect:
         serializedVersion: 2
-        x: 329
-        y: 143
-        width: 156
-        height: 176
+        x: 244
+        y: 118
+        width: 309
+        height: 215
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 22364510afbead24e98129479eba9753
-      internalID: 122809519
+      spriteID: 5007037d944c75e47950374a8de8cff5
+      internalID: 862948907
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Cart_0: 122809519
+      Cart_0: 862948907
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PreviewObject : Interactable
 {
     [Header("Ui")]
     [SerializeField] private GameObject buildOption = null;
+    [SerializeField] private Button rotationBtn = null;
 
     private Material defaultMaterial = null;
     private Material redMaterial = null;
@@ -27,6 +29,11 @@ public class PreviewObject : Interactable
         if (renderer == null)
             renderer = GetComponent<Renderer>();
 
+        if (GetMyData.rotationCheck == 0)
+        {
+            rotationBtn.interactable = false;
+
+        }
     }
 
     public void Active_BuildOption(bool active = true)
