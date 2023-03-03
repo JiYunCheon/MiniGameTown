@@ -31,6 +31,7 @@ public class PurchaseResult : MonoBehaviour
 
     IEnumerator WaitForSecond(float waitSecond)
     {
+        SoundManager.Inst.PlaySFX("SFX_PurChase");
         successWindow.SetActive(false);
         resultWindow.SetActive(true);
 

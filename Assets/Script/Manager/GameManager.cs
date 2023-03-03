@@ -234,7 +234,7 @@ public class GameManager : MonoBehaviour
         }
         else if (SceneManager.GetActiveScene().name == "2.BaseTown")
         {
-            SoundManager.Inst.PlayBGM("BGM_MiniTown");
+            SoundManager.Inst.PlayBGM("BGM_BaseTown");
         }
         else if (SceneManager.GetActiveScene().name == "3.MiniTown")
         {
