@@ -173,7 +173,7 @@ public class DatabaseAccess : MonoBehaviour
 
         loginUser = user;
 
-        PlayerLogin.setPlayedData(loginUser.id);
+        //PlayerLogin.setPlayedData(loginUser.id);
 
 
 

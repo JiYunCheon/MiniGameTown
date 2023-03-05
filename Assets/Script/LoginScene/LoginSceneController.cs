@@ -197,6 +197,7 @@ public class LoginSceneController : MonoBehaviour
         {
             saveID = inputfied__CreateID.text;
 
+            idCheck = true;
             id_StateText.color = green;
             id_StateText.text = "아이디 사용가능";
             idCompleteCheck = true;
@@ -204,6 +205,7 @@ public class LoginSceneController : MonoBehaviour
         else
         {
             saveID = inputfied__CreateID.text;
+            idCheck = false;
 
             id_StateText.color = red;
             id_StateText.text = "아이디 사용 불가";
