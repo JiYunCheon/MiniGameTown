@@ -48,96 +48,136 @@ public class LoginSceneController : MonoBehaviour
     [SerializeField] private int nickNameLength = 0;
     string saveID = null;
 
+    [HideInInspector]public Color green;
+    [HideInInspector] public Color red;
 
-    private void Update()
+
+    private void Awake()
     {
-        if(createCheck)
-        {
-            textLength = inputfied__CreateID.text.ToCharArray();
-            if(textLength.Length > idLength)
-            {
-                idCheck = false;
-                id_StateText.text = "아이디가 너무 길어요!";
-            }
-            else if(textLength.Length <= idLength && textLength.Length>0)
-            {
-                if (idCompleteCheck && saveID== inputfied__CreateID.text)
-                {
-                    idCheck = true;
-                    id_StateText.color = Color.green;
-                    id_StateText.text = "아이디 사용가능";
-                }
-                else if(!idCompleteCheck && CompareInputValueCheck())
-                {
-                    idCheck = false;
-                    id_StateText.color = Color.red;
-                    id_StateText.text = "아이디 중복확인 해주세요";
-                }
-                else if (saveID != inputfied__CreateID.text)
-                {
-                    idCheck = false;
-                    id_StateText.color = Color.red;
-                    id_StateText.text = "아이디 중복확인 해주세요";
-                }
-               
-            }
-
-            textLength = inputfied__CreatePsw.text.ToCharArray();
-
-            if(textLength.Length > pswLength)
-            {
-                pswCheck = false;
-                psw_StateText.text = "비밀번호가 너무 길어요";
-            }
-            else if (inputfied__CreatePsw.text != inputfied__CopyPsw.text)
-            {
-                pswCheck = false;
-
-                psw_StateText.text = "비밀번호가 서로 달라요!";
-            }
-            else if(inputfied__CreatePsw.text == inputfied__CopyPsw.text && textLength.Length>0)
-            {
-                pswCheck = true;
-                psw_StateText.text = "비밀번호가 같아요";
-            }
-
-            textLength = inputfied__CreateYear.text.ToCharArray();
-
-            if(textLength.Length!=6)
-            {
-                yearCheck = false;
-                year_StateText.text = "생년월일 6자리를 입력해 주세요!";
-            }
-            if (textLength.Length == 6)
-            {
-                yearCheck = true;
-
-                year_StateText.text = "생년월일 입력 완료";
-            }
-
-            textLength = inputfied__NickName.text.ToCharArray();
-
-            if (textLength.Length > nickNameLength)
-            {
-                nickNameCheck = false;
-
-                nickName_StateText.text = "닉네임이 너무 길어요!";
-            }
-            else if(textLength.Length <= nickNameLength && textLength.Length > 0)
-            {
-                nickNameCheck=true;
-                nickName_StateText.text = "닉네임 입력완료";
-            }
-            else
-            {
-                nickNameCheck = false;
-
-                nickName_StateText.text = "닉네임을 입력해 주세요...";
-            }
-        }
-
+        green = new Color(27 / 255f, 85 / 255f, 24 / 255f);
+        red = new Color(128 / 255f, 40 / 255f, 30 / 255f);
 
     }
+
+
+
+    public void OnChangeValue_CreateID()
+    {
+        textLength = inputfied__CreateID.text.ToCharArray();
+        Debug.Log(idCheck);
+        if (textLength.Length > idLength)
+        {
+            idCheck = false;
+            id_StateText.color = red;
+            id_StateText.text = "아이디가 너무 길어요!";
+        }
+        else if (textLength.Length <= idLength && textLength.Length > 0)
+        {
+            if (idCompleteCheck && saveID == inputfied__CreateID.text)
+            {
+                idCheck = true;
+            }
+            else if (!idCompleteCheck && CompareInputValueCheck())
+            {
+                idCheck = false;
+                id_StateText.color = red;
+                id_StateText.text = "아이디 중복확인 해주세요";
+            }
+            else if (saveID != inputfied__CreateID.text)
+            {
+                idCheck = false;
+                id_StateText.color = red;
+                id_StateText.text = "아이디 중복확인 해주세요";
+            }
+        }
+        else if(textLength.Length ==0)
+        {
+            idCheck = false;
+            id_StateText.color = red;
+            id_StateText.text = "아이디를 입력해 주세요";
+        }
+
+    }
+
+    public void OnChangeValue_CreatePsw()
+    {
+        textLength = inputfied__CreatePsw.text.ToCharArray();
+
+        if (textLength.Length > pswLength)
+        {
+            pswCheck = false;
+            psw_StateText.color = red;
+            psw_StateText.text = "비밀번호가 너무 길어요";
+        }
+        else if (inputfied__CreatePsw.text != inputfied__CopyPsw.text)
+        {
+            pswCheck = false;
+            psw_StateText.color = red;
+            psw_StateText.text = "비밀번호가 서로 달라요!";
+        }
+        else if (inputfied__CreatePsw.text == inputfied__CopyPsw.text && textLength.Length > 0)
+        {
+            pswCheck = true;
+            psw_StateText.color = green;
+
+            psw_StateText.text = "비밀번호가 같아요";
+        }
+        else if (textLength.Length == 0)
+        {
+            pswCheck = false;
+            psw_StateText.color = red;
+            psw_StateText.text = "비밀번호를 입력해 주세요";
+        }
+
+    }
+
+    public void OnChangeValue_CreateYear()
+    {
+        textLength = inputfied__CreateYear.text.ToCharArray();
+
+        if (textLength.Length != 6)
+        {
+            yearCheck = false;
+            year_StateText.color = red;
+            year_StateText.text = "생년월일 6자리를 입력해 주세요!";
+        }
+        if (textLength.Length == 6)
+        {
+            yearCheck = true;
+            year_StateText.color = green;
+            year_StateText.text = "생년월일 입력 완료";
+        }
+    }
+
+    public void OnChangeValue_NickName()
+    {
+        textLength = inputfied__NickName.text.ToCharArray();
+        nickName_StateText.color = Color.white;
+
+        if (textLength.Length > nickNameLength)
+        {
+            nickNameCheck = false;
+            nickName_StateText.color = red;
+
+            nickName_StateText.text = "닉네임이 너무 길어요!";
+        }
+        else if (textLength.Length <= nickNameLength && textLength.Length > 0)
+        {
+            nickNameCheck = true;
+            nickName_StateText.color = green;
+
+            nickName_StateText.text = "닉네임 입력완료";
+        }
+        else
+        {
+            nickNameCheck = false;
+            nickName_StateText.color = red;
+            nickName_StateText.text = "닉네임을 입력해 주세요";
+        }
+    }
+
+
+
 
     public void Active_LoginFaied(bool activeSelf = true)
     {
@@ -157,13 +197,15 @@ public class LoginSceneController : MonoBehaviour
         {
             saveID = inputfied__CreateID.text;
 
+            id_StateText.color = green;
+            id_StateText.text = "아이디 사용가능";
             idCompleteCheck = true;
         }
         else
         {
             saveID = inputfied__CreateID.text;
 
-            id_StateText.color = Color.red;
+            id_StateText.color = red;
             id_StateText.text = "아이디 사용 불가";
             idCompleteCheck = false;
         }
@@ -178,6 +220,7 @@ public class LoginSceneController : MonoBehaviour
 
     public void OnClick_LogIn_Confirm()
     {
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
         DatabaseAccess.Inst.GetUserData(inputfied_ID.text, inputfied_Password.text);
     }
 
@@ -199,12 +242,15 @@ public class LoginSceneController : MonoBehaviour
 
     public void OnClick_FindBox()
     {
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
         Active_FindPswBox();
     }
 
     public void OnClick_Find()
     {
-        if(inputfied__FindID.text!="" && inputfied__FindYear.text!="")
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
+
+        if (inputfied__FindID.text!="" && inputfied__FindYear.text!="")
          DatabaseAccess.Inst.ComparePsw_FromDatabase(inputfied__FindID.text, int.Parse(inputfied__FindYear.text));
         else
         {
@@ -214,6 +260,8 @@ public class LoginSceneController : MonoBehaviour
 
     public void OnClick_FindExit()
     {
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
+
         inputfied__FindID.text = "";
         inputfied__FindYear.text = "";
         find_Psw_StateText.text = "";
@@ -233,25 +281,48 @@ public class LoginSceneController : MonoBehaviour
     //아이디 만들기창 켜기
     public void OnClick_CreateID()
     {
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
+
         Active_CreateIDBox();
     }
 
     //아이디 중복 확인
     public void OnClick_IDConfirm()
     {
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
+
+        if(inputfied__CreateID.text=="")
+        {
+            idCheck = false;
+            id_StateText.color = red;
+            id_StateText.text = "아이디를 입력해 주세요";
+            return;
+        }
+
         DatabaseAccess.Inst.CompareID_FromDatabase(inputfied__CreateID.text);
     }
 
     //나가기 및 변수 초기화
     public void OnClick_CreateID_Exit()
     {
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
+
         idCompleteCheck = false;
-        id_StateText.color = Color.white;
+
         inputfied__CreateID.text = "";
         inputfied__CreatePsw.text = "";
         inputfied__CopyPsw.text = "";
         inputfied__CreateYear.text = "";
         inputfied__NickName.text = "";
+        id_StateText.text = "";
+        psw_StateText.text = "";
+        year_StateText.text = "";
+        nickName_StateText.text = "";
+
+        id_StateText.color = Color.white;
+        psw_StateText.color = Color.white;
+        year_StateText.color = Color.white;
+        nickName_StateText.color = Color.white;
 
         Active_CreateIDBox(false);
     }
@@ -259,14 +330,14 @@ public class LoginSceneController : MonoBehaviour
     //아이디 생성 로직
     public void OnClick_CreateID_Confirm()
     {
-        id_StateText.color = Color.white;
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
 
         if (idCompleteCheck)
         {
             if(!CompareInputValueCheck())
             {
-                id_StateText.text = "빈 칸을 채워주세요";
-                id_StateText.color = Color.red;
+                id_StateText.text = "입력하신 정보를 다시한번 확인해 주세요";
+                id_StateText.color = red;
             }
             else
             {

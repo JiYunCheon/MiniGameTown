@@ -173,6 +173,10 @@ public class DatabaseAccess : MonoBehaviour
 
         loginUser = user;
 
+        PlayerLogin.setPlayedData(loginUser.id);
+
+
+
         isProcessing = false;
 
         if (loginUser.id == null)
@@ -309,11 +313,11 @@ public class DatabaseAccess : MonoBehaviour
 
         if(user.password==null)
         {
-            GameManager.Inst.GetLoginSceneController.ChangeFind_ID_State(Color.red);
+            GameManager.Inst.GetLoginSceneController.ChangeFind_ID_State(GameManager.Inst.GetLoginSceneController.red);
         }
         else
         {
-            GameManager.Inst.GetLoginSceneController.ChangeFind_ID_State(Color.green, user.password);
+            GameManager.Inst.GetLoginSceneController.ChangeFind_ID_State(GameManager.Inst.GetLoginSceneController.green, user.password);
         }
 
     }

@@ -227,7 +227,6 @@ public class GameManager : MonoBehaviour
     {
         SoundManager.Inst.StopBGM();
 
-        // Debug.Log("¾À ±³Ã¼µÊ, ÇöÀç ¾À: " + scene.name);
         if (SceneManager.GetActiveScene().name == "1.LoginScene")
         {
             SoundManager.Inst.PlayBGM("BGM_Login");
@@ -243,6 +242,10 @@ public class GameManager : MonoBehaviour
         else if (SceneManager.GetActiveScene().name == "5.PlazaScene")
         {
             SoundManager.Inst.PlayBGM("BGM_MiniTown");
+        }
+        else if(SceneManager.GetActiveScene().name == "CharacterSelectScene")
+        {
+            SoundManager.Inst.PlayBGM("BGM_Select");
         }
 
     }

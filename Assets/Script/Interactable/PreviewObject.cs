@@ -26,6 +26,8 @@ public class PreviewObject : Interactable
 
     protected override void Initialized()
     {
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
+
         if (renderer == null)
             renderer = GetComponent<Renderer>();
 
@@ -55,7 +57,9 @@ public class PreviewObject : Interactable
     //Ui Ȯ���� ��������
     public void OnClick_Confirm()
     {
-        if(myInventoryItem==null)
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
+
+        if (myInventoryItem==null)
             myInventoryItem = GameManager.Inst.GetUiManager.GetInventoryContent(GetMyData);
 
         if (!GameManager.Inst.GetClickManager.InstCompare())
@@ -73,6 +77,8 @@ public class PreviewObject : Interactable
     //Ui ȸ���� ��������
     public void OnClick_Rotation()
     {
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
+
         if (count == 0)
         {
             this.transform.Rotate(0, 50f, 0);
@@ -93,6 +99,8 @@ public class PreviewObject : Interactable
     //Ui x�� ��������
     public void OnClick_Exit()
     {
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
+
         if (myInventoryItem == null)
             myInventoryItem = GameManager.Inst.GetUiManager.GetInventoryContent(GetMyData);
 

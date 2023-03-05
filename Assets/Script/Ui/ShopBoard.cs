@@ -28,7 +28,8 @@ public class ShopBoard : MonoBehaviour
 
     private void OnEnable()
     {
-        OnClick_Toggle_Building();
+        Building_Scroll_OnOff(true);
+        Object_Scroll_OnOff(false);
     }
 
     public void ActiveControll(bool active = true)
@@ -42,6 +43,8 @@ public class ShopBoard : MonoBehaviour
     //상점 x 클릭
     public void OnClick_Exit()
     {
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
+
         GameManager.Inst.GetUiManager.Active_ShopBtn();
         ActiveControll(false);
     }
@@ -49,6 +52,8 @@ public class ShopBoard : MonoBehaviour
     //토클 빌딩 클릭
     public void OnClick_Toggle_Building()
     {
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
+
         Building_Scroll_OnOff(true);
         Object_Scroll_OnOff(false);
     }
@@ -56,6 +61,8 @@ public class ShopBoard : MonoBehaviour
     //토클 오브젝트 클릭
     public void OnClick_Toggle_Object()
     {
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
+
         Object_Scroll_OnOff(true);
         Building_Scroll_OnOff(false);
 
@@ -64,6 +71,8 @@ public class ShopBoard : MonoBehaviour
     //편집모드 가기 클릭
     public void OnClick_WatingMode()
     {
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
+
         GameManager.Inst.GetUiManager.On_Click_WaitingMode();
     }
 

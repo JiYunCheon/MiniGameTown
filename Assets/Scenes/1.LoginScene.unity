@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
+  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.35872698, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1189,7 +1189,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uBE44\uBC00\uBC88\uD638 \uD655\uC778 \uC644\uB8CC "
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bb3ddc7dc9e5b624b83b2c60901d820a, type: 2}
   m_sharedMaterial: {fileID: -1631962337758843187, guid: bb3ddc7dc9e5b624b83b2c60901d820a, type: 2}
@@ -1199,7 +1199,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4280427212
-  m_fontColor: {r: 0.8018868, g: 0.13238695, b: 0.13238695, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2152,7 +2152,19 @@ MonoBehaviour:
       m_Calls: []
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1324273167}
+        m_TargetAssemblyTypeName: LoginSceneController, Assembly-CSharp
+        m_MethodName: OnChangeValue_NickName
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnTouchScreenKeyboardStatusChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2925,7 +2937,19 @@ MonoBehaviour:
       m_Calls: []
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1324273167}
+        m_TargetAssemblyTypeName: LoginSceneController, Assembly-CSharp
+        m_MethodName: OnChangeValue_CreateID
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnTouchScreenKeyboardStatusChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3175,7 +3199,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC0AC\uC6A9 \uAC00\uB2A5\uD55C \uC544\uC774\uB514 "
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bb3ddc7dc9e5b624b83b2c60901d820a, type: 2}
   m_sharedMaterial: {fileID: -1631962337758843187, guid: bb3ddc7dc9e5b624b83b2c60901d820a, type: 2}
@@ -3185,7 +3209,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4280427212
-  m_fontColor: {r: 0.8018868, g: 0.13238695, b: 0.13238695, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4415,7 +4439,19 @@ MonoBehaviour:
       m_Calls: []
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1324273167}
+        m_TargetAssemblyTypeName: LoginSceneController, Assembly-CSharp
+        m_MethodName: OnChangeValue_CreateYear
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnTouchScreenKeyboardStatusChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -5060,7 +5096,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uBE44\uBC00\uBC88\uD638 \uD655\uC778 \uC644\uB8CC "
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bb3ddc7dc9e5b624b83b2c60901d820a, type: 2}
   m_sharedMaterial: {fileID: -1631962337758843187, guid: bb3ddc7dc9e5b624b83b2c60901d820a, type: 2}
@@ -5070,7 +5106,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4280427212
-  m_fontColor: {r: 0.8018868, g: 0.13238695, b: 0.13238695, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -5805,7 +5841,19 @@ MonoBehaviour:
       m_Calls: []
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1324273167}
+        m_TargetAssemblyTypeName: LoginSceneController, Assembly-CSharp
+        m_MethodName: OnChangeValue_CreatePsw
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnTouchScreenKeyboardStatusChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -8237,6 +8285,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7e1923e78ad0d4d4ca54c927b5fc60a6, type: 3}
   - {fileID: 8300000, guid: 33c206f230eabd0489f39ea1cb4ea777, type: 3}
   - {fileID: 8300000, guid: 0d892dacffead404c9774a0e62d7a944, type: 3}
+  - {fileID: 8300000, guid: 4d411058ae0f3ef48a61fc8b1bac722c, type: 3}
   sfx:
   - {fileID: 8300000, guid: 18162cd1d456fc243a1c4096e23c83b3, type: 3}
   - {fileID: 8300000, guid: 786e60c623e3dcd44a760c26d0937dc8, type: 3}
@@ -8307,7 +8356,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uBE44\uBC00\uBC88\uD638 \uD655\uC778 \uC644\uB8CC "
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bb3ddc7dc9e5b624b83b2c60901d820a, type: 2}
   m_sharedMaterial: {fileID: -1631962337758843187, guid: bb3ddc7dc9e5b624b83b2c60901d820a, type: 2}
@@ -8317,7 +8366,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4280427212
-  m_fontColor: {r: 0.8018868, g: 0.13238695, b: 0.13238695, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -8976,7 +9025,19 @@ MonoBehaviour:
       m_Calls: []
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1324273167}
+        m_TargetAssemblyTypeName: LoginSceneController, Assembly-CSharp
+        m_MethodName: OnChangeValue_CreatePsw
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnTouchScreenKeyboardStatusChanged:
     m_PersistentCalls:
       m_Calls: []

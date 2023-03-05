@@ -156,7 +156,10 @@ public class RankingUiData : MonoBehaviour
 
     public void OnClick_Exit()
     {
-        if(SceneManager.GetActiveScene().name== "3.MiniTown")
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
+
+
+        if (SceneManager.GetActiveScene().name== "3.MiniTown")
             SoundManager.Inst.PlayBGM("BGM_MiniTown");
         else if (SceneManager.GetActiveScene().name == "2.BaseTown")
             SoundManager.Inst.PlayBGM("BGM_BaseTown");
@@ -175,6 +178,9 @@ public class RankingUiData : MonoBehaviour
 
     public void OnClick_EasyToggle()
     {
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
+
+
         if (curBoard != null)
             curBoard.SetActive(false);
 
@@ -185,6 +191,9 @@ public class RankingUiData : MonoBehaviour
 
     public void OnClick_NomalToggle()
     {
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
+
+
         if (curBoard != null)
             curBoard.SetActive(false);
 
@@ -196,6 +205,9 @@ public class RankingUiData : MonoBehaviour
 
     public void OnClick_HardToggle()
     {
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
+
+
         if (curBoard != null)
             curBoard.SetActive(false);
 
@@ -207,6 +219,8 @@ public class RankingUiData : MonoBehaviour
 
     public void OnClick_VeryHardToggle()
     {
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
+
         if (curBoard != null)
             curBoard.SetActive(false);
 
@@ -219,6 +233,8 @@ public class RankingUiData : MonoBehaviour
 
     public void Onclick_BalloonToggle()
     {
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
+
         curGameNum = 0;
 
         OnClick_EasyToggle();
@@ -226,6 +242,8 @@ public class RankingUiData : MonoBehaviour
 
     public void Onclick_MemoryCard()
     {
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
+
         curGameNum = 1;
 
         OnClick_EasyToggle();
@@ -233,6 +251,8 @@ public class RankingUiData : MonoBehaviour
 
     public void Onclick_Juice()
     {
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
+
         curGameNum = 2;
 
         OnClick_EasyToggle();
@@ -240,6 +260,8 @@ public class RankingUiData : MonoBehaviour
 
     public void Onclick_PuzzleToggle()
     {
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
+
         curGameNum = 3;
 
         OnClick_EasyToggle();

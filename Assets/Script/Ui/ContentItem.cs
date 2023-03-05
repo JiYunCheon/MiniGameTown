@@ -41,6 +41,8 @@ public class ContentItem : Item
     //가격버튼을 눌렀을 때 실행되는 함수
     public void OnClick_Price()
     {
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
+
         if (GetMyData.price < DatabaseAccess.Inst.loginUser.gamemoney)
         {
             InstantiatePurchaseReslut(this);

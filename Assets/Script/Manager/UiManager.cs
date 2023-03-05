@@ -125,6 +125,8 @@ public class UiManager : MonoBehaviour
     //게임 들어가기
     public void OnClick_GameIn()
     {
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
+
         OnClick_GameInExit();
         InGame.openApp(GameManager.Inst.curGameName);
     }
@@ -148,6 +150,8 @@ public class UiManager : MonoBehaviour
     //상점 ui
     public void OnClick_BuildingShop()
     {
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
+
         shopBoard.ActiveControll();
 
         Active_ShopBtn(false);
@@ -156,7 +160,6 @@ public class UiManager : MonoBehaviour
     //빌딩모드로 이동
     public void On_Click_BuildingMode()
     {
-
         ModeChange(true, false);
 
         padBoard.ActivePadByType(GameManager.Inst.GetClickManager.GetCurData.myType);
@@ -181,6 +184,9 @@ public class UiManager : MonoBehaviour
     //모드 나가기
     public void OnClick_ModeExit()
     {
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
+
+
         ModeChange(false, false);
 
         Active_ShopBtn();
@@ -193,12 +199,16 @@ public class UiManager : MonoBehaviour
     {
         OnClick_ModeExit();
 
-        OnClick_BuildingShop();
+        shopBoard.ActiveControll();
+
+        Active_ShopBtn(false);
     }
 
     //신변경
     public void OnClick_Go_2DTown()
     {
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
+
         GameManager.Inst.SaveData();
         GameManager.Inst.ListClear();
 
@@ -208,12 +218,16 @@ public class UiManager : MonoBehaviour
 
     public void Onclick_Save()
     {
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
+
         //데이터 저장
         GameManager.Inst.SaveData();
     }
 
     public void Onclick_GameExit()
     {
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
+
         //데이터 저장
         GameManager.Inst.SaveData();
 
@@ -223,6 +237,8 @@ public class UiManager : MonoBehaviour
 
     public void OnClick_Ranking()
     {
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
+
         Active_RankingBtn();
     }
     
@@ -271,8 +287,9 @@ public class UiManager : MonoBehaviour
     //인벤토리 상하 이동
     public void OnClick_InvenMove()
     {
-       
-        if(clickCount==0)
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
+
+        if (clickCount==0)
         {
             StopAllCoroutines();
             invenUpDownBtn.sprite = invenBtnImage[0];

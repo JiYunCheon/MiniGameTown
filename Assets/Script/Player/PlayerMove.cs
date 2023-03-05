@@ -125,8 +125,6 @@ public class PlayerMove : MonoBehaviour
             if (hit.transform.gameObject.TryGetComponent<Interactable>(out Interactable obj) && 
                 obj.GetInteracterbleCheck && obj.GetEntrance != null)
             {
-                SoundManager.Inst.StopSFX();
-
                 //건물의 입구로 이동
                 anim.SetBool("move", true);
 

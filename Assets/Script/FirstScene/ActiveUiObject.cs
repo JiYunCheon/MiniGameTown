@@ -8,6 +8,8 @@ public class ActiveUiObject : Select
 
     public override void GameSelect()
     {
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
+
         rankingBoard.gameObject.SetActive(true);
     }
  

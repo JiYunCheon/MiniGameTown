@@ -12,7 +12,7 @@ public class InventoryItem : Item
     //이미지를 데이터에 따라 바꿈
     protected override void Initialized()
     {
-        picture.sprite = Resources.Load<Sprite>($"Shop&Inventory_Image/Item_Image/{GetMyData.spriteName}");
+        picture.sprite = Resources.Load<Sprite>($"Shop&Inventory_Image/Item_Image/Inven_Image/{GetMyData.spriteName}");
     }
 
     //데이터에 카운트를 깍거나 더하고 개수에따라 표시하고 텍스트에 표시

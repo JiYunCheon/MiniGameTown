@@ -25,6 +25,9 @@ public class CameraControll : MonoBehaviour
     [SerializeField] private float xMax = 0;
     [SerializeField] private float yMin = 0;
     [SerializeField] private float yMax = 0;
+    [SerializeField] private float zMin = 0;
+    [SerializeField] private float zMax = 0;
+
 
     private bool posProcessing = false;
     private bool roProcessing = false;
@@ -106,7 +109,7 @@ public class CameraControll : MonoBehaviour
             targetPos = transform.position;
             targetPos.x = Mathf.Clamp(targetPos.x, xMin, xMax);
             targetPos.y = Mathf.Clamp(targetPos.y, yMin, yMax);
-            //targetPos.z = 70f- Mathf.Clamp(targetPos.x, xMin, xMax);
+            targetPos.z = Mathf.Clamp(targetPos.z, zMin, zMax);
 
             transform.position = targetPos;
 

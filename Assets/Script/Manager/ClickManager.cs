@@ -124,6 +124,9 @@ public class ClickManager : MonoBehaviour
             //상호 작용이 가능한 오브젝트인지 확인
             if (hit.transform.gameObject.TryGetComponent<Interactable>(out Interactable obj))
             {
+
+                GameManager.Inst.GetPlayer.PlayerDestination();
+
                 //이전 오브젝트가 없는 경우
                 if (curHitObject == null)
                     Interaction(obj);
@@ -152,8 +155,6 @@ public class ClickManager : MonoBehaviour
 
     public void EffectSequence(Vector3 point, Vector3 pos)
     {
-        Debug.Log("도착지 : "+pos);
-
         if (wayPoint == null)
         {
             wayPoint = Instantiate<ParticleSystem>(effect, point + pos, Quaternion.identity);

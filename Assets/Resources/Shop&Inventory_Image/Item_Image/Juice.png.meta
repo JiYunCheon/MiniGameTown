@@ -120,10 +120,10 @@ TextureImporter:
       name: Juice_0
       rect:
         serializedVersion: 2
-        x: 506
-        y: 128
-        width: 858
-        height: 634
+        x: 584
+        y: 164
+        width: 708
+        height: 565
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

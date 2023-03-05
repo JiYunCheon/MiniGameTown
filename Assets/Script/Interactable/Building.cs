@@ -24,6 +24,8 @@ public class Building : Interactable
 
     public override void Select_InteractableObj()
     {
+        SoundManager.Inst.StopSFX();
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
         renderer.material = lightMaterial;
     }
 

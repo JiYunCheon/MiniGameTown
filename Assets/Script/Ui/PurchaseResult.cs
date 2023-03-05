@@ -61,6 +61,8 @@ public class PurchaseResult : MonoBehaviour
     //구매취소 시 실행
     public void OnClick_Cancel()
     {
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
+
         gameObject.SetActive(false);
     }
 

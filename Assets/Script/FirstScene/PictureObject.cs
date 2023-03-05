@@ -11,6 +11,8 @@ public class PictureObject : Select
 
     public override void GameSelect()
     {
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
+
         GameManager.Inst.curGameName = packageName;
 
         if (GameManager.Inst.curGameName == "5.PlazaScene")

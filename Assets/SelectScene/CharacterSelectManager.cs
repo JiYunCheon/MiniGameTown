@@ -22,6 +22,8 @@ public class CharacterSelectManager : MonoBehaviour
 
     public void Btn_SelectCharacter(int idx)
     {
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
+
         charIdx = idx;
 
         switch(charIdx)
@@ -60,7 +62,9 @@ public class CharacterSelectManager : MonoBehaviour
 
     public void Btn_Confirm()
     {
-        if(charIdx == -1)
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
+
+        if (charIdx == -1)
         {
             Txt_InfoAnim.SetTrigger("showDescription");
             return;
@@ -70,6 +74,8 @@ public class CharacterSelectManager : MonoBehaviour
 
     public void Btn_Confirm_Yes()
     {
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
+
         //여기서 정보 가지고 원래씬으로 돌아가는부분
 
         DatabaseAccess.Inst.loginUser.selectNum = charIdx;
@@ -79,6 +85,8 @@ public class CharacterSelectManager : MonoBehaviour
     }
     public void Btn_Confirm_No()
     {
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
+
         panel_Confirm.SetActive(false);
     }
 }
