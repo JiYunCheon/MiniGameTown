@@ -6,10 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class CommonUI : MonoBehaviour
 {
-    //MinigameTown의 PackageName
-    public string TownPackageName = "com.DefaultCompany.MinigameTownTest";
-
-
     public GameObject UIPanel;
 
     bool SFXOn = true;
@@ -21,57 +17,7 @@ public class CommonUI : MonoBehaviour
 
 
     public static CommonUI Inst;
-
-
-    public GameObject Group_Setting;
-    public GameObject Group_Town;
-
-    private void Awake()
-    {
-        if (Inst == null)
-        {
-            Inst = this;
-            DontDestroyOnLoad(gameObject);
-            SceneManager.sceneLoaded += changeBtnStatus;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-
-    }
-
-
-    /// <summary>
-    /// 해당 함수 switch문에서 Scene 이름 넣어주시면 됩니다.
-    /// </summary>
-    /// <param name="scene"></param>
-    /// <param name="mode"></param>
-    public void changeBtnStatus(Scene scene, LoadSceneMode mode)
-    {
-        switch(scene.name)
-        {
-            //UI가 필요없는 씬 (난이도 선택 씬 등)
-            case "01. StartScene":
-            case "Additive_EndScene":
-            case "11. LoadScene":
-                Group_Town.SetActive(false);
-                Group_Setting.SetActive(false);
-                break;
-
-            //마을로 가는 버튼 필요한 씬(타입 선택 씬 등)
-            case "02. TypeSelectScene":
-                Group_Town.SetActive(true);
-                Group_Setting.SetActive(false);
-                break;
-            //팝업 버튼 필요한 씬(위에 선택 씬 외의 모든 씬)
-            default:
-                Group_Town.SetActive(false);
-                Group_Setting.SetActive(true);
-                break;
-                
-        }
-    }
+  
     public void Btn_Setting()
     {
         //팝업 열기
@@ -80,26 +26,7 @@ public class CommonUI : MonoBehaviour
         SoundManager.Inst.PlaySFX("SFX_ClickBtn");
     }
 
-    //public void Btn_Restart()
-    //{
-    //    //restart 버튼 눌렀을때 동작은 여기에서
-    //    Time.timeScale = 1f;
-    //    UIPanel.SetActive(false);
-    //    //현재 게임 타입 따라 분기가 필요
-    //    switch(GameData.Inst.type)
-    //    {
-    //        case GAMETYPE.DRAW:
-    //            LoadSceneManager.LoadSceneAsync("02_1. DrawScene");
-    //            SoundManager.Inst.PlaySFX("SFX_ClickBtn");
-    //            break;
-    //        default:
-    //            LoadSceneManager.LoadSceneAsync("02_23. SelectPhotoScene");
-    //            SoundManager.Inst.PlaySFX("SFX_ClickBtn");
-    //            break;
-
-    //    }
-
-    //}
+  
 
     public void Btn_Exit()
     {
@@ -115,7 +42,7 @@ public class CommonUI : MonoBehaviour
     public void Btn_Help()
     {
         Debug.Log("미?구현");
-        SoundManager.Inst.PlaySFX("SFX_ClickBtn");
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
     }
 
     public void Btn_BGM()
@@ -132,7 +59,7 @@ public class CommonUI : MonoBehaviour
             BGMOn = true;
             Image_BGM.sprite = TogleImages[0];
         }
-        SoundManager.Inst.PlaySFX("SFX_ClickBtn");
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
     }
 
     public void Btn_SFX()
@@ -149,67 +76,15 @@ public class CommonUI : MonoBehaviour
             SFXOn = true;
             Image_SFX.sprite = TogleImages[0];
         }
-        SoundManager.Inst.PlaySFX("SFX_ClickBtn");
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
     }
 
     public void Btn_Close()
     {
         UIPanel.SetActive(false); 
         Time.timeScale = 1f;
-        SoundManager.Inst.PlaySFX("SFX_ClickBtn");
+        SoundManager.Inst.PlaySFX("SFX_AllTouch");
     }
 
-    public void Btn_MoveToTown()
-    {
-#if UNITY_ANDROID
-        if (!IsAppInstalled(TownPackageName))
-        {
-            Debug.Log("앱이 깔려있지 않습니다");
-            return;
-        }
-        AndroidJavaClass jc = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
-
-        AndroidJavaObject jo = jc.GetStatic<AndroidJavaObject>("currentActivity");
-
-        AndroidJavaObject pm = jo.Call<AndroidJavaObject>("getPackageManager");
-
-        AndroidJavaObject intent = pm.Call<AndroidJavaObject>("getLaunchIntentForPackage", TownPackageName);
-
-        jo.Call("startActivity", intent);
-
-
-        Application.Quit();
-#else
-        Debug.Log("NOT SUPPORTED IN EDITOR");
-#endif
-    }
-    bool IsAppInstalled(string bundleID)
-    {
-#if UNITY_ANDROID
-        AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
-        AndroidJavaObject currentActivity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
-        AndroidJavaObject packageManager = currentActivity.Call<AndroidJavaObject>("getPackageManager");
-
-        AndroidJavaObject launchIntent = null;
-
-        //if the app is installed, no errors. Else, doesn't get past next line
-        try
-        {
-            launchIntent = packageManager.Call<AndroidJavaObject>("getLaunchIntentForPackage", bundleID);
-        }
-        catch (System.Exception ex)
-        {
-            Debug.Log("exception" + ex.Message);
-            //여기에서 앱이 설치 되지 않았을때의 예외처리.
-        }
-
-        return (launchIntent == null ? false : true);
-#else
-
-        Debug.LogError("NOT SUPPORTED IN EDITOR");
-        return false;
-#endif
-
-    }
 
 }

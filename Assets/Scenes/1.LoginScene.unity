@@ -8280,26 +8280,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgm:
-  - {fileID: 8300000, guid: ffed492f7bfd4224782c8c5cdcc04b78, type: 3}
-  - {fileID: 8300000, guid: 7e772efaa65a6da4780e02cb8f08d302, type: 3}
-  - {fileID: 8300000, guid: 415347ec34035424f82f80b9256da18a, type: 3}
+  - {fileID: 8300000, guid: 0d892dacffead404c9774a0e62d7a944, type: 3}
   - {fileID: 8300000, guid: d1f5bc11cb236e9429c048126547ccb0, type: 3}
+  - {fileID: 8300000, guid: 415347ec34035424f82f80b9256da18a, type: 3}
   - {fileID: 8300000, guid: 7e1923e78ad0d4d4ca54c927b5fc60a6, type: 3}
   - {fileID: 8300000, guid: 33c206f230eabd0489f39ea1cb4ea777, type: 3}
-  - {fileID: 8300000, guid: 0d892dacffead404c9774a0e62d7a944, type: 3}
+  - {fileID: 8300000, guid: ffed492f7bfd4224782c8c5cdcc04b78, type: 3}
+  - {fileID: 8300000, guid: 7e772efaa65a6da4780e02cb8f08d302, type: 3}
   - {fileID: 8300000, guid: 4d411058ae0f3ef48a61fc8b1bac722c, type: 3}
   sfx:
   - {fileID: 8300000, guid: 18162cd1d456fc243a1c4096e23c83b3, type: 3}
-  - {fileID: 8300000, guid: 786e60c623e3dcd44a760c26d0937dc8, type: 3}
+  - {fileID: 8300000, guid: 75deb3ae65658e14287026e58630312a, type: 3}
   - {fileID: 8300000, guid: fc071de466843f3418ae3f053e2badb8, type: 3}
   - {fileID: 8300000, guid: 57f0b741b771bf941b405c0c9b5d64dd, type: 3}
-  - {fileID: 8300000, guid: 75deb3ae65658e14287026e58630312a, type: 3}
+  - {fileID: 8300000, guid: 786e60c623e3dcd44a760c26d0937dc8, type: 3}
   bgmPlayer: {fileID: 1921860207}
   sfxPlayer:
   - {fileID: 1731881698}
   - {fileID: 987248826}
   - {fileID: 655080726}
   - {fileID: 1493498377}
+  - {fileID: 1667948412}
+  - {fileID: 2027506028}
 --- !u!1 &2035207974
 GameObject:
   m_ObjectHideFlags: 0

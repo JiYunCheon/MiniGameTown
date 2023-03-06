@@ -226,6 +226,9 @@ public class GameManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         SoundManager.Inst.StopBGM();
+        SoundManager.Inst.setBGMVolume(1);
+        SoundManager.Inst.setSFXVolume(1);
+
 
         if (SceneManager.GetActiveScene().name == "1.LoginScene")
         {
