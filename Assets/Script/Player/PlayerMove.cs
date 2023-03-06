@@ -11,7 +11,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] GameObject[] balloon = null;
 
     private GameObject beforeBalloon = null;
-    public NavMeshAgent myAgent;
+    [HideInInspector] public NavMeshAgent myAgent;
     Animator anim;
     Vector3 des = Vector3.zero;
     Coroutine interaction = null;
@@ -91,6 +91,11 @@ public class PlayerMove : MonoBehaviour
 
     IEnumerator ActiveControll()
     {
+        anim.SetBool("move", false);
+        if (stepSound != null)
+            StopCoroutine(stepSound);
+        SoundManager.Inst.StopSFX();
+
         int count = 0;
         Active_Item();
         while (true)
@@ -99,9 +104,8 @@ public class PlayerMove : MonoBehaviour
 
             count++;
 
-            if(count > 5)
+            if(count > 15)
             {
-                Debug.Log("들어옴");
                 Active_Item(false);
                 yield break;
             }
@@ -122,17 +126,20 @@ public class PlayerMove : MonoBehaviour
             }
 
             //클릭한 객체가 건물일 경우
-            if (hit.transform.gameObject.TryGetComponent<Interactable>(out Interactable obj) && 
+            if (hit.transform.gameObject.TryGetComponent<Interactable>(out Interactable obj)&&
                 obj.GetInteracterbleCheck && obj.GetEntrance != null)
             {
+
                 //건물의 입구로 이동
                 anim.SetBool("move", true);
 
                 myAgent.destination = obj.GetEntrance.transform.position;
 
                 des = obj.GetEntrance.transform.position;
-                
+
                 GameManager.Inst.GetClickManager.EffectSequence(obj.transform.position, new Vector3(0, 5f, 0));
+
+
             }
             else
             {
