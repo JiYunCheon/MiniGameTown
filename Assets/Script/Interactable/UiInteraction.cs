@@ -20,7 +20,6 @@ public class UiInteraction : Interactable
 
     public override void Select_InteractableObj()
     {
-        Debug.Log("¤¾¤·");
         activeUiCoroutine = StartCoroutine(UiSequnce());
     }
 

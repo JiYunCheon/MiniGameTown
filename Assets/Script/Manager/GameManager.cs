@@ -211,11 +211,7 @@ public class GameManager : MonoBehaviour
         }
         else Destroy(this);
 
-#if UNITY_EDITOR
         pointerID = -1;
-#elif UNITY_ANDROID
-                pointerID = 0; 
-#endif
     }
 
     void OnEnable()

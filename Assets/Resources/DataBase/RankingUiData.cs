@@ -52,7 +52,8 @@ public class RankingUiData : MonoBehaviour
         Onclick_BalloonToggle();
     }
 
-   
+
+
     public void GenerateRanking(int gameNum, int difficulty, List<UserData> userdata)
     {
         ScrollRect scroll = scrollRect[difficulty];
@@ -65,7 +66,7 @@ public class RankingUiData : MonoBehaviour
         UserData.sortingIdx = gameNum * 4 + difficulty;
         userdata.Sort();
 
-        if (gameNum != 1 || gameNum != 3)
+        if (gameNum != 1 && gameNum != 3)
             userdata.Reverse();
 
         int instNum = 0;
@@ -74,7 +75,6 @@ public class RankingUiData : MonoBehaviour
         {
             if (float.Parse(userdata[i].score[gameNum * 4 + difficulty]) == 0)
             {
-                Debug.Log(userdata[i].id == DatabaseAccess.Inst.loginUser.id);
                 if (userdata[i].id == DatabaseAccess.Inst.loginUser.id)
                     myScoreInfo.init(0, userdata[i].nickname, "0", userdata[i].selectNum, gameNum);
                 continue;

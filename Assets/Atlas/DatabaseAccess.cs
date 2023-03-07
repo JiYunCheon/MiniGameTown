@@ -120,7 +120,6 @@ public class DatabaseAccess : MonoBehaviour
         object arrayString;
 
         UserData user = new UserData();
-
         foreach (var data in datasAwated.ToList())
         {
             user.id = (string)data.GetValue("_id");
@@ -173,24 +172,22 @@ public class DatabaseAccess : MonoBehaviour
 
         loginUser = user;
 
-
-        LoginSave.Set(loginUser.id);
-        //PlayerLogin.setPlayedData(loginUser.id);
-
-
         isProcessing = false;
 
-        if (loginUser.id == null)
+        if (SceneManager.GetActiveScene().name == "1.LoginScene")
         {
-            Debug.Log("로그인 실패");
+            if (loginUser.id == null)
+            {
+                Debug.Log("로그인 실패");
 
-            GameManager.Inst.GetLoginSceneController.Active_LoginFaied();
+                GameManager.Inst.GetLoginSceneController.Active_LoginFaied();
 
-            return null;
+                return null;
+            }
+            Debug.Log("로그인 성공 :  " + loginUser.nickname);
+            LoginSave.Set(loginUser.id);
+            StartCoroutine(IsProcessing());
         }
-        Debug.Log("로그인 성공 :  " + loginUser.nickname);
-
-        StartCoroutine(IsProcessing());
 
         return user;
     }

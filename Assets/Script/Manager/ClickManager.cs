@@ -60,7 +60,8 @@ public class ClickManager : MonoBehaviour
     void Update()
     {
         //유아이 위를 클릭했을 경우 리턴 
-        if (selectCheck ||EventSystem.current.IsPointerOverGameObject(GameManager.Inst.pointerID) == true) return;
+        if (selectCheck ||EventSystem.current.IsPointerOverGameObject() == true ||
+            EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId) == true) return;
 
 
         //빌딩모드, 편집모드가 아닐경우 
@@ -280,6 +281,8 @@ public class ClickManager : MonoBehaviour
     //클릭 될때 호출 기능 들
     private void Interaction(Interactable obj)
     {
+        BuildingRefresh();
+
         if (obj.GetInteracterbleCheck)
         {
             curHitObject = obj;
@@ -301,11 +304,16 @@ public class ClickManager : MonoBehaviour
     public void BuildingRefresh()
     {
         selectCheck = false;
-        curHitObject.DeSelect_InteractableObj();
 
-        curHitObject.SetSelectCheck(false);
-        if(GetCurHitObject.GetEntrance!=null)
-            GetCurHitObject.GetEntrance.ActiveCollider(false);
+        if(curHitObject!=null)
+        {
+            curHitObject.DeSelect_InteractableObj();
+
+            curHitObject.SetSelectCheck(false);
+
+            if (GetCurHitObject.GetEntrance != null)
+                GetCurHitObject.GetEntrance.ActiveCollider(false);
+        }
 
         Refresh();
     }
