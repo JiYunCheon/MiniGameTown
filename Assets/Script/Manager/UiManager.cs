@@ -127,8 +127,8 @@ public class UiManager : MonoBehaviour
     {
         SoundManager.Inst.PlaySFX("SFX_AllTouch");
 
-        OnClick_GameInExit();
         InGame.openApp(GameManager.Inst.curGameName);
+        OnClick_GameInExit();
     }
 
     //게임 들어가기 취소

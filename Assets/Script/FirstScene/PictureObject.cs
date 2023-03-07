@@ -22,6 +22,7 @@ public class PictureObject : Select
         }
         else
         {
+            Debug.Log(GameManager.Inst.curGameName);
             InGame.openApp(GameManager.Inst.curGameName);
         }
     }

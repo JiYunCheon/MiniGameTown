@@ -26,6 +26,8 @@ public class Building : Interactable
     {
         SoundManager.Inst.StopSFX();
         SoundManager.Inst.PlaySFX("SFX_AllTouch");
+
+        GameManager.Inst.curGameName = GetMyData.packageName;
         renderer.material = lightMaterial;
     }
 
